@@ -20,7 +20,7 @@ public class Manager
     private Manager()
     {
         // start freelist
-        size = 2;
+        size = 0;
     }
 
     /**
