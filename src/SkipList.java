@@ -1,6 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.Random;
 import student.TestableRandom;
+import java.io.*;
 
 /**
  * SkipList that will be used to hold rectnagles input from a file
@@ -32,9 +33,10 @@ public class SkipList<K extends Comparable<K>, E>
     /**
      * creates a new skip list
      */
-    public SkipList()
+    public SkipList() throws IOException
     {
         head = new SkipNode<K, E>(null, 1);
+        Manager.getInstance().insert(Serializer.serialize(head));
         level = 0;
         size = 0;
     }
@@ -236,7 +238,7 @@ public class SkipList<K extends Comparable<K>, E>
             current = current.next[0];
         }
         System.out.println("SkipList size is: " + size);
-        Manager.dump();
+        //Manager.dump();
     }
 
     /**
