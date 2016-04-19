@@ -3,13 +3,15 @@ public class Manager
 {
     // create an object of SingleObject
     private static Manager instance;
-    
-    private int size;
+
+    private int            size;
 
     // private static LinkedList freeList;
 
-    // make the constructor private so that this class cannot be
-    // instantiated
+    /**
+     * make the constructor private so that this class cannot be instantiated
+     * creates a doubly linked freelist
+     */
     private Manager()
     {
         // start freelist
@@ -17,7 +19,8 @@ public class Manager
     }
 
     /**
-     *  Get the only object available
+     * Get the only object available
+     * 
      * @return the Singleton instance of the Manager class
      */
     public static Manager getInstance()
