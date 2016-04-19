@@ -8,6 +8,7 @@ public class Manager
     // instantiated
     private Manager()
     {
+        // start freelist
     }
 
     // Get the only object available
