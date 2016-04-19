@@ -236,6 +236,7 @@ public class SkipList<K extends Comparable<K>, E>
             current = current.next[0];
         }
         System.out.println("SkipList size is: " + size);
+        Manager.dump();
     }
 
     /**
