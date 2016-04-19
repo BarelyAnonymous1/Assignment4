@@ -24,23 +24,23 @@ public class Manager
      * make the constructor private so that this class cannot be instantiated
      * creates a doubly linked freelist
      */
-//    private Manager()
-//    {
-//        // start freelist
-//        size = 0;
-//    }
+    private Manager()
+    {
+        // start freelist
+        size = 0;
+    }
 
     /**
      * Get the only object available
      * 
      * @return the Singleton instance of the Manager class
      */
-//    public static Manager getInstance()
-//    {
-//        if (instance == null)
-//            instance = new Manager();
-//        return instance;
-//    }
+    public static Manager getInstance()
+    {
+        if (instance == null)
+            instance = new Manager();
+        return instance;
+    }
 
     /**
      * inserts data to the freelist
