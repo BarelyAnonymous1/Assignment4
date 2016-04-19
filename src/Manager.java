@@ -1,9 +1,14 @@
 
 public class Manager
 {
-    // create an object of SingleObject
+    /**
+     * create an object of SingleObject
+     */
     private static Manager instance;
 
+    /**
+     * dummy int to help test
+     */
     private int            size;
 
     // private static LinkedList freeList;
