@@ -36,7 +36,7 @@ public class SkipList<K extends Comparable<K>, E>
     public SkipList() throws IOException
     {
         head = new SkipNode<K, E>(null, 1);
-        //Manager.getInstance().insert(Serializer.serialize(head));
+        Manager.getInstance().insert(Serializer.serialize(head));
         level = 0;
         size = 0;
     }
