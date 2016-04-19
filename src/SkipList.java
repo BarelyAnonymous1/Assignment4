@@ -28,7 +28,11 @@ public class SkipList<K extends Comparable<K>, E>
      * level of the head
      */
     private int            level;
-
+    /**
+     * manager class
+     */
+    private Manager manager;
+    
     /**
      * creates a new skip list
      */
@@ -37,6 +41,7 @@ public class SkipList<K extends Comparable<K>, E>
         head = new SkipNode<K, E>(null, 1);
         level = 0;
         size = 0;
+        manager = new Manager();
     }
 
     /**
@@ -236,7 +241,7 @@ public class SkipList<K extends Comparable<K>, E>
             current = current.next[0];
         }
         System.out.println("SkipList size is: " + size);
-        Manager.dump();
+        manager.dump();
     }
 
     /**
