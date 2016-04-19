@@ -1,12 +1,44 @@
 
-public class Manager {
+public class Manager
+{
+    // create an object of SingleObject
+    private static Manager instance;
 
-    public Manager() {
-        // TODO Auto-generated constructor stub
+    // private static LinkedList freeList;
+
+    // make the constructor private so that this class cannot be
+    // instantiated
+    private Manager()
+    {
+        // start freelist
     }
 
+    // Get the only object available
+    public static Manager getInstance()
+    {
+        if (instance == null)
+            instance = new Manager();
+        return instance;
+    }
 
-    public void dump() {
-        
+    public MemHandle insert(byte[] data)
+    {
+        return null;
+    }
+
+    // Release the space associated with a record
+    public void release(MemHandle h)
+    {
+    }
+
+    // Get back a copy of a stored record
+    public byte[] getRecord(MemHandle h)
+    {
+        return null;
+    }
+
+    public void showMessage()
+    {
+        System.out.println("Hello World!");
     }
 }

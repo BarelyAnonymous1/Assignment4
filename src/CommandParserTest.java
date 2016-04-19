@@ -1,4 +1,5 @@
 import student.TestCase;
+import java.io.*;
 
 /**
  * Test class to demonstrate proper use of the CommandParser
@@ -13,7 +14,7 @@ public class CommandParserTest extends TestCase
     /**
      * tests to see if the parser will correctly handle an incorrect file
      */
-    public void testSearchFail()
+    public void testSearchFail() throws IOException
     {
         parser = new CommandParser("fail");
         boolean success = parser.parseFile();
@@ -24,7 +25,7 @@ public class CommandParserTest extends TestCase
      * tests to see if the parser will correctly open and close a file
      * does not test the output of the parser
      */
-    public void testSearchPass()
+    public void testSearchPass() throws IOException
     {
         parser = new CommandParser("SyntaxTest.txt");
         boolean success = parser.parseFile();
@@ -34,7 +35,7 @@ public class CommandParserTest extends TestCase
     /**
      * tests checkDim for the variety of conditions that are available
      */
-    public void testCheckDim()
+    public void testCheckDim() throws IOException
     {
         parser = new CommandParser("test.txt");
         assertTrue(parser.checkDim(0, 0, 1, 1));
@@ -54,7 +55,7 @@ public class CommandParserTest extends TestCase
     /**
      * tests the parsers various tests
      */
-    public void testParseFile()
+    public void testParseFile() throws IOException
     {
         parser = new CommandParser("test.txt");
         boolean success = parser.parseFile();

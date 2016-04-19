@@ -1,4 +1,5 @@
 import student.TestCase;
+import java.io.*;
 import student.TestableRandom;
 
 /**
@@ -19,7 +20,7 @@ public class SkipListTest extends TestCase
     /**
      * sets up the test cases
      */
-    public void setUp()
+    public void setUp() throws IOException
     {
         pair1 = new KVPair<String, Integer>("node1", 1);
         pair2 = new KVPair<String, Integer>("node6", 2);
@@ -59,7 +60,7 @@ public class SkipListTest extends TestCase
     /**
      * creates a fake region to check for new rectangles
      */
-    public void testRegionSearch()
+    public void testRegionSearch() throws IOException
     {
         Rectangle region = new Rectangle("region", 100, 100, 200, 200);
         SkipList<String, Rectangle> regionList = 
@@ -76,7 +77,7 @@ public class SkipListTest extends TestCase
      * tests that the intersections test successfully finds an intersection and
      * returns the appropriate boolean
      */
-    public void testIntersections()
+    public void testIntersections() throws IOException
     {
         SkipList<String, Rectangle> intersectList = 
                 new SkipList<String, Rectangle>();

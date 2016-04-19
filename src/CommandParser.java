@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -27,7 +26,7 @@ public class CommandParser
      * @param file
      *            name for the file that is being parsed
      */
-    public CommandParser(String file)
+    public CommandParser(String file) throws IOException
     {
         inputFile = file;
         list = new SkipList<String, Rectangle>();
