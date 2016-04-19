@@ -36,11 +36,6 @@ public class Manager
     {
         return null;
     }
-
-    public void showMessage()
-    {
-        System.out.println("Hello World!");
-    }
     
     public void dump()
     {
