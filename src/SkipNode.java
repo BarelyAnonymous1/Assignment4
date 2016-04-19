@@ -10,8 +10,13 @@
  * @version 1
  *
  */
-public class SkipNode<K extends Comparable<K>, E>
+public class SkipNode<K extends Comparable<K>, E> implements java.io.Serializable
 {
+
+    /**
+     * serializable ID
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
      * creates a skip list node array that is blank that will point to the next
