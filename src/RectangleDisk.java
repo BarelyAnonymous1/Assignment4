@@ -24,7 +24,6 @@ public class RectangleDisk
         }
         else
         {
-            System.out.println("Found expected parameter list.");
             try
             {
                 CommandParser parser = new CommandParser(args[0]);
