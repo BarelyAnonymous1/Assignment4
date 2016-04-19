@@ -61,9 +61,9 @@ public class Manager
      * @param h
      *            the receipt for the data in the allocated list
      */
-    public void release(MemHandle h)
-    {
-    }
+//    public void release(MemHandle h)
+//    {
+//    }
 
     /**
      * Get back a copy of a stored record
@@ -72,10 +72,10 @@ public class Manager
      *            the receipt for the data in the allocated list
      * @return the byte array that represents the data in the allocated list
      */
-    public byte[] getRecord(MemHandle h)
-    {
-        return null;
-    }
+//    public byte[] getRecord(MemHandle h)
+//    {
+//        return null;
+//    }
 
     /**
      * outputs a string representation of the Freelist
