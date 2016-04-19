@@ -21,13 +21,26 @@ public class Manager
         return instance;
     }
 
+    /**
+     * inserts data to the freelist
+     * 
+     * @param data
+     *            the byte array representing the data
+     * @return a receipt for the object being placed
+     */
     public MemHandle insert(byte[] data)
     {
         return null;
     }
 
-    // Release the space associated with a record
+    /**
+     * releases a specific set of data from the allocated list
+     * 
+     * @param h
+     *            the receipt for the data in the allocated list
+     */
     public void release(MemHandle h)
+
     {
     }
 
@@ -36,7 +49,7 @@ public class Manager
     {
         return null;
     }
-    
+
     public void dump()
     {
         System.out.println("Freelist Blocks:");
