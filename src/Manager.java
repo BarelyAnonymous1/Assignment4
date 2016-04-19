@@ -1,4 +1,11 @@
-
+/**
+ * Memory manager class that will communicate with a buffer pool to keep a
+ * SkipList
+ * 
+ * @author Jonathan DeFreeuw (jondef95) Preston Lattimer (platt)
+ * @version 1
+ *
+ */
 public class Manager
 {
     /**
