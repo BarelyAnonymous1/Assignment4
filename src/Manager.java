@@ -21,28 +21,28 @@ public class Manager
         return instance;
     }
 
-    public static MemHandle insert(byte[] data)
+    public MemHandle insert(byte[] data)
     {
         return null;
     }
 
     // Release the space associated with a record
-    public static void release(MemHandle h)
+    public void release(MemHandle h)
     {
     }
 
     // Get back a copy of a stored record
-    public static byte[] getRecord(MemHandle h)
+    public byte[] getRecord(MemHandle h)
     {
         return null;
     }
 
-    public static void showMessage()
+    public void showMessage()
     {
         System.out.println("Hello World!");
     }
     
-    public static void dump()
+    public void dump()
     {
         System.out.println("Freelist Blocks:");
         System.out.println("(0, 512");
