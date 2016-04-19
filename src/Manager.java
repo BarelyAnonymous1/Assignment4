@@ -1,12 +1,25 @@
 
-public class Manager {
+public class Manager
+{
+    // create an object of SingleObject
+    private static Manager instance;
 
-    public Manager() {
-        // TODO Auto-generated constructor stub
+    // make the constructor private so that this class cannot be
+    // instantiated
+    private Manager()
+    {
     }
 
+    // Get the only object available
+    public static Manager getInstance()
+    {
+        if (instance == null)
+            instance = new Manager();
+        return instance;
+    }
 
-    public void dump() {
-        
+    public void showMessage()
+    {
+        System.out.println("Hello World!");
     }
 }
