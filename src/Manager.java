@@ -77,6 +77,9 @@ public class Manager
         return null;
     }
 
+    /**
+     * outputs a string representation of the Freelist
+     */
     public void dump()
     {
         System.out.println("Freelist Blocks:");
