@@ -13,8 +13,9 @@ public class RectangleDiskTest extends TestCase {
      */
     String[] input1;
     
-    // list of inputs for second test
-     
+    /**
+     *  list of inputs for second test
+     */
     String[] input2;
 
     /**
