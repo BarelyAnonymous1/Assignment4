@@ -10,7 +10,8 @@
  * @version 1
  *
  */
-public class SkipNode<K extends Comparable<K>, E> implements java.io.Serializable
+public class SkipNode<K extends Comparable<K>, E>
+        implements java.io.Serializable
 {
 
     /**
@@ -22,16 +23,16 @@ public class SkipNode<K extends Comparable<K>, E> implements java.io.Serializabl
      * creates a skip list node array that is blank that will point to the next
      * node in the list
      */
-    public SkipNode<K, E>[] next;
+    public SkipNode<K, E>[]   next;
 
     /**
      * Data stored into the node
      */
-    private KVPair<K, E>    pair;
+    private KVPair<K, E>      pair;
     /**
      * determines the level that the node is actually on
      */
-    private int             level;
+    private int               level;
 
     /**
      * constructor to make nodes that store a KVPair
