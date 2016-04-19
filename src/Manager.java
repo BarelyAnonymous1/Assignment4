@@ -4,6 +4,8 @@ public class Manager
     // create an object of SingleObject
     private static Manager instance;
 
+    // private static LinkedList freeList;
+
     // make the constructor private so that this class cannot be
     // instantiated
     private Manager()
