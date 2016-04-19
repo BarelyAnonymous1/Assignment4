@@ -44,10 +44,12 @@ public class Manager
     {
     }
 
-    /** Get back a copy of a stored record
+    /**
+     * Get back a copy of a stored record
      * 
-     * @param h the receipt for the data in the allocated list
-     * @return
+     * @param h
+     *            the receipt for the data in the allocated list
+     * @return the byte array that represents the data in the allocated list
      */
     public byte[] getRecord(MemHandle h)
     {
