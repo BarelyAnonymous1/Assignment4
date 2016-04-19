@@ -3,6 +3,8 @@ public class Manager
 {
     // create an object of SingleObject
     private static Manager instance;
+    
+    private int size;
 
     // private static LinkedList freeList;
 
@@ -11,6 +13,7 @@ public class Manager
     private Manager()
     {
         // start freelist
+        size = 2;
     }
 
     // Get the only object available
@@ -30,6 +33,7 @@ public class Manager
      */
     public MemHandle insert(byte[] data)
     {
+        size += data.length;
         return null;
     }
 
