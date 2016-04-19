@@ -1,0 +1,49 @@
+
+insert r_r          -1 -20 3 4
+  insert rec        7 -8 1 3
+dump
+
+insert a 2 3 4 5
+insert a -2 3 4 5
+insert 1a 2 3 4 5
+insert 2a -2 3 4 5
+
+remove a
+remove b
+
+
+insert b 1 1 1 1
+insert a 0 0 11 1
+insert a 1 1 1 2
+insert c 1 2 3 4
+insert a 0 0 -1 -1
+insert a 0 1 0 -2
+insert a 1 1 0 0
+insert 1a 1 1 1 3
+insert findme 1 1 1 4
+insert <b -2 -3 -5 -6
+insert inExistRec_0 1 1 -1 -2
+
+insert trueNameTrueCoord  10 10 115 15
+insert 1falseNameTrueCoord 15 170 240 321
+insert trueNameFalseCoord -10 14 0 -100
+insert 1falseNameFalseCoord -57 42 1995 -190
+
+ regionsearch   11 11                 0 0
+
+intersections
+
+dump
+
+search a
+search c
+search virtual_rec0
+
+dump 
+remove r_r
+remove 1 1 1 4
+remove 1 -2 1 1
+remove 1 1 1 1
+	
+regionsearch   -5 -5 20 20 
+

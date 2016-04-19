@@ -80,7 +80,7 @@ public class RectangleDiskTest extends TestCase {
      */
     public void testSearchFile()
     {
-        String[] input = { "SyntaxTest.txt" };
+        String[] input = { "SyntaxTest.txt", "dataFile.dat", "5", "4096"};
         RectangleDisk.main(input);
     }
 }
