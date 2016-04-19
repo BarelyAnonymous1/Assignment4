@@ -63,7 +63,8 @@ public class RectangleDiskTest extends TestCase {
         RectangleDisk dum = new RectangleDisk();
         assertNotNull(dum);
         RectangleDisk.main(input1);
-        assertFuzzyEquals("Error: Incorrect number of arguments provided\n",
+        assertFuzzyEquals("Usage: RectangleDisk <commandfile> "
+                + "<diskFile> <numBuffs> <buffSize>\n",
                 systemOut().getHistory());
     }
 
