@@ -24,15 +24,16 @@ public class RectangleDisk
         }
         else
         {
-            try
-            {
-                CommandParser parser = new CommandParser(args[0]);
-                parser.parseFile();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+//            try
+//            {
+//                CommandParser parser = new CommandParser(args[0]);
+//                parser.parseFile();
+//            }
+//            catch (IOException e)
+//            {
+//                e.printStackTrace();
+//            }
+            System.out.println("Found expected parameter list.");
         }
     }
 }
