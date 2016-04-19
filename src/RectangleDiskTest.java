@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 import student.TestCase;
 
 /**
@@ -7,10 +9,24 @@ import student.TestCase;
 public class RectangleDiskTest extends TestCase {
 
     /**
+     * list of inputs for first test
+     */
+    String[] input1;
+    
+    // list of inputs for second test
+     
+    String[] input2;
+
+    /**
      * This method sets up the tests that follow.
      */
-    public void setUp() {
-        // no op
+    public void setUp()
+    {
+        input1 = new String[2];
+        input2 = new String[1];
+        input1[0] = "file1";
+        input1[1] = "file2";
+        input2[0] = "file1";
     }
 
     /**
@@ -38,5 +54,33 @@ public class RectangleDiskTest extends TestCase {
         RectangleDisk.main(params);
         assertFuzzyEquals("Found expected parameter list.", 
             systemOut().getHistory());
+    }
+    /**
+     * This method is simply to get code coverage of the class declaration.
+     */
+    public void testRInit()
+    {
+        RectangleDisk dum = new RectangleDisk();
+        assertNotNull(dum);
+        RectangleDisk.main(input1);
+        assertFuzzyEquals("Error: Incorrect number of arguments provided\n",
+                systemOut().getHistory());
+    }
+
+    /**
+     * test to show that the main will display an error through the parser
+     */
+    public void testFileNotFound() throws FileNotFoundException
+    {
+        RectangleDisk.main(input2);
+    }
+
+    /**
+     * test to skim a file to show parser can move through file
+     */
+    public void testSearchFile()
+    {
+        String[] input = { "SyntaxTest.txt" };
+        RectangleDisk.main(input);
     }
 }
