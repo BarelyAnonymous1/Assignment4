@@ -41,4 +41,10 @@ public class Manager
     {
         System.out.println("Hello World!");
     }
+    
+    public void dump()
+    {
+        System.out.println("Freelist Blocks:");
+        System.out.println("(0, 512");
+    }
 }
