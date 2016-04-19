@@ -18,6 +18,11 @@ public class Manager
             instance = new Manager();
         return instance;
     }
+    
+    public MemHandle insert(byte[] data)
+    {
+        return null;
+    }
 
     public void showMessage()
     {
