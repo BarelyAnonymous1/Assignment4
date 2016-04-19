@@ -18,8 +18,19 @@ public class Manager
             instance = new Manager();
         return instance;
     }
-    
+
     public MemHandle insert(byte[] data)
+    {
+        return null;
+    }
+
+    // Release the space associated with a record
+    public void release(MemHandle h)
+    {
+    }
+
+    // Get back a copy of a stored record
+    public byte[] getRecord(MemHandle h)
     {
         return null;
     }
