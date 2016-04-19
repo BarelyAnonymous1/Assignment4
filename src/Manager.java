@@ -17,6 +17,11 @@ public class Manager
      * dummy int to help test
      */
     private int            size;
+    
+    /**
+     * stub memhandle to get test coverage
+     */
+    private MemHandle handle;
 
     // private static LinkedList freeList;
 
@@ -27,6 +32,7 @@ public class Manager
     private Manager()
     {
         // start freelist
+        handle = new MemHandle();
         size = 0;
     }
 
