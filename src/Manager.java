@@ -49,11 +49,11 @@ public class Manager
      *            the byte array representing the data
      * @return a receipt for the object being placed
      */
-    public MemHandle insert(byte[] data)
-    {
-        size += data.length;
-        return null;
-    }
+//    public MemHandle insert(byte[] data)
+//    {
+//        size += data.length;
+//        return null;
+//    }
 
     /**
      * releases a specific set of data from the allocated list
