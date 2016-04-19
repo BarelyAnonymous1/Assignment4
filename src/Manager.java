@@ -16,7 +16,10 @@ public class Manager
         size = 2;
     }
 
-    // Get the only object available
+    /**
+     *  Get the only object available
+     * @return the Singleton instance of the Manager class
+     */
     public static Manager getInstance()
     {
         if (instance == null)
@@ -63,6 +66,6 @@ public class Manager
     public void dump()
     {
         System.out.println("Freelist Blocks:");
-        System.out.println("(" + size + ", 4096");
+        System.out.println("(" + size + ", 4096)");
     }
 }
