@@ -55,7 +55,6 @@ public class Manager
      *            the receipt for the data in the allocated list
      */
     public void release(MemHandle h)
-
     {
     }
 
