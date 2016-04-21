@@ -79,7 +79,7 @@ public class Manager
      *            the receipt for the data in the allocated list
      * @return the byte array that represents the data in the allocated list
      */
-    public byte[] getRecord(MemHandle h)
+    public byte[] getRecord(int h)
     {
         return null;
     }
