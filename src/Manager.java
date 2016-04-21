@@ -15,11 +15,11 @@ public class Manager
     /**
      * create an object of SingleObject
      */
-    private static Manager instance;
-   
-    private byte[] tempDisk;
-    private byte[] sizeArr;
-    private int curr;
+    private static Manager   instance;
+
+    private byte[]           tempDisk;
+    private byte[]           sizeArr;
+    private int              curr;
 
     // private static LinkedList freeList;
 
@@ -58,7 +58,7 @@ public class Manager
     {
         int temp = curr;
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
-        buffer.putShort((short)data.length);
+        buffer.putShort((short) data.length);
         System.arraycopy(buffer.get(), 0, tempDisk, curr, messageSize);
         curr += messageSize;
         System.arraycopy(data, 0, tempDisk, curr, data.length);
@@ -85,9 +85,10 @@ public class Manager
      */
     public byte[] getRecord(int h)
     {
-        System.arraycopy(tempDisk, h, sizeArr, 0, 2);
+        System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         int sizeNum = ByteBuffer.wrap(sizeArr).getInt();
-        return Arrays.copyOfRange(tempDisk, h+2, h+2+sizeNum);
+        return Arrays.copyOfRange(tempDisk, h + messageSize,
+                h + messageSize + sizeNum);
     }
 
     /**
