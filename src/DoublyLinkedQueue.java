@@ -43,14 +43,33 @@ public class DoublyLinkedQueue
      * @param newNode
      *            the node to be inserted
      */
-    public void enqueue(DoublyLinkedNode newNode)
+    public void insert(DoublyLinkedNode newerNode)
     {
-        tail.prev.setNext(newNode);
-        newNode.setPrev(tail.prev);
-        tail.setPrev(newNode);
-        newNode.setNext(tail);
-
-        size++;
+        DoublyLinkedNode newNode = newerNode;
+        if (head.next == null)
+        {
+            head.next = newNode;
+            newNode.next = tail;
+            tail.prev = newNode;
+            size++;
+        }
+        else
+        {
+            DoublyLinkedNode curr = head;
+            while (curr.next != tail)
+            {
+                if (newNode.data > curr.next.data )
+                {
+                    newNode.setNext(curr.getNext());
+                    curr.setNext(newNode);
+                    size++;
+                    return;
+                }
+                curr = curr.next;
+            }
+            curr.setNext(newNode);
+            size++;
+        }
     }
 
     /**
@@ -90,7 +109,7 @@ public class DoublyLinkedQueue
         DoublyLinkedNode curr = tail.prev;
         while (curr != head)
         {
-            Buffer buffer = curr.getData();
+            int datas = curr.getData();
             if (!(buffer.getID() != blockID || buffer.getFile() == null
                     || buffer.getFile() != file))
             {
