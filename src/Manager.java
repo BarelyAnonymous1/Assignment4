@@ -68,7 +68,7 @@ public class Manager
      * @param h
      *            the receipt for the data in the allocated list
      */
-    public void release(MemHandle h)
+    public void release(int h)
     {
     }
 
