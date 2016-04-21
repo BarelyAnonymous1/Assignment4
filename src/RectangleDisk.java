@@ -1,14 +1,10 @@
 import java.io.IOException;
 
 /**
- * { your description of the project here }
- */
-
-/**
  * The class containing the main method, the entry point of the application.
  *
- * @author { your name here }
- * @version { put something here }
+ * @author Preston Lattimer (platt) Jonathan DeFreeuw (jondef95)
+ * @version 1
  */
 public class RectangleDisk
 {
