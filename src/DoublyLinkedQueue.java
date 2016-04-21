@@ -59,7 +59,7 @@ public class DoublyLinkedQueue
             DoublyLinkedNode curr = head;
             while (curr.next != tail)
             {
-                if (newNode.index < curr.next.index)
+                if (newNode.index > curr.next.index)
                 {
                     DoublyLinkedNode temp = curr.next;
                     curr.next = newNode;
