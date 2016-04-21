@@ -51,6 +51,7 @@ public class DoublyLinkedQueue
             head.next = newNode;
             newNode.next = tail;
             tail.prev = newNode;
+            newNode.prev = head;
             size++;
         }
         else
@@ -60,9 +61,10 @@ public class DoublyLinkedQueue
             {
                 if (newNode.index < curr.next.index)
                 {
-                    curr.next.prev = newNode;
-                    newNode.next = curr.next;
+                    DoublyLinkedNode temp = curr.next;
                     curr.next = newNode;
+                    newNode.next = temp;
+                    temp.prev = newNode;
                     newNode.prev = curr;
                     size++;
                     return;
