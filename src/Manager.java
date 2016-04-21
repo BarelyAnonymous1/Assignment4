@@ -1,4 +1,5 @@
 import java.nio.ByteBuffer;
+import java.util.*;
 
 /**
  * Memory manager class that will communicate with a buffer pool to keep a
@@ -81,7 +82,11 @@ public class Manager
      */
     public byte[] getRecord(int h)
     {
-        return null;
+        byte[] size = new byte[2];
+        System.arraycopy(tempDisk, h, size, 0, 2);
+        int sizeNum = ByteBuffer.wrap(size).getInt();
+        return Arrays.copyOfRange(tempDisk, h+2, h+2+sizeNum);
+        
     }
 
     /**

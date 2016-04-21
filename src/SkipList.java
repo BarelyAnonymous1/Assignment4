@@ -19,24 +19,24 @@ public class SkipList<K extends Comparable<K>, E>
     /**
      * head node
      */
-    private SkipNode<K, E> head;
+    private int head;
 
     /**
      * number of nodes in the list
      */
-    private int            size;
+    private int size;
     /**
      * level of the head
      */
-    private int            level;
+    private int level;
 
     /**
      * creates a new skip list
      */
     public SkipList() throws IOException
     {
-        head = new SkipNode<K, E>(null, 1);
-        //Manager.getInstance().insert(Serializer.serialize(head));
+        head = Manager.getInstance()
+                .insert(Serializer.serialize(new SkipNode<K, E>(-1, 1)));
         level = 0;
         size = 0;
     }
@@ -46,9 +46,11 @@ public class SkipList<K extends Comparable<K>, E>
      * 
      * @return the head of the list
      */
-    public SkipNode<K, E> getHead()
+    @SuppressWarnings("unchecked")
+    public SkipNode<K, E> getHead() throws Exception
     {
-        return head;
+        return (SkipNode<K, E>) Serializer
+                .deserialize(Manager.getInstance().getRecord(head));
     }
 
     /**
@@ -61,7 +63,7 @@ public class SkipList<K extends Comparable<K>, E>
     private void fixHead(int newLevel)
     {
         SkipNode<K, E> oldHead = head;
-        head = new SkipNode<K, E>(null, newLevel);
+        head = Manager.getInstance().insert(Serializer.serialize(new SkipNode<K, E>(-1, newLevel)));
         for (int i = 0; i <= level; i++)
         {
             head.next[i] = oldHead.next[i];
@@ -162,10 +164,9 @@ public class SkipList<K extends Comparable<K>, E>
     }
 
     /**
-     * Scrolls along the bottom level of the list until
-     * the loop hits a value that is the same as the searched
-     * for value. Then uses removeKey(key of value) to delete
-     * the node from the SkipList
+     * Scrolls along the bottom level of the list until the loop hits a value
+     * that is the same as the searched for value. Then uses removeKey(key of
+     * value) to delete the node from the SkipList
      * 
      * @param value
      *            the searched for value
@@ -176,7 +177,7 @@ public class SkipList<K extends Comparable<K>, E>
         SkipNode<K, E> current = head;
         while (current.next[0] != null)
         {
-            if ( current.next[0].getValue().equals(value))
+            if (current.next[0].getValue().equals(value))
             {
                 return removeKey(current.next[0].getKey());
             }
@@ -186,8 +187,8 @@ public class SkipList<K extends Comparable<K>, E>
     }
 
     /**
-     * finds a specific node given a key value using a while loop
-     * to discover the specific node. 
+     * finds a specific node given a key value using a while loop to discover
+     * the specific node.
      * 
      * @param key
      *            the key that is being searched for
@@ -213,8 +214,7 @@ public class SkipList<K extends Comparable<K>, E>
     }
 
     /**
-     * output a list of every item in the list in the following
-     * format: 
+     * output a list of every item in the list in the following format:
      * "Node has depth 0, Value (0)"
      */
     public void dump()

@@ -23,12 +23,12 @@ public class SkipNode<K extends Comparable<K>, E>
      * creates a skip list node array that is blank that will point to the next
      * node in the list
      */
-    public int[]   next;
+    public int[]              next;
 
     /**
      * Data stored into the node
      */
-    private int     pair;
+    private int               pair;
     /**
      * determines the level that the node is actually on
      */
@@ -48,7 +48,7 @@ public class SkipNode<K extends Comparable<K>, E>
     {
         level = newLevel;
         pair = newPair;
-        next =  new int[newLevel + 1];
+        next = new int[newLevel + 1];
         for (int i = 0; i < level; i++)
         {
             next[i] = -1;
@@ -64,12 +64,13 @@ public class SkipNode<K extends Comparable<K>, E>
      * 
      * @return key of the node
      */
-    public K getKey()
+    @SuppressWarnings("unchecked")
+    public K getKey() throws Exception
     {
-        if (pair != null)
-        {
-            return pair.key();
-        }
+        byte[] obj = Manager.getInstance().getRecord(pair);
+        KVPair<K, E> found = ((KVPair<K, E>) Serializer.deserialize(obj));
+        if (found != null)
+            return found.key();
         return null;
     }
 
@@ -78,12 +79,13 @@ public class SkipNode<K extends Comparable<K>, E>
      * 
      * @return value of node
      */
-    public E getValue()
+    @SuppressWarnings("unchecked")
+    public E getValue() throws Exception
     {
-        if (pair != null)
-        {
-            return pair.value();
-        }
+        byte[] obj = Manager.getInstance().getRecord(pair);
+        KVPair<K, E> found = ((KVPair<K, E>) Serializer.deserialize(obj));
+        if (found != null)
+            return found.value();
         return null;
     }
 
@@ -102,10 +104,10 @@ public class SkipNode<K extends Comparable<K>, E>
      * 
      * @return KVPair of the node
      */
-    public KVPair<K, E> getPair()
+    @SuppressWarnings("unchecked")
+    public KVPair<K, E> getPair() throws Exception
     {
-        if (pair != null)
-            return pair;
-        return null;
+        byte[] obj = Manager.getInstance().getRecord(pair);
+        return ((KVPair<K, E>) Serializer.deserialize(obj));
     }
 }
