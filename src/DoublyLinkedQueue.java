@@ -71,7 +71,10 @@ public class DoublyLinkedQueue
                 }
                 curr = curr.next;
             }
-            curr.setNext(newNode);
+            newNode.prev = curr;
+            curr.next = newNode;
+            newNode.next = tail;
+            tail.prev = newNode;
             size++;
         }
     }
