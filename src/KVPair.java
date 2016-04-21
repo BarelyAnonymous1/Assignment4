@@ -14,7 +14,10 @@
 public class KVPair<K extends Comparable<K>, E>
         implements Comparable<KVPair<K, E>>, java.io.Serializable
 {
-    
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2573785258241524423L;
 
     /**
      * where the key of the pair will be stored
