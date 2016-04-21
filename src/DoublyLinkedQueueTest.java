@@ -38,8 +38,6 @@ public class DoublyLinkedQueueTest extends TestCase
         assertEquals(1, list.getSize());
         list.insert(node2);
         assertEquals(2, list.getSize());
-        list.insert(node1);
-        assertEquals(3, list.getSize());
         list.dump();
     }
 
