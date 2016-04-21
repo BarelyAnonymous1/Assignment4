@@ -18,6 +18,7 @@ public class Manager
     private static Manager instance;
    
     private byte[] tempDisk;
+    private byte[] sizeArr;
     private int curr;
 
     // private static LinkedList freeList;
@@ -30,7 +31,8 @@ public class Manager
     {
         // start freelist
         curr = 0;
-        tempDisk = new byte[4096]; 
+        tempDisk = new byte[4096];
+        sizeArr = new byte[messageSize];
     }
 
     /**
@@ -83,9 +85,8 @@ public class Manager
      */
     public byte[] getRecord(int h)
     {
-        byte[] size = new byte[2];
-        System.arraycopy(tempDisk, h, size, 0, 2);
-        int sizeNum = ByteBuffer.wrap(size).getInt();
+        System.arraycopy(tempDisk, h, sizeArr, 0, 2);
+        int sizeNum = ByteBuffer.wrap(sizeArr).getInt();
         return Arrays.copyOfRange(tempDisk, h+2, h+2+sizeNum);
     }
 
