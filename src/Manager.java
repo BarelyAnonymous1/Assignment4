@@ -1,3 +1,5 @@
+import java.nio.ByteBuffer;
+
 /**
  * Memory manager class that will communicate with a buffer pool to keep a
  * SkipList
@@ -12,16 +14,9 @@ public class Manager
      * create an object of SingleObject
      */
     private static Manager instance;
-
-    /**
-     * dummy int to help test
-     */
-    private int            size;
-    
-    /**
-     * stub memhandle to get test coverage
-     */
-    private MemHandle handle;
+   
+    private byte[] tempDisk;
+    private int curr;
 
     // private static LinkedList freeList;
 
@@ -32,8 +27,8 @@ public class Manager
     private Manager()
     {
         // start freelist
-        handle = new MemHandle();
-        size = 0;
+        curr = 0;
+        tempDisk = new byte[4096]; 
     }
 
     /**
@@ -55,11 +50,17 @@ public class Manager
      *            the byte array representing the data
      * @return a receipt for the object being placed
      */
-//    public MemHandle insert(byte[] data)
-//    {
-//        size += data.length;
-//        return null;
-//    }
+    public int insert(byte[] data)
+    {
+        int temp = curr;
+        ByteBuffer buffer = ByteBuffer.allocate(2);
+        buffer.putShort((short)data.length);
+        System.arraycopy(buffer.get(), 0, tempDisk, curr, 2);
+        curr += 2;
+        System.arraycopy(data, 0, tempDisk, curr, data.length);
+        curr += data.length;
+        return temp;
+    }
 
     /**
      * releases a specific set of data from the allocated list
@@ -67,9 +68,9 @@ public class Manager
      * @param h
      *            the receipt for the data in the allocated list
      */
-//    public void release(MemHandle h)
-//    {
-//    }
+    public void release(MemHandle h)
+    {
+    }
 
     /**
      * Get back a copy of a stored record
@@ -78,10 +79,10 @@ public class Manager
      *            the receipt for the data in the allocated list
      * @return the byte array that represents the data in the allocated list
      */
-//    public byte[] getRecord(MemHandle h)
-//    {
-//        return null;
-//    }
+    public byte[] getRecord(MemHandle h)
+    {
+        return null;
+    }
 
     /**
      * outputs a string representation of the Freelist
@@ -89,6 +90,6 @@ public class Manager
     public void dump()
     {
         System.out.println("Freelist Blocks:");
-        System.out.println("(" + size + ", 4096)");
+        System.out.println("(0, 4096)");
     }
 }
