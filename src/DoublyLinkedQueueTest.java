@@ -24,50 +24,33 @@ public class DoublyLinkedQueueTest extends TestCase
     public void setUp() throws IOException
     {
         file = new RandomAccessFile("buffertest.txt", "rw");
-        node1 = new DoublyLinkedNode(new Buffer(0, file));
-        node2 = new DoublyLinkedNode(new Buffer(0, file));
+        node1 = new DoublyLinkedNode(1, 1);
+        node2 = new DoublyLinkedNode(2, 2);
         list = new DoublyLinkedQueue();
     }
 
     /**
      * tests that the queue properly adds nodes to the list
      */
-    public void testEnqueue()
+    public void testinsert()
     {
-        list.enqueue(node1);
+        list.insert(node1);
         assertEquals(1, list.getSize());
-        list.enqueue(node2);
+        list.insert(node2);
         assertEquals(2, list.getSize());
     }
 
     /**
      * tests that the queue properly removes nodes from the list
-     */
-    public void testDequeue()
+     
+    public void testremove()
     {
-        assertNull(list.dequeue());
-        list.enqueue(node1);
-        list.enqueue(node2);
-        assertEquals(list.dequeue(), node1);
-        assertEquals(list.dequeue(), node2);
-    }
+        assertNull(list.remove(1));
+        list.insert(node1);
+        list.insert(node2);
+        assertEquals(list.remove(1), node1);
+        assertEquals(list.remove(2), node2);
+    }*/
 
-    /**
-     * tests that the queue properly searches for and removes a node
-     * @throws IOException 
-     */
-    public void testRemove() throws IOException
-    {
-        list.remove(0, file);
-        list.enqueue(node1);
-        list.enqueue(node2);
-        DoublyLinkedNode nullnode = 
-                new DoublyLinkedNode(new Buffer(2, null));
-        list.enqueue(nullnode);
-        assertNotSame(node2, list.remove(4, file));
-        assertNull(list.remove(0, null));
-        assertNull(list.remove(2, null));
-        assertEquals(node2, list.remove(0, file));
-    }
 
 }

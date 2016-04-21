@@ -29,8 +29,8 @@ public class DoublyLinkedQueue
      */
     public DoublyLinkedQueue()
     {
-        head = new DoublyLinkedNode(-1);
-        tail = new DoublyLinkedNode(-1);
+        head = new DoublyLinkedNode(-1, 0);
+        tail = new DoublyLinkedNode(-1, 0);
         head.setNext(tail);
         tail.setPrev(head);
         size = 0;
@@ -58,10 +58,12 @@ public class DoublyLinkedQueue
             DoublyLinkedNode curr = head;
             while (curr.next != tail)
             {
-                if (newNode.data > curr.next.data )
+                if (newNode.index < curr.next.index)
                 {
-                    newNode.setNext(curr.getNext());
-                    curr.setNext(newNode);
+                    curr.next.prev = newNode;
+                    newNode.next = curr.next;
+                    curr.next = newNode;
+                    newNode.prev = curr;
                     size++;
                     return;
                 }
@@ -79,50 +81,29 @@ public class DoublyLinkedQueue
      * @return the node that was just removed from the list so that it may be
      *         recycled and returned to the back of the queue
      */
-    public DoublyLinkedNode dequeue()
+    public DoublyLinkedNode remove(int remIndex)
     {
         if (size == 0)
             return null;
         else
         {
-            DoublyLinkedNode temp = head.next;
-            head.setNext(temp.next);
-            temp.next.setPrev(head);
-            temp.setNext(null);
-            temp.setPrev(null);
-            size--;
-            return temp;
-        }
-    }
-
-    /**
-     * removes from the middle of the queue and relinks the next and previous
-     * 
-     * @param blockID
-     *            the block of the node
-     * @param file
-     *            the file to look for the block in
-     * @return the node with the block removed
-     */
-    public DoublyLinkedNode remove(int blockID, RandomAccessFile file)
-    {
-        DoublyLinkedNode curr = tail.prev;
-        while (curr != head)
-        {
-            int datas = curr.getData();
-            if (!(buffer.getID() != blockID || buffer.getFile() == null
-                    || buffer.getFile() != file))
+            DoublyLinkedNode curr = head;
+            while (curr.next != tail)
             {
-                curr.prev.setNext(curr.next);
-                curr.next.setPrev(curr.prev);
-                curr.setPrev(null);
-                curr.setNext(null);
-                size--;
-                return curr;
+                if (curr.next.index == remIndex)
+                {
+                    DoublyLinkedNode temp = curr.next;
+                    curr.next.next.prev = curr;
+                    curr.next = curr.next.next;
+                    temp.next = null;
+                    temp.prev = null;
+                    size--;
+                    return temp;
+                }
+                curr = curr.next;
             }
-            curr = curr.prev;
+            return null;
         }
-        return null;
     }
 
     /**
