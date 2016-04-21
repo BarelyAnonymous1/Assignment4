@@ -7,7 +7,7 @@
  * @author Jonathan DeFreeuw (jondef95), Preston Lattimer (platt)
  * @version 1
  */
-public class Rectangle implements Comparable<Rectangle>
+public class Rectangle implements Comparable<Rectangle>, java.io.Serializable
 {
     /**
      * x coordinate of upper left corner of Rectangle
