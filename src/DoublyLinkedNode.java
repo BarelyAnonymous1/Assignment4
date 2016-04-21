@@ -23,7 +23,6 @@ public class DoublyLinkedNode
      * index of data
      */
     public int index;
-    
     /**
      * creates a node that contains data and no next node
      * 
@@ -49,6 +48,7 @@ public class DoublyLinkedNode
         next = newNext;
     }
 
+    
     /**
      * sets the value of the prev node
      * 
@@ -58,5 +58,17 @@ public class DoublyLinkedNode
     public void setPrev(DoublyLinkedNode newPrev)
     {
         prev = newPrev;
+    }
+
+    /**
+     * sets the value of the node
+     * 
+     * @param newData
+     *            data to be stored in the node
+     */
+    public void setData(int newIndex, int newLength)
+    {
+        index = newIndex;
+        length = newLength;
     }
 }
