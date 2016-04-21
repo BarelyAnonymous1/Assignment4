@@ -53,12 +53,13 @@ public class DoublyLinkedQueueTest extends TestCase
         assertNull(list.remove(1));
         list.insert(node1);
         list.insert(node2);
+        list.insert(node3);
         System.out.println("");
         assertEquals(list.remove(2), node2);
         list.dump();
-        //System.out.println("");
-        //assertEquals(list.remove(1), node1);
-        //list.dump();
+        System.out.println("");
+        assertEquals(list.remove(1), node1);
+        list.dump();
     }
 
 
