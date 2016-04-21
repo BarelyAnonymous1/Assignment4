@@ -77,27 +77,22 @@ public class DoublyLinkedQueue
      */
     public DoublyLinkedNode remove(int remIndex)
     {
-        if (size == 0)
-            return null;
-        else
+        DoublyLinkedNode curr = head;
+        while (curr.next != tail)
         {
-            DoublyLinkedNode curr = head;
-            while (curr.next != tail)
+            if (curr.next.index == remIndex)
             {
-                if (curr.next.index == remIndex)
-                {
-                    DoublyLinkedNode temp = curr.next;
-                    curr.next.next.prev = curr;
-                    curr.next = curr.next.next;
-                    temp.next = null;
-                    temp.prev = null;
-                    size--;
-                    return temp;
-                }
-                curr = curr.next;
+                DoublyLinkedNode temp = curr.next;
+                curr.next.next.prev = curr;
+                curr.next = curr.next.next;
+                temp.next = null;
+                temp.prev = null;
+                size--;
+                return temp;
             }
-            return null;
+            curr = curr.next;
         }
+        return null;
     }
 
     /**
