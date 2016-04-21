@@ -29,8 +29,8 @@ public class DoublyLinkedQueue
      */
     public DoublyLinkedQueue()
     {
-        head = new DoublyLinkedNode(null);
-        tail = new DoublyLinkedNode(null);
+        head = new DoublyLinkedNode(-1);
+        tail = new DoublyLinkedNode(-1);
         head.setNext(tail);
         tail.setPrev(head);
         size = 0;

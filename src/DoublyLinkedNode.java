@@ -16,18 +16,24 @@ public class DoublyLinkedNode
      */
     public DoublyLinkedNode prev;
     /**
-     * data
+     * length of data
      */
-    public int data;
+    public int length;
+    /**
+     * index of data
+     */
+    public int index;
+    
     /**
      * creates a node that contains data and no next node
      * 
      * @param newValue
      *            the value stored in the node
      */
-    public DoublyLinkedNode(int newValue)
+    public DoublyLinkedNode(int newindex, int newlength)
     {
-        data = newValue;
+        index = newindex;
+        length = newlength;
         prev = null;
         next = null;
     }
@@ -43,7 +49,6 @@ public class DoublyLinkedNode
         next = newNext;
     }
 
-    
     /**
      * sets the value of the prev node
      * 
@@ -53,26 +58,5 @@ public class DoublyLinkedNode
     public void setPrev(DoublyLinkedNode newPrev)
     {
         prev = newPrev;
-    }
-
-    /**
-     * sets the value of the node
-     * 
-     * @param newData
-     *            data to be stored in the node
-     */
-    public void setData(int newData)
-    {
-        data = newData;
-    }
-
-    /**
-     * returns the private Buffer stored in the node
-     * 
-     * @return the Buffer in the node
-     */
-    public int getData()
-    {
-        return data;
     }
 }
