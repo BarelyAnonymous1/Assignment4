@@ -23,12 +23,12 @@ public class SkipNode<K extends Comparable<K>, E>
      * creates a skip list node array that is blank that will point to the next
      * node in the list
      */
-    public SkipNode<K, E>[]   next;
+    public int[]   next;
 
     /**
      * Data stored into the node
      */
-    private KVPair<K, E>      pair;
+    private int     pair;
     /**
      * determines the level that the node is actually on
      */
@@ -44,14 +44,14 @@ public class SkipNode<K extends Comparable<K>, E>
      */
 
     @SuppressWarnings("unchecked")
-    public SkipNode(KVPair<K, E> newPair, int newLevel)
+    public SkipNode(int newPair, int newLevel)
     {
         level = newLevel;
         pair = newPair;
-        next = (SkipNode<K, E>[]) new SkipNode[newLevel + 1];
+        next =  new int[newLevel + 1];
         for (int i = 0; i < level; i++)
         {
-            next[i] = null;
+            next[i] = -1;
         }
     }
 
