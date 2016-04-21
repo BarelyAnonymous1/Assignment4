@@ -11,6 +11,7 @@ import java.util.*;
  */
 public class Manager
 {
+    private static final int messageSize = 2;
     /**
      * create an object of SingleObject
      */
@@ -54,10 +55,10 @@ public class Manager
     public int insert(byte[] data)
     {
         int temp = curr;
-        ByteBuffer buffer = ByteBuffer.allocate(2);
+        ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short)data.length);
-        System.arraycopy(buffer.get(), 0, tempDisk, curr, 2);
-        curr += 2;
+        System.arraycopy(buffer.get(), 0, tempDisk, curr, messageSize);
+        curr += messageSize;
         System.arraycopy(data, 0, tempDisk, curr, data.length);
         curr += data.length;
         return temp;
@@ -86,7 +87,6 @@ public class Manager
         System.arraycopy(tempDisk, h, size, 0, 2);
         int sizeNum = ByteBuffer.wrap(size).getInt();
         return Arrays.copyOfRange(tempDisk, h+2, h+2+sizeNum);
-        
     }
 
     /**
