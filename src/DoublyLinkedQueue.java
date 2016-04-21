@@ -46,7 +46,7 @@ public class DoublyLinkedQueue
     public void insert(DoublyLinkedNode newerNode)
     {
         DoublyLinkedNode newNode = newerNode;
-        if (head.next == null)
+        if (head.next == tail)
         {
             head.next = newNode;
             newNode.next = tail;
