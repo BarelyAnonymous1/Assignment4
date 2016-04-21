@@ -17,7 +17,7 @@ public class SkipNode<K extends Comparable<K>, E>
     /**
      * serializable ID
      */
-    private static final long serialVersionUID = 1L;
+   // private static final long serialVersionUID = 1L;
 
     /**
      * creates a skip list node array that is blank that will point to the next
