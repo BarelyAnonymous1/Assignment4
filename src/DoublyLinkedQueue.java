@@ -115,4 +115,14 @@ public class DoublyLinkedQueue
     {
         return size;
     }
+    
+    public void dump()
+    {
+        DoublyLinkedNode curr = head;
+        while (curr.next != tail)
+        {
+            System.out.println(curr.next.index + ", " + curr.next.length);
+        }
+        return;
+    }
 }
