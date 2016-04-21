@@ -15,7 +15,7 @@ public class KVPair<K extends Comparable<K>, E>
         implements Comparable<KVPair<K, E>>, java.io.Serializable
 {
     /**
-     * 
+     * serializable ID tag
      */
     private static final long serialVersionUID = 2573785258241524423L;
 
