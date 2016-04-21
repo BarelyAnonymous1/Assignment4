@@ -19,8 +19,8 @@ public class DoublyLinkedNodeTest extends TestCase
      */
     public void setUp()
     {
-        node1 = new DoublyLinkedNode(9);
-        node2 = new DoublyLinkedNode(8);
+        node1 = new DoublyLinkedNode(1, 1);
+        node2 = new DoublyLinkedNode(2, 2);
     }
 
     /**
@@ -32,7 +32,7 @@ public class DoublyLinkedNodeTest extends TestCase
         assertEquals(node1.next, node2);
         node2.setPrev(node1);
         assertEquals(node1, node2.prev);
-        node1.setData(node2.getData());
+        node1.setData(node2.index, node2.length);
     }
 
 }
