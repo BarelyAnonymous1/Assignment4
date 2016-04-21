@@ -46,37 +46,26 @@ public class DoublyLinkedQueue
     public void insert(DoublyLinkedNode newerNode)
     {
         DoublyLinkedNode newNode = newerNode;
-        if (size == 0)
+        DoublyLinkedNode curr = head;
+        while (curr.next != tail)
         {
-            head.next = newNode;
-            newNode.next = tail;
-            tail.prev = newNode;
-            newNode.prev = head;
-            size++;
-        }
-        else
-        {
-            DoublyLinkedNode curr = head;
-            while (curr.next != tail)
+            if (newNode.index < curr.next.index)
             {
-                if (newNode.index < curr.next.index)
-                {
-                    DoublyLinkedNode temp = curr.next;
-                    curr.next = newNode;
-                    newNode.next = temp;
-                    temp.prev = newNode;
-                    newNode.prev = curr;
-                    size++;
-                    return;
-                }
-                curr = curr.next;
+                DoublyLinkedNode temp = curr.next;
+                curr.next = newNode;
+                newNode.next = temp;
+                temp.prev = newNode;
+                newNode.prev = curr;
+                size++;
+                return;
             }
-            curr.next = newNode;
-            newNode.next = tail;
-            tail.prev = newNode;
-            newNode.prev = curr;
-            size++;
+            curr = curr.next;
         }
+        curr.next = newNode;
+        newNode.next = tail;
+        tail.prev = newNode;
+        newNode.prev = curr;
+        size++;
     }
 
     /**
