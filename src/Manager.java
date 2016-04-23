@@ -11,15 +11,16 @@ import java.util.*;
  */
 public class Manager
 {
-    private static final int messageSize = 2;
+    private static final int  messageSize = 2;
     /**
      * create an object of SingleObject
      */
-    private static Manager   instance;
+    private static Manager    instance;
 
-    private byte[]           tempDisk;
-    private byte[]           sizeArr;
-    private int              curr;
+    private byte[]            tempDisk;
+    private byte[]            sizeArr;
+    private int               curr;
+    private ByteBuffer        buffer;
 
     private DoublyLinkedQueue freeList;
 
@@ -87,8 +88,8 @@ public class Manager
     {
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         int sizeNum = ByteBuffer.wrap(sizeArr).getInt();
-        return Arrays.copyOfRange(tempDisk, h + messageSize,
-                h + messageSize + sizeNum);
+        return Arrays.copyOfRange(tempDisk, h + messageSize, h
+                + messageSize + sizeNum);
     }
 
     /**
