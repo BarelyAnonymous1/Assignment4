@@ -58,7 +58,7 @@ public class Manager
     public int insert(byte[] data)
     {
         int temp = curr;
-        ByteBuffer buffer = ByteBuffer.allocate(messageSize);
+        buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
         System.arraycopy(buffer.get(), 0, tempDisk, curr, messageSize);
         curr += messageSize;
