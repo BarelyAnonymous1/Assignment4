@@ -17,22 +17,22 @@ public class RectangleDisk
      */
     public static void main(String[] args)
     {
-        if (args.length != 4)
-        {
-            System.out.println("Usage: RectangleDisk <commandfile> "
-                    + "<diskFile> <numBuffs> <buffSize>");
-        }
-        else
-        {
-            try
-            {
-                CommandParser parser = new CommandParser(args[0]);
-                parser.parseFile();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
+//        if (args.length != 4)
+//        {
+//            System.out.println("Usage: RectangleDisk <commandfile> "
+//                    + "<diskFile> <numBuffs> <buffSize>");
+//        }
+//        else
+//        {
+//            try
+//            {
+//                CommandParser parser = new CommandParser(args[0]);
+//                parser.parseFile();
+//            }
+//            catch (IOException e)
+//            {
+//                e.printStackTrace();
+//            }
+//        }
     }
 }
