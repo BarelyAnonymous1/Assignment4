@@ -29,7 +29,7 @@ public class RectangleDisk
                 CommandParser parser = new CommandParser(args[0]);
                 parser.parseFile();
             }
-            catch (IOException e)
+            catch (Exception e)
             {
                 e.printStackTrace();
             }

@@ -36,8 +36,9 @@ public class CommandParser
      * function used to scan through the file input into the main program
      * 
      * @return boolean did the parsing succeed?
+     * @throws Exception
      */
-    public boolean parseFile()
+    public boolean parseFile() throws Exception
     {
         Scanner scanner = null;
         Exception d = null;
@@ -56,8 +57,7 @@ public class CommandParser
             while (scanner.hasNext())
             { // While the scanner has information to read
                 String cmd = scanner.next(); // Read the next command
-                switch (cmd)
-                {
+                switch (cmd) {
                     case ("insert"):
                     {
                         parseInsert(scanner);
@@ -108,10 +108,11 @@ public class CommandParser
      * 
      * @param scanner
      *            the scanner that is used to search the file
+     * @throws Exception
      * @precondition the scanner input is already initialized
      * @postcondition if coordinates are correct, a node is added to the list
      */
-    private void parseInsert(Scanner scanner)
+    private void parseInsert(Scanner scanner) throws Exception
     {
         String name = scanner.next();
         int x = scanner.nextInt();
@@ -141,10 +142,11 @@ public class CommandParser
      * 
      * @param scanner
      *            the scanner that is used to search the file
+     * @throws Exception
      * @precondition the scanner input is already initialized
      * @postcondition if the rectangle exists, it is removed from the list
      */
-    private void parseRemove(Scanner scanner)
+    private void parseRemove(Scanner scanner) throws Exception
     {
         String name = scanner.next();
         if (!isNumeric(name))
@@ -152,8 +154,8 @@ public class CommandParser
             Rectangle found = list.removeKey(name);
             if (found == null)
             {
-                System.out
-                        .println("Rectangle not removed: (" + name + ")");
+                System.out.println("Rectangle not removed: (" + name
+                        + ")");
             }
             else
             {
@@ -176,14 +178,13 @@ public class CommandParser
                 Rectangle found = list.removeValue(searchRect);
                 if (found == null)
                 {
-                    System.out.println(
-                            "Rectangle not removed: (" + search + ")");
+                    System.out.println("Rectangle not removed: (" + search
+                            + ")");
                 }
                 else
                 {
-                    System.out.println(
-                            "Rectangle removed: (" + found.getName() + ", "
-                                    + found.toString() + ")");
+                    System.out.println("Rectangle removed: (" + found
+                            .getName() + ", " + found.toString() + ")");
                 }
             }
             else
@@ -200,11 +201,12 @@ public class CommandParser
      * 
      * @param scanner
      *            the scanner that is used to search the file
+     * @throws Exception
      * @precondition the scanner input is already initialized
      * @postcondition if the height and width are appropriate, a list of
      *                rectangles are output to the console
      */
-    private void parseRegionSearch(Scanner scanner)
+    private void parseRegionSearch(Scanner scanner) throws Exception
     {
         int x = scanner.nextInt();
         int y = scanner.nextInt();
@@ -235,7 +237,8 @@ public class CommandParser
      * @precondition the scanner input is already initialized
      * @postcondition if coordinates are correct, a node is added to the list
      */
-    private void parseSearch(Scanner scanner)
+    @SuppressWarnings("unchecked")
+    private void parseSearch(Scanner scanner) throws Exception
     {
         String name = scanner.next();
         SkipNode<String, Rectangle> searchResult = list.search(name);
@@ -245,14 +248,20 @@ public class CommandParser
         }
         else
         {
-            System.out.println("(" + name + ", "
-                    + searchResult.getValue().toString() + ")");
-            while (searchResult.next[0] != null && searchResult.next[0]
-                    .getKey().compareTo(searchResult.getKey()) == 0)
+            System.out.println("(" + name + ", " + searchResult.getValue()
+                    .toString() + ")");
+            SkipNode<String, Rectangle> searchNext = (SkipNode<String, Rectangle>) Serializer
+                    .deserialize(Manager.getInstance().getRecord(
+                            searchResult.next[0]));
+            while (searchResult.next[0] != -1 && searchNext.getKey()
+                    .compareTo(searchResult.getKey()) == 0)
             {
-                searchResult = searchResult.next[0];
-                System.out.println("(" + name + ", "
-                        + searchResult.getValue().toString() + ")");
+                searchNext = (SkipNode<String, Rectangle>) Serializer
+                        .deserialize(Manager.getInstance().getRecord(
+                                searchResult.next[0]));
+                searchResult = searchNext;
+                System.out.println("(" + name + ", " + searchResult
+                        .getValue().toString() + ")");
             }
         }
     }
@@ -265,7 +274,7 @@ public class CommandParser
      * @postcondition terminal will have outputs containing intersections of
      *                rectangles, if any
      */
-    private void parseIntersections()
+    private void parseIntersections() throws Exception
     {
         System.out.println("Intersection pairs:");
         list.intersections();
@@ -284,8 +293,7 @@ public class CommandParser
     }
 
     /**
-     * helper method to do math regarding the dimensions of 
-     * the rectangle
+     * helper method to do math regarding the dimensions of the rectangle
      * 
      * @param x
      *            coordinate
@@ -299,10 +307,7 @@ public class CommandParser
      */
     public boolean checkDim(int x, int y, int width, int height)
     {
-        return !(width <= 0 || 
-                height <= 0 || 
-                x + width > 1024 ||
-                y + height > 1024 ||
-                x < 0 || y < 0);
+        return !(width <= 0 || height <= 0 || x + width > 1024 || y
+                + height > 1024 || x < 0 || y < 0);
     }
 }

@@ -227,16 +227,16 @@ public class SkipList<K extends Comparable<K>, E>
      *            the key that is being searched for
      * @return the node that contains a specific key
      */
-    @SuppressWarnings ("unchecked")
+    @SuppressWarnings("unchecked")
     public SkipNode<K, E> search(K key) throws Exception
     {
         SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
                 Manager.getInstance().getRecord(head));
-        SkipNode<K,E> currNext = null;
+        SkipNode<K, E> currNext = null;
         for (int i = level; 0 <= i; i--)
         {
-            currNext = (SkipNode<K, E>) Serializer.deserialize(
-                    Manager.getInstance().getRecord(current.next[i]));
+            currNext = (SkipNode<K, E>) Serializer.deserialize(Manager
+                    .getInstance().getRecord(current.next[i]));
             while (currNext != null && key.compareTo(currNext
                     .getKey()) > 0)
             {
@@ -255,7 +255,7 @@ public class SkipList<K extends Comparable<K>, E>
      * output a list of every item in the list in the following format:
      * "Node has depth 0, Value (0)"
      */
-    @SuppressWarnings ("unchecked")
+    @SuppressWarnings("unchecked")
     public void dump() throws Exception
     {
         System.out.println("SkipList dump:");
@@ -275,8 +275,9 @@ public class SkipList<K extends Comparable<K>, E>
             System.out.println("Node has depth " + current.getLevel()
                     + ", Value (" + name + ")");
 
-            current = (SkipNode<K, E>) Serializer.deserialize(
-                    Manager.getInstance().getRecord(current.next[0]));;
+            current = (SkipNode<K, E>) Serializer.deserialize(Manager
+                    .getInstance().getRecord(current.next[0]));
+            ;
         }
         System.out.println("SkipList size is: " + size);
         Manager.getInstance().dump();
@@ -288,13 +289,18 @@ public class SkipList<K extends Comparable<K>, E>
      * 
      * @return whether or not an intersection was found
      */
-    public boolean intersections()
+    @SuppressWarnings("unchecked")
+    public boolean intersections() throws Exception
     {
         boolean foundIntersect = false;
-        SkipNode<K, E> current = head.next[0];
+        SkipNode<K, E> temp = (SkipNode<K, E>) Serializer.deserialize(
+                Manager.getInstance().getRecord(head));
+        SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
+                Manager.getInstance().getRecord(temp.next[0]));
         for (int i = 0; i < size; i++)
         {
-            SkipNode<K, E> check = head.next[0];
+            SkipNode<K, E> check = (SkipNode<K, E>) Serializer.deserialize(
+                    Manager.getInstance().getRecord(temp.next[0]));
             for (int j = 0; j < size; j++)
             {
                 if (i != j)
@@ -307,9 +313,11 @@ public class SkipList<K extends Comparable<K>, E>
                         foundIntersect = true;
                     }
                 }
-                check = check.next[0];
+                check = (SkipNode<K, E>) Serializer.deserialize(Manager
+                        .getInstance().getRecord(check.next[0]));
             }
-            current = current.next[0];
+            current = (SkipNode<K, E>) Serializer.deserialize(Manager
+                    .getInstance().getRecord(current.next[0]));
         }
         return foundIntersect;
     }
@@ -321,10 +329,14 @@ public class SkipList<K extends Comparable<K>, E>
      *            KVPair that contains the rectangle for the intersecting region
      * @return whether or not a rectangle was found in the region
      */
-    public boolean regionSearch(Rectangle region)
+    @SuppressWarnings ("unchecked")
+    public boolean regionSearch(Rectangle region) throws Exception
     {
         boolean inRegion = false;
-        SkipNode<K, E> current = head.next[0];
+        SkipNode<K, E> temp = (SkipNode<K, E>) Serializer.deserialize(
+                Manager.getInstance().getRecord(head));
+        SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
+                Manager.getInstance().getRecord(temp.next[0]));
         for (int i = 0; i < size; i++)
         {
             if (((Rectangle) current.getValue()).intersects(region))
@@ -332,7 +344,8 @@ public class SkipList<K extends Comparable<K>, E>
                 System.out.println(current.getPair().toString());
                 inRegion = true;
             }
-            current = current.next[0];
+            current = (SkipNode<K, E>) Serializer.deserialize(Manager
+                    .getInstance().getRecord(current.next[0]));
         }
         return inRegion;
     }
