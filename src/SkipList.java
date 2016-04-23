@@ -154,6 +154,7 @@ public class SkipList<K extends Comparable<K>, E>
         SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
                 Manager.getInstance().getRecord(head));
         int removeHandle = -1;
+        int currHandle = head;
         E located = null;
         for (int i = level; i >= 0; i--)
         {
@@ -173,11 +174,16 @@ public class SkipList<K extends Comparable<K>, E>
                 {
                     break;
                 }
+                currHandle = current.next[i];
                 current = currNext;
             }
         }
-        Manager.getInstance().release(removeHandle);
-        Manager.getInstance().insert(Serializer.serialize(current));
+        if (removeHandle > -1)
+        {
+            Manager.getInstance().release(removeHandle);
+            Manager.getInstance().replaceRecord(currHandle, Serializer
+                    .serialize(current));
+        }
         if (located != null)
         {
             size--;
@@ -194,16 +200,21 @@ public class SkipList<K extends Comparable<K>, E>
      *            the searched for value
      * @return located value if found, if not, null
      */
-    public E removeValue(E value)
+    @SuppressWarnings("unchecked")
+    public E removeValue(E value) throws Exception
     {
-        SkipNode<K, E> current = head;
-        while (current.next[0] != null)
+        SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
+                Manager.getInstance().getRecord(head));
+        while (current.next[0] != -1)
         {
-            if (current.next[0].getValue().equals(value))
+            SkipNode<K, E> currNext = (SkipNode<K, E>) Serializer
+                    .deserialize(Manager.getInstance().getRecord(
+                            current.next[0]));
+            if (currNext.getValue().equals(value))
             {
-                return removeKey(current.next[0].getKey());
+                return removeKey(currNext.getKey());
             }
-            current = current.next[0];
+            current = currNext;
         }
         return null;
     }
@@ -216,18 +227,23 @@ public class SkipList<K extends Comparable<K>, E>
      *            the key that is being searched for
      * @return the node that contains a specific key
      */
-    public SkipNode<K, E> search(K key)
+    @SuppressWarnings ("unchecked")
+    public SkipNode<K, E> search(K key) throws Exception
     {
-        SkipNode<K, E> current = head;
+        SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
+                Manager.getInstance().getRecord(head));
+        SkipNode<K,E> currNext = null;
         for (int i = level; 0 <= i; i--)
         {
-            while (current.next[i] != null && key.compareTo(current.next[i]
+            currNext = (SkipNode<K, E>) Serializer.deserialize(
+                    Manager.getInstance().getRecord(current.next[i]));
+            while (currNext != null && key.compareTo(currNext
                     .getKey()) > 0)
             {
-                current = current.next[i];
+                current = currNext;
             }
         }
-        current = current.next[0];
+        current = currNext;
         if (current == null || key.compareTo(current.getKey()) != 0)
         {
             return null;
@@ -239,10 +255,12 @@ public class SkipList<K extends Comparable<K>, E>
      * output a list of every item in the list in the following format:
      * "Node has depth 0, Value (0)"
      */
-    public void dump()
+    @SuppressWarnings ("unchecked")
+    public void dump() throws Exception
     {
         System.out.println("SkipList dump:");
-        SkipNode<K, E> current = head;
+        SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
+                Manager.getInstance().getRecord(head));
         while (current != null)
         {
             String name = "";
@@ -257,7 +275,8 @@ public class SkipList<K extends Comparable<K>, E>
             System.out.println("Node has depth " + current.getLevel()
                     + ", Value (" + name + ")");
 
-            current = current.next[0];
+            current = (SkipNode<K, E>) Serializer.deserialize(
+                    Manager.getInstance().getRecord(current.next[0]));;
         }
         System.out.println("SkipList size is: " + size);
         Manager.getInstance().dump();
