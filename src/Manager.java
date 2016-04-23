@@ -21,7 +21,7 @@ public class Manager
     private byte[]           sizeArr;
     private int              curr;
 
-    private static DoublyLinkedQueue freeList;
+    private DoublyLinkedQueue freeList;
 
     /**
      * make the constructor private so that this class cannot be instantiated
