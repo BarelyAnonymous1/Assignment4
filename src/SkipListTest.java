@@ -31,7 +31,7 @@ public class SkipListTest extends TestCase
     /**
      * tests the insert method
      */
-    public void testInsert()
+    public void testInsert() throws Exception
     {
         list.insert(pair2);
         list.insert(pair1);
@@ -46,7 +46,7 @@ public class SkipListTest extends TestCase
      * make sure that the list will adjust the head when a node is added higher
      * than the head
      */
-    public void testRandomInsert()
+    public void testRandomInsert() throws Exception
     {
         TestableRandom.setNextBooleans(false, true, true, false);
         assertEquals(1, list.getHead().getLevel());
@@ -60,7 +60,7 @@ public class SkipListTest extends TestCase
     /**
      * creates a fake region to check for new rectangles
      */
-    public void testRegionSearch() throws IOException
+    public void testRegionSearch() throws Exception
     {
         Rectangle region = new Rectangle("region", 100, 100, 200, 200);
         SkipList<String, Rectangle> regionList = 
@@ -77,7 +77,7 @@ public class SkipListTest extends TestCase
      * tests that the intersections test successfully finds an intersection and
      * returns the appropriate boolean
      */
-    public void testIntersections() throws IOException
+    public void testIntersections() throws Exception
     {
         SkipList<String, Rectangle> intersectList = 
                 new SkipList<String, Rectangle>();
