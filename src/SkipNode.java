@@ -46,8 +46,8 @@ public class SkipNode<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public SkipNode(int newPair, int newLevel)
     {
-        level = newLevel;
         pair = newPair;
+        level = newLevel;
         next = new int[newLevel + 1];
         for (int i = 0; i < level; i++)
         {
