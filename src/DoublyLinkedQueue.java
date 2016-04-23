@@ -1,4 +1,3 @@
-import java.io.*;
 
 /**
  * DoublyLinkedQueue that is modified to be able to search remove from the
@@ -104,7 +103,7 @@ public class DoublyLinkedQueue
     {
         return size;
     }
-    
+
     public void dump()
     {
         DoublyLinkedNode curr = head;
