@@ -60,16 +60,19 @@ public class SkipList<K extends Comparable<K>, E>
      * @param newLevel
      *            is the new largest levels
      */
-    private void fixHead(int newLevel)
+    @SuppressWarnings("unchecked")
+    private void fixHead(int newLevel) throws Exception
     {
-        SkipNode<K, E> oldHead = head;
-        head = Manager.getInstance().insert(Serializer.serialize(new SkipNode<K, E>(-1, newLevel)));
+        SkipNode<K, E> oldHead = (SkipNode<K, E>) Serializer
+                .deserialize(Manager.getInstance().getRecord(head));
+        SkipNode<K, E> newHead = new SkipNode<K, E>(-1, newLevel);
         for (int i = 0; i <= level; i++)
         {
-            head.next[i] = oldHead.next[i];
+            newHead.next[i] = oldHead.next[i];
         }
         level = newLevel;
-
+        Manager.getInstance().release(head);
+        head = Manager.getInstance().insert(Serializer.serialize(newHead));
     }
 
     /**
@@ -96,7 +99,7 @@ public class SkipList<K extends Comparable<K>, E>
      * @return whether iteration succeeded
      */
     @SuppressWarnings("unchecked")
-    public boolean insert(KVPair<K, E> newPair)
+    public boolean insert(KVPair<K, E> newPair) throws Exception
     {
         int newLevel = pickRandomLevel();
         Comparable<K> key = newPair.key();
@@ -106,21 +109,32 @@ public class SkipList<K extends Comparable<K>, E>
         }
         SkipNode<K, E>[] update = (SkipNode[]) Array
                 .newInstance(SkipNode.class, level + 1);
-        SkipNode<K, E> curr = head;
+        SkipNode<K, E> curr = (SkipNode<K, E>) Serializer
+                .deserialize(Manager.getInstance().getRecord(head));
         for (int i = level; i >= 0; i--)
         {
-            while ((curr.next[i] != null)
-                    && (key.compareTo((curr.next[i]).getPair().key()) > 0))
+            SkipNode<K, E> currNext = (SkipNode<K, E>) Serializer
+                    .deserialize(
+                            Manager.getInstance().getRecord(curr.next[i]));
+            while ((curr.next[i] != -1)
+                    && (key.compareTo(currNext.getPair().key()) > 0))
             {
-                curr = curr.next[i];
+                curr = currNext;
+                currNext = (SkipNode<K, E>) Serializer
+                        .deserialize(
+                                Manager.getInstance().getRecord(curr.next[i]));
             }
             update[i] = curr;
         }
-        curr = new SkipNode<K, E>(newPair, newLevel);
+        curr = new SkipNode<K, E>(Manager.getInstance().insert(Serializer.serialize(newPair)), newLevel);
         for (int i = 0; i <= newLevel; i++)
         {
             curr.next[i] = update[i].next[i];
-            update[i].next[i] = curr;
+        }
+        int currPos = Manager.getInstance().insert(Serializer.serialize(curr));
+        for (int i = 0; i <= newLevel; i++)
+        {
+            update[i].next[i] = currPos;
         }
         size++;
         return true;
