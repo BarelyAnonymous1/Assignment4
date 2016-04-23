@@ -35,8 +35,8 @@ public class SkipList<K extends Comparable<K>, E>
      */
     public SkipList() throws IOException
     {
-        head = Manager.getInstance()
-                .insert(Serializer.serialize(new SkipNode<K, E>(-1, 1)));
+        head = Manager.getInstance().insert(Serializer.serialize(
+                new SkipNode<K, E>(-1, 1)));
         level = 0;
         size = 0;
     }
@@ -49,8 +49,8 @@ public class SkipList<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public SkipNode<K, E> getHead() throws Exception
     {
-        return (SkipNode<K, E>) Serializer
-                .deserialize(Manager.getInstance().getRecord(head));
+        return (SkipNode<K, E>) Serializer.deserialize(Manager
+                .getInstance().getRecord(head));
     }
 
     /**
@@ -63,8 +63,8 @@ public class SkipList<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     private void fixHead(int newLevel) throws Exception
     {
-        SkipNode<K, E> oldHead = (SkipNode<K, E>) Serializer
-                .deserialize(Manager.getInstance().getRecord(head));
+        SkipNode<K, E> oldHead = (SkipNode<K, E>) Serializer.deserialize(
+                Manager.getInstance().getRecord(head));
         SkipNode<K, E> newHead = new SkipNode<K, E>(-1, newLevel);
         for (int i = 0; i <= level; i++)
         {
@@ -107,35 +107,33 @@ public class SkipList<K extends Comparable<K>, E>
         {
             fixHead(newLevel);
         }
-        SkipNode<K, E>[] update = (SkipNode[]) Array
-                .newInstance(SkipNode.class, level + 1);
-        SkipNode<K, E> curr = (SkipNode<K, E>) Serializer
-                .deserialize(Manager.getInstance().getRecord(head));
+        SkipNode<K, E>[] update = (SkipNode[]) Array.newInstance(
+                SkipNode.class, level + 1);
+        SkipNode<K, E> curr = (SkipNode<K, E>) Serializer.deserialize(
+                Manager.getInstance().getRecord(head));
         for (int i = level; i >= 0; i--)
         {
             SkipNode<K, E> currNext = (SkipNode<K, E>) Serializer
-                    .deserialize(
-                            Manager.getInstance().getRecord(curr.next[i]));
-            while ((curr.next[i] != -1)
-                    && (key.compareTo(currNext.getPair().key()) > 0))
+                    .deserialize(Manager.getInstance().getRecord(
+                            curr.next[i]));
+            while ((curr.next[i] != -1) && (key.compareTo(currNext
+                    .getPair().key()) > 0))
             {
                 curr = currNext;
-                currNext = (SkipNode<K, E>) Serializer.deserialize(
-                        Manager.getInstance().getRecord(curr.next[i]));
+                currNext = (SkipNode<K, E>) Serializer.deserialize(Manager
+                        .getInstance().getRecord(curr.next[i]));
             }
             update[i] = curr;
         }
-        curr = new SkipNode<K, E>(Manager.getInstance()
-                .insert(Serializer.serialize(newPair)), newLevel);
+        curr = new SkipNode<K, E>(Manager.getInstance().insert(Serializer
+                .serialize(newPair)), newLevel);
+        int currPos = Manager.getInstance().insert(Serializer.serialize(
+                curr));
         for (int i = 0; i <= newLevel; i++)
         {
             curr.next[i] = update[i].next[i];
-        }
-        int currPos = Manager.getInstance()
-                .insert(Serializer.serialize(curr));
-        for (int i = 0; i <= newLevel; i++)
-        {
             update[i].next[i] = currPos;
+
         }
         size++;
         return true;
@@ -150,27 +148,36 @@ public class SkipList<K extends Comparable<K>, E>
      *            the searched for key
      * @return located value if found, if not, null
      */
-    public E removeKey(K key)
+    @SuppressWarnings("unchecked")
+    public E removeKey(K key) throws Exception
     {
-        SkipNode<K, E> current = head;
+        SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
+                Manager.getInstance().getRecord(head));
+        int removeHandle = -1;
         E located = null;
         for (int i = level; i >= 0; i--)
         {
-            while (current.next[i] != null)
+            while (current.next[i] != -1)
             {
-                if (current.next[i].getKey().compareTo(key) == 0)
+                SkipNode<K, E> currNext = (SkipNode<K, E>) Serializer
+                        .deserialize(Manager.getInstance().getRecord(
+                                current.next[i]));
+                if (currNext.getKey().compareTo(key) == 0)
                 {
-                    located = current.next[i].getValue();
-                    current.next[i] = current.next[i].next[i];
+                    located = currNext.getValue();
+                    current.next[i] = currNext.next[i];
+                    removeHandle = current.next[i];
                     break;
                 }
-                if (current.next[i].getKey().compareTo(key) > 0)
+                if (currNext.getKey().compareTo(key) > 0)
                 {
                     break;
                 }
-                current = current.next[i];
+                current = currNext;
             }
         }
+        Manager.getInstance().release(removeHandle);
+        Manager.getInstance().insert(Serializer.serialize(current));
         if (located != null)
         {
             size--;
@@ -214,8 +221,8 @@ public class SkipList<K extends Comparable<K>, E>
         SkipNode<K, E> current = head;
         for (int i = level; 0 <= i; i--)
         {
-            while (current.next[i] != null
-                    && key.compareTo(current.next[i].getKey()) > 0)
+            while (current.next[i] != null && key.compareTo(current.next[i]
+                    .getKey()) > 0)
             {
                 current = current.next[i];
             }
@@ -273,8 +280,8 @@ public class SkipList<K extends Comparable<K>, E>
             {
                 if (i != j)
                 {
-                    if (((Rectangle) current.getValue())
-                            .intersects(((Rectangle) check.getValue())))
+                    if (((Rectangle) current.getValue()).intersects(
+                            ((Rectangle) check.getValue())))
                     {
                         System.out.println(current.getPair().toString()
                                 + " | " + check.getPair().toString());
