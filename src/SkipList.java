@@ -120,18 +120,19 @@ public class SkipList<K extends Comparable<K>, E>
                     && (key.compareTo(currNext.getPair().key()) > 0))
             {
                 curr = currNext;
-                currNext = (SkipNode<K, E>) Serializer
-                        .deserialize(
-                                Manager.getInstance().getRecord(curr.next[i]));
+                currNext = (SkipNode<K, E>) Serializer.deserialize(
+                        Manager.getInstance().getRecord(curr.next[i]));
             }
             update[i] = curr;
         }
-        curr = new SkipNode<K, E>(Manager.getInstance().insert(Serializer.serialize(newPair)), newLevel);
+        curr = new SkipNode<K, E>(Manager.getInstance()
+                .insert(Serializer.serialize(newPair)), newLevel);
         for (int i = 0; i <= newLevel; i++)
         {
             curr.next[i] = update[i].next[i];
         }
-        int currPos = Manager.getInstance().insert(Serializer.serialize(curr));
+        int currPos = Manager.getInstance()
+                .insert(Serializer.serialize(curr));
         for (int i = 0; i <= newLevel; i++)
         {
             update[i].next[i] = currPos;
