@@ -17,12 +17,12 @@ public class KVPair<K extends Comparable<K>, E> implements java.io.Serializable
     /**
      * where the key of the pair will be stored
      */
-    String    theKey;
+    K    theKey;
 
     /**
      * where the value for the pair will be stored
      */
-    Rectangle theVal;
+    E theVal;
 
     /**
      * constructor for the KVPair that stored the key and value
@@ -32,7 +32,7 @@ public class KVPair<K extends Comparable<K>, E> implements java.io.Serializable
      * @param v
      *            value to be stored
      */
-    public KVPair(String k, Rectangle v)
+    public KVPair(K k, E v)
     {
         theKey = k;
         theVal = v;
@@ -68,7 +68,7 @@ public class KVPair<K extends Comparable<K>, E> implements java.io.Serializable
      * 
      * @return key stored in pair
      */
-    public String key() throws Exception
+    public K key() throws Exception
     {
         return theKey;
     }
@@ -78,7 +78,7 @@ public class KVPair<K extends Comparable<K>, E> implements java.io.Serializable
      * 
      * @return value stored in pair
      */
-    public Rectangle value() throws Exception
+    public E value() throws Exception
     {
         return theVal;
     }
