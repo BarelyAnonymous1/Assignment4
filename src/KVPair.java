@@ -78,9 +78,10 @@ public class KVPair implements java.io.Serializable
      * 
      * @return value stored in pair
      */
-    public int value()
+    public Rectangle value() throws Exception
     {
-        return theVal;
+        return (Rectangle) Serializer.deserialize(Manager.getInstance()
+                .getRecord(theVal));
     }
 
     /**
