@@ -26,9 +26,9 @@ public class CommandParser
      * @param file
      *            name for the file that is being parsed
      */
-    public CommandParser(String file) throws IOException
+    public CommandParser(String[] args) throws IOException
     {
-        inputFile = file;
+        inputFile = args[0];
         list = new SkipList<String, Rectangle>();
     }
 
@@ -123,7 +123,7 @@ public class CommandParser
         if (checkDim(x, y, width, height) && Character.isAlphabetic(c))
         {
             Rectangle rect = new Rectangle(name, x, y, width, height);
-            KVPair pair = new KVPair(name, rect);
+            KVPair<String,Rectangle> pair = new KVPair<String, Rectangle>(name, rect);
             list.insert(pair);
             System.out.println("Rectangle inserted: (" + name + ", " + x
                     + ", " + y + ", " + width + ", " + height + ")");
