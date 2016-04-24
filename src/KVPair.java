@@ -17,7 +17,7 @@ public class KVPair implements java.io.Serializable
     /**
      * where the key of the pair will be stored
      */
-    String theKey;
+    String    theKey;
 
     /**
      * where the value for the pair will be stored
@@ -70,8 +70,7 @@ public class KVPair implements java.io.Serializable
      */
     public String key() throws Exception
     {
-        return (String) Serializer.deserialize(Manager.getInstance()
-                .getRecord(theKey));
+        return theKey;
     }
 
     /**
@@ -81,8 +80,7 @@ public class KVPair implements java.io.Serializable
      */
     public Rectangle value() throws Exception
     {
-        return (Rectangle) Serializer.deserialize(Manager.getInstance()
-                .getRecord(theVal));
+        return theVal;
     }
 
     /**
@@ -90,11 +88,8 @@ public class KVPair implements java.io.Serializable
      * 
      * @return the String values for both the key and value
      */
-    public String pairToString() throws Exception
+    public String toString()
     {
-        return (String) Serializer.deserialize(Manager.getInstance()
-                .getRecord(theKey)) + ", " + (Rectangle) Serializer
-                        .deserialize(Manager.getInstance().getRecord(
-                                theVal));
+        return theKey + ", " + theVal;
     }
 }
