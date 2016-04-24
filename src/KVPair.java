@@ -78,7 +78,7 @@ public class KVPair<K extends Comparable<K>, E> implements java.io.Serializable,
      * 
      * @return value stored in pair
      */
-    public E value() throws Exception
+    public E value()
     {
         return theVal;
     }
