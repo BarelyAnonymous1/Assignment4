@@ -148,6 +148,6 @@ public class Manager
     public void dump()
     {
         System.out.println("Freelist Blocks:");
-        System.out.println("(0, 4096)");
+        freeList.dump();
     }
 }
