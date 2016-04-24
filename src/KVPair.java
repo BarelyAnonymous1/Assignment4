@@ -46,7 +46,7 @@ public class KVPair<K extends Comparable<K>, E> implements java.io.Serializable
      * @return 0 if they have the same key, another integer if different
      * @throws Exception
      */
-    public int compareTo(KVPair<K,E> it) throws Exception
+    public int compareTo(KVPair<K,E> it)
     {
         return key().compareTo(it.key());
     }
@@ -58,7 +58,7 @@ public class KVPair<K extends Comparable<K>, E> implements java.io.Serializable
      *            the key that is being used to compare with this
      * @return 0 if they keys are equal, another integer if different
      */
-    public int compareTo(String it) throws Exception
+    public int compareTo(K it)
     {
         return key().compareTo(it);
     }
