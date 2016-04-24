@@ -148,13 +148,13 @@ public class SkipList<K extends Comparable<K>, E>
      * @return located value if found, if not, null
      */
     @SuppressWarnings("unchecked")
-    public Rectangle removeKey(String key) throws Exception
+    public E removeKey(K key) throws Exception
     {
         SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
                 Manager.getInstance().getRecord(head));
         int removeHandle = -1;
         int currHandle = head;
-        Rectangle located = null;
+        E located = null;
         for (int i = level; i >= 0; i--)
         {
             while (current.next[i] != -1)
@@ -200,7 +200,7 @@ public class SkipList<K extends Comparable<K>, E>
      * @return located value if found, if not, null
      */
     @SuppressWarnings("unchecked")
-    public Rectangle removeValue(E value) throws Exception
+    public E removeValue(E value) throws Exception
     {
         SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
                 Manager.getInstance().getRecord(head));
@@ -227,7 +227,7 @@ public class SkipList<K extends Comparable<K>, E>
      * @return the node that contains a specific key
      */
     @SuppressWarnings("unchecked")
-    public SkipNode<K, E> search(String key) throws Exception
+    public SkipNode<K, E> search(K key) throws Exception
     {
         SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
                 Manager.getInstance().getRecord(head));
