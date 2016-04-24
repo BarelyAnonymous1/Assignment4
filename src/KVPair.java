@@ -69,9 +69,8 @@ public class KVPair implements java.io.Serializable
      */
     public String key() throws Exception
     {
-        return (String) Serializer
-                .deserialize(Manager.getInstance().getRecord(
-                        theKey));
+        return (String) Serializer.deserialize(Manager.getInstance()
+                .getRecord(theKey));
     }
 
     /**
