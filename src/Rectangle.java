@@ -10,10 +10,6 @@
 public class Rectangle implements Comparable<Rectangle>, java.io.Serializable
 {
     /**
-     * 
-     */
-    private static final long serialVersionUID = -494421004953016520L;
-    /**
      * x coordinate of upper left corner of Rectangle
      */
     private int    x;

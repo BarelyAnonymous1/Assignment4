@@ -11,6 +11,7 @@
  * @param <E>
  *            generic element to be stored
  */
+@SuppressWarnings("serial")
 public class KVPair<K extends Comparable<K>, E>
         implements Comparable<KVPair<K, E>>, java.io.Serializable
 {
