@@ -12,18 +12,17 @@
  *            generic element to be stored
  */
 @SuppressWarnings("serial")
-public class KVPair<K extends Comparable<K>, E>
-        implements Comparable<KVPair<K, E>>, java.io.Serializable
+public class KVPair implements java.io.Serializable
 {
     /**
      * where the key of the pair will be stored
      */
-    K theKey;
+    int theKey;
 
     /**
      * where the value for the pair will be stored
      */
-    E theVal;
+    int theVal;
 
     /**
      * constructor for the KVPair that stored the key and value
@@ -33,7 +32,7 @@ public class KVPair<K extends Comparable<K>, E>
      * @param v
      *            value to be stored
      */
-    public KVPair(K k, E v)
+    public KVPair(int k, int v)
     {
         theKey = k;
         theVal = v;

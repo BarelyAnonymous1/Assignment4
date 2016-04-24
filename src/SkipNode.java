@@ -10,6 +10,7 @@
  * @version 1
  *
  */
+@SuppressWarnings("serial")
 public class SkipNode<K extends Comparable<K>, E>
         implements java.io.Serializable
 {
