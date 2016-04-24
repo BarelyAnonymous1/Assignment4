@@ -57,10 +57,11 @@ public class SkipNode<K extends Comparable<K>, E>
      * 
      * @return key of the node
      */
-    public String getKey() throws Exception
+    @SuppressWarnings("unchecked")
+    public K getKey() throws Exception
     {
         byte[] obj = Manager.getInstance().getRecord(pair);
-        KVPair found = ((KVPair) Serializer.deserialize(obj));
+        KVPair<K,E> found = ((KVPair<K,E>) Serializer.deserialize(obj));
         if (found != null)
             return found.key();
         return null;
@@ -71,10 +72,11 @@ public class SkipNode<K extends Comparable<K>, E>
      * 
      * @return value of node
      */
-    public Rectangle getValue() throws Exception
+    @SuppressWarnings("unchecked")
+    public E getValue() throws Exception
     {
         byte[] obj = Manager.getInstance().getRecord(pair);
-        KVPair found = ((KVPair) Serializer.deserialize(obj));
+        KVPair<K,E> found = ((KVPair<K,E>) Serializer.deserialize(obj));
         if (found != null)
             return found.value();
         return null;
@@ -96,9 +98,9 @@ public class SkipNode<K extends Comparable<K>, E>
      * @return KVPair of the node
      */
     @SuppressWarnings("unchecked")
-    public KVPair getPair() throws Exception
+    public KVPair<K,E> getPair() throws Exception
     {
         byte[] obj = Manager.getInstance().getRecord(pair);
-        return ((KVPair) Serializer.deserialize(obj));
+        return ((KVPair<K,E>) Serializer.deserialize(obj));
     }
 }
