@@ -7,6 +7,7 @@
  * @author Jonathan DeFreeuw (jondef95), Preston Lattimer (platt)
  * @version 1
  */
+@SuppressWarnings("serial")
 public class Rectangle implements Comparable<Rectangle>, java.io.Serializable
 {
     /**

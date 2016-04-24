@@ -13,12 +13,6 @@
 public class SkipNode<K extends Comparable<K>, E>
         implements java.io.Serializable
 {
-
-    /**
-     * serializable ID tag
-     */
-    private static final long serialVersionUID = 7644132670332293690L;
-
     /**
      * creates a skip list node array that is blank that will point to the next
      * node in the list
@@ -42,8 +36,6 @@ public class SkipNode<K extends Comparable<K>, E>
      * @param newLevel
      *            the integer used to store the level of that node
      */
-
-    @SuppressWarnings("unchecked")
     public SkipNode(int newPair, int newLevel)
     {
         pair = newPair;
