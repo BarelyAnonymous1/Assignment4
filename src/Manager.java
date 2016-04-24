@@ -90,6 +90,7 @@ public class Manager
             handle = (numBlocks++) * blockSize;
             freeList.insert(new DoublyLinkedNode(handle + recordSize,
                     blockSize - recordSize));
+            numBlocks++;
         }
         // freeblock on the end of the list
         else
