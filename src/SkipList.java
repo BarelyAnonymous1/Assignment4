@@ -99,10 +99,12 @@ public class SkipList<K extends Comparable<K>, E>
      * @return whether iteration succeeded
      */
     @SuppressWarnings("unchecked")
-    public boolean insert(KVPair<K, E> newPair) throws Exception
+    public boolean insert(KVPair newPair) throws Exception
     {
         int newLevel = pickRandomLevel();
-        Comparable<K> key = newPair.key();
+
+        String key = (String) Serializer.deserialize(Manager.getInstance()
+                .getRecord(newPair.key()));
         if (level < newLevel)
         {
             fixHead(newLevel);
@@ -329,7 +331,7 @@ public class SkipList<K extends Comparable<K>, E>
      *            KVPair that contains the rectangle for the intersecting region
      * @return whether or not a rectangle was found in the region
      */
-    @SuppressWarnings ("unchecked")
+    @SuppressWarnings("unchecked")
     public boolean regionSearch(Rectangle region) throws Exception
     {
         boolean inRegion = false;

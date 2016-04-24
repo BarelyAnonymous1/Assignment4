@@ -123,8 +123,11 @@ public class CommandParser
         if (checkDim(x, y, width, height) && Character.isAlphabetic(c))
         {
             Rectangle rect = new Rectangle(name, x, y, width, height);
-            KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(
-                    name, rect);
+            int nameHandle = Manager.getInstance().insert(Serializer
+                    .serialize(name));
+            int rectHandle = Manager.getInstance().insert(Serializer
+                    .serialize(rect));
+            KVPair pair = new KVPair(name, rect);
             list.insert(pair);
             System.out.println("Rectangle inserted: (" + name + ", " + x
                     + ", " + y + ", " + width + ", " + height + ")");

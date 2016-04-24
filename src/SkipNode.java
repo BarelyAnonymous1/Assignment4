@@ -98,9 +98,9 @@ public class SkipNode<K extends Comparable<K>, E>
      * @return KVPair of the node
      */
     @SuppressWarnings("unchecked")
-    public KVPair<K, E> getPair() throws Exception
+    public KVPair getPair() throws Exception
     {
         byte[] obj = Manager.getInstance().getRecord(pair);
-        return ((KVPair<K, E>) Serializer.deserialize(obj));
+        return ((KVPair) Serializer.deserialize(obj));
     }
 }

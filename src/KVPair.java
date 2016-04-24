@@ -45,9 +45,9 @@ public class KVPair implements java.io.Serializable
      *            the KVPair that is being checked against this pair
      * @return 0 if they have the same key, another integer if different
      */
-    public int compareTo(KVPair<K, E> it)
+    public int compareTo(KVPair it)
     {
-        return theKey.compareTo(it.key());
+        return theKey - it.key();
     }
 
     /**
@@ -57,9 +57,9 @@ public class KVPair implements java.io.Serializable
      *            the key that is being used to compare with this
      * @return 0 if they keys are equal, another integer if different
      */
-    public int compareTo(K it)
+    public int compareTo(int it)
     {
-        return theKey.compareTo(it);
+        return theKey - it;
     }
 
     /**
@@ -67,9 +67,11 @@ public class KVPair implements java.io.Serializable
      * 
      * @return key stored in pair
      */
-    public K key()
+    public String key() throws Exception
     {
-        return theKey;
+        return (String) Serializer
+                .deserialize(Manager.getInstance().getRecord(
+                        theKey));
     }
 
     /**
@@ -77,7 +79,7 @@ public class KVPair implements java.io.Serializable
      * 
      * @return value stored in pair
      */
-    public E value()
+    public int value()
     {
         return theVal;
     }
@@ -87,8 +89,11 @@ public class KVPair implements java.io.Serializable
      * 
      * @return the String values for both the key and value
      */
-    public String toString()
+    public String pairToString() throws Exception
     {
-        return theKey.toString() + ", " + theVal.toString();
+        return (String) Serializer.deserialize(Manager.getInstance()
+                .getRecord(theKey)) + ", " + (Rectangle) Serializer
+                        .deserialize(Manager.getInstance().getRecord(
+                                theVal));
     }
 }
