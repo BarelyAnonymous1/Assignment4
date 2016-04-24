@@ -12,7 +12,7 @@
  *            generic element to be stored
  */
 @SuppressWarnings("serial")
-public class KVPair implements java.io.Serializable
+public class KVPair<K extends Comparable<K>, E> implements java.io.Serializable
 {
     /**
      * where the key of the pair will be stored
