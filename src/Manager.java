@@ -20,6 +20,7 @@ public class Manager
 
     private byte[]            tempDisk;
     private byte[]            sizeArr;
+    private int               numBlocks;
     private int               curr;
     private ByteBuffer        buffer;
 
@@ -32,6 +33,7 @@ public class Manager
     private Manager()
     {
         // start freelist
+        numBlocks = 0;
         curr = 0;
         sizeArr = new byte[messageSize];
     }
@@ -69,14 +71,42 @@ public class Manager
      */
     public int insert(byte[] data)
     {
-        int temp = curr;
+        // int temp = curr;
+        // buffer = ByteBuffer.allocate(messageSize);
+        // buffer.putShort((short) data.length);
+        // System.arraycopy(buffer.get(), 0, tempDisk, curr, messageSize);
+        // curr += messageSize;
+        // System.arraycopy(data, 0, tempDisk, curr, data.length);
+        // curr += data.length;
+        // return temp;
+
+        buffer = ByteBuffer.allocate(messageSize);
+        buffer.putShort((short) data.length);
+        int recordSize = messageSize + data.length;
+        DoublyLinkedNode free = freeList.contains(recordSize);
+        int handle = -1;
+        if (free == null)
+        {
+            handle = (numBlocks++) * blockSize;
+            freeList.insert(new DoublyLinkedNode(handle + recordSize,
+                    blockSize - recordSize));
+        }
+        // freeblock on the end of the list
+        else
+        {
+            if ((free.index + free.length) % blockSize == 0)
+            {
+                free.length += blockSize;
+                numBlocks++;
+            }
+            free.index += recordSize;
+            free.length -= recordSize;
+        }
         buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
         System.arraycopy(buffer.get(), 0, tempDisk, curr, messageSize);
-        curr += messageSize;
         System.arraycopy(data, 0, tempDisk, curr, data.length);
-        curr += data.length;
-        return temp;
+        return handle;
     }
 
     /**
@@ -100,8 +130,8 @@ public class Manager
     {
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         int sizeNum = ByteBuffer.wrap(sizeArr).getInt();
-        return Arrays.copyOfRange(tempDisk, h + messageSize, h
-                + messageSize + sizeNum);
+        return Arrays.copyOfRange(tempDisk, h + messageSize,
+                h + messageSize + sizeNum);
     }
 
     public void replaceRecord(int h, byte[] newMessage)
@@ -118,6 +148,6 @@ public class Manager
     public void dump()
     {
         System.out.println("Freelist Blocks:");
-        System.out.println("(0, 4096)");
+        freeList.dump();
     }
 }

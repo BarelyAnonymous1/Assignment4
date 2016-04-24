@@ -95,6 +95,34 @@ public class DoublyLinkedQueue
     }
 
     /**
+     * returns the best fit node in the list
+     * 
+     * @param sz
+     *            size of the message that needs to be allocated
+     * @return the node that has the best fit for the message
+     */
+    public DoublyLinkedNode contains(int sz)
+    {
+        DoublyLinkedNode curr = head.next;
+        DoublyLinkedNode best = null;
+        while (curr != tail)
+        {
+            if (curr.length == sz)
+                return curr;
+            else if (curr.length > sz && best != null
+                    && curr.length < best.length)
+                best = curr;
+            curr = curr.next;
+        }
+        if (best != null)
+                return best;
+        else if (size == 0)
+            return null;
+        else 
+            return tail.prev;
+    }
+
+    /**
      * get the size of the list; size should not include duplicates
      * 
      * @return size of the list, no duplicates
@@ -106,10 +134,10 @@ public class DoublyLinkedQueue
 
     public void dump()
     {
-        DoublyLinkedNode curr = head;
-        while (curr.next != tail)
+        DoublyLinkedNode curr = head.next;
+        while (curr != tail)
         {
-            System.out.println(curr.next.index + ", " + curr.next.length);
+            System.out.println(curr.index + ", " + curr.length);
             curr = curr.next;
         }
         return;
