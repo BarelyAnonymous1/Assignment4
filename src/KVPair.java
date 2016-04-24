@@ -17,12 +17,12 @@ public class KVPair implements java.io.Serializable
     /**
      * where the key of the pair will be stored
      */
-    int theKey;
+    String theKey;
 
     /**
      * where the value for the pair will be stored
      */
-    int theVal;
+    Rectangle theVal;
 
     /**
      * constructor for the KVPair that stored the key and value
@@ -32,7 +32,7 @@ public class KVPair implements java.io.Serializable
      * @param v
      *            value to be stored
      */
-    public KVPair(int k, int v)
+    public KVPair(String k, Rectangle v)
     {
         theKey = k;
         theVal = v;
@@ -58,10 +58,9 @@ public class KVPair implements java.io.Serializable
      *            the key that is being used to compare with this
      * @return 0 if they keys are equal, another integer if different
      */
-    public int compareTo(int it) throws Exception
+    public int compareTo(String it) throws Exception
     {
-        return key().compareTo((String) Serializer.deserialize(Manager
-                .getInstance().getRecord(it)));
+        return key().compareTo(it);
     }
 
     /**
