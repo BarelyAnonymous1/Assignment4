@@ -127,7 +127,7 @@ public class CommandParser
                     .serialize(name));
             int rectHandle = Manager.getInstance().insert(Serializer
                     .serialize(rect));
-            KVPair pair = new KVPair(name, rect);
+            KVPair pair = new KVPair(nameHandle, rectHandle);
             list.insert(pair);
             System.out.println("Rectangle inserted: (" + name + ", " + x
                     + ", " + y + ", " + width + ", " + height + ")");
