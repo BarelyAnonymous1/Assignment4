@@ -29,6 +29,10 @@ public class CommandParser
     public CommandParser(String[] args) throws IOException
     {
         inputFile = args[0];
+        //diskfile
+        //numBuffs
+        //bufferSize
+        Manager.getInstance().setSize(args[2]);
         list = new SkipList<String, Rectangle>();
     }
 

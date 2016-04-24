@@ -16,7 +16,7 @@ public class CommandParserTest extends TestCase
      */
     public void testSearchFail() throws Exception
     {
-        parser = new CommandParser("fail");
+//        parser = new CommandParser("fail");
         boolean success = parser.parseFile();
         assertFalse(success);
     }
@@ -27,7 +27,7 @@ public class CommandParserTest extends TestCase
      */
     public void testSearchPass() throws Exception
     {
-        parser = new CommandParser("SyntaxTest.txt");
+//        parser = new CommandParser("SyntaxTest.txt");
         boolean success = parser.parseFile();
         assertTrue(success);
     }
@@ -37,7 +37,7 @@ public class CommandParserTest extends TestCase
      */
     public void testCheckDim() throws Exception
     {
-        parser = new CommandParser("test.txt");
+        //parser = new CommandParser(["test.txt", ""]);
         assertTrue(parser.checkDim(0, 0, 1, 1));
         assertTrue(parser.checkDim(1, 1, 1, 1));
         assertFalse(parser.checkDim(0, 0, 1025, 1));
@@ -57,7 +57,7 @@ public class CommandParserTest extends TestCase
      */
     public void testParseFile() throws Exception
     {
-        parser = new CommandParser("test.txt");
+//        parser = new CommandParser("test.txt");
         boolean success = parser.parseFile();
         assertTrue(success);
     }
