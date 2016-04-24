@@ -86,10 +86,12 @@ public class Manager
         DoublyLinkedNode free = freeList.contains(recordSize);
         int handle = -1;
         if (free == null)
+        {
             handle = (numBlocks++) * blockSize;
             freeList.insert(new DoublyLinkedNode(
                      handle + recordSize,
                     blockSize - recordSize));
+        }
         // freeblock on the end of the list
         else
         {
