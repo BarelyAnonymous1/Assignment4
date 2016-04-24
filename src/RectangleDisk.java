@@ -26,7 +26,7 @@ public class RectangleDisk
         {
             try
             {
-                CommandParser parser = new CommandParser(args[0]);
+                CommandParser parser = new CommandParser(args);
                 parser.parseFile();
             }
             catch (Exception e)
