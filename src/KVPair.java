@@ -44,10 +44,11 @@ public class KVPair implements java.io.Serializable
      * @param it
      *            the KVPair that is being checked against this pair
      * @return 0 if they have the same key, another integer if different
+     * @throws Exception
      */
-    public int compareTo(KVPair it)
+    public int compareTo(KVPair it) throws Exception
     {
-        return theKey - it.key();
+        return key().compareTo(it.key());
     }
 
     /**
@@ -57,9 +58,10 @@ public class KVPair implements java.io.Serializable
      *            the key that is being used to compare with this
      * @return 0 if they keys are equal, another integer if different
      */
-    public int compareTo(int it)
+    public int compareTo(int it) throws Exception
     {
-        return theKey - it;
+        return key().compareTo((String) Serializer.deserialize(Manager
+                .getInstance().getRecord(it)));
     }
 
     /**
