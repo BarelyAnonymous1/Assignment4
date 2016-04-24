@@ -84,18 +84,20 @@ public class Manager
         buffer.putShort((short) data.length);
         int recordSize = messageSize + data.length;
         DoublyLinkedNode free = freeList.contains(recordSize);
+        int handle = -1;
         if (free == null)
+            handle = (numBlocks++) * blockSize;
             freeList.insert(new DoublyLinkedNode(
-                    (numBlocks++) * blockSize + recordSize,
+                     handle + recordSize,
                     blockSize - recordSize));
         // freeblock on the end of the list
-        if ((free.index + free.length) % blockSize == 0)
+        else
         {
-            free.length += blockSize;
+            if ((free.index + free.length) % blockSize == 0)
+                free.length += blockSize;
             free.index += recordSize;
             free.length -= recordSize;
         }
-
 
     }
 
