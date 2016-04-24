@@ -114,7 +114,12 @@ public class DoublyLinkedQueue
                 best = curr;
             curr = curr.next;
         }
-        return best;
+        if (best != null)
+                return best;
+        else if (size == 0)
+            return null;
+        else 
+            return tail.prev;
     }
 
     /**

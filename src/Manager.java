@@ -20,6 +20,7 @@ public class Manager
 
     private byte[]            tempDisk;
     private byte[]            sizeArr;
+    private int               numBlocks;
     private int               curr;
     private ByteBuffer        buffer;
 
@@ -32,6 +33,7 @@ public class Manager
     private Manager()
     {
         // start freelist
+        numBlocks = 0;
         curr = 0;
         sizeArr = new byte[messageSize];
     }
@@ -69,14 +71,23 @@ public class Manager
      */
     public int insert(byte[] data)
     {
-        int temp = curr;
+        // int temp = curr;
+        // buffer = ByteBuffer.allocate(messageSize);
+        // buffer.putShort((short) data.length);
+        // System.arraycopy(buffer.get(), 0, tempDisk, curr, messageSize);
+        // curr += messageSize;
+        // System.arraycopy(data, 0, tempDisk, curr, data.length);
+        // curr += data.length;
+        // return temp;
+
         buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
-        System.arraycopy(buffer.get(), 0, tempDisk, curr, messageSize);
-        curr += messageSize;
-        System.arraycopy(data, 0, tempDisk, curr, data.length);
-        curr += data.length;
-        return temp;
+        int recordSize = messageSize + data.length;
+        DoublyLinkedNode free = freeList.contains(recordSize);
+        if (free != null)
+            freeList.insert(new DoublyLinkedNode(
+                    (numBlocks++) * blockSize + recordSize, blockSize));
+
     }
 
     /**
