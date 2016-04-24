@@ -100,8 +100,8 @@ public class Manager
     {
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         int sizeNum = ByteBuffer.wrap(sizeArr).getInt();
-        return Arrays.copyOfRange(tempDisk, h + messageSize, h
-                + messageSize + sizeNum);
+        return Arrays.copyOfRange(tempDisk, h + messageSize,
+                h + messageSize + sizeNum);
     }
 
     public void replaceRecord(int h, byte[] newMessage)
