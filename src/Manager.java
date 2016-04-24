@@ -12,7 +12,7 @@ import java.util.*;
 public class Manager
 {
     private static final int  messageSize = 2;
-    private static int  blockSize;
+    private static int        blockSize;
     /**
      * create an object of SingleObject
      */
@@ -47,8 +47,14 @@ public class Manager
             instance = new Manager();
         return instance;
     }
-    
-    private void setSize(int sz)
+
+    /**
+     * sets the size of a block of the freelist
+     * 
+     * @param sz
+     *            size of the freeblock in the list
+     */
+    public void setSize(int sz)
     {
         blockSize = sz;
         tempDisk = new byte[blockSize];
@@ -97,7 +103,7 @@ public class Manager
         return Arrays.copyOfRange(tempDisk, h + messageSize, h
                 + messageSize + sizeNum);
     }
-    
+
     public void replaceRecord(int h, byte[] newMessage)
     {
         buffer = ByteBuffer.allocate(messageSize);

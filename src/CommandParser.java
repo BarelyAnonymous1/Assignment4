@@ -32,7 +32,7 @@ public class CommandParser
         //diskfile
         //numBuffs
         //bufferSize
-        Manager.getInstance().setSize(args[2]);
+        Manager.getInstance().setSize(Integer.parseInt(args[2]));
         list = new SkipList<String, Rectangle>();
     }
 
