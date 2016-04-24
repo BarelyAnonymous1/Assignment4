@@ -32,7 +32,6 @@ public class Manager
     {
         // start freelist
         curr = 0;
-        tempDisk = new byte[4096];
         sizeArr = new byte[messageSize];
     }
 
@@ -46,6 +45,12 @@ public class Manager
         if (instance == null)
             instance = new Manager();
         return instance;
+    }
+    
+    private void setSize(int sz)
+    {
+        tempDisk = new byte[sz];
+
     }
 
     /**
