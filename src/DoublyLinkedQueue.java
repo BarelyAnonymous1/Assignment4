@@ -140,18 +140,18 @@ public class DoublyLinkedQueue
         DoublyLinkedNode curr = head.next;
         while (curr != tail)
         {
-            if (curr.index + curr.length + 1 == handle)
-            {
-                curr.length += sz;
-                return;
-            }
-            if (curr.index - 1 == handle + sz)
-            {
-                curr.index -= sz;
-                curr.length += sz;
-                return;
-            }
-            curr = curr.next;
+//            if (curr.index + curr.length + 1 == handle)
+//            {
+//                curr.length += sz;
+//                return;
+//            }
+//            if (curr.index - 1 == handle + sz)
+//            {
+//                curr.index -= sz;
+//                curr.length += sz;
+//                return;
+//            }
+//            curr = curr.next;
         }
         insert(new DoublyLinkedNode(handle, sz));
     }
