@@ -98,6 +98,7 @@ public class Manager
             if (free.length == 0)
                 freeList.remove(free.index);
         }
+        dump();
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
         System.out.println(handle);
