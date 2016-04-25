@@ -151,7 +151,7 @@ public class DoublyLinkedQueue
 //                curr.length += sz;
 //                return;
 //            }
-//            curr = curr.next;
+            curr = curr.next;
         }
         insert(new DoublyLinkedNode(handle, sz));
     }
