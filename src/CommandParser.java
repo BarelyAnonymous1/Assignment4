@@ -127,7 +127,7 @@ public class CommandParser
         char c = name.charAt(0);
         if (checkDim(x, y, width, height) && Character.isAlphabetic(c))
         {
-            Rectangle rect = new Rectangle(name, x, y, width, height);
+            Rectangle rect = new Rectangle(x, y, width, height);
             KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(
                     name, rect);
             list.insert(pair);
@@ -178,7 +178,7 @@ public class CommandParser
             {
                 String search = x + ", " + y + ", " + width + ", "
                         + height;
-                Rectangle searchRect = new Rectangle(null, x, y, width,
+                Rectangle searchRect = new Rectangle(x, y, width,
                         height);
                 Rectangle found = list.removeValue(searchRect);
                 if (found == null)

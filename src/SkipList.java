@@ -216,7 +216,7 @@ public class SkipList<K extends Comparable<K>, E>
      * @return located value if found, if not, null
      */
     @SuppressWarnings("unchecked")
-    public E removeValue(E value) throws Exception
+    public KVPair<K,E> removeValue(E value) throws Exception
     {
         SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
                 Manager.getInstance().getRecord(head));
