@@ -267,10 +267,11 @@ public class SkipList<K extends Comparable<K>, E>
     public void dump() throws Exception
     {
         System.out.println("SkipList dump:");
-        SkipNode<K, E> current = (SkipNode<K, E>) Serializer
-                .deserialize(Manager.getInstance().getRecord(head));
-        while (current != null)
+        int curr = head;
+        while (curr != -1)
         {
+            SkipNode<K, E> current = (SkipNode<K, E>) Serializer
+                    .deserialize(Manager.getInstance().getRecord(curr));
             String name = "";
             if (current.getValue() == null)
             {
