@@ -71,7 +71,6 @@ public class SkipList<K extends Comparable<K>, E>
         level = newLevel;
         System.out.println("adjusted");
         head = Manager.getInstance().insert(Serializer.serialize(newHead));
-        System.out.println(");
     }
 
     /**
@@ -113,12 +112,10 @@ public class SkipList<K extends Comparable<K>, E>
         int[] updateHandles = (int[]) Array.newInstance(int.class,
                 level + 1);
         int curr = head;
-        for (int i = newLevel-1; i >= 0; i--)
+        for (int i = level; i >= 0; i--)
         {
-            System.out.println("Head: " + head);
             SkipNode<K, E> currNode = (SkipNode<K, E>) Serializer
                     .deserialize(Manager.getInstance().getRecord(curr));
-            System.out.println("CurrNode: " + currNode.next[i]);
             while (currNode.next[i] != -1 && (key.compareTo(
                     ((SkipNode<K, E>) Serializer.deserialize(Manager
                             .getInstance().getRecord(currNode.next[i])))
