@@ -99,9 +99,10 @@ public class SkipList<K extends Comparable<K>, E>
      * @return whether iteration succeeded
      */
     @SuppressWarnings("unchecked")
-    public boolean insert(KVPair newPair) throws Exception
+    public boolean insert(KVPair<K,E> newPair) throws Exception
     {
         int newLevel = pickRandomLevel();
+        Comparable<K> key = newPair.key();
         if (level < newLevel)
         {
             fixHead(newLevel);
@@ -115,7 +116,7 @@ public class SkipList<K extends Comparable<K>, E>
             SkipNode<K, E> currNext = (SkipNode<K, E>) Serializer
                     .deserialize(Manager.getInstance().getRecord(
                             curr.next[i]));
-            while ((curr.next[i] != -1) && (newPair.key().compareTo(currNext
+            while ((curr.next[i] != -1) && (key.compareTo(currNext
                     .getPair().key()) > 0))
             {
                 curr = currNext;
