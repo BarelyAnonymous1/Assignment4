@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class Manager
 {
-    private static int  messageSize;
+    private static int        messageSize;
     private static int        blockSize;
     /**
      * create an object of SingleObject
@@ -61,7 +61,7 @@ public class Manager
     public void setSize(int sz)
     {
         blockSize = sz;
-        tempDisk = new byte[4*blockSize];
+        tempDisk = new byte[4 * blockSize];
     }
 
     /**
