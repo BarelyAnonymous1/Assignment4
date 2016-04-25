@@ -134,7 +134,7 @@ public class Manager
         sizeArr[1] = tempDisk[h + 1];
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         return Arrays.copyOfRange(tempDisk, h + messageSize,
-                h + messageSize + sizeNum);
+                h + messageSize + sizeNum + 1);
     }
 
     public void replaceRecord(int h, byte[] newMessage)
