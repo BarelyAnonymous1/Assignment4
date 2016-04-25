@@ -81,7 +81,6 @@ public class Manager
             numBlocks++;
             freeList.insert(new DoublyLinkedNode(handle + recordSize,
                     blockSize - recordSize));
-            System.out.println("Handle is: " + handle);
             freeList.dump();
         }
         // freeblock on the end of the list
