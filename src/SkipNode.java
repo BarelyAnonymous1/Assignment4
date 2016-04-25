@@ -41,7 +41,7 @@ public class SkipNode<K extends Comparable<K>, E>
     {
         pair = newPair;
         level = newLevel;
-        next = new int[newLevel];
+        next = new int[newLevel+1];
         for (int i = 0; i < level; i++)
         {
             next[i] = -1;
