@@ -39,7 +39,7 @@ public class SkipListTest extends TestCase
         assertNull(list.search("node3"));
         list.insert(pair3);
         list.insert(new KVPair<String, Integer>("node4", 4));
-        // assertEquals(pair3.compareTo(list.search("node3").getPair()), 0);
+        assertEquals(pair3.compareTo(list.search("node3").getPair()), 0);
 
         list.dump();
     }
