@@ -105,8 +105,6 @@ public class Manager
             free.index += recordSize;
             free.length -= recordSize;
         }
-        buffer = ByteBuffer.allocate(messageSize);
-        buffer.putShort((short) data.length);
         System.arraycopy(buffer.array(), 0, tempDisk, handle, messageSize);
         System.arraycopy(data, 0, tempDisk, curr, data.length);
         return handle;
