@@ -241,8 +241,10 @@ public class SkipList<K extends Comparable<K>, E>
                         Manager.getInstance().getRecord(current.next[i]));
             }
         }
+        if (current.next[0] == -1)
+            return null;
         current = (SkipNode<K, E>) Serializer.deserialize(
-                Manager.getInstance().getRecord(current.next[i]));
+                Manager.getInstance().getRecord(current.next[0]));
         if (current == null || current.getKey() == null
                 || key.compareTo(current.getKey()) != 0 )
         {
