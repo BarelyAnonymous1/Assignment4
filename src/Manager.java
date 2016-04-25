@@ -105,7 +105,7 @@ public class Manager
         }
         buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
-        System.arraycopy(buffer.get(), 0, tempDisk, curr, messageSize);
+        System.arraycopy(buffer.array(), 0, tempDisk, curr, messageSize);
         System.arraycopy(data, 0, tempDisk, curr, data.length);
         return handle;
     }
