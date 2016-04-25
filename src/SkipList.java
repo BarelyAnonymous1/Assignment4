@@ -71,8 +71,7 @@ public class SkipList<K extends Comparable<K>, E>
             newHead.next[i] = oldHead.next[i];
         }
         level = newLevel;
-        Manager.getInstance().release(head);
-        head = Manager.getInstance().insert(Serializer.serialize(newHead));
+        Manager.getInstance().replaceRecord(head, Serializer.serialize(newHead));
     }
 
     /**
