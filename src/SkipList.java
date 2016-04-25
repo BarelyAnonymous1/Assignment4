@@ -242,8 +242,6 @@ public class SkipList<K extends Comparable<K>, E>
             }
         }
         if (current == null
-                || current == (SkipNode<K, E>) Serializer
-                        .deserialize(Manager.getInstance().getRecord(head))
                 || key.compareTo(current.getKey()) != 0)
         {
             return null;
