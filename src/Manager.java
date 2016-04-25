@@ -59,6 +59,8 @@ public class Manager
     {
         blockSize = sz;
         tempDisk = new byte[blockSize];
+        System.out.println("adding another...");
+
         freeList.insert(new DoublyLinkedNode(0, blockSize));
         numBlocks++;
     }
@@ -78,7 +80,6 @@ public class Manager
         if (free == null)
         {
             handle = (numBlocks) * blockSize;
-            System.out.println("adding another...");
             numBlocks++;
             freeList.insert(new DoublyLinkedNode(handle + recordSize,
                     blockSize - recordSize));
