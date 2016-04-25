@@ -142,6 +142,8 @@ public class SkipList<K extends Comparable<K>, E>
         int currPos = getHandle(newNode);
         for (int i = 0; i <= newLevel; i++)
         {
+            System.out.println("updateHandles at " + i + "is "
+                    + updateHandles[i]);
             newNode.next[i] = ((SkipNode<K, E>) getObject(
                     updateHandles[i])).next[i];
             SkipNode<K, E> updateNode = ((SkipNode<K, E>) getObject(
@@ -164,13 +166,13 @@ public class SkipList<K extends Comparable<K>, E>
      * @return located value if found, if not, null
      */
     @SuppressWarnings("unchecked")
-    public KVPair<K,E> removeKey(K key) throws Exception
+    public KVPair<K, E> removeKey(K key) throws Exception
     {
         SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
                 Manager.getInstance().getRecord(head));
         int removeHandle = -1;
         int currHandle = head;
-        KVPair<K,E> located = null;
+        KVPair<K, E> located = null;
         for (int i = level; i >= 0; i--)
         {
             while (current.next[i] != -1)
@@ -216,7 +218,7 @@ public class SkipList<K extends Comparable<K>, E>
      * @return located value if found, if not, null
      */
     @SuppressWarnings("unchecked")
-    public KVPair<K,E> removeValue(E value) throws Exception
+    public KVPair<K, E> removeValue(E value) throws Exception
     {
         SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
                 Manager.getInstance().getRecord(head));
