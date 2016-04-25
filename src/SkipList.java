@@ -71,7 +71,8 @@ public class SkipList<K extends Comparable<K>, E>
             newHead.next[i] = oldHead.next[i];
         }
         level = newLevel;
-        Manager.getInstance().replaceRecord(head, Serializer.serialize(newHead));
+        Manager.getInstance().replaceRecord(head,
+                Serializer.serialize(newHead));
     }
 
     /**
@@ -117,9 +118,8 @@ public class SkipList<K extends Comparable<K>, E>
                             Manager.getInstance().getRecord(curr.next[i])))
                                     .getPair().key()) > 0))
             {
-                curr = (SkipNode<K, E>) Serializer
-                        .deserialize(Manager.getInstance().getRecord(
-                                curr.next[i]));
+                curr = (SkipNode<K, E>) Serializer.deserialize(
+                        Manager.getInstance().getRecord(curr.next[i]));
             }
             update[i] = curr;
         }
