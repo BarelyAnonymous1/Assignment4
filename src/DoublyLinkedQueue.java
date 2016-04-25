@@ -71,7 +71,8 @@ public class DoublyLinkedQueue
      * pulls the last added node from the queue this node removed from the queue
      * ------------- x-x-x-x-x-x x -> -------------
      * 
-     * @param remIndex the index of the node to remove
+     * @param remIndex
+     *            the index of the node to remove
      * @return the node that was just removed from the list so that it may be
      *         recycled and returned to the back of the queue
      */
@@ -112,12 +113,16 @@ public class DoublyLinkedQueue
             {
                 return curr;
             }
+            else if (best == null)
+            {
+                best = curr;
+            }
             else if (curr.length > sz && best != null
                     && curr.length < best.length)
             {
                 best = curr;
-                curr = curr.next;
             }
+            curr = curr.next;
         }
         if (best != null)
         {

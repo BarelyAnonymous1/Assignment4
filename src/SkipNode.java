@@ -18,16 +18,16 @@ public class SkipNode<K extends Comparable<K>, E>
      * creates a skip list node array that is blank that will point to the next
      * node in the list
      */
-    public int[]              next;
+    public int[] next;
 
     /**
      * Data stored into the node
      */
-    private int               pair;
+    private int  pair;
     /**
      * determines the level that the node is actually on
      */
-    private int               level;
+    private int  level;
 
     /**
      * constructor to make nodes that store a KVPair
@@ -41,8 +41,8 @@ public class SkipNode<K extends Comparable<K>, E>
     {
         pair = newPair;
         level = newLevel;
-        next = new int[newLevel + 1];
-        for (int i = 0; i < level; i++)
+        next = new int[newLevel+1];
+        for (int i = 0; i <= level; i++)
         {
             next[i] = -1;
         }
@@ -60,8 +60,10 @@ public class SkipNode<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public K getKey() throws Exception
     {
+        if (pair == -1)
+            return null;
         byte[] obj = Manager.getInstance().getRecord(pair);
-        KVPair<K,E> found = ((KVPair<K,E>) Serializer.deserialize(obj));
+        KVPair<K, E> found = ((KVPair<K, E>) Serializer.deserialize(obj));
         if (found != null)
             return found.key();
         return null;
@@ -75,8 +77,10 @@ public class SkipNode<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public E getValue() throws Exception
     {
+        if (pair == -1)
+            return null;
         byte[] obj = Manager.getInstance().getRecord(pair);
-        KVPair<K,E> found = ((KVPair<K,E>) Serializer.deserialize(obj));
+        KVPair<K, E> found = ((KVPair<K, E>) Serializer.deserialize(obj));
         if (found != null)
             return found.value();
         return null;
@@ -98,9 +102,9 @@ public class SkipNode<K extends Comparable<K>, E>
      * @return KVPair of the node
      */
     @SuppressWarnings("unchecked")
-    public KVPair<K,E> getPair() throws Exception
+    public KVPair<K, E> getPair() throws Exception
     {
         byte[] obj = Manager.getInstance().getRecord(pair);
-        return ((KVPair<K,E>) Serializer.deserialize(obj));
+        return ((KVPair<K, E>) Serializer.deserialize(obj));
     }
 }
