@@ -248,7 +248,7 @@ public class SkipList<K extends Comparable<K>, E>
                         Manager.getInstance().getRecord(curr));
             }
 //        }
-//        curr = currNode.next[0];
+        curr = currNode.next[0];
         System.out.println(curr);
         if (curr == -1)
             return null;
