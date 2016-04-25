@@ -56,8 +56,6 @@ public class DoublyLinkedQueue
                 temp.prev = newNode;
                 newNode.prev = curr;
                 size++;
-                System.out.println("adding another...");
-
                 return;
             }
             curr = curr.next;
@@ -173,7 +171,6 @@ public class DoublyLinkedQueue
      */
     public void dump()
     {
-        System.out.println("Number of blocks: " + size);
         DoublyLinkedNode curr = head.next;
         while (curr != tail)
         {
