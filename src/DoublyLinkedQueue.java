@@ -39,7 +39,7 @@ public class DoublyLinkedQueue
      * adds a new node into the linked queue This node is inserted into the
      * front of the queue ------------- -> x -------------
      * 
-     * @param newNode
+     * @param newerNode
      *            the node to be inserted
      */
     public void insert(DoublyLinkedNode newerNode)
@@ -71,6 +71,7 @@ public class DoublyLinkedQueue
      * pulls the last added node from the queue this node removed from the queue
      * ------------- x-x-x-x-x-x x -> -------------
      * 
+     * @param remIndex the index of the node to remove
      * @return the node that was just removed from the list so that it may be
      *         recycled and returned to the back of the queue
      */
@@ -108,18 +109,28 @@ public class DoublyLinkedQueue
         while (curr != tail)
         {
             if (curr.length == sz)
+            {
                 return curr;
+            }
             else if (curr.length > sz && best != null
                     && curr.length < best.length)
+            {
                 best = curr;
-            curr = curr.next;
+                curr = curr.next;
+            }
         }
         if (best != null)
-                return best;
+        {
+            return best;
+        }
         else if (size == 0)
+        {
             return null;
-        else 
+        }
+        else
+        {
             return tail.prev;
+        }
     }
 
     /**
@@ -132,6 +143,9 @@ public class DoublyLinkedQueue
         return size;
     }
 
+    /**
+     * dumps the list
+     */
     public void dump()
     {
         DoublyLinkedNode curr = head.next;
@@ -140,6 +154,5 @@ public class DoublyLinkedQueue
             System.out.println(curr.index + ", " + curr.length);
             curr = curr.next;
         }
-        return;
     }
 }
