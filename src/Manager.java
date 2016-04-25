@@ -82,7 +82,6 @@ public class Manager
             freeList.insert(new DoublyLinkedNode(handle + recordSize,
                     blockSize - recordSize));
             System.out.println("had to add a new block");
-            freeList.dump();
         }
         // freeblock on the end of the list
         else
@@ -90,7 +89,6 @@ public class Manager
             handle = free.index;
             free.index += recordSize;
             free.length -= recordSize;
-            freeList.dump();
         }
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
