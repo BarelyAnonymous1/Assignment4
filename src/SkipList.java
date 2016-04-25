@@ -66,9 +66,11 @@ public class SkipList<K extends Comparable<K>, E>
         SkipNode<K, E> newHead = new SkipNode<K, E>(-1, newLevel);
         for (int i = 0; i <= level; i++)
         {
-            System.out.println("oldHead.next at " + i + "= " + oldHead.next[i]);
+            System.out.println(
+                    "oldHead.next at " + i + "= " + oldHead.next[i]);
             newHead.next[i] = oldHead.next[i];
-            System.out.println("newHead.next at " + i + "= " + newHead.next[i]);
+            System.out.println(
+                    "newHead.next at " + i + "= " + newHead.next[i]);
         }
         level = newLevel;
         head = Manager.getInstance().insert(Serializer.serialize(newHead));
@@ -108,7 +110,8 @@ public class SkipList<K extends Comparable<K>, E>
         }
         SkipNode<K, E>[] update = (SkipNode[]) Array
                 .newInstance(SkipNode.class, level + 1);
-        int[] updateHandles = (int[]) Array.newInstance(int.class, level+1);
+        int[] updateHandles = (int[]) Array.newInstance(int.class,
+                level + 1);
         SkipNode<K, E> curr = getHead();
         for (int i = level; i >= 0; i--)
         {
@@ -132,6 +135,8 @@ public class SkipList<K extends Comparable<K>, E>
         {
             curr.next[i] = update[i].next[i];
             update[i].next[i] = currPos;
+            Manager.getInstance().replaceRecord(updateHandles[i],
+                    Serializer.serialize(update[i]));
         }
         size++;
         System.out.println("insert Success");
