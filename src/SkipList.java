@@ -68,12 +68,9 @@ public class SkipList<K extends Comparable<K>, E>
         {
             newHead.next[i] = oldHead.next[i];
         }
-
+        // remove old head
         level = newLevel;
-        System.out.println("old head: " + head);
         head = Manager.getInstance().insert(Serializer.serialize(newHead));
-        System.out.println("new head: " + head);
-
     }
 
     /**
@@ -102,15 +99,14 @@ public class SkipList<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public boolean insert(KVPair<K, E> newPair) throws Exception
     {
-        int newLevel = pickRandomLevel();
-        System.out.println("Level: " + newLevel);
         K key = newPair.key();
+        int newLevel = pickRandomLevel();
         if (level < newLevel)
         {
             fixHead(newLevel);
         }
         SkipNode<K, E>[] update = (SkipNode<K, E>[]) Array
-                .newInstance(SkipNode.class, level + 1);
+                .newInstance(SkipNode.class, level + 1); //only ever use integers
         int[] updateHandles = (int[]) Array.newInstance(int.class,
                 level + 1);
         int curr = head;
@@ -150,6 +146,7 @@ public class SkipList<K extends Comparable<K>, E>
         dump();
         System.out.println("");
         return true;
+        //work with the handles instead of the node references
     }
 
     /**
