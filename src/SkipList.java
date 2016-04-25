@@ -70,7 +70,10 @@ public class SkipList<K extends Comparable<K>, E>
         }
         level = newLevel;
         System.out.println("adjusting...");
+        System.out.println(head);
         head = Manager.getInstance().insert(Serializer.serialize(newHead));
+        System.out.println(head);
+
     }
 
     /**
@@ -122,7 +125,6 @@ public class SkipList<K extends Comparable<K>, E>
         }
         int pairHandle = Manager.getInstance()
                 .insert(Serializer.serialize(newPair));
-        System.out.println(pairHandle);
         curr = new SkipNode<K, E>(pairHandle, newLevel);
         int currPos = Manager.getInstance()
                 .insert(Serializer.serialize(curr));
