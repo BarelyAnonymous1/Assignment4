@@ -35,10 +35,10 @@ public class SkipListTest extends TestCase
     public void testInsert() throws Exception
     {
         list.insert(pair1);
-        list.insert(pair3);
+//        list.insert(pair3);
         // assertNull(list.search("node3"));
-        list.insert(pair2);
-        list.insert(new KVPair<String, Integer>("node4", 4));
+//        list.insert(pair2);
+//        list.insert(new KVPair<String, Integer>("node4", 4));
         // assertEquals(pair3.compareTo(list.search("node3").getPair()), 0);
 
         list.dump();
