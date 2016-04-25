@@ -147,22 +147,10 @@ public class SkipList<K extends Comparable<K>, E>
             Manager.getInstance().replaceRecord(updateHandles[i],
                     Serializer.serialize(updateNode));
         }
-//        int currPos = Manager.getInstance()
-//                .insert(Serializer.serialize(newNode));
-//        for (int i = 0; i <= newLevel; i++)
-//        {
-//            ((SkipNode<K, E>) Serializer.deserialize(Manager.getInstance()
-//                    .getRecord(updateHandles[i]))).next[i] = currPos;
-//            Manager.getInstance().replaceRecord(updateHandles[i],
-//                    Serializer.serialize(((SkipNode<K, E>) Serializer
-//                            .deserialize(Manager.getInstance()
-//                                    .getRecord(updateHandles[i])))));
-//        }
         size++;
         dump();
         System.out.println("");
         return true;
-        // work with the handles instead of the node references
     }
 
     /**
@@ -259,19 +247,19 @@ public class SkipList<K extends Comparable<K>, E>
         int curr = head;
         SkipNode<K, E> currNode = (SkipNode<K, E>) Serializer
                 .deserialize(Manager.getInstance().getRecord(curr));
-        // for (int i = level; i >= 0; i--)
-        // {
-        while (currNode.next[0] != -1
-                && (key.compareTo(((SkipNode<K, E>) Serializer.deserialize(
-                        Manager.getInstance().getRecord(currNode.next[0])))
-                                .getKey()) > 0))
+        for (int i = level; i >= 0; i--)
         {
-            System.out.println(curr);
-            curr = currNode.next[0];
-            currNode = (SkipNode<K, E>) Serializer
-                    .deserialize(Manager.getInstance().getRecord(curr));
+            while (currNode.next[0] != -1 && (key.compareTo(
+                    ((SkipNode<K, E>) Serializer.deserialize(Manager
+                            .getInstance().getRecord(currNode.next[0])))
+                                    .getKey()) > 0))
+            {
+                System.out.println(curr);
+                curr = currNode.next[0];
+                currNode = (SkipNode<K, E>) Serializer.deserialize(
+                        Manager.getInstance().getRecord(curr));
+            }
         }
-        // }
         curr = currNode.next[0];
         System.out.println(curr);
         if (curr == -1)
