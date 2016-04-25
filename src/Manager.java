@@ -107,6 +107,7 @@ public class Manager
         buffer.putShort((short) data.length);
         System.arraycopy(buffer.array(), 0, tempDisk, handle, messageSize);
         System.arraycopy(data, 0, tempDisk, handle+2, data.length);
+        freeList.dump();
         return handle;
     }
 
