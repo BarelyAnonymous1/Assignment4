@@ -137,6 +137,7 @@ public class SkipList<K extends Comparable<K>, E>
         for (int i = 0; i <= newLevel; i++)
         {
             newNode.next[i] = update[i].next[i];
+            System.out.println("newNext: " + newNode.next[i]);
 
         }
         int currPos = Manager.getInstance()
