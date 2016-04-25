@@ -60,11 +60,9 @@ public class SkipList<K extends Comparable<K>, E>
      * @param newLevel
      *            is the new largest levels
      */
-    @SuppressWarnings("unchecked")
     private void fixHead(int newLevel) throws Exception
     {
-        SkipNode<K, E> oldHead = (SkipNode<K, E>) Serializer
-                .deserialize(Manager.getInstance().getRecord(head));
+        SkipNode<K, E> oldHead = getHead();
         SkipNode<K, E> newHead = new SkipNode<K, E>(-1, newLevel);
         for (int i = 0; i <= level; i++)
         {
