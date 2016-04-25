@@ -143,6 +143,7 @@ public class SkipList<K extends Comparable<K>, E>
             System.out.println(currPos);
         }
         size++;
+        dump();
         return true;
     }
 
