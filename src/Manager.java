@@ -98,6 +98,7 @@ public class Manager
         {
             if ((free.index + free.length) % blockSize == 0)
             {
+                handle = free.index;
                 free.length += blockSize;
                 numBlocks++;
             }
@@ -106,8 +107,7 @@ public class Manager
         }
         buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
-        buffer.flip();
-        System.arraycopy(buffer.array(), 0, tempDisk, curr, messageSize);
+        System.arraycopy(buffer.array(), 0, tempDisk, handle, messageSize);
         System.arraycopy(data, 0, tempDisk, curr, data.length);
         return handle;
     }
