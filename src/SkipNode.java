@@ -60,6 +60,8 @@ public class SkipNode<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public K getKey() throws Exception
     {
+        if (pair == -1)
+            return null;
         byte[] obj = Manager.getInstance().getRecord(pair);
         KVPair<K,E> found = ((KVPair<K,E>) Serializer.deserialize(obj));
         if (found != null)
