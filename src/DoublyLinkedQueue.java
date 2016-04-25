@@ -174,7 +174,7 @@ public class DoublyLinkedQueue
         DoublyLinkedNode curr = head.next;
         while (curr != tail)
         {
-            System.out.println(curr.index + ", " + curr.length);
+            System.out.println("(" + curr.index + ", " + curr.length+ ")");
             curr = curr.next;
         }
     }
