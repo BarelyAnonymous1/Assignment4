@@ -129,7 +129,7 @@ public class Manager
     public byte[] getRecord(int h)
     {
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
-        System.out.println(sizeArr);
+        System.out.println(sizeArr[0]);
         int sizeNum = ByteBuffer.wrap(sizeArr).getInt();
         return Arrays.copyOfRange(tempDisk, h + messageSize,
                 h + messageSize + sizeNum);
