@@ -110,7 +110,7 @@ public class SkipList<K extends Comparable<K>, E>
         SkipNode<K, E>[] update = (SkipNode[]) Array
                 .newInstance(SkipNode.class, level + 1);
         int[] updateHandles = (int[]) Array.newInstance(int.class,
-                level + 1);
+                newLevel + 1);
         int curr = head;
         for (int i = newLevel; i >= 0; i--)
         {
