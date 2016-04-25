@@ -62,7 +62,7 @@ public class Manager
     public void setSize(int sz)
     {
         blockSize = sz;
-        tempDisk = new byte[blockSize];
+        tempDisk = new byte[10*blockSize];
         freeList.insert(new DoublyLinkedNode(0, blockSize));
         numBlocks++;
     }
