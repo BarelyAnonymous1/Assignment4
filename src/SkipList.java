@@ -123,6 +123,7 @@ public class SkipList<K extends Comparable<K>, E>
                 currNode = (SkipNode<K, E>) Serializer.deserialize(
                         Manager.getInstance().getRecord(curr));
             }
+            System.out.println(i);
             updateHandles[i] = curr;
             update[i] = currNode;
         }
