@@ -30,11 +30,6 @@ public class Rectangle implements Comparable<Rectangle>, java.io.Serializable
     private int    height;
 
     /**
-     * holds the name of the rectangle
-     */
-    private String name;
-
-    /**
      * standard constructor for Rectangle; sets up the position and size
      * 
      * @param newName
@@ -53,10 +48,9 @@ public class Rectangle implements Comparable<Rectangle>, java.io.Serializable
      * @precondition x + width is less than 1024
      * @precondition y + height is less than 1024
      */
-    public Rectangle(String newName, int newX, int newY, int newWidth,
+    public Rectangle(int newX, int newY, int newWidth,
             int newHeight)
     {
-        name = newName;
         x = newX;
         y = newY;
         width = newWidth;
@@ -101,16 +95,6 @@ public class Rectangle implements Comparable<Rectangle>, java.io.Serializable
     public int getHeight()
     {
         return height;
-    }
-
-    /**
-     * access to name
-     * 
-     * @return the name of the rectangle
-     */
-    public String getName()
-    {
-        return name;
     }
 
     /**
