@@ -105,8 +105,6 @@ public class SkipList<K extends Comparable<K>, E>
         {
             fixHead(newLevel);
         }
-        SkipNode<K, E>[] update = (SkipNode<K, E>[]) Array
-                .newInstance(SkipNode.class, level + 1); //only ever use integers
         int[] updateHandles = (int[]) Array.newInstance(int.class,
                 level + 1);
         int curr = head;
@@ -124,14 +122,14 @@ public class SkipList<K extends Comparable<K>, E>
                         Manager.getInstance().getRecord(curr));
             }
             updateHandles[i] = curr;
-            update[i] = currNode;
         }
         int pairHandle = Manager.getInstance()
                 .insert(Serializer.serialize(newPair));
         SkipNode<K, E> newNode = new SkipNode<K, E>(pairHandle, newLevel);
         for (int i = 0; i <= newLevel; i++)
         {
-            newNode.next[i] = update[i].next[i];
+            newNode.next[i] = ((SkipNode<K, E>) Serializer.deserialize(
+                    Manager.getInstance().getRecord(updateHandles[i]))).next[i];
 
         }
         int currPos = Manager.getInstance()
@@ -146,7 +144,7 @@ public class SkipList<K extends Comparable<K>, E>
         dump();
         System.out.println("");
         return true;
-        //work with the handles instead of the node references
+        // work with the handles instead of the node references
     }
 
     /**
