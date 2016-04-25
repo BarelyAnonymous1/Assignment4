@@ -284,9 +284,7 @@ public class SkipList<K extends Comparable<K>, E>
             System.out.println("Node has depth " + current.getLevel()
                     + ", Value (" + name + ")");
 
-            current = (SkipNode<K, E>) Serializer.deserialize(
-                    Manager.getInstance().getRecord(current.next[0]));
-            ;
+            curr = current.next[0];
         }
         System.out.println("SkipList size is: " + size);
         Manager.getInstance().dump();
