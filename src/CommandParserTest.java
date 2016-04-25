@@ -62,7 +62,8 @@ public class CommandParserTest extends TestCase
      */
     public void testParseFile() throws Exception
     {
-//        parser = new CommandParser("test.txt");
+        String[] args = {"test.txt", "1", "2", "512"};
+        parser = new CommandParser(args);
         boolean success = parser.parseFile();
         assertTrue(success);
     }
