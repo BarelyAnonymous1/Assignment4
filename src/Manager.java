@@ -98,10 +98,10 @@ public class Manager
         {
             if ((free.index + free.length) % blockSize == 0)
             {
-                handle = free.index;
                 free.length += blockSize;
                 numBlocks++;
             }
+            handle = free.index;
             free.index += recordSize;
             free.length -= recordSize;
         }
