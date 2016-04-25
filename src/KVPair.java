@@ -90,6 +90,6 @@ public class KVPair<K extends Comparable<K>, E> implements java.io.Serializable,
      */
     public String toString()
     {
-        return theKey + ", " + theVal;
+        return theKey.toString() + ", " + theVal.toString();
     }
 }
