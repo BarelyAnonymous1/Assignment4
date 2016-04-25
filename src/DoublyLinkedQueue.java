@@ -113,12 +113,12 @@ public class DoublyLinkedQueue
             {
                 return curr;
             }
-            else if (curr.length > sz && best != null
-                    && curr.length < best.length)
+            else if (best == null)
             {
                 best = curr;
             }
-            else if (best == null)
+            else if (curr.length > sz && best != null
+                    && curr.length < best.length)
             {
                 best = curr;
             }
@@ -134,6 +134,7 @@ public class DoublyLinkedQueue
         }
         else
         {
+            System.out.println("else");
             return tail.prev;
         }
     }
