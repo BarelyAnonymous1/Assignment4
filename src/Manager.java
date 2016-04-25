@@ -58,7 +58,7 @@ public class Manager
     public void setSize(int sz)
     {
         blockSize = sz;
-        tempDisk = new byte[10 * blockSize];
+        tempDisk = new byte[blockSize];
     }
 
     /**
