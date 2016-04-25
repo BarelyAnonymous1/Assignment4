@@ -59,7 +59,7 @@ public class Manager
     public void setSize(int sz)
     {
         blockSize = sz;
-        tempDisk = new byte[blockSize];
+        tempDisk = new byte[4*blockSize];
     }
 
     /**
