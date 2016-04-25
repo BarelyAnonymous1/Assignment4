@@ -67,8 +67,6 @@ public class SkipList<K extends Comparable<K>, E>
         System.out.println("size: " + size);
         for (int i = 0; i <= level; i++)
         {
-            System.out.println("old: " + oldHead.next[i]);
-            System.out.println("new: " + newHead.next[i]);
             newHead.next[i] = oldHead.next[i];
         }
         level = newLevel;
@@ -102,6 +100,7 @@ public class SkipList<K extends Comparable<K>, E>
     public boolean insert(KVPair<K, E> newPair) throws Exception
     {
         int newLevel = pickRandomLevel();
+        System.out.println("Level: " + newLevel);
         Comparable<K> key = newPair.key();
         if (level < newLevel)
         {
