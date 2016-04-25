@@ -139,9 +139,9 @@ public class Manager
 
     public void replaceRecord(int h, byte[] newMessage)
     {
-        ByteBuffer buffer = ByteBuffer.allocate(messageSize);
-        buffer.putShort((short) newMessage.length);
-        System.arraycopy(buffer.get(), 0, tempDisk, curr, messageSize);
+        sizeArr[0] = tempDisk[h];
+        sizeArr[1] = tempDisk[h+1];
+        System.arraycopy(sizeArr, 0, tempDisk, curr, messageSize);
         System.arraycopy(newMessage, 0, tempDisk, curr, newMessage.length);
     }
 
