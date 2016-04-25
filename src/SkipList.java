@@ -80,7 +80,7 @@ public class SkipList<K extends Comparable<K>, E>
      */
     private int pickRandomLevel()
     {
-        int leveler = 1;
+        int leveler = 0;
         Random random = new TestableRandom();
         while (random.nextBoolean())
         {
