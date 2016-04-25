@@ -108,6 +108,7 @@ public class SkipList<K extends Comparable<K>, E>
         }
         SkipNode<K, E>[] update = (SkipNode[]) Array
                 .newInstance(SkipNode.class, level + 1);
+        int[] updateHandles = (int[]) Array.newInstance(int.class, level+1);
         SkipNode<K, E> curr = getHead();
         for (int i = level; i >= 0; i--)
         {
@@ -116,6 +117,7 @@ public class SkipList<K extends Comparable<K>, E>
                             Manager.getInstance().getRecord(curr.next[i])))
                                     .getPair().key()) > 0))
             {
+                updateHandles[i] = curr.next[i];
                 curr = (SkipNode<K, E>) Serializer.deserialize(
                         Manager.getInstance().getRecord(curr.next[i]));
             }
@@ -130,7 +132,6 @@ public class SkipList<K extends Comparable<K>, E>
         {
             curr.next[i] = update[i].next[i];
             update[i].next[i] = currPos;
-
         }
         size++;
         System.out.println("insert Success");
