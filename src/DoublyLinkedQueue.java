@@ -132,10 +132,7 @@ public class DoublyLinkedQueue
         {
             return null;
         }
-        else
-        {
-            return tail.prev;
-        }
+        return null;
     }
 
     /**
