@@ -125,11 +125,16 @@ public class Manager
 
     public void replaceRecord(int h, byte[] newMessage)
     {
+        sizeArr[0] = tempDisk[h];
+        sizeArr[1] = tempDisk[h + 1];
+        short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
+        System.out.println("replaced size " + sizeNum);
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) newMessage.length);
         System.arraycopy(buffer.array(), 0, tempDisk, h, messageSize);
         System.arraycopy(newMessage, 0, tempDisk, h + 2,
                 newMessage.length);
+        System.out.println("With : " + buffer.array());
     }
 
     /**
