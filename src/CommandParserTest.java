@@ -19,7 +19,7 @@ public class CommandParserTest extends TestCase
         String[] args = {"fail", "1", "2", "512"};
         parser = new CommandParser(args);
 //        boolean success = parser.parseFile();
-        assertFalse(true);
+        assertFalse(fail);
     }
     
     /**
