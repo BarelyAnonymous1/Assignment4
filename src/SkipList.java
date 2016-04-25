@@ -294,7 +294,7 @@ public class SkipList<K extends Comparable<K>, E>
             {
                 name = current.getPair().toString();
             }
-            System.out.println("Node has depth " + current.getLevel()
+            System.out.println("Node has depth " + current.getLevel() + 1
                     + ", Value (" + name + ")");
 
             curr = current.next[0];
