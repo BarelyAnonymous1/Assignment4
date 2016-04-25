@@ -125,7 +125,7 @@ public class SkipList<K extends Comparable<K>, E>
                 .insert(Serializer.serialize(newPair)), newLevel);
         int currPos = Manager.getInstance()
                 .insert(Serializer.serialize(curr));
-        for (int i = 0; i <= newLevel; i++)
+        for (int i = 0; i < newLevel; i++)
         {
             curr.next[i] = update[i].next[i];
             update[i].next[i] = currPos;
