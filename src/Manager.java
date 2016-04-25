@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class Manager
 {
-    private static final int  messageSize = 2;
+    private static int  messageSize;
     private static int        blockSize;
     /**
      * create an object of SingleObject
@@ -35,6 +35,7 @@ public class Manager
         // start freelist
         numBlocks = 0;
         curr = 0;
+        messageSize = 2;
         sizeArr = new byte[messageSize];
         freeList = new DoublyLinkedQueue();
     }
