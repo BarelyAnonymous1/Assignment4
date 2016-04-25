@@ -52,6 +52,11 @@ public class SkipList<K extends Comparable<K>, E>
         return (SkipNode<K, E>) Serializer
                 .deserialize(Manager.getInstance().getRecord(head));
     }
+    
+    private Object getObject(int handle) throws Exception
+    {
+        return Serializer.deserialize(Manager.getInstance().getRecord(handle));
+    }
 
     /**
      * fixes the head to make sure that it represents the new largest number of
@@ -131,7 +136,6 @@ public class SkipList<K extends Comparable<K>, E>
             newNode.next[i] = ((SkipNode<K, E>) Serializer
                     .deserialize(Manager.getInstance()
                             .getRecord(updateHandles[i]))).next[i];
-
         }
         int currPos = Manager.getInstance()
                 .insert(Serializer.serialize(newNode));
