@@ -107,8 +107,7 @@ public class SkipList<K extends Comparable<K>, E>
         }
         SkipNode<K, E>[] update = (SkipNode[]) Array
                 .newInstance(SkipNode.class, level + 1);
-        SkipNode<K, E> curr = (SkipNode<K, E>) Serializer
-                .deserialize(Manager.getInstance().getRecord(head));
+        SkipNode<K, E> curr = getHead();
         for (int i = level; i >= 0; i--)
         {
             while ((curr.next[i] != -1) && (key
