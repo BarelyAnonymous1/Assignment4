@@ -134,6 +134,22 @@ public class DoublyLinkedQueue
         }
         return null;
     }
+    
+    public void reallocate(int handle, int sz)
+    {
+        DoublyLinkedNode curr = head.next;
+        while (curr != tail)
+        {
+            if (curr.index-1 == handle + sz)
+            {
+                curr.index -= sz;
+                curr.length += sz;
+                return;
+            }
+            curr = curr.next;
+        }
+        insert(new DoublyLinkedNode(handle, sz));
+    }
 
     /**
      * get the size of the list; size should not include duplicates
