@@ -72,15 +72,6 @@ public class Manager
      */
     public int insert(byte[] data)
     {
-        // int temp = curr;
-        // buffer = ByteBuffer.allocate(messageSize);
-        // buffer.putShort((short) data.length);
-        // System.arraycopy(buffer.get(), 0, tempDisk, curr, messageSize);
-        // curr += messageSize;
-        // System.arraycopy(data, 0, tempDisk, curr, data.length);
-        // curr += data.length;
-        // return temp;
-
         int recordSize = messageSize + data.length;
         DoublyLinkedNode free = freeList.contains(recordSize);
         int handle = -1;
@@ -94,11 +85,6 @@ public class Manager
         // freeblock on the end of the list
         else
         {
-//            if (free.length < recordSize && ((free.index + free.length) % blockSize == 0))
-//            {
-//                free.length += blockSize;
-//                numBlocks++;
-//            }
             handle = free.index;
             free.index += recordSize;
             free.length -= recordSize;
