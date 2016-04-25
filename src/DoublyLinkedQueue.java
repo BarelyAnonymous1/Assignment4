@@ -116,8 +116,8 @@ public class DoublyLinkedQueue
                     && curr.length < best.length)
             {
                 best = curr;
-                curr = curr.next;
             }
+            curr = curr.next;
         }
         if (best != null)
         {
