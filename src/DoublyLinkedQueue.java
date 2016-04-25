@@ -153,6 +153,8 @@ public class DoublyLinkedQueue
             }
             curr = curr.next;
         }
+        System.out.println("adding another...");
+
         insert(new DoublyLinkedNode(handle, sz));
     }
 
