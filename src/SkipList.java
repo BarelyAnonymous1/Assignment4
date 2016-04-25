@@ -84,7 +84,7 @@ public class SkipList<K extends Comparable<K>, E>
         Random random = new TestableRandom();
         while (random.nextBoolean())
         {
-            //leveler++;
+            leveler++;
         }
         return leveler;
     }
