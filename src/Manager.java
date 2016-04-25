@@ -52,6 +52,7 @@ public class Manager
     public static void resetInstance()
     {
         instance = null;
+        tempDisk = new byte[10 * blockSize];
     }
 
     /**
