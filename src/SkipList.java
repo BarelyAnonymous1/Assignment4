@@ -101,12 +101,10 @@ public class SkipList<K extends Comparable<K>, E>
     {
         int newLevel = pickRandomLevel();
         Comparable<K> key = newPair.key();
-        System.out.println("head: " + head);
         if (level < newLevel)
         {
             fixHead(newLevel);
         }
-        System.out.println("Fixed head: " + head);
         SkipNode<K, E>[] update = (SkipNode[]) Array
                 .newInstance(SkipNode.class, level + 1);
         int[] updateHandles = (int[]) Array.newInstance(int.class,
