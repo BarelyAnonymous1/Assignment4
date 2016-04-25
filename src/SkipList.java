@@ -164,13 +164,13 @@ public class SkipList<K extends Comparable<K>, E>
      * @return located value if found, if not, null
      */
     @SuppressWarnings("unchecked")
-    public E removeKey(K key) throws Exception
+    public KVPair<K,E> removeKey(K key) throws Exception
     {
         SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
                 Manager.getInstance().getRecord(head));
         int removeHandle = -1;
         int currHandle = head;
-        E located = null;
+        KVPair<K,E> located = null;
         for (int i = level; i >= 0; i--)
         {
             while (current.next[i] != -1)
@@ -180,7 +180,7 @@ public class SkipList<K extends Comparable<K>, E>
                                 current.next[i]));
                 if (currNext.getKey().compareTo(key) == 0)
                 {
-                    located = currNext.getValue();
+                    located = currNext.getPair();
                     current.next[i] = currNext.next[i];
                     removeHandle = current.next[i];
                     break;
