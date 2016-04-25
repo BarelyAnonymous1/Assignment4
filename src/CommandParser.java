@@ -23,7 +23,7 @@ public class CommandParser
     /**
      * constructor for parser, stores filename
      * 
-     * @param file
+     * @param args
      *            name for the file that is being parsed
      */
     public CommandParser(String[] args) throws IOException
@@ -127,7 +127,8 @@ public class CommandParser
         if (checkDim(x, y, width, height) && Character.isAlphabetic(c))
         {
             Rectangle rect = new Rectangle(name, x, y, width, height);
-            KVPair<String,Rectangle> pair = new KVPair<String, Rectangle>(name, rect);
+            KVPair<String,Rectangle> pair = 
+                    new KVPair<String, Rectangle>(name, rect);
             list.insert(pair);
             System.out.println("Rectangle inserted: (" + name + ", " + x
                     + ", " + y + ", " + width + ", " + height + ")");
@@ -253,7 +254,8 @@ public class CommandParser
         {
             System.out.println("(" + name + ", " + searchResult.getValue()
                     .toString() + ")");
-            SkipNode<String, Rectangle> searchNext = (SkipNode<String, Rectangle>) Serializer
+            SkipNode<String, Rectangle> searchNext = 
+                    (SkipNode<String, Rectangle>) Serializer
                     .deserialize(Manager.getInstance().getRecord(
                             searchResult.next[0]));
             while (searchResult.next[0] != -1 && searchNext.getKey()
