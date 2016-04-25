@@ -132,13 +132,14 @@ public class SkipList<K extends Comparable<K>, E>
         for (int i = 0; i <= newLevel; i++)
         {
             newNode.next[i] = update[i].next[i];
-            System.out.println("new next: " + newNode.next[i]);
         }
         int currPos = Manager.getInstance()
                 .insert(Serializer.serialize(newNode));
         for (int i = 0; i <= newLevel; i++)
         {
+            System.out.println("new next: " + update[i].next[i]);
             update[i].next[i] = currPos;
+            System.out.println("new next: " + update[i].next[i]);
             Manager.getInstance().replaceRecord(updateHandles[i],
                     Serializer.serialize(update[i]));
         }
