@@ -81,7 +81,6 @@ public class Manager
         // curr += data.length;
         // return temp;
 
-
         int recordSize = messageSize + data.length;
         DoublyLinkedNode free = freeList.contains(recordSize);
         int handle = -1;
@@ -106,7 +105,7 @@ public class Manager
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
         System.arraycopy(buffer.array(), 0, tempDisk, handle, messageSize);
-        System.arraycopy(data, 0, tempDisk, handle+2, data.length);
+        System.arraycopy(data, 0, tempDisk, handle + 2, data.length);
         freeList.dump();
         return handle;
     }
@@ -131,7 +130,7 @@ public class Manager
     public byte[] getRecord(int h)
     {
         sizeArr[0] = tempDisk[h];
-        sizeArr[1] = tempDisk[h+1];
+        sizeArr[1] = tempDisk[h + 1];
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         return Arrays.copyOfRange(tempDisk, h + messageSize,
                 h + messageSize + sizeNum);
@@ -139,10 +138,11 @@ public class Manager
 
     public void replaceRecord(int h, byte[] newMessage)
     {
-        sizeArr[0] = tempDisk[h];
-        sizeArr[1] = tempDisk[h+1];
-        System.arraycopy(sizeArr, 0, tempDisk, curr, messageSize);
-        System.arraycopy(newMessage, 0, tempDisk, curr, newMessage.length);
+        ByteBuffer buffer = ByteBuffer.allocate(messageSize);
+        buffer.putShort((short) newMessage.length);
+        System.arraycopy(buffer.array(), 0, tempDisk, h, messageSize);
+        System.arraycopy(newMessage, 0, tempDisk, h + 2,
+                newMessage.length);
     }
 
     /**
