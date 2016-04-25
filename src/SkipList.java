@@ -66,13 +66,14 @@ public class SkipList<K extends Comparable<K>, E>
         SkipNode<K, E> newHead = new SkipNode<K, E>(-1, newLevel);
         for (int i = 0; i <= level; i++)
         {
-            System.out.println("old head: " + newHead.next[i]);
             newHead.next[i] = oldHead.next[i];
-            System.out.println("new head: " + newHead.next[i]);
         }
 
         level = newLevel;
+        System.out.println("old head: " + head);
         head = Manager.getInstance().insert(Serializer.serialize(newHead));
+        System.out.println("new head: " + head);
+
     }
 
     /**
