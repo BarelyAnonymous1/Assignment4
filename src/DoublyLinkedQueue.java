@@ -56,6 +56,8 @@ public class DoublyLinkedQueue
                 temp.prev = newNode;
                 newNode.prev = curr;
                 size++;
+                System.out.println("adding another...");
+
                 return;
             }
             curr = curr.next;
