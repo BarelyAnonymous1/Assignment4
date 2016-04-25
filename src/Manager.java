@@ -114,8 +114,7 @@ public class Manager
      */
     public void release(int h)
     {
-        sizeArr[1] = tempDisk[h];
-        sizeArr[0] = tempDisk[h + 1];
+        System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         freeList.reallocate(h, sizeNum + messageSize);
     }
