@@ -52,10 +52,16 @@ public class SkipList<K extends Comparable<K>, E>
         return (SkipNode<K, E>) Serializer
                 .deserialize(Manager.getInstance().getRecord(head));
     }
-    
+
     private Object getObject(int handle) throws Exception
     {
-        return Serializer.deserialize(Manager.getInstance().getRecord(handle));
+        return Serializer
+                .deserialize(Manager.getInstance().getRecord(handle));
+    }
+
+    private int getHandle(Object obj) throws Exception
+    {
+        return Manager.getInstance().insert(Serializer.serialize(obj));
     }
 
     /**
@@ -75,7 +81,7 @@ public class SkipList<K extends Comparable<K>, E>
         }
         // remove old head
         level = newLevel;
-        head = Manager.getInstance().insert(Serializer.serialize(newHead));
+        head = getHandle(newHead);
     }
 
     /**
