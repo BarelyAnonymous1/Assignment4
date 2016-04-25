@@ -13,9 +13,10 @@ public class SkipListTest extends TestCase
 {
 
     private SkipList<String, Integer> list;
-    private KVPair<String, Integer>   pair1;
-    private KVPair<String, Integer>   pair2;
-    private KVPair<String, Integer>   pair3;
+    private KVPair<String, Rectangle> pair1;
+    private KVPair<String, Rectangle> pair2;
+    private KVPair<String, Rectangle> pair3;
+    private KVPair<String, Rectangle> pair4;
 
     /**
      * sets up the test cases
@@ -23,10 +24,11 @@ public class SkipListTest extends TestCase
     public void setUp() throws IOException
     {
         Manager.getInstance().setSize(512);
-        pair1 = new KVPair<String, Integer>("node1", 1);
-        pair2 = new KVPair<String, Integer>("node2", 2);
-        pair3 = new KVPair<String, Integer>("node3", 3);
-        list = new SkipList<String, Integer>();
+        pair1 = new KVPair<String, Rectangle>("node1", 1);
+        pair2 = new KVPair<String, Rectangle>("node2", 2);
+        pair3 = new KVPair<String, Rectangle>("node3", 3);
+        new KVPair<String, Integer>("node4", 4)
+        list = new SkipList<String, Rectangle>();
     }
 
     /**
@@ -36,10 +38,10 @@ public class SkipListTest extends TestCase
     {
         list.insert(pair1);
         list.insert(pair2);
-//        assertNull(list.search("node3"));
+        // assertNull(list.search("node3"));
         list.insert(pair3);
-        list.insert(new KVPair<String, Integer>("node4", 4));
-//        assertEquals(pair3.compareTo(list.search("node3").getPair()), 0);
+        list.insert();
+        // assertEquals(pair3.compareTo(list.search("node3").getPair()), 0);
 
         list.dump();
     }
