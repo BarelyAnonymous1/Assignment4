@@ -148,6 +148,7 @@ public class SkipList<K extends Comparable<K>, E>
                     Serializer.serialize(update[i]));
         }
         size++;
+        System.out.println("");
         return true;
     }
 
