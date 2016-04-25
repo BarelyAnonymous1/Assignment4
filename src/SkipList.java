@@ -133,7 +133,7 @@ public class SkipList<K extends Comparable<K>, E>
         SkipNode<K, E> newNode = new SkipNode<K, E>(pairHandle, newLevel);
         int currPos = Manager.getInstance()
                 .insert(Serializer.serialize(curr));
-        for (int i = 0; i <= newLevel; i++)
+        for (int i = 0; i <= level; i++)
         {
             newNode.next[i] = update[i].next[i];
             update[i].next[i] = currPos;
