@@ -233,17 +233,19 @@ public class SkipList<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public SkipNode<K, E> search(K key) throws Exception
     {
-        SkipNode<K, E> current = (SkipNode<K, E>) Serializer
-                .deserialize(Manager.getInstance().getRecord(head));
+        int curr = head;
         for (int i = level-1; i > 0; i--)
         {
-            while (current.next[i] != -1 && key.compareTo(
+            SkipNode<K, E> currNode = (SkipNode<K, E>) Serializer
+                    .deserialize(Manager.getInstance().getRecord(curr));
+            while (currNode.next[i] != -1 && (key.compareTo(
                     ((SkipNode<K, E>) Serializer.deserialize(Manager
-                            .getInstance().getRecord(current.next[i])))
-                                    .getKey()) > 0)
+                            .getInstance().getRecord(currNode.next[i])))
+                                    .getKey()) > 0))
             {
-                current = (SkipNode<K, E>) Serializer.deserialize(
-                        Manager.getInstance().getRecord(current.next[i]));
+                curr = currNode.next[i];
+                currNode = (SkipNode<K, E>) Serializer.deserialize(
+                        Manager.getInstance().getRecord(curr));
             }
         }
         if (current.next[0] == -1)
