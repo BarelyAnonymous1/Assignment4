@@ -88,6 +88,7 @@ public class Manager
             handle = free.index;
             free.index += recordSize;
             free.length -= recordSize;
+            freeList.dump();
         }
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
