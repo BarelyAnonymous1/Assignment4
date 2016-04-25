@@ -128,17 +128,22 @@ public class SkipList<K extends Comparable<K>, E>
         SkipNode<K, E> newNode = new SkipNode<K, E>(pairHandle, newLevel);
         for (int i = 0; i <= newLevel; i++)
         {
-            newNode.next[i] = ((SkipNode<K, E>) Serializer.deserialize(
-                    Manager.getInstance().getRecord(updateHandles[i]))).next[i];
+            newNode.next[i] = ((SkipNode<K, E>) Serializer
+                    .deserialize(Manager.getInstance()
+                            .getRecord(updateHandles[i]))).next[i];
 
         }
         int currPos = Manager.getInstance()
                 .insert(Serializer.serialize(newNode));
         for (int i = 0; i <= newLevel; i++)
         {
-            update[i].next[i] = currPos;
+
+            ((SkipNode<K, E>) Serializer.deserialize(Manager.getInstance()
+                    .getRecord(updateHandles[i]))).next[i] = currPos;
             Manager.getInstance().replaceRecord(updateHandles[i],
-                    Serializer.serialize(update[i]));
+                    Serializer.serialize(((SkipNode<K, E>) Serializer
+                            .deserialize(Manager.getInstance()
+                                    .getRecord(updateHandles[i])))));
         }
         size++;
         dump();
