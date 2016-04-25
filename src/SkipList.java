@@ -70,7 +70,7 @@ public class SkipList<K extends Comparable<K>, E>
             newHead.next[i] = oldHead.next[i];
             System.out.println("new head: " + newHead.next[i]);
         }
-        
+
         level = newLevel;
         head = Manager.getInstance().insert(Serializer.serialize(newHead));
     }
@@ -126,7 +126,7 @@ public class SkipList<K extends Comparable<K>, E>
                 currNode = (SkipNode<K, E>) Serializer.deserialize(
                         Manager.getInstance().getRecord(curr));
             }
-            System.out.println("curr: " +curr);
+            System.out.println("curr: " + curr);
             updateHandles[i] = curr;
             update[i] = currNode;
         }
