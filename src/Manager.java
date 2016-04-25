@@ -95,7 +95,6 @@ public class Manager
         // freeblock on the end of the list
         else
         {
-            
 //            if (free.length < recordSize && ((free.index + free.length) % blockSize == 0))
 //            {
 //                free.length += blockSize;
@@ -105,6 +104,7 @@ public class Manager
             free.index += recordSize;
             free.length -= recordSize;
         }
+        System.out.println("handle is: " + handle);
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
         System.arraycopy(buffer.array(), 0, tempDisk, handle, messageSize);
