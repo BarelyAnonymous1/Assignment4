@@ -41,6 +41,7 @@ public class SkipListTest extends TestCase
 
         list.dump();
     }
+}
 
 //    /**
 //     * make sure that the list will adjust the head when a node is added higher
