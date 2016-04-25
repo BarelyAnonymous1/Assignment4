@@ -52,9 +52,7 @@ public class Manager
     public static void resetInstance()
     {
         instance = null;
-        tempDisk = new byte[10 * blockSize];
     }
-
     /**
      * sets the size of a block of the freelist
      * 
@@ -64,7 +62,7 @@ public class Manager
     public void setSize(int sz)
     {
         blockSize = sz;
-        tempDisk = new byte[10 * blockSize];
+        tempDisk = new byte[10*blockSize];
         freeList.insert(new DoublyLinkedNode(0, blockSize));
         numBlocks++;
     }
@@ -132,8 +130,8 @@ public class Manager
     {
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
-        byte[] temp = new byte[messageSize + sizeNum];
-        System.arraycopy(tempDisk, h + messageSize, temp, 0, temp.length);
+        byte[] temp = new byte[messageSize+sizeNum];
+        System.arraycopy(tempDisk, h+messageSize, temp, 0, temp.length);
         return temp;
     }
 
