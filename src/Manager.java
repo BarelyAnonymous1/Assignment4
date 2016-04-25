@@ -95,8 +95,8 @@ public class Manager
         // freeblock on the end of the list
         else
         {
-            System.out.println("else");
-            if ((free.index + free.length) % blockSize == 0)
+            
+            if (free.length < recordSize && ((free.index + free.length) % blockSize == 0))
             {
                 free.length += blockSize;
                 numBlocks++;
