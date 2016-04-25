@@ -90,7 +90,8 @@ public class Manager
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
         System.arraycopy(buffer.array(), 0, tempDisk, handle, messageSize);
-        System.arraycopy(data, 0, tempDisk, handle + messageSize, data.length);
+        System.arraycopy(data, 0, tempDisk, handle + messageSize,
+                data.length);
         return handle;
     }
 
@@ -105,7 +106,7 @@ public class Manager
         sizeArr[0] = tempDisk[h];
         sizeArr[1] = tempDisk[h + 1];
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
-        freeList.reallocate(h, sizeNum+2);
+        freeList.reallocate(h, sizeNum + messageSize);
     }
 
     /**
@@ -120,8 +121,8 @@ public class Manager
         sizeArr[0] = tempDisk[h];
         sizeArr[1] = tempDisk[h + 1];
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
-        return Arrays.copyOfRange(tempDisk, h + messageSize,
-                h + messageSize + sizeNum + 1);
+        return Arrays.copyOfRange(tempDisk, h + messageSize, h
+                + messageSize + sizeNum + 1);
     }
 
     public void replaceRecord(int h, byte[] newMessage)
