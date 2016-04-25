@@ -22,7 +22,6 @@ public class Manager
     private byte[]            sizeArr;
     private int               numBlocks;
     private int               curr;
-    private ByteBuffer        buffer;
 
     private DoublyLinkedQueue freeList;
 
@@ -82,7 +81,7 @@ public class Manager
         // curr += data.length;
         // return temp;
 
-        buffer = ByteBuffer.allocate(messageSize);
+        ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
         int recordSize = messageSize + data.length;
         DoublyLinkedNode free = freeList.contains(recordSize);
