@@ -156,7 +156,7 @@ public class CommandParser
         String name = scanner.next();
         if (!isNumeric(name))
         {
-            Rectangle found = list.removeKey(name);
+            KVPair<String, Rectangle> found = list.removeKey(name);
             if (found == null)
             {
                 System.out.println("Rectangle not removed: (" + name
@@ -164,8 +164,8 @@ public class CommandParser
             }
             else
             {
-                System.out.println("Rectangle removed: (" + name + ", "
-                        + found.toString() + ")");
+                System.out.println("Rectangle removed: (" + found
+                        .toString() + ")");
             }
         }
         else
@@ -178,9 +178,9 @@ public class CommandParser
             {
                 String search = x + ", " + y + ", " + width + ", "
                         + height;
-                Rectangle searchRect = new Rectangle(x, y, width,
-                        height);
-                Rectangle found = list.removeValue(searchRect);
+                Rectangle searchRect = new Rectangle(x, y, width, height);
+                KVPair<String, Rectangle> found = list.removeValue(
+                        searchRect);
                 if (found == null)
                 {
                     System.out.println("Rectangle not removed: (" + search
@@ -189,7 +189,7 @@ public class CommandParser
                 else
                 {
                     System.out.println("Rectangle removed: (" + found
-                            .getName() + ", " + found.toString() + ")");
+                            .toString() + ")");
                 }
             }
             else
@@ -221,8 +221,7 @@ public class CommandParser
         {
             System.out.println("Rectangles intersecting region (" + x
                     + ", " + y + ", " + width + ", " + height + "):");
-            Rectangle regionRect = new Rectangle("regionRect", x, y, width,
-                    height);
+            Rectangle regionRect = new Rectangle(x, y, width, height);
             list.regionSearch(regionRect);
         }
         else
