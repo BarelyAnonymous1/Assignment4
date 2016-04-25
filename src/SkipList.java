@@ -69,6 +69,8 @@ public class SkipList<K extends Comparable<K>, E>
             System.out.println(oldHead.next[i]);
             System.out.println(newHead.next[i]);
             newHead.next[i] = oldHead.next[i];
+            System.out.println(oldHead.next[i]);
+            System.out.println(newHead.next[i]);
         }
         level = newLevel;
         System.out.println("adjusted");
