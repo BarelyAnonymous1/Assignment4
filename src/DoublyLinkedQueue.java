@@ -171,6 +171,7 @@ public class DoublyLinkedQueue
      */
     public void dump()
     {
+        System.out.println("Number of blocks: " + size);
         DoublyLinkedNode curr = head.next;
         while (curr != tail)
         {
