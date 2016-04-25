@@ -141,6 +141,7 @@ public class Manager
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) newMessage.length);
         System.arraycopy(buffer.array(), 0, tempDisk, h, messageSize);
+        System.out.println(newMessage.length);
         System.arraycopy(newMessage, 0, tempDisk, h + 2,
                 newMessage.length);
     }
