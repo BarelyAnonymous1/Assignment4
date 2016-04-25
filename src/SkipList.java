@@ -124,8 +124,7 @@ public class SkipList<K extends Comparable<K>, E>
                         .deserialize(Manager.getInstance().getRecord(curr));
             }
             updateHandles[i] = curr;
-            update[i] = (SkipNode<K, E>) Serializer
-                    .deserialize(Manager.getInstance().getRecord(curr));
+            update[i] = currNode;
         }
         int pairHandle = Manager.getInstance()
                 .insert(Serializer.serialize(newPair));
