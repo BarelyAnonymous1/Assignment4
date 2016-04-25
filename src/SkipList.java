@@ -63,6 +63,12 @@ public class SkipList<K extends Comparable<K>, E>
     {
         return Manager.getInstance().insert(Serializer.serialize(obj));
     }
+    
+    private void replaceObject(int pos, Object obj) throws Exception
+    {
+        Manager.getInstance().replaceRecord(pos,
+                Serializer.serialize(obj));
+    }
 
     /**
      * fixes the head to make sure that it represents the new largest number of
