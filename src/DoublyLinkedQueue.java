@@ -134,13 +134,18 @@ public class DoublyLinkedQueue
         }
         return null;
     }
-    
+
     public void reallocate(int handle, int sz)
     {
         DoublyLinkedNode curr = head.next;
         while (curr != tail)
         {
-            if (curr.index-1 == handle + sz)
+            if (curr.index + curr.length + 1 == handle)
+            {
+                curr.length += sz;
+                return;
+            }
+            if (curr.index - 1 == handle + sz)
             {
                 curr.index -= sz;
                 curr.length += sz;
