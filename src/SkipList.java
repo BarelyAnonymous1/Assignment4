@@ -241,8 +241,8 @@ public class SkipList<K extends Comparable<K>, E>
                         Manager.getInstance().getRecord(current.next[i]));
             }
         }
-        if (current == null
-                || key.compareTo(current.getKey()) != 0)
+        if (current == null || current.getKey() == null
+                || key.compareTo(current.getKey()) != 0 )
         {
             return null;
         }
