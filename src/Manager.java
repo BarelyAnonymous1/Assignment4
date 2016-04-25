@@ -134,7 +134,7 @@ public class Manager
         System.arraycopy(buffer.array(), 0, tempDisk, h, messageSize);
         System.arraycopy(newMessage, 0, tempDisk, h + 2,
                 newMessage.length);
-        System.out.println("With : " + buffer.array());
+        System.out.println("With : " + newMessage.length);
     }
 
     /**
