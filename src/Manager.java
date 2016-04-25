@@ -85,7 +85,8 @@ public class Manager
         // freeblock on the end of the list
         else
         {
-            if ((free.index + free.length) % blockSize == 0 && recordSize > free.length)
+            if ((free.index + free.length) % blockSize == 0
+                    && recordSize > free.length)
                 free.length += blockSize;
             handle = free.index;
             free.index += recordSize;
