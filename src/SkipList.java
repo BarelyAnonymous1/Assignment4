@@ -234,11 +234,10 @@ public class SkipList<K extends Comparable<K>, E>
     public SkipNode<K, E> search(K key) throws Exception
     {
         int curr = head;
-        SkipNode<K, E> currNode = null;
+        SkipNode<K, E> currNode = (SkipNode<K, E>) Serializer
+                .deserialize(Manager.getInstance().getRecord(curr));
         for (int i = level; i >= 0; i--)
         {
-            currNode = (SkipNode<K, E>) Serializer
-                    .deserialize(Manager.getInstance().getRecord(curr));
             while (currNode.next[i] != -1 && (key.compareTo(
                     ((SkipNode<K, E>) Serializer.deserialize(Manager
                             .getInstance().getRecord(currNode.next[i])))
