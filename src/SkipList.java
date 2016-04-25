@@ -100,7 +100,7 @@ public class SkipList<K extends Comparable<K>, E>
     {
         int newLevel = pickRandomLevel();
         System.out.println("Level: " + newLevel);
-        Comparable<K> key = newPair.key();
+        K key = newPair.key();
         if (level < newLevel)
         {
             fixHead(newLevel);
@@ -123,7 +123,6 @@ public class SkipList<K extends Comparable<K>, E>
                 currNode = (SkipNode<K, E>) Serializer.deserialize(
                         Manager.getInstance().getRecord(curr));
             }
-            System.out.println(i);
             updateHandles[i] = curr;
             update[i] = currNode;
         }
