@@ -234,7 +234,7 @@ public class SkipList<K extends Comparable<K>, E>
     {
         SkipNode<K, E> current = (SkipNode<K, E>) Serializer
                 .deserialize(Manager.getInstance().getRecord(head));
-        for (int i = level; 0 <= i; i--)
+        for (int i = level; i > 0; i--)
         {
             while (current.next[i] != -1 && key.compareTo(
                     ((SkipNode<K, E>) Serializer.deserialize(Manager
