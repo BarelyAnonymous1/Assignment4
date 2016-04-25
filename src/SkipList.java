@@ -36,7 +36,7 @@ public class SkipList<K extends Comparable<K>, E>
     public SkipList() throws IOException
     {
         head = Manager.getInstance()
-                .insert(Serializer.serialize(new SkipNode<K, E>(-1, 1)));
+                .insert(Serializer.serialize(new SkipNode<K, E>(-1, 0)));
         level = 0;
         size = 0;
     }
@@ -110,7 +110,7 @@ public class SkipList<K extends Comparable<K>, E>
         int[] updateHandles = (int[]) Array.newInstance(int.class,
                 level + 1);
         int curr = head;
-        for (int i = newLevel-1; i >= 0; i--)
+        for (int i = level; i >= 0; i--)
         {
             SkipNode<K, E> currNode = (SkipNode<K, E>) Serializer
                     .deserialize(Manager.getInstance().getRecord(curr));
@@ -235,7 +235,7 @@ public class SkipList<K extends Comparable<K>, E>
     {
         int curr = head;
         SkipNode<K, E> currNode = null;
-        for (int i = level-1; i >= 0; i--)
+        for (int i = level; i >= 0; i--)
         {
             currNode = (SkipNode<K, E>) Serializer
                     .deserialize(Manager.getInstance().getRecord(curr));
