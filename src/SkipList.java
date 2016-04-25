@@ -129,13 +129,13 @@ public class SkipList<K extends Comparable<K>, E>
         int pairHandle = Manager.getInstance()
                 .insert(Serializer.serialize(newPair));
         SkipNode<K, E> newNode = new SkipNode<K, E>(pairHandle, newLevel);
-        for (int i = 0; i < newLevel; i++)
+        for (int i = 0; i <= newLevel; i++)
         {
             newNode.next[i] = update[i].next[i];
         }
         int currPos = Manager.getInstance()
                 .insert(Serializer.serialize(newNode));
-        for (int i = 0; i < newLevel; i++)
+        for (int i = 0; i <= newLevel; i++)
         {
             update[i].next[i] = currPos;
             Manager.getInstance().replaceRecord(updateHandles[i],
