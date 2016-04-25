@@ -18,7 +18,7 @@ public class SkipNode<K extends Comparable<K>, E>
      * creates a skip list node array that is blank that will point to the next
      * node in the list
      */
-    public int[] next;
+    public int[] next;g
 
     /**
      * Data stored into the node
