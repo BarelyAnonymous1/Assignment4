@@ -134,7 +134,6 @@ public class DoublyLinkedQueue
         }
         else
         {
-            System.out.println("else");
             return tail.prev;
         }
     }
