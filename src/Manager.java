@@ -82,7 +82,7 @@ public class Manager
         // return temp;
 
         int recordSize = messageSize + data.length;
-        System.out.println(recordSize);
+//        System.out.println(recordSize);
         DoublyLinkedNode free = freeList.contains(recordSize);
         int handle = -1;
         if (free == null)
