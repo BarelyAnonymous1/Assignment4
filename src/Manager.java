@@ -87,13 +87,15 @@ public class Manager
         int handle = -1;
         if (free == null)
         {
-            handle = (numBlocks++) * blockSize;
+            handle = (numBlocks) * blockSize;
+            numBlocks++;
             freeList.insert(new DoublyLinkedNode(handle + recordSize,
                     blockSize - recordSize));
         }
         // freeblock on the end of the list
         else
         {
+            System.out.println("else");
             if ((free.index + free.length) % blockSize == 0)
             {
                 free.length += blockSize;
