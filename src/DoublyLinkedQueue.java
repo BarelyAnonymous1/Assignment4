@@ -113,12 +113,12 @@ public class DoublyLinkedQueue
             {
                 return curr;
             }
-            else if (best == null)
+            else if (curr.length > sz && best != null
+                    && curr.length < best.length)
             {
                 best = curr;
             }
-            else if (curr.length > sz && best != null
-                    && curr.length < best.length)
+            else if (best == null && curr.length > sz)
             {
                 best = curr;
             }
