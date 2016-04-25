@@ -240,7 +240,7 @@ public class SkipList<K extends Comparable<K>, E>
 //        {
             while (currNode.next[0] != -1 && (key.compareTo(
                     ((SkipNode<K, E>) Serializer.deserialize(Manager
-                            .getInstance().getRecord(currNode.next[i])))
+                            .getInstance().getRecord(currNode.next[0])))
                                     .getKey()) > 0))
             {
                 curr = currNode.next[0];
@@ -248,7 +248,7 @@ public class SkipList<K extends Comparable<K>, E>
                         Manager.getInstance().getRecord(curr));
             }
 //        }
-        curr = currNode.next[0];
+//        curr = currNode.next[0];
         System.out.println(curr);
         if (curr == -1)
             return null;
