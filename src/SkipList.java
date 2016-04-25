@@ -259,7 +259,6 @@ public class SkipList<K extends Comparable<K>, E>
             }
         }
         curr = currNode.next[0];
-        System.out.println(curr);
         if (curr == -1)
             return null;
         currNode = (SkipNode<K, E>) Serializer

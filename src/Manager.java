@@ -21,7 +21,6 @@ public class Manager
     private byte[]            tempDisk;
     private byte[]            sizeArr;
     private int               numBlocks;
-    private int               curr;
 
     private DoublyLinkedQueue freeList;
 
@@ -33,7 +32,6 @@ public class Manager
     {
         // start freelist
         numBlocks = 0;
-        curr = 0;
         messageSize = 2;
         sizeArr = new byte[messageSize];
         freeList = new DoublyLinkedQueue();
