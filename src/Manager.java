@@ -79,19 +79,19 @@ public class Manager
         {
             handle = (numBlocks) * blockSize;
             numBlocks++;
-            freeList.insert(new DoublyLinkedNode(handle + recordSize + 1,
-                    blockSize - recordSize + 1));
+            freeList.insert(new DoublyLinkedNode(handle + recordSize,
+                    blockSize - recordSize));
+            System.out.println("Handle is: " + handle);
             freeList.dump();
         }
         // freeblock on the end of the list
         else
         {
-            handle = free.index + 1;
-            free.index += recordSize + 1;
-            free.length -= recordSize + 1;
+            handle = free.index;
+            free.index += recordSize;
+            free.length -= recordSize;
             freeList.dump();
         }
-        handle++;
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
         System.arraycopy(buffer.array(), 0, tempDisk, handle, messageSize);
