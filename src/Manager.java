@@ -36,6 +36,7 @@ public class Manager
         numBlocks = 0;
         curr = 0;
         sizeArr = new byte[messageSize];
+        freeList = new DoublyLinkedQueue();
     }
 
     /**
