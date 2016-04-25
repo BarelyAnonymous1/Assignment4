@@ -121,8 +121,7 @@ public class SkipList<K extends Comparable<K>, E>
         int curr = head;
         for (int i = level; i >= 0; i--)
         {
-            SkipNode<K, E> currNode = (SkipNode<K, E>) Serializer
-                    .deserialize(Manager.getInstance().getRecord(curr));
+            SkipNode<K, E> currNode = (SkipNode<K, E>) getObject(curr);
             while (currNode.next[i] != -1 && (key.compareTo(
                     ((SkipNode<K, E>) Serializer.deserialize(Manager
                             .getInstance().getRecord(currNode.next[i])))
