@@ -132,7 +132,6 @@ public class Manager
         sizeArr[0] = tempDisk[h];
         sizeArr[1] = tempDisk[h+1];
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
-        System.out.println(sizeNum);
         return Arrays.copyOfRange(tempDisk, h + messageSize,
                 h + messageSize + sizeNum);
     }
