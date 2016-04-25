@@ -120,7 +120,7 @@ public class SkipList<K extends Comparable<K>, E>
             while (currNode.next[i] != -1 && (key.compareTo(
                     ((SkipNode<K, E>) Serializer.deserialize(Manager
                             .getInstance().getRecord(currNode.next[i])))
-                                    .getPair().key()) > 0))
+                                    .getKey()) > 0))
             {
                 updateHandles[i] = curr;
                 curr = currNode.next[i];
