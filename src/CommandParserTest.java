@@ -16,7 +16,8 @@ public class CommandParserTest extends TestCase
      */
     public void testSearchFail() throws Exception
     {
-//        parser = new CommandParser("fail");
+        String[] args = {"fail", "1", "2", "512"};
+        parser = new CommandParser(args);
         boolean success = parser.parseFile();
         assertFalse(success);
     }
@@ -27,7 +28,7 @@ public class CommandParserTest extends TestCase
      */
     public void testSearchPass() throws Exception
     {
-//        parser = new CommandParser("SyntaxTest.txt");
+        parser = new CommandParser("SyntaxTest.txt");
         boolean success = parser.parseFile();
         assertTrue(success);
     }
