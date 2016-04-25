@@ -133,6 +133,7 @@ public class SkipList<K extends Comparable<K>, E>
 
         }
         size++;
+        System.out.println("insert Success");
         return true;
     }
 
