@@ -28,7 +28,9 @@ public class CommandParserTest extends TestCase
      */
     public void testSearchPass() throws Exception
     {
-        parser = new CommandParser("SyntaxTest.txt");
+        String[] args = {"SyntaxTest.txt", "1", "2", "512"};
+
+        parser = new CommandParser(args);
         boolean success = parser.parseFile();
         assertTrue(success);
     }
@@ -38,7 +40,9 @@ public class CommandParserTest extends TestCase
      */
     public void testCheckDim() throws Exception
     {
-        //parser = new CommandParser(["test.txt", ""]);
+        String[] args = {"test.txt", "1", "2", "512"};
+
+        parser = new CommandParser(args);
         assertTrue(parser.checkDim(0, 0, 1, 1));
         assertTrue(parser.checkDim(1, 1, 1, 1));
         assertFalse(parser.checkDim(0, 0, 1025, 1));
