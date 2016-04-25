@@ -24,10 +24,7 @@ public class SkipNode<K extends Comparable<K>, E>
      * Data stored into the node
      */
     private int  pair;
-    /**
-     * determines the level that the node is actually on
-     */
-    private int  level;
+
 
     /**
      * constructor to make nodes that store a KVPair
@@ -40,9 +37,8 @@ public class SkipNode<K extends Comparable<K>, E>
     public SkipNode(int newPair, int newLevel)
     {
         pair = newPair;
-        level = newLevel;
         next = new int[newLevel+1];
-        for (int i = 0; i <= level; i++)
+        for (int i = 0; i <= newLevel; i++)
         {
             next[i] = -1;
         }
@@ -86,15 +82,6 @@ public class SkipNode<K extends Comparable<K>, E>
         return null;
     }
 
-    /**
-     * level getter
-     * 
-     * @return level of the current node
-     */
-    public int getLevel()
-    {
-        return level;
-    }
 
     /**
      * gets the pair
