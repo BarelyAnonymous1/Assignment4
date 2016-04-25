@@ -37,7 +37,6 @@ public class SkipList<K extends Comparable<K>, E>
     {
         head = Manager.getInstance().insert(Serializer.serialize(
                 new SkipNode<K, E>(-1, 1)));
-        System.out.println(head);
         level = 0;
         size = 0;
     }
