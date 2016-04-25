@@ -81,8 +81,7 @@ public class Manager
         // curr += data.length;
         // return temp;
 
-        ByteBuffer buffer = ByteBuffer.allocate(messageSize);
-        buffer.putShort((short) data.length);
+
         int recordSize = messageSize + data.length;
         DoublyLinkedNode free = freeList.contains(recordSize);
         int handle = -1;
@@ -104,6 +103,8 @@ public class Manager
             free.index += recordSize;
             free.length -= recordSize;
         }
+        ByteBuffer buffer = ByteBuffer.allocate(messageSize);
+        buffer.putShort((short) data.length);
         System.arraycopy(buffer.array(), 0, tempDisk, handle, messageSize);
         System.arraycopy(data, 0, tempDisk, curr, data.length);
         return handle;
