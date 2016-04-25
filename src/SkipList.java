@@ -147,17 +147,17 @@ public class SkipList<K extends Comparable<K>, E>
             Manager.getInstance().replaceRecord(updateHandles[i],
                     Serializer.serialize(updateNode));
         }
-        int currPos = Manager.getInstance()
-                .insert(Serializer.serialize(newNode));
-        for (int i = 0; i <= newLevel; i++)
-        {
-            ((SkipNode<K, E>) Serializer.deserialize(Manager.getInstance()
-                    .getRecord(updateHandles[i]))).next[i] = currPos;
-            Manager.getInstance().replaceRecord(updateHandles[i],
-                    Serializer.serialize(((SkipNode<K, E>) Serializer
-                            .deserialize(Manager.getInstance()
-                                    .getRecord(updateHandles[i])))));
-        }
+//        int currPos = Manager.getInstance()
+//                .insert(Serializer.serialize(newNode));
+//        for (int i = 0; i <= newLevel; i++)
+//        {
+//            ((SkipNode<K, E>) Serializer.deserialize(Manager.getInstance()
+//                    .getRecord(updateHandles[i]))).next[i] = currPos;
+//            Manager.getInstance().replaceRecord(updateHandles[i],
+//                    Serializer.serialize(((SkipNode<K, E>) Serializer
+//                            .deserialize(Manager.getInstance()
+//                                    .getRecord(updateHandles[i])))));
+//        }
         size++;
         dump();
         System.out.println("");
