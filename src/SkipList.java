@@ -85,7 +85,7 @@ public class SkipList<K extends Comparable<K>, E>
         {
             newHead.next[i] = oldHead.next[i];
         }
-        // remove old head
+        Manager.getInstance().release(head);
         level = newLevel;
         head = getHandle(newHead);
     }
