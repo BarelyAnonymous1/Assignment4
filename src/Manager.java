@@ -78,6 +78,7 @@ public class Manager
         if (free == null)
         {
             handle = (numBlocks) * blockSize;
+            System.out.println("adding another...");
             numBlocks++;
             freeList.insert(new DoublyLinkedNode(handle + recordSize,
                     blockSize - recordSize));
