@@ -86,7 +86,7 @@ public class SkipList<K extends Comparable<K>, E>
         {
             leveler++;
         }
-        return leveler;
+        return 1;
     }
 
     /**
