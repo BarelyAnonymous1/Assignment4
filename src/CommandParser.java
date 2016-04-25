@@ -33,7 +33,6 @@ public class CommandParser
         // numBuffs
         // bufferSize
         Manager.getInstance().setSize(Integer.parseInt(args[3]));
-        System.out.println(args[2]);
         list = new SkipList<String, Rectangle>();
     }
 
