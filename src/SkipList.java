@@ -69,11 +69,7 @@ public class SkipList<K extends Comparable<K>, E>
             newHead.next[i] = oldHead.next[i];
         }
         level = newLevel;
-        System.out.println("adjusting...");
-        System.out.println(head);
         head = Manager.getInstance().insert(Serializer.serialize(newHead));
-        System.out.println(head);
-
     }
 
     /**
