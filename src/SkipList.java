@@ -138,6 +138,7 @@ public class SkipList<K extends Comparable<K>, E>
             Manager.getInstance().replaceRecord(updateHandles[i],
                     Serializer.serialize(update[i]));
         }
+        Manager.getInstance().insert(Serializer.serialize(newNode));
         size++;
         return true;
     }
