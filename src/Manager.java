@@ -49,6 +49,10 @@ public class Manager
         return instance;
     }
 
+    public static void resetInstance()
+    {
+        instance = null;
+    }
     /**
      * sets the size of a block of the freelist
      * 
