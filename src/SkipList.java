@@ -140,6 +140,7 @@ public class SkipList<K extends Comparable<K>, E>
             update[i].next[i] = currPos;
             Manager.getInstance().replaceRecord(updateHandles[i],
                     Serializer.serialize(update[i]));
+            System.out.println("replaced");
         }
         size++;
         return true;
