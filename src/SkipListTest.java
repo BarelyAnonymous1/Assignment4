@@ -24,7 +24,7 @@ public class SkipListTest extends TestCase
     {
         Manager.getInstance().setSize(512);
         pair1 = new KVPair<String, Integer>("node1", 1);
-        pair2 = new KVPair<String, Integer>("node6", 2);
+        pair2 = new KVPair<String, Integer>("node2", 2);
         pair3 = new KVPair<String, Integer>("node3", 3);
         list = new SkipList<String, Integer>();
     }
