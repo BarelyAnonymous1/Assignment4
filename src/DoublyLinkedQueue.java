@@ -153,7 +153,6 @@ public class DoublyLinkedQueue
             }
             curr = curr.next;
         }
-        System.out.println("insert at reallocate");
         insert(new DoublyLinkedNode(handle, sz));
     }
 
