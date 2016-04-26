@@ -139,7 +139,6 @@ public class Manager
      */
     public byte[] getRecord(int h)
     {
-        System.out.println(h);
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] temp = new byte[messageSize + sizeNum];
