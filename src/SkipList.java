@@ -162,10 +162,9 @@ public class SkipList<K extends Comparable<K>, E>
         {
             SkipNode<K, E> currNode = (SkipNode<K, E>) getObject(
                 curr);
-            while (currNode.next[i] != -1
-                && (newPair.key().compareTo(
-                    ((SkipNode<K, E>) getObject(currNode.next[i]))
-                        .getKey()) > 0))
+            while (currNode.next[i] != -1 && (newPair.key().compareTo(
+                ((SkipNode<K, E>) getObject(currNode.next[i]))
+                    .getKey()) > 0))
             {
                 curr = currNode.next[i];
                 currNode = (SkipNode<K, E>) getObject(curr);
@@ -204,30 +203,33 @@ public class SkipList<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public E removeKey(K key) throws Exception
     {
-        SkipNode<K, E> current = (SkipNode<K, E>) getObject(head);
-        int removeHandle = -1;
-        int currHandle = head;
         E located = null;
+        int[] updateHandles = (int[]) Array.newInstance(int.class,
+            level + 1);
+        int removeHandle = -1;
+        int curr = head;
         for (int i = level; i >= 0; i--)
         {
-            while (current.next[i] != -1)
+            SkipNode<K, E> currNode = (SkipNode<K, E>) Serializer
+                .deserialize(Manager.getInstance().getRecord(curr));
+            while (currNode.next[i] != -1)
             {
-                SkipNode<K, E> currNext = (SkipNode<K, E>) Serializer
-                    .deserialize(Manager.getInstance().getRecord(
-                        current.next[i]));
+                SkipNode<K, E> currNext = (SkipNode<K, E>) getObject(
+                    currNode.next[i]);
                 if (currNext.getKey().compareTo(key) == 0)
                 {
                     located = currNext.getValue();
-                    current.next[i] = currNext.next[i];
-                    removeHandle = current.next[i];
+                    currNode.next[i] = currNext.next[i];
+                    removeHandle = currNode.next[i];
                     break;
                 }
                 if (currNext.getKey().compareTo(key) > 0)
                 {
                     break;
                 }
-                currHandle = current.next[i];
-                current = currNext;
+                curr = currNode.next[i];
+                currNode = (SkipNode<K, E>) Serializer.deserialize(
+                    Manager.getInstance().getRecord(curr));
             }
         }
         if (removeHandle > -1)
