@@ -207,7 +207,6 @@ public class SkipList<K extends Comparable<K>, E>
         int[] updateHandles = (int[]) Array.newInstance(int.class,
             level + 1);
         int removeHandle = -1;
-        int pairHandle = -1;
         int curr = head;
         for (int i = level; i >= 0; i--)
         {
@@ -238,7 +237,7 @@ public class SkipList<K extends Comparable<K>, E>
         {
             size--;
         }
-        if (removeHandle != -1 && pairHandle != -1)
+        if (removeHandle != -1)
         {
             SkipNode<K,E> removeNode = ((SkipNode<K,E>) getObject(removeHandle));
             for (int i = 0; i < removeNode.next.length; i++)
