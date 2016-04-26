@@ -14,16 +14,18 @@ public class SkipNodeTest extends TestCase
     /**
      * sets up the test cases
      */
-    public void setUp()
+    public void setUp() throws Exception
     {
         pair = null;
-        node2 = new SkipNode<String, Integer>(pair, 1);
+        int handle = Manager.getInstance()
+                .insert(Serializer.serialize(pair));
+        node2 = new SkipNode<String, Integer>(handle, 1);
     }
 
     /**
      * tests the getKey method properly
      */
-    public void testGetKey()
+    public void testGetKey() throws Exception
     {
         assertNull(node2.getKey());
     }
@@ -31,7 +33,7 @@ public class SkipNodeTest extends TestCase
     /**
      * tests that a node with no pair returns null
      */
-    public void testGetPair()
+    public void testGetPair() throws Exception
     {
         assertNull(node2.getPair());
     }
@@ -39,11 +41,13 @@ public class SkipNodeTest extends TestCase
     /**
      * tests that a node with a KVPair returns that pair by testing its key
      */
-    public void testGetPairRight()
+    public void testGetPairRight() throws Exception
     {
         KVPair<String, Integer> newPair = new KVPair<String, Integer>(
                 "hello!", 1);
-        node3 = new SkipNode<String, Integer>(newPair, 4);
+        int handle = Manager.getInstance()
+                .insert(Serializer.serialize(newPair));
+        node3 = new SkipNode<String, Integer>(handle, 4);
         assertFuzzyEquals(node3.getPair().key(), "hello!");
     }
 
