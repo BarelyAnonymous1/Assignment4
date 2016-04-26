@@ -101,6 +101,7 @@ public class Manager
         if (free == null)
         {
             handle = freeList.insert(numBlocks, blockSize, recordSize);
+            numBlocks++;
         }
         // freeblock on the end of the list
         else
