@@ -23,7 +23,7 @@ public class SkipNode<K extends Comparable<K>, E>
     /**
      * Data stored into the node
      */
-    public int  pair;
+    public int   pair;
 
     /**
      * constructor to make nodes that store a KVPair
@@ -56,8 +56,10 @@ public class SkipNode<K extends Comparable<K>, E>
             return null;
         }
         byte[] obj = Manager.getInstance().getRecord(pair);
-        KVPair<K, E> found = ((KVPair<K, E>) Serializer.deserialize(
-            obj));
+        if (obj == null)
+            return null;
+        KVPair<K, E> found = ((KVPair<K, E>) Serializer
+            .deserialize(obj));
         if (found != null)
         {
             return found.key();
@@ -78,8 +80,8 @@ public class SkipNode<K extends Comparable<K>, E>
             return null;
         }
         byte[] obj = Manager.getInstance().getRecord(pair);
-        KVPair<K, E> found = ((KVPair<K, E>) Serializer.deserialize(
-            obj));
+        KVPair<K, E> found = ((KVPair<K, E>) Serializer
+            .deserialize(obj));
         if (found != null)
         {
             return found.value();
