@@ -59,11 +59,11 @@ public class SkipListTest extends TestCase
     public void testRandomInsert() throws Exception
     {
         TestableRandom.setNextBooleans(false, true, true, false);
-        assertEquals(1, list.getHead().next.length);
-        assertTrue(list.insert(pair1));
-        assertEquals(1, list.getHead().next.length);
-        assertTrue(list.insert(pair2));
         assertEquals(2, list.getHead().next.length);
+        assertTrue(list.insert(pair1));
+        assertEquals(2, list.getHead().next.length);
+        assertTrue(list.insert(pair2));
+        assertEquals(3, list.getHead().next.length);
         list.dump();
     }
 }
