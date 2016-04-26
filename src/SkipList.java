@@ -151,8 +151,6 @@ public class SkipList<K extends Comparable<K>, E>
     public boolean insert(KVPair<K, E> newPair) throws Exception
     {
         int newLevel = pickRandomLevel();
-        System.out.println("old level: " + level);
-        System.out.println("new level: " + newLevel);
 
         if (level < newLevel)
         {
