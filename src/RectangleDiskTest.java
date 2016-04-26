@@ -54,8 +54,7 @@ public class RectangleDiskTest extends TestCase
     {
         String[] params = { "commands.txt", "dataFile.dat", "5", "4096" };
         RectangleDisk.main(params);
-//        assertFuzzyEquals("Found expected parameter list.",
-//                systemOut().getHistory());
+        assertEquals(4096, Manager.blockSize);
     }
 
     /**
