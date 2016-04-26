@@ -28,8 +28,8 @@ public class DoublyLinkedQueue
      */
     public DoublyLinkedQueue()
     {
-        head = new DoublyLinkedNode(-1, 0);
-        tail = new DoublyLinkedNode(-1, 0);
+        head = new DoublyLinkedNode(-1, -1);
+        tail = new DoublyLinkedNode(-1, -1);
         head.setNext(tail);
         tail.setPrev(head);
         size = 0;
@@ -66,7 +66,7 @@ public class DoublyLinkedQueue
         newNode.prev = curr;
         size++;
     }
-    
+
     /**
      * adds a new node into the linked queue This node is inserted into the
      * front of the queue ------------- -> x -------------
@@ -74,13 +74,19 @@ public class DoublyLinkedQueue
      * @param newerNode
      *            the node to be inserted
      */
-    public void insert(int handle, int sz)
+    public int insert(int numBlocks, int sz)
     {
         DoublyLinkedNode newNode = null;
         DoublyLinkedNode curr = head;
-        while (curr.next != tail)
+        if (size == 0)
         {
-            curr = curr.next;
+            insert(new DoublyLinkedNode(numBlocks * sz, sz));
+            return numBlocks * sz;
+        }
+        else
+        {
+            tail.prev.length -= sz;
+            return tail.prev.index;
         }
 
     }
@@ -136,7 +142,7 @@ public class DoublyLinkedQueue
                 best = curr;
             }
             else if (curr.length > sz && best != null
-                    && curr.length < best.length)
+                && curr.length < best.length)
             {
                 best = curr;
             }
@@ -227,8 +233,8 @@ public class DoublyLinkedQueue
         DoublyLinkedNode curr = head.next;
         while (curr != tail)
         {
-            System.out.println("(" + curr.index + ", " + curr.length
-                    + ")");
+            System.out
+                .println("(" + curr.index + ", " + curr.length + ")");
             curr = curr.next;
         }
     }
