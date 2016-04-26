@@ -25,7 +25,6 @@ public class SkipNode<K extends Comparable<K>, E>
      */
     private int  pair;
 
-
     /**
      * constructor to make nodes that store a KVPair
      * 
@@ -37,16 +36,12 @@ public class SkipNode<K extends Comparable<K>, E>
     public SkipNode(int newPair, int newLevel)
     {
         pair = newPair;
-        next = new int[newLevel+1];
+        next = new int[newLevel + 1];
         for (int i = 0; i <= newLevel; i++)
         {
             next[i] = -1;
         }
     }
-
-    /**
-     * =========================== getters and setters section
-     */
 
     /**
      * key getter
@@ -57,11 +52,16 @@ public class SkipNode<K extends Comparable<K>, E>
     public K getKey() throws Exception
     {
         if (pair == -1)
+        {
             return null;
+        }
         byte[] obj = Manager.getInstance().getRecord(pair);
-        KVPair<K, E> found = ((KVPair<K, E>) Serializer.deserialize(obj));
+        KVPair<K, E> found = ((KVPair<K, E>) Serializer.deserialize(
+                obj));
         if (found != null)
+        {
             return found.key();
+        }
         return null;
     }
 
@@ -74,14 +74,18 @@ public class SkipNode<K extends Comparable<K>, E>
     public E getValue() throws Exception
     {
         if (pair == -1)
+        {
             return null;
+        }
         byte[] obj = Manager.getInstance().getRecord(pair);
-        KVPair<K, E> found = ((KVPair<K, E>) Serializer.deserialize(obj));
+        KVPair<K, E> found = ((KVPair<K, E>) Serializer.deserialize(
+                obj));
         if (found != null)
+        {
             return found.value();
+        }
         return null;
     }
-
 
     /**
      * gets the pair
@@ -92,7 +96,9 @@ public class SkipNode<K extends Comparable<K>, E>
     public KVPair<K, E> getPair() throws Exception
     {
         if (pair == -1)
+        {
             return null;
+        }
         byte[] obj = Manager.getInstance().getRecord(pair);
         return ((KVPair<K, E>) Serializer.deserialize(obj));
     }
