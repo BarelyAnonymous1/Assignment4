@@ -1,3 +1,4 @@
+import java.io.*;
 
 /**
  * DoublyLinkedQueue that is modified to be able to search remove from the
@@ -28,8 +29,8 @@ public class DoublyLinkedQueue
      */
     public DoublyLinkedQueue()
     {
-        head = new DoublyLinkedNode(-1, 0);
-        tail = new DoublyLinkedNode(-1, 0);
+        head = new DoublyLinkedNode(null);
+        tail = new DoublyLinkedNode(null);
         head.setNext(tail);
         tail.setPrev(head);
         size = 0;
@@ -39,31 +40,16 @@ public class DoublyLinkedQueue
      * adds a new node into the linked queue This node is inserted into the
      * front of the queue ------------- -> x -------------
      * 
-     * @param newerNode
+     * @param newNode
      *            the node to be inserted
      */
-    public void insert(DoublyLinkedNode newerNode)
+    public void enqueue(DoublyLinkedNode newNode)
     {
-        DoublyLinkedNode newNode = newerNode;
-        DoublyLinkedNode curr = head;
-        while (curr.next != tail)
-        {
-            if (newNode.index < curr.next.index)
-            {
-                DoublyLinkedNode temp = curr.next;
-                curr.next = newNode;
-                newNode.next = temp;
-                temp.prev = newNode;
-                newNode.prev = curr;
-                size++;
-                return;
-            }
-            curr = curr.next;
-        }
-        curr.next = newNode;
-        newNode.next = tail;
-        tail.prev = newNode;
-        newNode.prev = curr;
+        tail.prev.setNext(newNode);
+        newNode.setPrev(tail.prev);
+        tail.setPrev(newNode);
+        newNode.setNext(tail);
+
         size++;
     }
 
@@ -71,71 +57,53 @@ public class DoublyLinkedQueue
      * pulls the last added node from the queue this node removed from the queue
      * ------------- x-x-x-x-x-x x -> -------------
      * 
-     * @param remIndex
-     *            the index of the node to remove
      * @return the node that was just removed from the list so that it may be
      *         recycled and returned to the back of the queue
      */
-    public DoublyLinkedNode remove(int remIndex)
+    public DoublyLinkedNode dequeue()
     {
-        DoublyLinkedNode curr = head;
-        while (curr.next != tail)
+        if (size == 0)
+            return null;
+        else
         {
-            if (curr.next.index == remIndex)
-            {
-                DoublyLinkedNode temp = curr.next;
-                curr.next.next.prev = curr;
-                curr.next = curr.next.next;
-                temp.next = null;
-                temp.prev = null;
-                size--;
-                return temp;
-            }
-            curr = curr.next;
+            DoublyLinkedNode temp = head.next;
+            head.setNext(temp.next);
+            temp.next.setPrev(head);
+            temp.setNext(null);
+            temp.setPrev(null);
+            size--;
+            return temp;
         }
-        return null;
     }
 
     /**
-     * returns the best fit node in the list
+     * removes from the middle of the queue and relinks the next and previous
      * 
-     * @param sz
-     *            size of the message that needs to be allocated
-     * @return the node that has the best fit for the message
+     * @param blockID
+     *            the block of the node
+     * @param file
+     *            the file to look for the block in
+     * @return the node with the block removed
      */
-    public DoublyLinkedNode contains(int sz)
+    public DoublyLinkedNode remove(int blockID, RandomAccessFile file)
     {
-        DoublyLinkedNode curr = head.next;
-        DoublyLinkedNode best = null;
-        while (curr != tail)
+        DoublyLinkedNode curr = tail.prev;
+        while (curr != head)
         {
-            if (curr.length == sz)
+            Buffer buffer = curr.getData();
+            if (!(buffer.getID() != blockID || buffer.getFile() == null
+                    || buffer.getFile() != file))
             {
+                curr.prev.setNext(curr.next);
+                curr.next.setPrev(curr.prev);
+                curr.setPrev(null);
+                curr.setNext(null);
+                size--;
                 return curr;
             }
-            else if (best == null)
-            {
-                best = curr;
-            }
-            else if (curr.length > sz && best != null
-                    && curr.length < best.length)
-            {
-                best = curr;
-            }
-            curr = curr.next;
+            curr = curr.prev;
         }
-        if (best != null)
-        {
-            return best;
-        }
-        else if (size == 0)
-        {
-            return null;
-        }
-        else
-        {
-            return tail.prev;
-        }
+        return null;
     }
 
     /**
@@ -146,18 +114,5 @@ public class DoublyLinkedQueue
     public int getSize()
     {
         return size;
-    }
-
-    /**
-     * dumps the list
-     */
-    public void dump()
-    {
-        DoublyLinkedNode curr = head.next;
-        while (curr != tail)
-        {
-            System.out.println(curr.index + ", " + curr.length);
-            curr = curr.next;
-        }
     }
 }

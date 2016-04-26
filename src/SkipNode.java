@@ -12,7 +12,7 @@
  */
 @SuppressWarnings("serial")
 public class SkipNode<K extends Comparable<K>, E>
-        implements java.io.Serializable
+    implements java.io.Serializable
 {
     /**
      * creates a skip list node array that is blank that will point to the next
@@ -23,11 +23,7 @@ public class SkipNode<K extends Comparable<K>, E>
     /**
      * Data stored into the node
      */
-    private int  pair;
-    /**
-     * determines the level that the node is actually on
-     */
-    private int  level;
+    public int   pair;
 
     /**
      * constructor to make nodes that store a KVPair
@@ -40,17 +36,12 @@ public class SkipNode<K extends Comparable<K>, E>
     public SkipNode(int newPair, int newLevel)
     {
         pair = newPair;
-        level = newLevel;
-        next = new int[newLevel+1];
-        for (int i = 0; i <= level; i++)
+        next = new int[newLevel + 1];
+        for (int i = 0; i <= newLevel; i++)
         {
             next[i] = -1;
         }
     }
-
-    /**
-     * =========================== getters and setters section
-     */
 
     /**
      * key getter
@@ -61,11 +52,18 @@ public class SkipNode<K extends Comparable<K>, E>
     public K getKey() throws Exception
     {
         if (pair == -1)
+        {
             return null;
+        }
         byte[] obj = Manager.getInstance().getRecord(pair);
-        KVPair<K, E> found = ((KVPair<K, E>) Serializer.deserialize(obj));
+        if (obj == null)
+            return null;
+        KVPair<K, E> found = ((KVPair<K, E>) Serializer
+            .deserialize(obj));
         if (found != null)
+        {
             return found.key();
+        }
         return null;
     }
 
@@ -78,22 +76,17 @@ public class SkipNode<K extends Comparable<K>, E>
     public E getValue() throws Exception
     {
         if (pair == -1)
+        {
             return null;
+        }
         byte[] obj = Manager.getInstance().getRecord(pair);
-        KVPair<K, E> found = ((KVPair<K, E>) Serializer.deserialize(obj));
+        KVPair<K, E> found = ((KVPair<K, E>) Serializer
+            .deserialize(obj));
         if (found != null)
+        {
             return found.value();
+        }
         return null;
-    }
-
-    /**
-     * level getter
-     * 
-     * @return level of the current node
-     */
-    public int getLevel()
-    {
-        return level;
     }
 
     /**
@@ -104,6 +97,10 @@ public class SkipNode<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public KVPair<K, E> getPair() throws Exception
     {
+        if (pair == -1)
+        {
+            return null;
+        }
         byte[] obj = Manager.getInstance().getRecord(pair);
         return ((KVPair<K, E>) Serializer.deserialize(obj));
     }

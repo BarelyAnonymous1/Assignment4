@@ -15,7 +15,6 @@ public class DoublyLinkedQueueTest extends TestCase
 
     private DoublyLinkedNode  node1;
     private DoublyLinkedNode  node2;
-    private DoublyLinkedNode  node3;
     private RandomAccessFile  file;
     private DoublyLinkedQueue list;
 
@@ -25,42 +24,45 @@ public class DoublyLinkedQueueTest extends TestCase
     public void setUp() throws IOException
     {
         file = new RandomAccessFile("buffertest.txt", "rw");
-        node1 = new DoublyLinkedNode(1, 1);
-        node2 = new DoublyLinkedNode(2, 2);
-        node3 = new DoublyLinkedNode(3, 3);
+        node1 = new DoublyLinkedNode(new Buffer(0, file));
+        node2 = new DoublyLinkedNode(new Buffer(0, file));
         list = new DoublyLinkedQueue();
     }
 
     /**
      * tests that the queue properly adds nodes to the list
      */
-    public void testinsert()
+    public void testEnqueue()
     {
-        list.insert(node2);
+        list.enqueue(node1);
         assertEquals(1, list.getSize());
-        list.insert(node3);
+        list.enqueue(node2);
         assertEquals(2, list.getSize());
-        list.insert(node1);
-        assertEquals(3, list.getSize());
-        list.dump();
     }
 
     /**
      * tests that the queue properly removes nodes from the list
      */
-    public void testremove()
+    public void testDequeue()
     {
-        assertNull(list.remove(1));
-        list.insert(node1);
-        list.insert(node2);
-        list.insert(node3);
-        System.out.println("");
-        assertEquals(list.remove(2), node2);
-        list.dump();
-        System.out.println("");
-        assertEquals(list.remove(1), node1);
-        list.dump();
+        assertNull(list.dequeue());
+        list.enqueue(node1);
+        list.enqueue(node2);
+        assertEquals(list.dequeue(), node1);
+        assertEquals(list.dequeue(), node2);
     }
 
+    /**
+     * tests that the queue properly searches for and removes a node
+     */
+    public void testRemove()
+    {
+        list.remove(0, file);
+        list.enqueue(node1);
+        list.enqueue(node2);
+        assertNotSame(node2, list.remove(4, file));
+        assertNull(list.remove(0, null));
+        assertEquals(node2, list.remove(0, file));
+    }
 
 }

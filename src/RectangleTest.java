@@ -17,7 +17,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 0, 0, 10, 10);
 
-        assertTrue(rect1.compareTo(rect2) == 0);
+        assertEquals(rect1.compareTo(rect2), 0);
     }
 
     /**
@@ -28,7 +28,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 1, 0, 10, 10);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -39,7 +39,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 0, 1, 10, 10);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -50,7 +50,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 0, 0, 11, 10);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -61,7 +61,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 0, 0, 10, 11);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -72,7 +72,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 1, 1, 10, 10);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -83,7 +83,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 1, 0, 11, 10);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -94,7 +94,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 1, 0, 10, 11);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -105,7 +105,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 0, 1, 11, 10);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -116,7 +116,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 0, 1, 10, 11);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -127,7 +127,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 0, 0, 11, 11);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -138,7 +138,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 1, 1, 11, 10);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -149,7 +149,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 1, 1, 10, 11);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -160,7 +160,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 1, 0, 11, 11);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -171,7 +171,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 0, 1, 11, 11);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -182,7 +182,7 @@ public class RectangleTest extends TestCase
         Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
         Rectangle rect2 = new Rectangle("a", 1, 1, 11, 11);
 
-        assertTrue(rect1.compareTo(rect2) == -1);
+        assertEquals(rect1.compareTo(rect2), -1);
     }
 
     /**
@@ -190,8 +190,8 @@ public class RectangleTest extends TestCase
      */
     public void testToString()
     {
-        Rectangle rect1 = new Rectangle("Hello World!", 0, 0, 10, 10);
-        assertFuzzyEquals("0, 0, 10, 10", rect1.toString());
+        Rectangle rect1 = new Rectangle("a", 0, 0, 10, 10);
+        assertFuzzyEquals("a, 0, 0, 10, 10", rect1.toString());
     }
 
     /**
@@ -200,8 +200,8 @@ public class RectangleTest extends TestCase
      */
     public void testRectangleHorizontal()
     {
-        Rectangle left = new Rectangle("left", 20, 20, 40, 40);
-        Rectangle right = new Rectangle("right", 70, 20, 40, 40);
+        Rectangle left = new Rectangle("a", 20, 20, 40, 40);
+        Rectangle right = new Rectangle("a", 70, 20, 40, 40);
         assertFalse(left.intersects(right));
         assertFalse(right.intersects(left));
     }
@@ -212,8 +212,8 @@ public class RectangleTest extends TestCase
      */
     public void testRectangleVertical()
     {
-        Rectangle top = new Rectangle("top", 20, 20, 40, 40);
-        Rectangle bottom = new Rectangle("bottom", 20, 70, 40, 40);
+        Rectangle top = new Rectangle("a", 20, 20, 40, 40);
+        Rectangle bottom = new Rectangle("a", 20, 70, 40, 40);
         assertFalse(top.intersects(bottom));
         assertFalse(bottom.intersects(top));
     }
@@ -223,8 +223,8 @@ public class RectangleTest extends TestCase
      */
     public void testRectangleIntersect()
     {
-        Rectangle rect1 = new Rectangle("rect1", 10, 10, 20, 20);
-        Rectangle rect2 = new Rectangle("rect2", 15, 15, 20, 20);
+        Rectangle rect1 = new Rectangle("a", 10, 10, 20, 20);
+        Rectangle rect2 = new Rectangle("a", 15, 15, 20, 20);
         assertTrue(rect1.intersects(rect2));
         assertTrue(rect2.intersects(rect1));
     }
@@ -234,8 +234,8 @@ public class RectangleTest extends TestCase
      */
     public void testRectangleInside()
     {
-        Rectangle rect1 = new Rectangle("rect1", 10, 10, 5, 5);
-        Rectangle rect2 = new Rectangle("rect2", 11, 11, 1, 1);
+        Rectangle rect1 = new Rectangle("a", 10, 10, 5, 5);
+        Rectangle rect2 = new Rectangle("a", 11, 11, 1, 1);
         assertTrue(rect1.intersects(rect2));
         assertTrue(rect2.intersects(rect1));
     }
@@ -245,8 +245,8 @@ public class RectangleTest extends TestCase
      */
     public void testRectangleTouch()
     {
-        Rectangle rect1 = new Rectangle("rect1", 10, 10, 5, 5);
-        Rectangle rect2 = new Rectangle("rect2", 15, 10, 5, 5);
+        Rectangle rect1 = new Rectangle("a", 10, 10, 5, 5);
+        Rectangle rect2 = new Rectangle("a", 15, 10, 5, 5);
         assertFalse(rect1.intersects(rect2));
         assertFalse(rect2.intersects(rect1));
     }
@@ -255,9 +255,9 @@ public class RectangleTest extends TestCase
      */
     public void testEquals()
     {
-        Rectangle rect1 = new Rectangle("rect1", 1, 1, 1, 1);
-        Rectangle rect2 = new Rectangle("rect2", 2, 2, 2, 2);
-        Rectangle rect3 = new Rectangle("rect3", 1, 1, 1, 1);
+        Rectangle rect1 = new Rectangle("a", 1, 1, 1, 1);
+        Rectangle rect2 = new Rectangle("a", 2, 2, 2, 2);
+        Rectangle rect3 = new Rectangle("a", 1, 1, 1, 1);
         Object obj = new Object();
         assertFalse(rect1.equals(obj));
         assertFalse(rect1.equals(new Rectangle("a", 1, 1, 2, 2)));

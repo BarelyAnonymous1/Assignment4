@@ -41,10 +41,9 @@ public class RectangleDiskTest extends TestCase
         assertNotNull(rectDisk);
         String[] params = { "bad", "params" };
         RectangleDisk.main(params);
-        assertFuzzyEquals(
-                "Usage: RectangleDisk <commandfile> "
-                        + "<diskFile> <numBuffs> <buffSize>",
-                systemOut().getHistory());
+        assertFuzzyEquals("Usage: RectangleDisk <commandfile> "
+            + "<diskFile> <numBuffs> <buffSize>", systemOut()
+                .getHistory());
     }
 
     /**
@@ -52,10 +51,13 @@ public class RectangleDiskTest extends TestCase
      */
     public void testGoodParams()
     {
-        String[] params = { "commands.txt", "dataFile.dat", "5", "4096" };
+        String[] params = {
+            "commands.txt",
+            "dataFile.dat",
+            "5",
+            "4096" };
         RectangleDisk.main(params);
-//        assertFuzzyEquals("Found expected parameter list.",
-//                systemOut().getHistory());
+        assertEquals(4096, Manager.getInstance().getSize());
     }
 
     /**
@@ -66,10 +68,9 @@ public class RectangleDiskTest extends TestCase
         RectangleDisk dum = new RectangleDisk();
         assertNotNull(dum);
         RectangleDisk.main(input1);
-        assertFuzzyEquals(
-                "Usage: RectangleDisk <commandfile> "
-                        + "<diskFile> <numBuffs> <buffSize>\n",
-                systemOut().getHistory());
+        assertFuzzyEquals("Usage: RectangleDisk <commandfile> "
+            + "<diskFile> <numBuffs> <buffSize>\n", systemOut()
+                .getHistory());
     }
 
     /**
@@ -78,6 +79,7 @@ public class RectangleDiskTest extends TestCase
     public void testFileNotFound() throws FileNotFoundException
     {
         RectangleDisk.main(input2);
+        assertNotSame(4096, Manager.getInstance().getSize());
     }
 
     /**
@@ -85,7 +87,13 @@ public class RectangleDiskTest extends TestCase
      */
     public void testSearchFile()
     {
-        String[] input = { "SyntaxTest.txt", "dataFile.dat", "5", "4096" };
+        String[] input = {
+            "SyntaxTest.txt",
+            "dataFile.dat",
+            "5",
+            "4096" };
         RectangleDisk.main(input);
+        assertEquals(4096, Manager.getInstance().getSize());
+
     }
 }

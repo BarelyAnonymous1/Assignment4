@@ -41,7 +41,7 @@ public class KVPairTest extends TestCase
     public void testCompareToKVPairOfKE()
     {
         assertEquals(0, pair1.compareTo(pair3));
-        assertFalse(pair2.compareTo(pair3) == 0);
+        assertNotSame(pair2.compareTo(pair3), 0);
     }
 
     /**

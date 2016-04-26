@@ -16,23 +16,19 @@ public class DoublyLinkedNode
      */
     public DoublyLinkedNode prev;
     /**
-     * length of data
+     * point data contained in the node
      */
-    public int length;
-    /**
-     * index of data
-     */
-    public int index;
+    private Buffer     data;
+
     /**
      * creates a node that contains data and no next node
      * 
      * @param newValue
      *            the value stored in the node
      */
-    public DoublyLinkedNode(int newindex, int newlength)
+    public DoublyLinkedNode(Buffer newValue)
     {
-        index = newindex;
-        length = newlength;
+        data = newValue;
         prev = null;
         next = null;
     }
@@ -66,9 +62,18 @@ public class DoublyLinkedNode
      * @param newData
      *            data to be stored in the node
      */
-    public void setData(int newIndex, int newLength)
+    public void setData(Buffer newData)
     {
-        index = newIndex;
-        length = newLength;
+        data = newData;
+    }
+
+    /**
+     * returns the private Buffer stored in the node
+     * 
+     * @return the Buffer in the node
+     */
+    public Buffer getData()
+    {
+        return data;
     }
 }

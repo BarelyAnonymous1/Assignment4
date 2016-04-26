@@ -1,5 +1,4 @@
 import java.nio.ByteBuffer;
-import java.util.*;
 
 /**
  * Memory manager class that will communicate with a buffer pool to keep a
@@ -11,8 +10,12 @@ import java.util.*;
  */
 public class Manager
 {
-    private static int        messageSize;
+    /**
+     * stores the size of a single FreeBlock and Buffer
+     */
     private static int        blockSize;
+
+    private static int        messageSize;
     /**
      * create an object of SingleObject
      */
@@ -21,9 +24,8 @@ public class Manager
     private byte[]            tempDisk;
     private byte[]            sizeArr;
     private int               numBlocks;
-    private int               curr;
 
-    private DoublyLinkedQueue freeList;
+    private FreeList freeList;
 
     /**
      * make the constructor private so that this class cannot be instantiated
@@ -32,11 +34,10 @@ public class Manager
     private Manager()
     {
         // start freelist
-        numBlocks = 0;
-        curr = 0;
         messageSize = 2;
+        numBlocks = 0;
         sizeArr = new byte[messageSize];
-        freeList = new DoublyLinkedQueue();
+        freeList = new FreeList();
     }
 
     /**
@@ -47,20 +48,41 @@ public class Manager
     public static Manager getInstance()
     {
         if (instance == null)
+        {
             instance = new Manager();
+        }
         return instance;
     }
 
     /**
-     * sets the size of a block of the freelist
+     * resets the instance of the Manager
+     */
+    public static void resetInstance()
+    {
+        instance = null;
+    }
+
+    /**
+     * sets the size of a block of the freelist and reinitializes the temp array
+     * that represents the disk
      * 
      * @param sz
-     *            size of the freeblock in the list
+     *            size of the block
      */
     public void setSize(int sz)
     {
         blockSize = sz;
         tempDisk = new byte[10 * blockSize];
+    }
+
+    /**
+     * gets the largest size of a new freeblock
+     * 
+     * @return the freeblock size
+     */
+    public int getSize()
+    {
+        return blockSize;
     }
 
     /**
@@ -73,27 +95,37 @@ public class Manager
     public int insert(byte[] data)
     {
         int recordSize = messageSize + data.length;
-        DoublyLinkedNode free = freeList.contains(recordSize);
+        FreeNode free = freeList.contains(recordSize);
         int handle = -1;
         if (free == null)
         {
             handle = (numBlocks) * blockSize;
             numBlocks++;
-            freeList.insert(new DoublyLinkedNode(handle + recordSize,
+            freeList.insert(new FreeNode(handle + recordSize,
                     blockSize - recordSize));
-            System.out.println("had to add a new block");
         }
         // freeblock on the end of the list
         else
         {
+            if ((free.index + free.length) % blockSize == 0
+                    && recordSize > free.length)
+            {
+                free.length += blockSize;
+                numBlocks++;
+            }
             handle = free.index;
             free.index += recordSize;
             free.length -= recordSize;
+            if (free.length == 0)
+            {
+                freeList.remove(free.index);
+            }
         }
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
         System.arraycopy(buffer.array(), 0, tempDisk, handle, messageSize);
-        System.arraycopy(data, 0, tempDisk, handle + 2, data.length);
+        System.arraycopy(data, 0, tempDisk, handle + messageSize,
+                data.length);
         return handle;
     }
 
@@ -105,6 +137,9 @@ public class Manager
      */
     public void release(int h)
     {
+        System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
+        short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
+        freeList.reallocate(h, sizeNum + messageSize);
     }
 
     /**
@@ -116,13 +151,22 @@ public class Manager
      */
     public byte[] getRecord(int h)
     {
-        sizeArr[0] = tempDisk[h];
-        sizeArr[1] = tempDisk[h + 1];
+        System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
-        return Arrays.copyOfRange(tempDisk, h + messageSize,
-                h + messageSize + sizeNum + 1);
+        byte[] temp = new byte[messageSize + sizeNum];
+        System.arraycopy(tempDisk, h + messageSize, temp, 0, temp.length);
+        return temp;
     }
 
+    /**
+     * updates a record in place; incoming message is expected to be the same
+     * size as the original message
+     * 
+     * @param h
+     *            index position of the original message
+     * @param newMessage
+     *            byte array containing the new message
+     */
     public void replaceRecord(int h, byte[] newMessage)
     {
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
