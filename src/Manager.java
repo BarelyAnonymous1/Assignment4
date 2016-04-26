@@ -37,10 +37,7 @@ public class Manager
         messageSize = 2;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
-        tempDisk = new byte[10 * blockSize];
         freeList = new DoublyLinkedQueue();
-        freeList.insert(new DoublyLinkedNode(0, blockSize));
-        numBlocks++;
     }
 
     /**
@@ -64,6 +61,12 @@ public class Manager
     {
         instance = null;
         numBlocks = 0;
+    }
+    
+    public void setSize(int sz)
+    {
+        blockSize = sz;
+        tempDisk = new byte[10 * blockSize];
     }
 
     /**
