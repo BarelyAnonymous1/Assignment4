@@ -142,8 +142,6 @@ public class SkipList<K extends Comparable<K>, E>
         int currPos = getHandle(newNode);
         for (int i = 0; i <= newLevel; i++)
         {
-            System.out.println("updateHandles at " + i + " is "
-                    + updateHandles[i]);
             newNode.next[i] = ((SkipNode<K, E>) getObject(
                     updateHandles[i])).next[i];
             SkipNode<K, E> updateNode = ((SkipNode<K, E>) getObject(
