@@ -248,7 +248,7 @@ public class CommandParser
     {
         String name = scanner.next();
         SkipNode<String, Rectangle> searchResult = list.search(name);
-        if (null == list.search(name))
+        if (searchResult == null)
         {
             System.out.println("Rectangle not found: " + name);
         }
