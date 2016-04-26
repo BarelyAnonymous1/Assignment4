@@ -255,7 +255,7 @@ public class CommandParser
         }
         else
         {
-            System.out.println("(" + searchResult.getValue()
+            System.out.println("(" + searchResult.getPair()
                 .toString() + ")");
             SkipNode<String, Rectangle> searchNext = (SkipNode<String, Rectangle>) Serializer
                 .deserialize(Manager.getInstance().getRecord(
