@@ -76,6 +76,12 @@ public class SkipList<K extends Comparable<K>, E>
         return Manager.getInstance().insert(Serializer.serialize(obj));
     }
 
+    /**
+     * replaces a message in place, given a handle and object
+     * @param pos the handle of the original message
+     * @param obj the Object that is being stored in the manager
+     * @throws Exception if the object cant be serialized
+     */
     private void replaceObject(int pos, Object obj) throws Exception
     {
         Manager.getInstance().replaceRecord(pos, Serializer.serialize(
