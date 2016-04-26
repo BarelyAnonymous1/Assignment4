@@ -12,7 +12,7 @@
  */
 @SuppressWarnings("serial")
 public class SkipNode<K extends Comparable<K>, E>
-        implements java.io.Serializable
+    implements java.io.Serializable
 {
     /**
      * creates a skip list node array that is blank that will point to the next
@@ -57,7 +57,7 @@ public class SkipNode<K extends Comparable<K>, E>
         }
         byte[] obj = Manager.getInstance().getRecord(pair);
         KVPair<K, E> found = ((KVPair<K, E>) Serializer.deserialize(
-                obj));
+            obj));
         if (found != null)
         {
             return found.key();
@@ -79,7 +79,7 @@ public class SkipNode<K extends Comparable<K>, E>
         }
         byte[] obj = Manager.getInstance().getRecord(pair);
         KVPair<K, E> found = ((KVPair<K, E>) Serializer.deserialize(
-                obj));
+            obj));
         if (found != null)
         {
             return found.value();
