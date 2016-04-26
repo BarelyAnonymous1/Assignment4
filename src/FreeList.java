@@ -155,19 +155,21 @@ public class FreeList
         {
             if (curr.prev.index + curr.prev.length == curr.index)
             {
-                curr.length += curr.next.length;
+                curr.prev.length += curr.length;
+                curr = curr.next;
                 remove(curr.next.index);
             }
             if (curr.index + curr.length == handle)
             {
                 curr.length += sz;
+                curr = curr.next;
             }
             if (curr.index == handle + sz)
             {
                 curr.index -= sz;
                 curr.length += sz;
+                curr = curr.next;
             }
-            curr = curr.next;
         }
         insert(new FreeNode(handle, sz));
     }
