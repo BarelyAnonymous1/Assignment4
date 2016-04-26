@@ -118,6 +118,9 @@ public class SkipList<K extends Comparable<K>, E>
     public boolean insert(KVPair<K, E> newPair) throws Exception
     {
         int newLevel = pickRandomLevel();
+        System.out.println("old level: " + level);
+        System.out.println("new level: " + newLevel);
+
         if (level < newLevel)
         {
             fixHead(newLevel);
@@ -166,8 +169,7 @@ public class SkipList<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public KVPair<K, E> removeKey(K key) throws Exception
     {
-        SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
-                Manager.getInstance().getRecord(head));
+        SkipNode<K, E> current = (SkipNode<K, E>) getObject(head);
         int removeHandle = -1;
         int currHandle = head;
         KVPair<K, E> located = null;
@@ -313,35 +315,31 @@ public class SkipList<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public boolean intersections() throws Exception
     {
-        return false;
-//        boolean foundIntersect = false;
-//        SkipNode<K, E> temp = (SkipNode<K, E>) Serializer.deserialize(
-//                Manager.getInstance().getRecord(head));
-//        SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
-//                Manager.getInstance().getRecord(temp.next[0]));
-//        for (int i = 0; i < size; i++)
-//        {
-//            SkipNode<K, E> check = (SkipNode<K, E>) Serializer.deserialize(
-//                    Manager.getInstance().getRecord(temp.next[0]));
-//            for (int j = 0; j < size; j++)
-//            {
-//                if (i != j)
-//                {
-//                    if (((Rectangle) current.getValue()).intersects(
-//                            ((Rectangle) check.getValue())))
-//                    {
-//                        System.out.println(current.getPair().toString()
-//                                + " | " + check.getPair().toString());
-//                        foundIntersect = true;
-//                    }
-//                }
-//                check = (SkipNode<K, E>) Serializer.deserialize(Manager
-//                        .getInstance().getRecord(check.next[0]));
-//            }
-//            current = (SkipNode<K, E>) Serializer.deserialize(Manager
-//                    .getInstance().getRecord(current.next[0]));
-//        }
-//        return foundIntersect;
+        boolean foundIntersect = false;
+        SkipNode<K, E> temp = (SkipNode<K, E>) getObject(head);
+        if (temp.next[0] == -1)
+            return foundIntersect;
+        SkipNode<K, E> current = (SkipNode<K, E>) getObject(temp.next[0]);
+        for (int i = 0; i < size; i++)
+        {
+            SkipNode<K, E> check = (SkipNode<K, E>) getObject(temp.next[0]);
+            for (int j = 0; j < size; j++)
+            {
+                if (i != j)
+                {
+                    if (((Rectangle) current.getValue()).intersects(
+                            ((Rectangle) check.getValue())))
+                    {
+                        System.out.println(current.getPair().toString()
+                                + " | " + check.getPair().toString());
+                        foundIntersect = true;
+                    }
+                }
+                check = (SkipNode<K, E>) getObject(check.next[0]);
+            }
+            current = (SkipNode<K, E>) getObject(check.next[0]);
+        }
+        return foundIntersect;
     }
 
     /**
