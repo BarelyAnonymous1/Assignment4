@@ -80,7 +80,8 @@ public class DoublyLinkedQueue
         DoublyLinkedNode curr = head;
         if (size == 0)
         {
-            insert(new DoublyLinkedNode(numBlocks * sz, sz-recordSz));
+            insert(
+                new DoublyLinkedNode(numBlocks * sz, sz - recordSz));
             return numBlocks * sz;
         }
         else
