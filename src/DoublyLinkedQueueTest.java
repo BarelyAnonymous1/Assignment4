@@ -1,5 +1,3 @@
-import java.io.*;
-import org.junit.Test;
 
 import student.TestCase;
 
@@ -16,15 +14,13 @@ public class DoublyLinkedQueueTest extends TestCase
     private DoublyLinkedNode  node1;
     private DoublyLinkedNode  node2;
     private DoublyLinkedNode  node3;
-    private RandomAccessFile  file;
     private DoublyLinkedQueue list;
 
     /**
      * sets up the nodes and files for the DoublyLinkedQueue
      */
-    public void setUp() throws IOException
+    public void setUp()
     {
-        file = new RandomAccessFile("buffertest.txt", "rw");
         node1 = new DoublyLinkedNode(1, 1);
         node2 = new DoublyLinkedNode(2, 2);
         node3 = new DoublyLinkedNode(3, 3);
@@ -34,7 +30,7 @@ public class DoublyLinkedQueueTest extends TestCase
     /**
      * tests that the queue properly adds nodes to the list
      */
-    public void testinsert()
+    public void testInsert()
     {
         list.insert(node2);
         assertEquals(1, list.getSize());
@@ -48,7 +44,7 @@ public class DoublyLinkedQueueTest extends TestCase
     /**
      * tests that the queue properly removes nodes from the list
      */
-    public void testremove()
+    public void testRemove()
     {
         assertNull(list.remove(1));
         list.insert(node1);
