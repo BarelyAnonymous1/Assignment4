@@ -257,9 +257,12 @@ public class CommandParser
             System.out.println("(" + searchResult.getValue()
                 .toString() + ")");
             SkipNode<String, Rectangle> searchNext = null;
-            searchNext = (SkipNode<String, Rectangle>) Serializer
-                .deserialize(Manager.getInstance().getRecord(
-                    searchResult.next[0]));
+            if (searchResult.next[0] != 0)
+            {
+                searchNext = (SkipNode<String, Rectangle>) Serializer
+                    .deserialize(Manager.getInstance().getRecord(
+                        searchResult.next[0]));
+            }
             while (searchResult.next[0] != -1 && searchNext.getKey()
                 .compareTo(searchResult.getKey()) == 0)
             {
