@@ -283,7 +283,6 @@ public class CommandParser
      */
     private void parseIntersections() throws Exception
     {
-        System.out.println("Intersection pairs:");
         list.intersections();
     }
 
