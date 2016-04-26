@@ -417,7 +417,9 @@ public class SkipList<K extends Comparable<K>, E>
         boolean inRegion = false;
         SkipNode<K, E> temp = (SkipNode<K, E>) getObject(head);
         if (temp.next[0] == -1)
+        {
             return inRegion;
+        }
         SkipNode<K, E> current = (SkipNode<K, E>) getObject(
                 temp.next[0]);
         for (int i = 0; i < size; i++)
@@ -428,7 +430,9 @@ public class SkipList<K extends Comparable<K>, E>
                 inRegion = true;
             }
             if (current.next[0] != -1)
+            {
                 current = (SkipNode<K, E>) getObject(current.next[0]);
+            }
         }
         return inRegion;
     }
