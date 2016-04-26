@@ -14,29 +14,33 @@ public abstract class Manager
     /**
      * stores the size of a single FreeBlock and Buffer
      */
-    private static int        blockSize;
+    private static int              blockSize;
 
-    private static int        messageSize = 2;
+    private static int              messageSize = 2;
 
-    private static byte[]            tempDisk;
-    private static byte[]            sizeArr;
-    private static int               numBlocks;
+    private static byte[]           tempDisk;
+    private static byte[]           sizeArr;
+    private static int              numBlocks;
     private static RandomAccessFile diskFile;
-    private static BufferPool pool;
+    private static BufferPool       pool;
 
-    private static FreeList freeList;
+    private static FreeList         freeList;
 
     /**
      * make the constructor private so that this class cannot be instantiated
      * creates a doubly linked freelist
+     * 
+     * @throws FileNotFoundException
      */
-    public static void setValues(String startFile, int numBuffs, int buffSize)
+    public static void setValues(String startFile, int numBuffs,
+        int buffSize) throws FileNotFoundException
     {
         // start freelist
+        diskFile = new RandomAccessFile(startFile, "rw");
         blockSize = buffSize;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
-        tempDisk = new byte[10*blockSize];
+        tempDisk = new byte[10 * blockSize];
         pool = new BufferPool(numBuffs);
         freeList = new FreeList();
     }
@@ -68,13 +72,13 @@ public abstract class Manager
             handle = (numBlocks) * blockSize;
             numBlocks++;
             freeList.insert(new FreeNode(handle + recordSize,
-                    blockSize - recordSize));
+                blockSize - recordSize));
         }
         // freeblock on the end of the list
         else
         {
             if ((free.index + free.length) % blockSize == 0
-                    && recordSize > free.length)
+                && recordSize > free.length)
             {
                 free.length += blockSize;
                 numBlocks++;
@@ -89,9 +93,10 @@ public abstract class Manager
         }
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
-        System.arraycopy(buffer.array(), 0, tempDisk, handle, messageSize);
+        System.arraycopy(buffer.array(), 0, tempDisk, handle,
+            messageSize);
         System.arraycopy(data, 0, tempDisk, handle + messageSize,
-                data.length);
+            data.length);
         return handle;
     }
 
@@ -120,7 +125,8 @@ public abstract class Manager
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] temp = new byte[messageSize + sizeNum];
-        System.arraycopy(tempDisk, h + messageSize, temp, 0, temp.length);
+        System.arraycopy(tempDisk, h + messageSize, temp, 0,
+            temp.length);
         return temp;
     }
 
@@ -139,7 +145,7 @@ public abstract class Manager
         buffer.putShort((short) newMessage.length);
         System.arraycopy(buffer.array(), 0, tempDisk, h, messageSize);
         System.arraycopy(newMessage, 0, tempDisk, h + 2,
-                newMessage.length);
+            newMessage.length);
     }
 
     /**
