@@ -102,13 +102,13 @@ public class Manager
             handle = (numBlocks) * blockSize;
             numBlocks++;
             freeList.insert(new DoublyLinkedNode(handle + recordSize,
-                blockSize - recordSize));
+                    blockSize - recordSize));
         }
         // freeblock on the end of the list
         else
         {
             if ((free.index + free.length) % blockSize == 0
-                && recordSize > free.length)
+                    && recordSize > free.length)
             {
                 free.length += blockSize;
                 numBlocks++;
@@ -123,10 +123,9 @@ public class Manager
         }
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
-        System.arraycopy(buffer.array(), 0, tempDisk, handle,
-            messageSize);
+        System.arraycopy(buffer.array(), 0, tempDisk, handle, messageSize);
         System.arraycopy(data, 0, tempDisk, handle + messageSize,
-            data.length);
+                data.length);
         return handle;
     }
 
@@ -140,8 +139,6 @@ public class Manager
     {
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
-        byte[] clear = new byte[sizeNum + 2];
-        System.arraycopy(clear, 0, tempDisk, 0, sizeNum + 2);
         freeList.reallocate(h, sizeNum + messageSize);
     }
 
@@ -157,8 +154,7 @@ public class Manager
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] temp = new byte[messageSize + sizeNum];
-        System.arraycopy(tempDisk, h + messageSize, temp, 0,
-            temp.length);
+        System.arraycopy(tempDisk, h + messageSize, temp, 0, temp.length);
         return temp;
     }
 
@@ -177,7 +173,7 @@ public class Manager
         buffer.putShort((short) newMessage.length);
         System.arraycopy(buffer.array(), 0, tempDisk, h, messageSize);
         System.arraycopy(newMessage, 0, tempDisk, h + 2,
-            newMessage.length);
+                newMessage.length);
     }
 
     /**
