@@ -43,16 +43,23 @@ public class SkipListTest extends TestCase
     {
         list.insert(pair1);
         list.dump();
+        System.out.println("");
         list.insert(pair4);
         list.dump();
+        System.out.println("");
+
         assertNull(list.search("node3"));
         list.insert(pair2);
         list.dump();
+        System.out.println("");
+
         list.insert(pair3);
         assertEquals(pair3.compareTo(list.search("node3").getPair()),
             0);
 
         list.dump();
+        System.out.println("");
+
     }
 
 //    /**
