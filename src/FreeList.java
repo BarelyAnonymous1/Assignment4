@@ -157,12 +157,14 @@ public class FreeList
             {
                 curr.index = handle;
                 curr.length += sz;
+                combineBlocks();
                 return;
             }
             if (curr.index + curr.length == handle) // inserting at the end of a
                                                     // block
             {
                 curr.length += sz;
+                combineBlocks();
                 return;
             }
             curr = curr.next;
