@@ -164,7 +164,11 @@ public class FreeList
                 curr.length += sz;
                 return;
             }
-
+            if (curr.index + curr.length == curr.next.index)
+            {
+                curr.length += curr.next.length;
+                remove(curr.next.index);
+            }
             curr = curr.next;
         }
         insert(new FreeNode(handle, sz));
