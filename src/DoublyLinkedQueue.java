@@ -134,6 +134,19 @@ public class DoublyLinkedQueue
         }
         return null;
     }
+    public DoublyLinkedNode contains2(int sz)
+    {
+        DoublyLinkedNode curr = tail.prev;
+        while (curr != head)
+        {
+            if (curr.length >= sz)
+            {
+                return curr;
+            }
+            curr = curr.next;
+        }
+        return null;
+    }
 
     public void reallocate(int handle, int sz)
     {
