@@ -219,7 +219,6 @@ public class SkipList<K extends Comparable<K>, E>
                 if (currNext.getKey().compareTo(key) == 0)
                 {
                     located = currNext.getValue();
-                    currNode.next[i] = currNext.next[i];
                     removeHandle = currNode.next[i];
                     break;
                 }
