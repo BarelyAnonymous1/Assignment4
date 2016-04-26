@@ -133,13 +133,8 @@ public class CommandParser
             c))
         {
             Rectangle rect = new Rectangle(name, x, y, width, height);
-<<<<<<< HEAD
-            KVPair<String,Rectangle> pair = 
-                    new KVPair<String, Rectangle>(name, rect);
-=======
             KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(
                 name, rect);
->>>>>>> branch 'master' of https://github.com/BarelyAnonymous1/Assignment4.git
             list.insert(pair);
             System.out.println("Rectangle inserted: (" + name + ", "
                 + x + ", " + y + ", " + width + ", " + height + ")");
@@ -263,21 +258,10 @@ public class CommandParser
         }
         else
         {
-<<<<<<< HEAD
-            System.out.println("(" + name + ", " + searchResult.getValue()
-                    .toString() + ")");
-            SkipNode<String, Rectangle> searchNext = 
-                    (SkipNode<String, Rectangle>) Serializer
-                    .deserialize(Manager.getInstance().getRecord(
-                            searchResult.next[0]));
-            while (searchResult.next[0] != -1 && searchNext.getKey()
-                    .compareTo(searchResult.getKey()) == 0)
-=======
             System.out.println("(" + searchResult.getValue()
                 .toString() + ")");
             SkipNode<String, Rectangle> searchNext = null;
             if (searchResult.next[0] != -1)
->>>>>>> branch 'master' of https://github.com/BarelyAnonymous1/Assignment4.git
             {
                 searchNext = (SkipNode<String, Rectangle>) Serializer
                     .deserialize(Manager.getInstance().getRecord(
