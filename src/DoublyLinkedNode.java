@@ -32,10 +32,10 @@ public class DoublyLinkedNode
      * @param newLength
      *            the length of the freeblock stored in the node
      */
-    public DoublyLinkedNode(int newindex, int newlength)
+    public DoublyLinkedNode(int newIndex, int newLength)
     {
-        index = newindex;
-        length = newlength;
+        index = newIndex;
+        length = newLength;
         prev = null;
         next = null;
     }
