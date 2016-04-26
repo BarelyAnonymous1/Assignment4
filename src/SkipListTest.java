@@ -61,6 +61,7 @@ public class SkipListTest extends TestCase
         System.out.println("");
         list.removeKey("node1");
         list.dump();
+        list.removeKey("node2");
 
     }
 
