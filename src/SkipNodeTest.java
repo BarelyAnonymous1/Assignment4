@@ -16,7 +16,7 @@ public class SkipNodeTest extends TestCase
      */
     public void setUp() throws Exception
     {
-        Manager manager = new Manager(512);
+        Manager.setValues(512);
         pair = null;
         int handle = Manager.insert(Serializer.serialize(pair));
         node2 = new SkipNode<String, Integer>(handle, 1);

@@ -8,7 +8,7 @@ import java.nio.ByteBuffer;
  * @version 1
  *
  */
-public class Manager
+public abstract class Manager
 {
     /**
      * stores the size of a single FreeBlock and Buffer
