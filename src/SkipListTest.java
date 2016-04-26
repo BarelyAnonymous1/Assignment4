@@ -81,25 +81,23 @@ public class SkipListTest extends TestCase
                 new Rectangle(75, 75, 200, 250)));
         assertTrue(regionList.regionSearch(region));
     }
+
+    /**
+     * tests that the intersections test successfully finds an intersection and
+     * returns the appropriate boolean
+     */
+    public void testIntersections() throws Exception
+    {
+        SkipList<String, Rectangle> intersectList = new SkipList<String, Rectangle>();
+        intersectList.insert(new KVPair<String, Rectangle>(
+                "notIntersect", new Rectangle(10, 10, 20, 20)));
+        assertFalse(intersectList.intersections());
+        intersectList.insert(new KVPair<String, Rectangle>(
+                "intersect1", new Rectangle(75, 75, 200, 250)));
+        assertFalse(intersectList.intersections());
+        intersectList.insert(new KVPair<String, Rectangle>(
+                "intersect2", new Rectangle(100, 100, 200, 200)));
+        assertTrue(intersectList.intersections());
+
+    }
 }
-//
-// /**
-// * tests that the intersections test successfully finds an intersection and
-// * returns the appropriate boolean
-// */
-// public void testIntersections() throws Exception
-// {
-// SkipList<String, Rectangle> intersectList =
-// new SkipList<String, Rectangle>();
-// intersectList.insert(new KVPair<String, Rectangle>("notIntersect",
-// new Rectangle("notIntersect", 10, 10, 20, 20)));
-// assertFalse(intersectList.intersections());
-// intersectList.insert(new KVPair<String, Rectangle>("intersect1",
-// new Rectangle("intersect1", 75, 75, 200, 250)));
-// assertFalse(intersectList.intersections());
-// intersectList.insert(new KVPair<String, Rectangle>("intersect2",
-// new Rectangle("intersect2", 100, 100, 200, 200)));
-// assertTrue(intersectList.intersections());
-//
-// }
-// }
