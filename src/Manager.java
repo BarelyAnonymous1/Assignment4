@@ -23,7 +23,7 @@ public class Manager
 
     private byte[]            tempDisk;
     private byte[]            sizeArr;
-    private int               numBlocks;
+    private static int               numBlocks;
 
     private DoublyLinkedQueue freeList;
 
@@ -92,6 +92,7 @@ public class Manager
                     && recordSize > free.length)
             {
                 free.length += blockSize;
+                numBlocks++;
             }
             handle = free.index;
             free.index += recordSize;
