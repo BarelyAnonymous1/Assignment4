@@ -157,7 +157,8 @@ public class DoublyLinkedQueue
         {
             return null;
         }
-        return null;
+        else
+            return tail.prev;
     }
 
     /**
