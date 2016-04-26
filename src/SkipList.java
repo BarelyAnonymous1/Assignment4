@@ -390,10 +390,14 @@ public class SkipList<K extends Comparable<K>, E>
                 }
 
                 if (check.next[0] != -1)
+                {
                     check = (SkipNode<K, E>) getObject(check.next[0]);
+                }
             }
             if (current.next[0] != -1)
+            {
                 current = (SkipNode<K, E>) getObject(current.next[0]);
+            }
         }
         return foundIntersect;
     }
