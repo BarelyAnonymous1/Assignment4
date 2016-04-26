@@ -143,7 +143,7 @@ public class DoublyLinkedQueue
             {
                 return curr;
             }
-            curr = curr.next;
+            curr = curr.prev;
         }
         return null;
     }
