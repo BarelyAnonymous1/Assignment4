@@ -247,8 +247,8 @@ public class SkipList<K extends Comparable<K>, E>
                 updateNode.next[i] = removeNode.next[i];
                 replaceObject(updateHandles[i], updateNode);
             }
-            Manager.getInstance().release(removeHandle);
             Manager.getInstance().release(removeNode.pair);
+            Manager.getInstance().release(removeHandle);
         }
 
         return located;
