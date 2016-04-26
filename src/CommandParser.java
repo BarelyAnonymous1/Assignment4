@@ -157,7 +157,7 @@ public class CommandParser
         String name = scanner.next();
         if (!isNumeric(name))
         {
-            KVPair<String, Rectangle> found = list.removeKey(name);
+            Rectangle found = list.removeKey(name);
             if (found == null)
             {
                 System.out.println("Rectangle not removed: (" + name
@@ -165,8 +165,8 @@ public class CommandParser
             }
             else
             {
-                System.out.println("Rectangle removed: (" + found
-                    .toString() + ")");
+                System.out.println("Rectangle removed: (" + name
+                    + ", " + found.toString() + ")");
             }
         }
         else

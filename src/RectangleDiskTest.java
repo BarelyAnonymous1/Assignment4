@@ -57,7 +57,7 @@ public class RectangleDiskTest extends TestCase
             "5",
             "4096" };
         RectangleDisk.main(params);
-        assertEquals(4096, Manager.getSize());
+        assertEquals(4096, Manager.getInstance().getSize());
     }
 
     /**
@@ -79,7 +79,7 @@ public class RectangleDiskTest extends TestCase
     public void testFileNotFound() throws FileNotFoundException
     {
         RectangleDisk.main(input2);
-        assertNotSame(4096, Manager.getSize());
+        assertNotSame(4096, Manager.getInstance().getSize());
     }
 
     /**
@@ -93,7 +93,7 @@ public class RectangleDiskTest extends TestCase
             "5",
             "4096" };
         RectangleDisk.main(input);
-        assertEquals(4096, Manager.getSize());
+        assertEquals(4096, Manager.getInstance().getSize());
 
     }
 }
