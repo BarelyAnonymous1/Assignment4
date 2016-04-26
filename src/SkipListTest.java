@@ -13,10 +13,10 @@ public class SkipListTest extends TestCase
 {
 
     private SkipList<String, Rectangle> list;
-    private KVPair<String, Rectangle> pair1;
-    private KVPair<String, Rectangle> pair2;
-    private KVPair<String, Rectangle> pair3;
-    private KVPair<String, Rectangle> pair4;
+    private KVPair<String, Rectangle>   pair1;
+    private KVPair<String, Rectangle>   pair2;
+    private KVPair<String, Rectangle>   pair3;
+    private KVPair<String, Rectangle>   pair4;
 
     /**
      * sets up the test cases
@@ -25,10 +25,14 @@ public class SkipListTest extends TestCase
     {
         Manager.resetInstance();
         Manager.blockSize = 512;
-        pair1 = new KVPair<String, Rectangle>("node1", new Rectangle(1, 1, 1, 1));
-        pair2 = new KVPair<String, Rectangle>("node2", new Rectangle(2, 2, 2, 2));
-        pair3 = new KVPair<String, Rectangle>("node3", new Rectangle(3, 3, 3, 3));
-        pair4 = new KVPair<String, Rectangle>("node4", new Rectangle(4, 4, 4, 4));
+        pair1 = new KVPair<String, Rectangle>("node1", new Rectangle(
+                1, 1, 1, 1));
+        pair2 = new KVPair<String, Rectangle>("node2", new Rectangle(
+                2, 2, 2, 2));
+        pair3 = new KVPair<String, Rectangle>("node3", new Rectangle(
+                3, 3, 3, 3));
+        pair4 = new KVPair<String, Rectangle>("node4", new Rectangle(
+                4, 4, 4, 4));
         list = new SkipList<String, Rectangle>();
     }
 
@@ -38,11 +42,11 @@ public class SkipListTest extends TestCase
     public void testInsert() throws Exception
     {
         list.insert(pair1);
-//        list.insert(pair4);
-        // assertNull(list.search("node3"));
-//        list.insert(pair2);
-//        list.insert(pair3);
-        // assertEquals(pair3.compareTo(list.search("node3").getPair()), 0);
+        list.insert(pair4);
+         assertNull(list.search("node3"));
+        list.insert(pair2);
+        list.insert(pair3);
+         assertEquals(pair3.compareTo(list.search("node3").getPair()), 0);
 
         list.dump();
     }
