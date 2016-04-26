@@ -1,4 +1,5 @@
 import java.nio.ByteBuffer;
+import java.io.*;
 
 /**
  * Memory manager class that will communicate with a buffer pool to keep a
@@ -20,6 +21,8 @@ public abstract class Manager
     private static byte[]            tempDisk;
     private static byte[]            sizeArr;
     private static int               numBlocks;
+    private static RandomAccessFile diskFile;
+    private static BufferPool pool;
 
     private static FreeList freeList;
 
@@ -27,13 +30,14 @@ public abstract class Manager
      * make the constructor private so that this class cannot be instantiated
      * creates a doubly linked freelist
      */
-    public static void setValues(String diskFile, int numBuffs, int buffSize)
+    public static void setValues(String startFile, int numBuffs, int buffSize)
     {
         // start freelist
         blockSize = buffSize;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
         tempDisk = new byte[10*blockSize];
+        pool = new BufferPool(numBuffs);
         freeList = new FreeList();
     }
 
