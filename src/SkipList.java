@@ -94,6 +94,7 @@ public class SkipList<K extends Comparable<K>, E>
      * 
      * @param newLevel
      *            is the new largest levels
+     * @throws Exception if an object cant be serialized           
      */
     private void fixHead(int newLevel) throws Exception
     {
@@ -131,6 +132,7 @@ public class SkipList<K extends Comparable<K>, E>
      * @param newPair
      *            is the pair to be inserted
      * @return whether iteration succeeded
+     * @throws Exception if an object cant be serialized 
      */
     @SuppressWarnings("unchecked")
     public boolean insert(KVPair<K, E> newPair) throws Exception
@@ -183,6 +185,7 @@ public class SkipList<K extends Comparable<K>, E>
      * @param key
      *            the searched for key
      * @return located value if found, if not, null
+     * @throws Exception if an object cant be serialized 
      */
     @SuppressWarnings("unchecked")
     public KVPair<K, E> removeKey(K key) throws Exception
@@ -234,6 +237,7 @@ public class SkipList<K extends Comparable<K>, E>
      * @param value
      *            the searched for value
      * @return located value if found, if not, null
+     * @throws Exception if an object cant be serialized 
      */
     @SuppressWarnings("unchecked")
     public KVPair<K, E> removeValue(E value) throws Exception
@@ -261,6 +265,7 @@ public class SkipList<K extends Comparable<K>, E>
      * @param key
      *            the key that is being searched for
      * @return the node that contains a specific key
+     * @throws Exception if an object cant be serialized 
      */
     @SuppressWarnings("unchecked")
     public SkipNode<K, E> search(K key) throws Exception
@@ -296,6 +301,7 @@ public class SkipList<K extends Comparable<K>, E>
     /**
      * output a list of every item in the list in the following format:
      * "Node has depth 0, Value (0)"
+     * @throws Exception if an object cant be serialized 
      */
     @SuppressWarnings("unchecked")
     public void dump() throws Exception
@@ -329,6 +335,7 @@ public class SkipList<K extends Comparable<K>, E>
      * to use Casting to check for intersections
      * 
      * @return whether or not an intersection was found
+     * @throws Exception if an object cant be serialized 
      */
     @SuppressWarnings("unchecked")
     public boolean intersections() throws Exception
