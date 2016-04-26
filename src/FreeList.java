@@ -155,8 +155,10 @@ public class FreeList
         {
             if (curr.prev.index + curr.prev.length == curr.index)
             {
-                curr.length += curr.next.length;
-                remove(curr.next.index);
+                curr.prev.length += curr.length;
+                curr = curr.next;
+                remove(curr.prev.index);
+                return;
             }
             if (curr.index + curr.length == handle)
             {
