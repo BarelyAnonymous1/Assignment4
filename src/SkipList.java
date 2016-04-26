@@ -323,6 +323,7 @@ public class SkipList<K extends Comparable<K>, E>
         {
             return null;
         }
+        System.out.println("currNode is: " + currNode.getPair());
         return currNode;
     }
 
