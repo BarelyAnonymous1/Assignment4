@@ -28,7 +28,7 @@ public class CommandParserTest extends TestCase
      */
     public void testSearchPass() throws Exception
     {
-        String[] args = {"sampleInputEmpty.txt", "1", "2", "512"};
+        String[] args = {"SyntaxTest.txt", "1", "2", "512"};
 
         parser = new CommandParser(args);
         boolean success = parser.parseFile();
