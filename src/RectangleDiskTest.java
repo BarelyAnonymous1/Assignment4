@@ -86,5 +86,7 @@ public class RectangleDiskTest extends TestCase
     {
         String[] input = { "SyntaxTest.txt", "dataFile.dat", "5", "4096" };
         RectangleDisk.main(input);
+        assertEquals(4096, Manager.blockSize);
+
     }
 }
