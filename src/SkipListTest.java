@@ -24,7 +24,7 @@ public class SkipListTest extends TestCase
     public void setUp() throws IOException
     {
         Manager.resetInstance();
-        Manager.blockSize = 512;
+        Manager.getInstance().setSize(512);
         pair1 = new KVPair<String, Rectangle>("node1", new Rectangle(
             "node1", 1, 1, 1, 1));
         pair2 = new KVPair<String, Rectangle>("node2", new Rectangle(

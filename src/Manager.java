@@ -68,6 +68,11 @@ public class Manager
         blockSize = sz;
         tempDisk = new byte[10 * blockSize];
     }
+    
+    public int getSize()
+    {
+        return blockSize;
+    }
 
     /**
      * inserts data to the freelist
