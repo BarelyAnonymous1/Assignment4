@@ -412,6 +412,7 @@ public class SkipList<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public boolean regionSearch(Rectangle region) throws Exception
     {
+        System.out.println("Intersection pairs:");
         boolean inRegion = false;
         SkipNode<K, E> temp = (SkipNode<K, E>) getObject(head);
         if (temp.next[0] == -1)
