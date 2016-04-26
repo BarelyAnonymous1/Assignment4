@@ -10,8 +10,12 @@ import java.nio.ByteBuffer;
  */
 public class Manager
 {
-    private static int        messageSize;
+    /**
+     * stores the size of a single FreeBlock and Buffer
+     */
     public static int         blockSize;
+
+    private static int        messageSize;
     /**
      * create an object of SingleObject
      */
