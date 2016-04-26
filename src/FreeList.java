@@ -152,14 +152,24 @@ public class FreeList
         FreeNode curr = head.next;
         while (curr != tail)
         {
-            if (curr.index == handle + sz) //inserting at the beginning of a block
+            if (curr.index == handle + sz) // inserting at the beginning of a
+                                           // block
             {
                 curr.index = handle;
                 curr.length += sz;
                 return;
             }
-            if (curr.index + curr.length == ) //inserting at the end of a block
-                    if () //inserting in the middle of the block
+            if (curr.index + curr.length == handle) // inserting at the end of a
+                                                    // block
+            {
+                curr.length += sz;
+                return;
+            }
+            if (curr.index + curr.length == curr.next.index)
+            {
+                curr.length += curr.next.length;
+                remove(curr.next.index);
+            }
             curr = curr.next;
         }
         insert(new FreeNode(handle, sz));
