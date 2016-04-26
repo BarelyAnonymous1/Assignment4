@@ -132,6 +132,10 @@ public class DoublyLinkedQueue
         {
             return null;
         }
+        else if (size > 0)
+        {
+            return tail.prev;
+        }
         return null;
     }
 
