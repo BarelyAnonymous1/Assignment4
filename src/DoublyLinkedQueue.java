@@ -161,7 +161,7 @@ public class DoublyLinkedQueue
             % Manager.getInstance().getSize() == 0)
             return tail.prev;
         else
-            return null
+            return null;
     }
 
     /**
