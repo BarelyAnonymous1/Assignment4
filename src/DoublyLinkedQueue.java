@@ -114,7 +114,7 @@ public class DoublyLinkedQueue
                 return curr;
             }
             else if (curr.length > sz && best != null
-                    && curr.length < best.length)
+                && curr.length < best.length)
             {
                 best = curr;
             }
@@ -128,15 +128,14 @@ public class DoublyLinkedQueue
         {
             return best;
         }
-        else if (size == 0)
-        {
-            return null;
-        }
         else if (size > 0)
         {
             return tail.prev;
         }
-        return null;
+        else
+        {
+            return null;
+        }
     }
 
     /**
@@ -213,8 +212,8 @@ public class DoublyLinkedQueue
         DoublyLinkedNode curr = head.next;
         while (curr != tail)
         {
-            System.out.println("(" + curr.index + ", " + curr.length
-                    + ")");
+            System.out
+                .println("(" + curr.index + ", " + curr.length + ")");
             curr = curr.next;
         }
     }
