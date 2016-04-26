@@ -142,7 +142,7 @@ public class Manager
     /**
      * outputs a string representation of the Freelist
      */
-    public void dump()
+    public static void dump()
     {
         System.out.println("Freelist Blocks:");
         freeList.dump();
