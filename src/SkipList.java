@@ -36,7 +36,7 @@ public class SkipList<K extends Comparable<K>, E>
     public SkipList() throws IOException
     {
         head = Manager.getInstance().insert(Serializer.serialize(
-                new SkipNode<K, E>(-1, 0)));
+            new SkipNode<K, E>(-1, 0)));
         level = 0;
         size = 0;
     }
@@ -50,7 +50,7 @@ public class SkipList<K extends Comparable<K>, E>
     public SkipNode<K, E> getHead() throws Exception
     {
         return (SkipNode<K, E>) Serializer.deserialize(Manager
-                .getInstance().getRecord(head));
+            .getInstance().getRecord(head));
     }
 
     /**
@@ -65,7 +65,7 @@ public class SkipList<K extends Comparable<K>, E>
     private Object getObject(int handle) throws Exception
     {
         return Serializer.deserialize(Manager.getInstance().getRecord(
-                handle));
+            handle));
     }
 
     /**
@@ -80,7 +80,7 @@ public class SkipList<K extends Comparable<K>, E>
     private int getHandle(Object obj) throws Exception
     {
         return Manager.getInstance().insert(Serializer.serialize(
-                obj));
+            obj));
     }
 
     /**
@@ -96,7 +96,7 @@ public class SkipList<K extends Comparable<K>, E>
     private void replaceObject(int pos, Object obj) throws Exception
     {
         Manager.getInstance().replaceRecord(pos, Serializer.serialize(
-                obj));
+            obj));
     }
 
     /**
@@ -157,15 +157,15 @@ public class SkipList<K extends Comparable<K>, E>
             fixHead(newLevel);
         }
         int[] updateHandles = (int[]) Array.newInstance(int.class,
-                level + 1);
+            level + 1);
         int curr = head;
         for (int i = level; i >= 0; i--)
         {
             SkipNode<K, E> currNode = (SkipNode<K, E>) getObject(
-                    curr);
+                curr);
             while (currNode.next[i] != -1 && (newPair.key().compareTo(
-                    ((SkipNode<K, E>) getObject(currNode.next[i]))
-                            .getKey()) > 0))
+                ((SkipNode<K, E>) getObject(currNode.next[i]))
+                    .getKey()) > 0))
             {
                 curr = currNode.next[i];
                 currNode = (SkipNode<K, E>) getObject(curr);
@@ -174,14 +174,14 @@ public class SkipList<K extends Comparable<K>, E>
         }
         int pairHandle = getHandle(newPair);
         SkipNode<K, E> newNode = new SkipNode<K, E>(pairHandle,
-                newLevel);
+            newLevel);
         int currPos = getHandle(newNode);
         for (int i = 0; i <= newLevel; i++)
         {
             newNode.next[i] = ((SkipNode<K, E>) getObject(
-                    updateHandles[i])).next[i];
+                updateHandles[i])).next[i];
             SkipNode<K, E> updateNode = ((SkipNode<K, E>) getObject(
-                    updateHandles[i]));
+                updateHandles[i]));
             updateNode.next[i] = currPos;
             replaceObject(currPos, newNode);
             replaceObject(updateHandles[i], updateNode);
@@ -213,8 +213,8 @@ public class SkipList<K extends Comparable<K>, E>
             while (current.next[i] != -1)
             {
                 SkipNode<K, E> currNext = (SkipNode<K, E>) Serializer
-                        .deserialize(Manager.getInstance().getRecord(
-                                current.next[i]));
+                    .deserialize(Manager.getInstance().getRecord(
+                        current.next[i]));
                 if (currNext.getKey().compareTo(key) == 0)
                 {
                     located = currNext.getPair();
@@ -234,7 +234,7 @@ public class SkipList<K extends Comparable<K>, E>
         {
             Manager.getInstance().release(removeHandle);
             Manager.getInstance().replaceRecord(currHandle, Serializer
-                    .serialize(current));
+                .serialize(current));
         }
         if (located != null)
         {
@@ -258,12 +258,12 @@ public class SkipList<K extends Comparable<K>, E>
     public KVPair<K, E> removeValue(E value) throws Exception
     {
         SkipNode<K, E> current = (SkipNode<K, E>) Serializer
-                .deserialize(Manager.getInstance().getRecord(head));
+            .deserialize(Manager.getInstance().getRecord(head));
         while (current.next[0] != -1)
         {
             SkipNode<K, E> currNext = (SkipNode<K, E>) Serializer
-                    .deserialize(Manager.getInstance().getRecord(
-                            current.next[0]));
+                .deserialize(Manager.getInstance().getRecord(
+                    current.next[0]));
             if (currNext.getValue().equals(value))
             {
                 return removeKey(currNext.getKey());
@@ -288,18 +288,17 @@ public class SkipList<K extends Comparable<K>, E>
     {
         int curr = head;
         SkipNode<K, E> currNode = (SkipNode<K, E>) Serializer
-                .deserialize(Manager.getInstance().getRecord(curr));
+            .deserialize(Manager.getInstance().getRecord(curr));
         for (int i = level; i >= 0; i--)
         {
             while (currNode.next[0] != -1 && (key.compareTo(
-                    ((SkipNode<K, E>) Serializer.deserialize(Manager
-                            .getInstance().getRecord(
-                                    currNode.next[0])))
-                                            .getKey()) > 0))
+                ((SkipNode<K, E>) Serializer.deserialize(Manager
+                    .getInstance().getRecord(currNode.next[0])))
+                        .getKey()) > 0))
             {
                 curr = currNode.next[0];
                 currNode = (SkipNode<K, E>) Serializer.deserialize(
-                        Manager.getInstance().getRecord(curr));
+                    Manager.getInstance().getRecord(curr));
             }
         }
         curr = currNode.next[0];
@@ -308,9 +307,9 @@ public class SkipList<K extends Comparable<K>, E>
             return null;
         }
         currNode = (SkipNode<K, E>) Serializer.deserialize(Manager
-                .getInstance().getRecord(curr));
+            .getInstance().getRecord(curr));
         if (currNode.getKey() == null || key.compareTo(currNode
-                .getKey()) != 0)
+            .getKey()) != 0)
         {
             return null;
         }
@@ -332,8 +331,7 @@ public class SkipList<K extends Comparable<K>, E>
         while (curr != -1)
         {
             SkipNode<K, E> current = (SkipNode<K, E>) Serializer
-                    .deserialize(Manager.getInstance().getRecord(
-                            curr));
+                .deserialize(Manager.getInstance().getRecord(curr));
             String name = "";
             if (current.getValue() == null)
             {
@@ -344,8 +342,7 @@ public class SkipList<K extends Comparable<K>, E>
                 name = current.getPair().toString();
             }
             System.out.println("Node has depth "
-                    + (current.next.length) + ", Value (" + name
-                    + ")");
+                + (current.next.length) + ", Value (" + name + ")");
 
             curr = current.next[0];
         }
@@ -372,19 +369,19 @@ public class SkipList<K extends Comparable<K>, E>
             return foundIntersect;
         }
         SkipNode<K, E> current = (SkipNode<K, E>) getObject(
-                temp.next[0]);
+            temp.next[0]);
         for (int i = 0; i < size; i++)
         {
             SkipNode<K, E> check = (SkipNode<K, E>) getObject(
-                    temp.next[0]);
+                temp.next[0]);
             for (int j = 0; j < size; j++)
             {
 
                 if (i != j && ((Rectangle) current.getValue())
-                        .intersects(((Rectangle) check.getValue())))
+                    .intersects(((Rectangle) check.getValue())))
                 {
                     System.out.println(current.getValue().toString()
-                            + " | " + check.getValue().toString());
+                        + " | " + check.getValue().toString());
                     foundIntersect = true;
                 }
 
@@ -413,6 +410,9 @@ public class SkipList<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public boolean regionSearch(Rectangle region) throws Exception
     {
+        System.out.println("Rectangles intersecting region (" + region
+            .getX() + ", " + region.getY() + ", " + region.getWidth()
+            + ", " + region.getHeight() + "):");
         boolean inRegion = false;
         SkipNode<K, E> temp = (SkipNode<K, E>) getObject(head);
         if (temp.next[0] == -1)
@@ -420,7 +420,7 @@ public class SkipList<K extends Comparable<K>, E>
             return inRegion;
         }
         SkipNode<K, E> current = (SkipNode<K, E>) getObject(
-                temp.next[0]);
+            temp.next[0]);
         for (int i = 0; i < size; i++)
         {
             if (((Rectangle) current.getValue()).intersects(region))
