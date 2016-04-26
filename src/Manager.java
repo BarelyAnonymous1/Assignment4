@@ -17,17 +17,17 @@ public class Manager
 
     private static int        messageSize;
 
-    private byte[]            tempDisk;
-    private byte[]            sizeArr;
-    private int               numBlocks;
+    private static byte[]            tempDisk;
+    private static byte[]            sizeArr;
+    private static int               numBlocks;
 
-    private FreeList freeList;
+    private static FreeList freeList;
 
     /**
      * make the constructor private so that this class cannot be instantiated
      * creates a doubly linked freelist
      */
-    private Manager(int sz)
+    public Manager(int sz)
     {
         // start freelist
         blockSize = sz;
@@ -55,7 +55,7 @@ public class Manager
      *            the byte array representing the data
      * @return a receipt for the object being placed
      */
-    public int insert(byte[] data)
+    public static int insert(byte[] data)
     {
         int recordSize = messageSize + data.length;
         FreeNode free = freeList.contains(recordSize);
@@ -98,7 +98,7 @@ public class Manager
      * @param h
      *            the receipt for the data in the allocated list
      */
-    public void release(int h)
+    public static void release(int h)
     {
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
@@ -112,7 +112,7 @@ public class Manager
      *            the receipt for the data in the allocated list
      * @return the byte array that represents the data in the allocated list
      */
-    public byte[] getRecord(int h)
+    public static byte[] getRecord(int h)
     {
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
@@ -130,7 +130,7 @@ public class Manager
      * @param newMessage
      *            byte array containing the new message
      */
-    public void replaceRecord(int h, byte[] newMessage)
+    public static void replaceRecord(int h, byte[] newMessage)
     {
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) newMessage.length);
