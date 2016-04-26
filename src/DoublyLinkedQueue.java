@@ -103,37 +103,37 @@ public class DoublyLinkedQueue
      *            size of the message that needs to be allocated
      * @return the node that has the best fit for the message
      */
-//    public DoublyLinkedNode contains2(int sz)
-//    {
-//        DoublyLinkedNode curr = head.next;
-//        DoublyLinkedNode best = null;
-//        while (curr != tail)
-//        {
-//            if (curr.length == sz)
-//            {
-//                return curr;
-//            }
-//            else if (curr.length > sz && best != null
-//                    && curr.length < best.length)
-//            {
-//                best = curr;
-//            }
-//            else if (best == null && curr.length > sz)
-//            {
-//                best = curr;
-//            }
-//            curr = curr.next;
-//        }
-//        if (best != null)
-//        {
-//            return best;
-//        }
-//        else if (size == 0)
-//        {
-//            return null;
-//        }
-//        return null;
-//    }
+    public DoublyLinkedNode contains(int sz)
+    {
+        DoublyLinkedNode curr = head.next;
+        DoublyLinkedNode best = null;
+        while (curr != tail)
+        {
+            if (curr.length == sz)
+            {
+                return curr;
+            }
+            else if (curr.length > sz && best != null
+                    && curr.length < best.length)
+            {
+                best = curr;
+            }
+            else if (best == null && curr.length > sz)
+            {
+                best = curr;
+            }
+            curr = curr.next;
+        }
+        if (best != null)
+        {
+            return best;
+        }
+        else if (size == 0)
+        {
+            return null;
+        }
+        return null;
+    }
 
     /**
      * checks to see if the freelist has a block of a certain size available
@@ -143,7 +143,7 @@ public class DoublyLinkedQueue
      * @return the node containing the needed freeblock; or null if it does not
      *         exist
      */
-    public DoublyLinkedNode contains(int sz)
+    public DoublyLinkedNode contains2(int sz)
     {
         DoublyLinkedNode curr = tail.prev;
         while (curr != head)
