@@ -66,23 +66,22 @@ public class SkipListTest extends TestCase
         assertEquals(2, list.getHead().next.length);
         list.dump();
     }
+
+    /**
+     * creates a fake region to check for new rectangles
+     */
+    public void testRegionSearch() throws Exception
+    {
+        Rectangle region = new Rectangle(100, 100, 200, 200);
+        SkipList<String, Rectangle> regionList = new SkipList<String, Rectangle>();
+        regionList.insert(new KVPair<String, Rectangle>(
+                "notIntersect", new Rectangle(10, 10, 20, 20)));
+        assertFalse(regionList.regionSearch(region));
+        regionList.insert(new KVPair<String, Rectangle>("intersect1",
+                new Rectangle(75, 75, 200, 250)));
+        assertTrue(regionList.regionSearch(region));
+    }
 }
-//
-// /**
-// * creates a fake region to check for new rectangles
-// */
-// public void testRegionSearch() throws Exception
-// {
-// Rectangle region = new Rectangle("region", 100, 100, 200, 200);
-// SkipList<String, Rectangle> regionList =
-// new SkipList<String, Rectangle>();
-// regionList.insert(new KVPair<String, Rectangle>("notIntersect",
-// new Rectangle("notIntersect", 10, 10, 20, 20)));
-// assertFalse(regionList.regionSearch(region));
-// regionList.insert(new KVPair<String, Rectangle>("intersect1",
-// new Rectangle("intersect1", 75, 75, 200, 250)));
-// assertTrue(regionList.regionSearch(region));
-// }
 //
 // /**
 // * tests that the intersections test successfully finds an intersection and
