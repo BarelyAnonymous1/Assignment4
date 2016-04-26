@@ -255,8 +255,8 @@ public class CommandParser
         }
         else
         {
-            System.out.println("(" + name + ", " + searchResult
-                .getValue().toString() + ")");
+            System.out.println("(" + searchResult.getValue()
+                .toString() + ")");
             SkipNode<String, Rectangle> searchNext = (SkipNode<String, Rectangle>) Serializer
                 .deserialize(Manager.getInstance().getRecord(
                     searchResult.next[0]));
