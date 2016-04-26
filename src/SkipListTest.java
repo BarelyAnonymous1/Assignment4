@@ -51,22 +51,22 @@ public class SkipListTest extends TestCase
 
         list.dump();
     }
-}
 
-// /**
-// * make sure that the list will adjust the head when a node is added higher
-// * than the head
-// */
-// public void testRandomInsert() throws Exception
-// {
-// TestableRandom.setNextBooleans(false, true, true, false);
-// assertEquals(1, list.getHead().getLevel());
-// assertTrue(list.insert(pair1));
-// assertEquals(1, list.getHead().getLevel());
-// assertTrue(list.insert(pair2));
-// assertEquals(2, list.getHead().getLevel());
-// list.dump();
-// }
+    /**
+     * make sure that the list will adjust the head when a node is added higher
+     * than the head
+     */
+    public void testRandomInsert() throws Exception
+    {
+        TestableRandom.setNextBooleans(false, true, true, false);
+        assertEquals(1, list.getHead().next.length);
+        assertTrue(list.insert(pair1));
+        assertEquals(1, list.getHead().next.length);
+        assertTrue(list.insert(pair2));
+        assertEquals(2, list.getHead().next.length);
+        list.dump();
+    }
+}
 //
 // /**
 // * creates a fake region to check for new rectangles
