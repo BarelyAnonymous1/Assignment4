@@ -255,11 +255,15 @@ public class CommandParser
         }
         else
         {
-            System.out.println("(" + searchResult.getPair()
-                .toString() + ")");
-            SkipNode<String, Rectangle> searchNext = (SkipNode<String, Rectangle>) Serializer
-                .deserialize(Manager.getInstance().getRecord(
-                    searchResult.next[0]));
+            System.out.println("(" + searchResult.getPair().toString()
+                + ")");
+            SkipNode<String, Rectangle> searchNext = null;
+            if (searchResult.next[0] != -1)
+            {
+                searchNext = (SkipNode<String, Rectangle>) Serializer
+                    .deserialize(Manager.getInstance().getRecord(
+                        searchResult.next[0]));
+            }
             while (searchResult.next[0] != -1 && searchNext.getKey()
                 .compareTo(searchResult.getKey()) == 0)
             {
