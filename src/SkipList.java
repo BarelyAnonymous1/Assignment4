@@ -231,17 +231,24 @@ public class SkipList<K extends Comparable<K>, E>
                 currNode = (SkipNode<K, E>) Serializer.deserialize(
                     Manager.getInstance().getRecord(curr));
             }
-        }
-        if (removeHandle > -1)
-        {
-            Manager.getInstance().release(removeHandle);
-            Manager.getInstance().replaceRecord(currHandle, Serializer
-                .serialize(current));
+            updateHandles[i] = curr;
         }
         if (located != null)
         {
             size--;
         }
+        if (updateHandles[0] != -1)
+        {
+            SkipNode<K,E> removeNode = ((SkipNode<K,E>) getObject(removeHandle));
+            for (int i = 0; i < removeNode.next.length; i++)
+            {
+                SkipNode<K, E> updateNode = ((SkipNode<K, E>) getObject(
+                    updateHandles[i]));
+                updateNode.next[i] = removeNode.next[i];
+                replaceObject(updateHandles[i], updateNode);
+            }
+        }
+        
         return located;
     }
 
