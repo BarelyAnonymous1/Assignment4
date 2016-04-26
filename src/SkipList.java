@@ -301,12 +301,12 @@ public class SkipList<K extends Comparable<K>, E>
             .deserialize(Manager.getInstance().getRecord(curr));
         for (int i = level; i >= 0; i--)
         {
-            while (currNode.next[0] != -1 && (key.compareTo(
+            while (currNode.next[i] != -1 && (key.compareTo(
                 ((SkipNode<K, E>) Serializer.deserialize(Manager
-                    .getInstance().getRecord(currNode.next[0])))
+                    .getInstance().getRecord(currNode.next[i])))
                         .getKey()) > 0))
             {
-                curr = currNode.next[0];
+                curr = currNode.next[i];
                 currNode = (SkipNode<K, E>) Serializer.deserialize(
                     Manager.getInstance().getRecord(curr));
             }
