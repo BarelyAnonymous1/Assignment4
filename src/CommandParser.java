@@ -267,12 +267,15 @@ public class CommandParser
             while (searchResult.next[0] != -1 && searchNext.getKey()
                 .compareTo(searchResult.getKey()) == 0)
             {
-                searchNext = (SkipNode<String, Rectangle>) Serializer
-                    .deserialize(Manager.getInstance().getRecord(
-                        searchResult.next[0]));
-                searchResult = searchNext;
                 System.out.println("(" + name + ", " + searchResult
                     .getValue().toString() + ")");
+                if (searchResult.next[0] != -1)
+                {
+                    searchNext = (SkipNode<String, Rectangle>) Serializer
+                        .deserialize(Manager.getInstance().getRecord(
+                            searchResult.next[0]));
+                }
+                searchResult = searchNext;
             }
         }
     }
