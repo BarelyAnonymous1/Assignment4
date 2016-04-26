@@ -66,6 +66,24 @@ public class DoublyLinkedQueue
         newNode.prev = curr;
         size++;
     }
+    
+    /**
+     * adds a new node into the linked queue This node is inserted into the
+     * front of the queue ------------- -> x -------------
+     * 
+     * @param newerNode
+     *            the node to be inserted
+     */
+    public void insert(int handle, int sz)
+    {
+        DoublyLinkedNode newNode = null;
+        DoublyLinkedNode curr = head;
+        while (curr.next != tail)
+        {
+            curr = curr.next;
+        }
+
+    }
 
     /**
      * pulls the last added node from the queue this node removed from the queue
