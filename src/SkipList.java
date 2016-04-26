@@ -354,21 +354,22 @@ public class SkipList<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public boolean regionSearch(Rectangle region) throws Exception
     {
-        boolean inRegion = false;
-        SkipNode<K, E> temp = (SkipNode<K, E>) Serializer.deserialize(
-                Manager.getInstance().getRecord(head));
-        SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
-                Manager.getInstance().getRecord(temp.next[0]));
-        for (int i = 0; i < size; i++)
-        {
-            if (((Rectangle) current.getValue()).intersects(region))
-            {
-                System.out.println(current.getPair().toString());
-                inRegion = true;
-            }
-            current = (SkipNode<K, E>) Serializer.deserialize(Manager
-                    .getInstance().getRecord(current.next[0]));
-        }
-        return inRegion;
+        return false;
+//        boolean inRegion = false;
+//        SkipNode<K, E> temp = (SkipNode<K, E>) Serializer.deserialize(
+//                Manager.getInstance().getRecord(head));
+//        SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
+//                Manager.getInstance().getRecord(temp.next[0]));
+//        for (int i = 0; i < size; i++)
+//        {
+//            if (((Rectangle) current.getValue()).intersects(region))
+//            {
+//                System.out.println(current.getPair().toString());
+//                inRegion = true;
+//            }
+//            current = (SkipNode<K, E>) Serializer.deserialize(Manager
+//                    .getInstance().getRecord(current.next[0]));
+//        }
+//        return inRegion;
     }
 }
