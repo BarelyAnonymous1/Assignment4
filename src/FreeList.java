@@ -21,7 +21,7 @@ public class FreeList
     /**
      * number of nodes in the list
      */
-    private int             size;
+    private int     size;
 
     /**
      * default constructor for the LinkedList
@@ -66,7 +66,6 @@ public class FreeList
         newNode.prev = curr;
         size++;
     }
-
 
     /**
      * pulls the last added node from the queue this node removed from the queue
@@ -153,22 +152,14 @@ public class FreeList
         FreeNode curr = head.next;
         while (curr != tail)
         {
-            if (curr.index + curr.length == handle)
+            if (curr.index == handle + sz) //inserting at the beginning of a block
             {
+                curr.index = handle;
                 curr.length += sz;
                 return;
             }
-            if (curr.index == handle + sz)
-            {
-                curr.index -= sz;
-                curr.length += sz;
-                return;
-            }
-            if (curr.index + curr.length == curr.next.index)
-            {
-                curr.length += curr.next.length;
-                remove(curr.next.index);
-            }
+            if (curr.index + curr.length == ) //inserting at the end of a block
+                    if () //inserting in the middle of the block
             curr = curr.next;
         }
         insert(new FreeNode(handle, sz));
