@@ -32,8 +32,6 @@ public class Rectangle implements Comparable<Rectangle>, java.io.Serializable
     /**
      * standard constructor for Rectangle; sets up the position and size
      * 
-     * @param newName
-     *            the name fo the rectangle given from the scanner
      * @param newX
      *            x coordinate of upper left corner
      * @param newY
