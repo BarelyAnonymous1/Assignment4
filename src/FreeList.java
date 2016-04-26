@@ -150,7 +150,6 @@ public class FreeList
     public void reallocate(int handle, int sz)
     {
         FreeNode curr = head.next;
-        boolean changed = false;
         while (curr != tail)
         {
             if (curr.index == handle + sz) // inserting at the beginning of a
@@ -158,18 +157,17 @@ public class FreeList
             {
                 curr.index = handle;
                 curr.length += sz;
-                changed = true;
+                return;
             }
             if (curr.index + curr.length == handle) // inserting at the end of a
                                                     // block
             {
                 curr.length += sz;
-                changed = true;
+                return;
             }
             curr = curr.next;
         }
-        if (!changed)
-            insert(new FreeNode(handle, sz));
+        insert(new FreeNode(handle, sz));
         combineBlocks();
     }
 
