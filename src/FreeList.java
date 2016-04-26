@@ -153,25 +153,21 @@ public class FreeList
         FreeNode curr = head.next;
         while (curr != tail)
         {
+            if (curr.prev.index + curr.prev.length == curr.index)
+            {
+                curr.length += curr.next.length;
+                remove(curr.next.index);
+            }
             if (curr.index + curr.length == handle)
             {
                 curr.length += sz;
-                return;
             }
             if (curr.index == handle + sz)
             {
                 curr.index -= sz;
                 curr.length += sz;
-                return;
             }
-            if (curr.prev.index + curr.prev.length == curr.index)
-            {
-                curr.prev.length += curr.length;
-                curr = curr.next;
-                remove(curr.prev.index);
-            }
-            else
-                curr = curr.next;
+            curr = curr.next;
         }
         insert(new FreeNode(handle, sz));
     }
