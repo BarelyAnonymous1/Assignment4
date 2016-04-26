@@ -13,7 +13,7 @@ public class Manager
     /**
      * stores the size of a single FreeBlock and Buffer
      */
-    private static int         blockSize;
+    private static int        blockSize;
 
     private static int        messageSize;
     /**
@@ -61,13 +61,25 @@ public class Manager
     {
         instance = null;
     }
-    
+
+    /**
+     * sets the size of a block of the freelist and reinitializes the temp array
+     * that represents the disk
+     * 
+     * @param sz
+     *            size of the block
+     */
     public void setSize(int sz)
     {
         blockSize = sz;
         tempDisk = new byte[10 * blockSize];
     }
-    
+
+    /**
+     * gets the largest size of a new freeblock
+     * 
+     * @return the freeblock size
+     */
     public int getSize()
     {
         return blockSize;
@@ -99,6 +111,7 @@ public class Manager
                     && recordSize > free.length)
             {
                 free.length += blockSize;
+                numBlocks++;
             }
             handle = free.index;
             free.index += recordSize;
@@ -110,8 +123,7 @@ public class Manager
         }
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
-        System.arraycopy(buffer.array(), 0, tempDisk, handle,
-                messageSize);
+        System.arraycopy(buffer.array(), 0, tempDisk, handle, messageSize);
         System.arraycopy(data, 0, tempDisk, handle + messageSize,
                 data.length);
         return handle;
@@ -142,8 +154,7 @@ public class Manager
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] temp = new byte[messageSize + sizeNum];
-        System.arraycopy(tempDisk, h + messageSize, temp, 0,
-                temp.length);
+        System.arraycopy(tempDisk, h + messageSize, temp, 0, temp.length);
         return temp;
     }
 

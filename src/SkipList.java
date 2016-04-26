@@ -35,8 +35,8 @@ public class SkipList<K extends Comparable<K>, E>
      */
     public SkipList() throws IOException
     {
-        head = Manager.getInstance().insert(Serializer.serialize(
-            new SkipNode<K, E>(-1, 0)));
+        head = Manager.getInstance()
+            .insert(Serializer.serialize(new SkipNode<K, E>(-1, 0)));
         level = 0;
         size = 0;
     }
@@ -49,8 +49,8 @@ public class SkipList<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public SkipNode<K, E> getHead() throws Exception
     {
-        return (SkipNode<K, E>) Serializer.deserialize(Manager
-            .getInstance().getRecord(head));
+        return (SkipNode<K, E>) Serializer
+            .deserialize(Manager.getInstance().getRecord(head));
     }
 
     /**
@@ -64,8 +64,8 @@ public class SkipList<K extends Comparable<K>, E>
      */
     private Object getObject(int handle) throws Exception
     {
-        return Serializer.deserialize(Manager.getInstance().getRecord(
-            handle));
+        return Serializer
+            .deserialize(Manager.getInstance().getRecord(handle));
     }
 
     /**
@@ -79,8 +79,8 @@ public class SkipList<K extends Comparable<K>, E>
      */
     private int getHandle(Object obj) throws Exception
     {
-        return Manager.getInstance().insert(Serializer.serialize(
-            obj));
+        return Manager.getInstance()
+            .insert(Serializer.serialize(obj));
     }
 
     /**
@@ -95,8 +95,8 @@ public class SkipList<K extends Comparable<K>, E>
      */
     private void replaceObject(int pos, Object obj) throws Exception
     {
-        Manager.getInstance().replaceRecord(pos, Serializer.serialize(
-            obj));
+        Manager.getInstance().replaceRecord(pos,
+            Serializer.serialize(obj));
     }
 
     /**
@@ -238,7 +238,8 @@ public class SkipList<K extends Comparable<K>, E>
         }
         if (removeHandle != -1)
         {
-            SkipNode<K,E> removeNode = ((SkipNode<K,E>) getObject(removeHandle));
+            SkipNode<K, E> removeNode = ((SkipNode<K, E>) getObject(
+                removeHandle));
             for (int i = 0; i < removeNode.next.length; i++)
             {
                 SkipNode<K, E> updateNode = ((SkipNode<K, E>) getObject(
@@ -249,7 +250,7 @@ public class SkipList<K extends Comparable<K>, E>
             Manager.getInstance().release(removeHandle);
             Manager.getInstance().release(removeNode.pair);
         }
-        
+
         return located;
     }
 
@@ -272,8 +273,8 @@ public class SkipList<K extends Comparable<K>, E>
         while (current.next[0] != -1)
         {
             SkipNode<K, E> currNext = (SkipNode<K, E>) Serializer
-                .deserialize(Manager.getInstance().getRecord(
-                    current.next[0]));
+                .deserialize(
+                    Manager.getInstance().getRecord(current.next[0]));
             if (currNext.getValue().equals(value))
             {
                 return removeKey(currNext.getKey());
@@ -316,10 +317,10 @@ public class SkipList<K extends Comparable<K>, E>
         {
             return null;
         }
-        currNode = (SkipNode<K, E>) Serializer.deserialize(Manager
-            .getInstance().getRecord(curr));
-        if (currNode.getKey() == null || key.compareTo(currNode
-            .getKey()) != 0)
+        currNode = (SkipNode<K, E>) Serializer
+            .deserialize(Manager.getInstance().getRecord(curr));
+        if (currNode.getKey() == null
+            || key.compareTo(currNode.getKey()) != 0)
         {
             return null;
         }
@@ -420,9 +421,9 @@ public class SkipList<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public boolean regionSearch(Rectangle region) throws Exception
     {
-        System.out.println("Rectangles intersecting region (" + region
-            .getX() + ", " + region.getY() + ", " + region.getWidth()
-            + ", " + region.getHeight() + "):");
+        System.out.println("Rectangles intersecting region ("
+            + region.getX() + ", " + region.getY() + ", "
+            + region.getWidth() + ", " + region.getHeight() + "):");
         boolean inRegion = false;
         SkipNode<K, E> temp = (SkipNode<K, E>) getObject(head);
         if (temp.next[0] == -1)
