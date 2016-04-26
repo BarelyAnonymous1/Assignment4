@@ -157,7 +157,8 @@ public class DoublyLinkedQueue
         {
             return null;
         }
-        else
+        else if ((tail.prev.index + tail.prev.length)
+            % Manager.getInstance().getSize() == 0)
             return tail.prev;
     }
 
