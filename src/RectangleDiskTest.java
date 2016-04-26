@@ -51,7 +51,10 @@ public class RectangleDiskTest extends TestCase
      */
     public void testGoodParams()
     {
-        String[] params = { "commands.txt", "dataFile.dat", "5",
+        String[] params = {
+                "commands.txt",
+                "dataFile.dat",
+                "5",
                 "4096" };
         RectangleDisk.main(params);
         assertEquals(4096, Manager.blockSize);
@@ -84,7 +87,10 @@ public class RectangleDiskTest extends TestCase
      */
     public void testSearchFile()
     {
-        String[] input = { "SyntaxTest.txt", "dataFile.dat", "5",
+        String[] input = {
+                "SyntaxTest.txt",
+                "dataFile.dat",
+                "5",
                 "4096" };
         RectangleDisk.main(input);
         assertEquals(4096, Manager.blockSize);
