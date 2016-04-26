@@ -18,16 +18,19 @@ public class DoublyLinkedNode
     /**
      * length of data
      */
-    public int length;
+    public int              length;
     /**
      * index of data
      */
-    public int index;
+    public int              index;
+
     /**
      * creates a node that contains data and no next node
      * 
-     * @param newValue
-     *            the value stored in the node
+     * @param newIndex
+     *            the index stored in the node
+     * @param newLength
+     *            the length of the freeblock stored in the node
      */
     public DoublyLinkedNode(int newindex, int newlength)
     {
@@ -48,7 +51,6 @@ public class DoublyLinkedNode
         next = newNext;
     }
 
-    
     /**
      * sets the value of the prev node
      * 
