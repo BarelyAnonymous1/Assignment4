@@ -65,8 +65,10 @@ public class DoublyLinkedNode
     /**
      * sets the value of the node
      * 
-     * @param newData
-     *            data to be stored in the node
+     * @param newIndex
+     *            index to be stored in the node
+     * @param newLength
+     *            the length of the new freeblock
      */
     public void setData(int newIndex, int newLength)
     {
