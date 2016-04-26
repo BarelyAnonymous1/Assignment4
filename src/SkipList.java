@@ -367,8 +367,7 @@ public class SkipList<K extends Comparable<K>, E>
                 System.out.println(current.getPair().toString());
                 inRegion = true;
             }
-            current = (SkipNode<K, E>) Serializer.deserialize(Manager
-                    .getInstance().getRecord(current.next[0]));
+            current = (SkipNode<K, E>) getObject(current.next[0]);
         }
         return inRegion;
     }
