@@ -110,6 +110,8 @@ public abstract class Manager
     {
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
+        byte[] replace = new byte[sizeNum + messageSize];
+        System.arraycopy(replace, 0, tempDisk, h, replace.length);
         freeList.reallocate(h, sizeNum + messageSize);
     }
 
