@@ -25,7 +25,7 @@ public class Manager
     private byte[]            sizeArr;
     private int               numBlocks;
 
-    private DoublyLinkedQueue freeList;
+    private FreeList freeList;
 
     /**
      * make the constructor private so that this class cannot be instantiated
@@ -37,7 +37,7 @@ public class Manager
         messageSize = 2;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
-        freeList = new DoublyLinkedQueue();
+        freeList = new FreeList();
     }
 
     /**
@@ -95,13 +95,13 @@ public class Manager
     public int insert(byte[] data)
     {
         int recordSize = messageSize + data.length;
-        DoublyLinkedNode free = freeList.contains(recordSize);
+        FreeNode free = freeList.contains(recordSize);
         int handle = -1;
         if (free == null)
         {
             handle = (numBlocks) * blockSize;
             numBlocks++;
-            freeList.insert(new DoublyLinkedNode(handle + recordSize,
+            freeList.insert(new FreeNode(handle + recordSize,
                     blockSize - recordSize));
         }
         // freeblock on the end of the list

@@ -2,29 +2,29 @@
 import student.TestCase;
 
 /**
- * tests the implementation of the DoublyLinkedQueue
+ * tests the implementation of the FreeQueue
  * 
  * @author Preston Lattimer (platt) Jonathan DeFreeuw (jondef95)
  * @version 1
  *
  */
-public class DoublyLinkedQueueTest extends TestCase
+public class FreeListTest extends TestCase
 {
 
-    private DoublyLinkedNode  node1;
-    private DoublyLinkedNode  node2;
-    private DoublyLinkedNode  node3;
-    private DoublyLinkedQueue list;
+    private FreeNode  node1;
+    private FreeNode  node2;
+    private FreeNode  node3;
+    private FreeList list;
 
     /**
-     * sets up the nodes and files for the DoublyLinkedQueue
+     * sets up the nodes and files for the FreeQueue
      */
     public void setUp()
     {
-        node1 = new DoublyLinkedNode(1, 1);
-        node2 = new DoublyLinkedNode(2, 2);
-        node3 = new DoublyLinkedNode(3, 3);
-        list = new DoublyLinkedQueue();
+        node1 = new FreeNode(1, 1);
+        node2 = new FreeNode(2, 2);
+        node3 = new FreeNode(3, 3);
+        list = new FreeList();
     }
 
     /**

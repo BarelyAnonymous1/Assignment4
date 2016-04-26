@@ -3,24 +3,24 @@ import java.io.*;
 import student.TestCase;
 
 /**
- * tests to ensure the proper implementation of a DoublyLinkedNode
+ * tests to ensure the proper implementation of a FreeNode
  * 
  * @author Preston Lattimer (platt) Jonathan DeFreeuw (jondef95)
  * @version 1
  */
-public class DoublyLinkedNodeTest extends TestCase
+public class FreeNodeTest extends TestCase
 {
 
-    private DoublyLinkedNode node1;
-    private DoublyLinkedNode node2;
+    private FreeNode node1;
+    private FreeNode node2;
 
     /**
      * creates a RAF and two nodes to use during testing
      */
     public void setUp()
     {
-        node1 = new DoublyLinkedNode(1, 1);
-        node2 = new DoublyLinkedNode(2, 2);
+        node1 = new FreeNode(1, 1);
+        node2 = new FreeNode(2, 2);
     }
 
     /**
