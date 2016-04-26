@@ -39,7 +39,7 @@ public class SkipNode<K extends Comparable<K>, E>
         next = new int[newLevel + 1];
         for (int i = 0; i <= newLevel; i++)
         {
-            next[i] = -1;
+            next[i] = RectangleDisk.INVALID;
         }
     }
 
@@ -51,7 +51,7 @@ public class SkipNode<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public K getKey() throws Exception
     {
-        if (pair == -1)
+        if (pair == RectangleDisk.INVALID)
         {
             return null;
         }
@@ -75,7 +75,7 @@ public class SkipNode<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public E getValue() throws Exception
     {
-        if (pair == -1)
+        if (pair == RectangleDisk.INVALID)
         {
             return null;
         }
@@ -97,7 +97,7 @@ public class SkipNode<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public KVPair<K, E> getPair() throws Exception
     {
-        if (pair == -1)
+        if (pair == RectangleDisk.INVALID)
         {
             return null;
         }
