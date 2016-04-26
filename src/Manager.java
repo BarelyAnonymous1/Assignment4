@@ -33,7 +33,7 @@ public abstract class Manager
         blockSize = buffSize;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
-        tempDisk = new byte[4*blockSize];
+        tempDisk = new byte[10*blockSize];
         freeList = new FreeList();
     }
 
