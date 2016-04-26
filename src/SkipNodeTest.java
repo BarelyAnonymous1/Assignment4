@@ -16,6 +16,8 @@ public class SkipNodeTest extends TestCase
      */
     public void setUp() throws Exception
     {
+        Manager.getInstance().resetInstance();
+        Manager.getInstance().setSize(512);
         pair = null;
         int handle = Manager.getInstance()
                 .insert(Serializer.serialize(pair));
