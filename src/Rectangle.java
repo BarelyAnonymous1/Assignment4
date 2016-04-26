@@ -8,8 +8,13 @@
  * @version 1
  */
 @SuppressWarnings("serial")
-public class Rectangle implements Comparable<Rectangle>, java.io.Serializable
+public class Rectangle
+    implements Comparable<Rectangle>, java.io.Serializable
 {
+    /**
+     * name of the rectangle
+     */
+    private String name;
     /**
      * x coordinate of upper left corner of Rectangle
      */
@@ -32,6 +37,8 @@ public class Rectangle implements Comparable<Rectangle>, java.io.Serializable
     /**
      * standard constructor for Rectangle; sets up the position and size
      * 
+     * @param newName
+     *            the name fo the rectangle given from the scanner
      * @param newX
      *            x coordinate of upper left corner
      * @param newY
@@ -46,9 +53,14 @@ public class Rectangle implements Comparable<Rectangle>, java.io.Serializable
      * @precondition x + width is less than 1024
      * @precondition y + height is less than 1024
      */
-    public Rectangle(int newX, int newY, int newWidth,
-            int newHeight)
+    public Rectangle(
+        String newName,
+        int newX,
+        int newY,
+        int newWidth,
+        int newHeight)
     {
+        name = newName;
         x = newX;
         y = newY;
         width = newWidth;
@@ -102,7 +114,8 @@ public class Rectangle implements Comparable<Rectangle>, java.io.Serializable
      */
     public String toString()
     {
-        return x + ", " + y + ", " + width + ", " + height;
+        return name + ", " + x + ", " + y + ", " + width + ", "
+            + height;
     }
 
     /**
@@ -116,8 +129,8 @@ public class Rectangle implements Comparable<Rectangle>, java.io.Serializable
     public int compareTo(Rectangle obj)
     {
         if (this.x == obj.getX() && this.y == obj.getY()
-                && this.width == obj.getWidth()
-                && this.height == obj.getHeight())
+            && this.width == obj.getWidth() && this.height == obj
+                .getHeight())
         {
             return 0;
         }
@@ -154,11 +167,11 @@ public class Rectangle implements Comparable<Rectangle>, java.io.Serializable
     {
         // left edge r2 is to the right of r1
         return !((otherRect.getX() >= this.x + this.width)
-                // right edge r2 is to the left of r1
-                || (otherRect.getX() + otherRect.getWidth() <= this.x)
-                // bottom edge r2 is above r1
-                || (otherRect.getY() + otherRect.getHeight() <= this.y)
-                // top edge r2 is below r1
-                || (otherRect.getY() >= this.y + this.height));
+            // right edge r2 is to the left of r1
+            || (otherRect.getX() + otherRect.getWidth() <= this.x)
+            // bottom edge r2 is above r1
+            || (otherRect.getY() + otherRect.getHeight() <= this.y)
+            // top edge r2 is below r1
+            || (otherRect.getY() >= this.y + this.height));
     }
 }
