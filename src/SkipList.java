@@ -313,34 +313,35 @@ public class SkipList<K extends Comparable<K>, E>
     @SuppressWarnings("unchecked")
     public boolean intersections() throws Exception
     {
-        boolean foundIntersect = false;
-        SkipNode<K, E> temp = (SkipNode<K, E>) Serializer.deserialize(
-                Manager.getInstance().getRecord(head));
-        SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
-                Manager.getInstance().getRecord(temp.next[0]));
-        for (int i = 0; i < size; i++)
-        {
-            SkipNode<K, E> check = (SkipNode<K, E>) Serializer.deserialize(
-                    Manager.getInstance().getRecord(temp.next[0]));
-            for (int j = 0; j < size; j++)
-            {
-                if (i != j)
-                {
-                    if (((Rectangle) current.getValue()).intersects(
-                            ((Rectangle) check.getValue())))
-                    {
-                        System.out.println(current.getPair().toString()
-                                + " | " + check.getPair().toString());
-                        foundIntersect = true;
-                    }
-                }
-                check = (SkipNode<K, E>) Serializer.deserialize(Manager
-                        .getInstance().getRecord(check.next[0]));
-            }
-            current = (SkipNode<K, E>) Serializer.deserialize(Manager
-                    .getInstance().getRecord(current.next[0]));
-        }
-        return foundIntersect;
+        return false;
+//        boolean foundIntersect = false;
+//        SkipNode<K, E> temp = (SkipNode<K, E>) Serializer.deserialize(
+//                Manager.getInstance().getRecord(head));
+//        SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
+//                Manager.getInstance().getRecord(temp.next[0]));
+//        for (int i = 0; i < size; i++)
+//        {
+//            SkipNode<K, E> check = (SkipNode<K, E>) Serializer.deserialize(
+//                    Manager.getInstance().getRecord(temp.next[0]));
+//            for (int j = 0; j < size; j++)
+//            {
+//                if (i != j)
+//                {
+//                    if (((Rectangle) current.getValue()).intersects(
+//                            ((Rectangle) check.getValue())))
+//                    {
+//                        System.out.println(current.getPair().toString()
+//                                + " | " + check.getPair().toString());
+//                        foundIntersect = true;
+//                    }
+//                }
+//                check = (SkipNode<K, E>) Serializer.deserialize(Manager
+//                        .getInstance().getRecord(check.next[0]));
+//            }
+//            current = (SkipNode<K, E>) Serializer.deserialize(Manager
+//                    .getInstance().getRecord(current.next[0]));
+//        }
+//        return foundIntersect;
     }
 
     /**
