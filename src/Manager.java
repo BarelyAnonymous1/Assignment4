@@ -44,10 +44,15 @@ public class Manager
     public static Manager getInstance()
     {
         if (instance == null)
+        {
             instance = new Manager();
+        }
         return instance;
     }
 
+    /**
+     * resets the instance of the Manager
+     */
     public static void resetInstance()
     {
         instance = null;
