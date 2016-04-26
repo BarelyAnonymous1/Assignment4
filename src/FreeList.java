@@ -134,7 +134,7 @@ public class FreeList
             return null;
         }
         else if ((tail.prev.index + tail.prev.length)
-            % Manager.getInstance().getSize() == 0)
+            % Manager.getSize() == 0)
             return tail.prev;
         else
             return null;
