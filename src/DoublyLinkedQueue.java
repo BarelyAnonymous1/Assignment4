@@ -28,10 +28,8 @@ public class DoublyLinkedQueue
      */
     public DoublyLinkedQueue()
     {
-        head = new DoublyLinkedNode(-1,
-                0);
-        tail = new DoublyLinkedNode(-1,
-                0);
+        head = new DoublyLinkedNode(-1, 0);
+        tail = new DoublyLinkedNode(-1, 0);
         head.setNext(tail);
         tail.setPrev(head);
         size = 0;
@@ -161,8 +159,11 @@ public class DoublyLinkedQueue
 
     /**
      * makes a certain block available again
-     * @param handle 
+     * 
+     * @param handle
+     *            index of the message that is being removed
      * @param sz
+     *            size of the message that is being removed
      */
     public void reallocate(int handle, int sz)
     {
@@ -182,8 +183,7 @@ public class DoublyLinkedQueue
             }
             curr = curr.next;
         }
-        insert(new DoublyLinkedNode(handle,
-                sz));
+        insert(new DoublyLinkedNode(handle, sz));
     }
 
     /**
