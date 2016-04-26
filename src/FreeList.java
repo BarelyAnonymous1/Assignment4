@@ -153,19 +153,19 @@ public class FreeList
         boolean removed = false;
         while (curr != tail)
         {
-            if (curr.index + curr.length == curr..next.index)
+            if (curr.index + curr.length == curr.next.index)
             {
-                curr.prev.length += curr.length;
+                curr.length += curr.next.length;
                 curr = curr.next;
                 remove(curr.prev.index);
             }
-            if (curr.index + curr.length == handle)
+            else if (curr.index + curr.length == handle)
             {
                 curr.length += sz;
                 curr = curr.next;
                 removed = true;
             }
-            if (curr.index == handle + sz)
+            else if (curr.index == handle + sz)
             {
                 curr.index -= sz;
                 curr.length += sz;
