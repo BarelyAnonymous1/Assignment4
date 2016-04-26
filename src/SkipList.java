@@ -55,9 +55,12 @@ public class SkipList<K extends Comparable<K>, E>
 
     /**
      * gets an object from a specific handle in the manager
-     * @param handle index of the message required
+     * 
+     * @param handle
+     *            index of the message required
      * @return the object from the Serializer
-     * @throws Exception if the object cant be deserialized
+     * @throws Exception
+     *             if the object cant be deserialized
      */
     private Object getObject(int handle) throws Exception
     {
@@ -67,20 +70,28 @@ public class SkipList<K extends Comparable<K>, E>
 
     /**
      * stores a message and returns a handle to it
-     * @param obj the object to store in the memory manager
+     * 
+     * @param obj
+     *            the object to store in the memory manager
      * @return the index of the object in the manager array/disk
-     * @throws Exception if the object cant be serialized
+     * @throws Exception
+     *             if the object cant be serialized
      */
     private int getHandle(Object obj) throws Exception
     {
-        return Manager.getInstance().insert(Serializer.serialize(obj));
+        return Manager.getInstance().insert(Serializer.serialize(
+                obj));
     }
 
     /**
      * replaces a message in place, given a handle and object
-     * @param pos the handle of the original message
-     * @param obj the Object that is being stored in the manager
-     * @throws Exception if the object cant be serialized
+     * 
+     * @param pos
+     *            the handle of the original message
+     * @param obj
+     *            the Object that is being stored in the manager
+     * @throws Exception
+     *             if the object cant be serialized
      */
     private void replaceObject(int pos, Object obj) throws Exception
     {
@@ -94,7 +105,8 @@ public class SkipList<K extends Comparable<K>, E>
      * 
      * @param newLevel
      *            is the new largest levels
-     * @throws Exception if an object cant be serialized           
+     * @throws Exception
+     *             if an object cant be serialized
      */
     private void fixHead(int newLevel) throws Exception
     {
@@ -132,7 +144,8 @@ public class SkipList<K extends Comparable<K>, E>
      * @param newPair
      *            is the pair to be inserted
      * @return whether iteration succeeded
-     * @throws Exception if an object cant be serialized 
+     * @throws Exception
+     *             if an object cant be serialized
      */
     @SuppressWarnings("unchecked")
     public boolean insert(KVPair<K, E> newPair) throws Exception
@@ -145,12 +158,13 @@ public class SkipList<K extends Comparable<K>, E>
         {
             fixHead(newLevel);
         }
-        int[] updateHandles = (int[]) Array.newInstance(int.class, level
-                + 1);
+        int[] updateHandles = (int[]) Array.newInstance(int.class,
+                level + 1);
         int curr = head;
         for (int i = level; i >= 0; i--)
         {
-            SkipNode<K, E> currNode = (SkipNode<K, E>) getObject(curr);
+            SkipNode<K, E> currNode = (SkipNode<K, E>) getObject(
+                    curr);
             while (currNode.next[i] != -1 && (newPair.key().compareTo(
                     ((SkipNode<K, E>) getObject(currNode.next[i]))
                             .getKey()) > 0))
@@ -161,7 +175,8 @@ public class SkipList<K extends Comparable<K>, E>
             updateHandles[i] = curr;
         }
         int pairHandle = getHandle(newPair);
-        SkipNode<K, E> newNode = new SkipNode<K, E>(pairHandle, newLevel);
+        SkipNode<K, E> newNode = new SkipNode<K, E>(pairHandle,
+                newLevel);
         int currPos = getHandle(newNode);
         for (int i = 0; i <= newLevel; i++)
         {
@@ -185,7 +200,8 @@ public class SkipList<K extends Comparable<K>, E>
      * @param key
      *            the searched for key
      * @return located value if found, if not, null
-     * @throws Exception if an object cant be serialized 
+     * @throws Exception
+     *             if an object cant be serialized
      */
     @SuppressWarnings("unchecked")
     public KVPair<K, E> removeKey(K key) throws Exception
@@ -237,13 +253,14 @@ public class SkipList<K extends Comparable<K>, E>
      * @param value
      *            the searched for value
      * @return located value if found, if not, null
-     * @throws Exception if an object cant be serialized 
+     * @throws Exception
+     *             if an object cant be serialized
      */
     @SuppressWarnings("unchecked")
     public KVPair<K, E> removeValue(E value) throws Exception
     {
-        SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
-                Manager.getInstance().getRecord(head));
+        SkipNode<K, E> current = (SkipNode<K, E>) Serializer
+                .deserialize(Manager.getInstance().getRecord(head));
         while (current.next[0] != -1)
         {
             SkipNode<K, E> currNext = (SkipNode<K, E>) Serializer
@@ -265,29 +282,33 @@ public class SkipList<K extends Comparable<K>, E>
      * @param key
      *            the key that is being searched for
      * @return the node that contains a specific key
-     * @throws Exception if an object cant be serialized 
+     * @throws Exception
+     *             if an object cant be serialized
      */
     @SuppressWarnings("unchecked")
     public SkipNode<K, E> search(K key) throws Exception
     {
         int curr = head;
-        SkipNode<K, E> currNode = (SkipNode<K, E>) Serializer.deserialize(
-                Manager.getInstance().getRecord(curr));
+        SkipNode<K, E> currNode = (SkipNode<K, E>) Serializer
+                .deserialize(Manager.getInstance().getRecord(curr));
         for (int i = level; i >= 0; i--)
         {
             while (currNode.next[0] != -1 && (key.compareTo(
                     ((SkipNode<K, E>) Serializer.deserialize(Manager
-                            .getInstance().getRecord(currNode.next[0])))
-                                    .getKey()) > 0))
+                            .getInstance().getRecord(
+                                    currNode.next[0])))
+                                            .getKey()) > 0))
             {
                 curr = currNode.next[0];
-                currNode = (SkipNode<K, E>) Serializer.deserialize(Manager
-                        .getInstance().getRecord(curr));
+                currNode = (SkipNode<K, E>) Serializer.deserialize(
+                        Manager.getInstance().getRecord(curr));
             }
         }
         curr = currNode.next[0];
         if (curr == -1)
+        {
             return null;
+        }
         currNode = (SkipNode<K, E>) Serializer.deserialize(Manager
                 .getInstance().getRecord(curr));
         if (currNode.getKey() == null || key.compareTo(currNode
@@ -301,7 +322,9 @@ public class SkipList<K extends Comparable<K>, E>
     /**
      * output a list of every item in the list in the following format:
      * "Node has depth 0, Value (0)"
-     * @throws Exception if an object cant be serialized 
+     * 
+     * @throws Exception
+     *             if an object cant be serialized
      */
     @SuppressWarnings("unchecked")
     public void dump() throws Exception
@@ -311,7 +334,8 @@ public class SkipList<K extends Comparable<K>, E>
         while (curr != -1)
         {
             SkipNode<K, E> current = (SkipNode<K, E>) Serializer
-                    .deserialize(Manager.getInstance().getRecord(curr));
+                    .deserialize(Manager.getInstance().getRecord(
+                            curr));
             String name = "";
             if (current.getValue() == null)
             {
@@ -321,8 +345,9 @@ public class SkipList<K extends Comparable<K>, E>
             {
                 name = current.getPair().toString();
             }
-            System.out.println("Node has depth " + (current.next.length)
-                    + ", Value (" + name + ")");
+            System.out.println("Node has depth "
+                    + (current.next.length) + ", Value (" + name
+                    + ")");
 
             curr = current.next[0];
         }
@@ -335,7 +360,8 @@ public class SkipList<K extends Comparable<K>, E>
      * to use Casting to check for intersections
      * 
      * @return whether or not an intersection was found
-     * @throws Exception if an object cant be serialized 
+     * @throws Exception
+     *             if an object cant be serialized
      */
     @SuppressWarnings("unchecked")
     public boolean intersections() throws Exception
@@ -343,24 +369,26 @@ public class SkipList<K extends Comparable<K>, E>
         boolean foundIntersect = false;
         SkipNode<K, E> temp = (SkipNode<K, E>) getObject(head);
         if (temp.next[0] == -1)
+        {
             return foundIntersect;
-        SkipNode<K, E> current = (SkipNode<K, E>) getObject(temp.next[0]);
+        }
+        SkipNode<K, E> current = (SkipNode<K, E>) getObject(
+                temp.next[0]);
         for (int i = 0; i < size; i++)
         {
             SkipNode<K, E> check = (SkipNode<K, E>) getObject(
                     temp.next[0]);
             for (int j = 0; j < size; j++)
             {
-                if (i != j)
+
+                if (i != j && ((Rectangle) current.getValue())
+                        .intersects(((Rectangle) check.getValue())))
                 {
-                    if (((Rectangle) current.getValue()).intersects(
-                            ((Rectangle) check.getValue())))
-                    {
-                        System.out.println(current.getPair().toString()
-                                + " | " + check.getPair().toString());
-                        foundIntersect = true;
-                    }
+                    System.out.println(current.getPair().toString()
+                            + " | " + check.getPair().toString());
+                    foundIntersect = true;
                 }
+
                 if (check.next[0] != -1)
                     check = (SkipNode<K, E>) getObject(check.next[0]);
             }
@@ -376,7 +404,8 @@ public class SkipList<K extends Comparable<K>, E>
      * @param region
      *            KVPair that contains the rectangle for the intersecting region
      * @return whether or not a rectangle was found in the region
-     * @throws Exception if an object cant be serialized 
+     * @throws Exception
+     *             if an object cant be serialized
      */
     @SuppressWarnings("unchecked")
     public boolean regionSearch(Rectangle region) throws Exception
@@ -385,7 +414,8 @@ public class SkipList<K extends Comparable<K>, E>
         SkipNode<K, E> temp = (SkipNode<K, E>) getObject(head);
         if (temp.next[0] == -1)
             return inRegion;
-        SkipNode<K, E> current = (SkipNode<K, E>) getObject(temp.next[0]);
+        SkipNode<K, E> current = (SkipNode<K, E>) getObject(
+                temp.next[0]);
         for (int i = 0; i < size; i++)
         {
             if (((Rectangle) current.getValue()).intersects(region))
