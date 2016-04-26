@@ -38,7 +38,6 @@ public class BufferPoolTest extends TestCase
         file.write(test);
         file.write(test2);
         file.write(test3);
-        Mergesort.fileSize = 12285;
     }
 
     /**
