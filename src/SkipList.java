@@ -203,12 +203,12 @@ public class SkipList<K extends Comparable<K>, E>
      *             if an object cant be serialized
      */
     @SuppressWarnings("unchecked")
-    public KVPair<K, E> removeKey(K key) throws Exception
+    public K removeKey(K key) throws Exception
     {
         SkipNode<K, E> current = (SkipNode<K, E>) getObject(head);
         int removeHandle = -1;
         int currHandle = head;
-        KVPair<K, E> located = null;
+        K located = null;
         for (int i = level; i >= 0; i--)
         {
             while (current.next[i] != -1)
@@ -218,7 +218,7 @@ public class SkipList<K extends Comparable<K>, E>
                         current.next[i]));
                 if (currNext.getKey().compareTo(key) == 0)
                 {
-                    located = currNext.getPair();
+                    located = currNext.getKey();
                     current.next[i] = currNext.next[i];
                     removeHandle = current.next[i];
                     break;
