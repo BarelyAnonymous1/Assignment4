@@ -23,8 +23,8 @@ public class CommandParser
     /**
      * constructor for parser, stores filename
      * 
-     * @param file
-     *            name for the file that is being parsed
+     * @param args
+     *            inputs given from the command line
      */
     public CommandParser(String[] args) throws IOException
     {
