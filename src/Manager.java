@@ -107,12 +107,12 @@ public class Manager
         // freeblock on the end of the list
         else
         {
-            if ((free.index + free.length) % blockSize == 0
-                    && recordSize > free.length)
-            {
-                free.length += blockSize;
-                numBlocks++;
-            }
+//            if ((free.index + free.length) % blockSize == 0
+//                    && recordSize > free.length)
+//            {
+//                free.length += blockSize;
+//                numBlocks++;
+//            }
             handle = free.index;
             free.index += recordSize;
             free.length -= recordSize;
