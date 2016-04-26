@@ -153,11 +153,10 @@ public class FreeList
         FreeNode curr = head.next;
         while (curr != tail)
         {
-            if (curr.index + curr.length == curr.next.index)
+            if (curr.prev.index + curr.prev.length == curr.index)
             {
                 curr.length += curr.next.length;
                 remove(curr.next.index);
-                System.out.println("tried to remove stuff");
             }
             if (curr.index + curr.length == handle)
             {
