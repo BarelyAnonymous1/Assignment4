@@ -125,18 +125,12 @@ public class CommandParser
         int width = scanner.nextInt();
         int height = scanner.nextInt();
         char c = name.charAt(0);
-        if (checkDim(x,
-                y,
-                width,
-                height) && Character.isAlphabetic(c))
+        if (checkDim(x, y, width, height) && Character.isAlphabetic(
+                c))
         {
-            Rectangle rect = new Rectangle(x,
-                    y,
-                    width,
-                    height);
+            Rectangle rect = new Rectangle(x, y, width, height);
             KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(
-                    name,
-                    rect);
+                    name, rect);
             list.insert(pair);
             System.out.println("Rectangle inserted: (" + name + ", "
                     + x + ", " + y + ", " + width + ", " + height
@@ -183,16 +177,11 @@ public class CommandParser
             int y = scanner.nextInt();
             int width = scanner.nextInt();
             int height = scanner.nextInt();
-            if (checkDim(x,
-                    y,
-                    width,
-                    height))
+            if (checkDim(x, y, width, height))
             {
                 String search = x + ", " + y + ", " + width + ", "
                         + height;
-                Rectangle searchRect = new Rectangle(x,
-                        y,
-                        width,
+                Rectangle searchRect = new Rectangle(x, y, width,
                         height);
                 KVPair<String, Rectangle> found = list.removeValue(
                         searchRect);
@@ -236,10 +225,7 @@ public class CommandParser
         {
             System.out.println("Rectangles intersecting region (" + x
                     + ", " + y + ", " + width + ", " + height + "):");
-            Rectangle regionRect = new Rectangle(x,
-                    y,
-                    width,
-                    height);
+            Rectangle regionRect = new Rectangle(x, y, width, height);
             list.regionSearch(regionRect);
         }
         else
@@ -271,21 +257,19 @@ public class CommandParser
         else
         {
             System.out.println("(" + name + ", " + searchResult
-                    .getValue()
-                    .toString() + ")");
-            SkipNode<String, Rectangle> searchNext = (SkipNode<String, Rectangle>) 
-                    Serializer.deserialize(Manager.getInstance()
-                            .getRecord(searchResult.next[0]));
+                    .getValue().toString() + ")");
+            SkipNode<String, Rectangle> searchNext = (SkipNode<String, Rectangle>) Serializer
+                    .deserialize(Manager.getInstance().getRecord(
+                            searchResult.next[0]));
             while (searchResult.next[0] != -1 && searchNext.getKey()
                     .compareTo(searchResult.getKey()) == 0)
             {
                 searchNext = (SkipNode<String, Rectangle>) Serializer
-                        .deserialize(Manager.getInstance()
-                                .getRecord(searchResult.next[0]));
+                        .deserialize(Manager.getInstance().getRecord(
+                                searchResult.next[0]));
                 searchResult = searchNext;
                 System.out.println("(" + name + ", " + searchResult
-                        .getValue()
-                        .toString() + ")");
+                        .getValue().toString() + ")");
             }
         }
     }
