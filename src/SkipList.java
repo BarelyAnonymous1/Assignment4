@@ -376,6 +376,7 @@ public class SkipList<K extends Comparable<K>, E>
      * @param region
      *            KVPair that contains the rectangle for the intersecting region
      * @return whether or not a rectangle was found in the region
+     * @throws Exception if an object cant be serialized 
      */
     @SuppressWarnings("unchecked")
     public boolean regionSearch(Rectangle region) throws Exception
