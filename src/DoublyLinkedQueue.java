@@ -74,18 +74,18 @@ public class DoublyLinkedQueue
      * @param newerNode
      *            the node to be inserted
      */
-    public int insert(int numBlocks, int sz)
+    public int insert(int numBlocks, int sz, int recordSz)
     {
         DoublyLinkedNode newNode = null;
         DoublyLinkedNode curr = head;
         if (size == 0)
         {
-            insert(new DoublyLinkedNode(numBlocks * sz, sz));
+            insert(new DoublyLinkedNode(numBlocks * sz, sz-recordSz));
             return numBlocks * sz;
         }
         else
         {
-            tail.prev.length -= sz;
+            tail.prev.length -= recordSz;
             return tail.prev.index;
         }
 

@@ -100,7 +100,7 @@ public class Manager
         int handle = -1;
         if (free == null)
         {
-            handle = freeList.insert(numBlocks, blockSize);
+            handle = freeList.insert(numBlocks, blockSize, recordSize);
         }
         // freeblock on the end of the list
         else
