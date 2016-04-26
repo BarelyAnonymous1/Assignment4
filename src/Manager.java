@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
 public class Manager
 {
     private static int        messageSize;
-    private static int        blockSize;
+    public static int        blockSize;
     /**
      * create an object of SingleObject
      */
