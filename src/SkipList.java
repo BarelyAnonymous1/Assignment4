@@ -382,8 +382,8 @@ public class SkipList<K extends Comparable<K>, E>
                 if (i != j && ((Rectangle) current.getValue())
                         .intersects(((Rectangle) check.getValue())))
                 {
-                    System.out.println(current.getPair().toString()
-                            + " | " + check.getPair().toString());
+                    System.out.println(current.getValue().toString()
+                            + " | " + check.getValue().toString());
                     foundIntersect = true;
                 }
 
@@ -424,7 +424,7 @@ public class SkipList<K extends Comparable<K>, E>
         {
             if (((Rectangle) current.getValue()).intersects(region))
             {
-                System.out.println(current.getPair().toString());
+                System.out.println(current.getValue().toString());
                 inRegion = true;
             }
             if (current.next[0] != -1)

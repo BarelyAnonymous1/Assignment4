@@ -26,13 +26,13 @@ public class SkipListTest extends TestCase
         Manager.resetInstance();
         Manager.blockSize = 512;
         pair1 = new KVPair<String, Rectangle>("node1", new Rectangle(
-                1, 1, 1, 1));
+            "node1", 1, 1, 1, 1));
         pair2 = new KVPair<String, Rectangle>("node2", new Rectangle(
-                2, 2, 2, 2));
+            "node2", 2, 2, 2, 2));
         pair3 = new KVPair<String, Rectangle>("node3", new Rectangle(
-                3, 3, 3, 3));
+            "node3", 3, 3, 3, 3));
         pair4 = new KVPair<String, Rectangle>("node4", new Rectangle(
-                4, 4, 4, 4));
+            "node4", 4, 4, 4, 4));
         list = new SkipList<String, Rectangle>();
     }
 
@@ -47,7 +47,7 @@ public class SkipListTest extends TestCase
         list.insert(pair2);
         list.insert(pair3);
         assertEquals(pair3.compareTo(list.search("node3").getPair()),
-                0);
+            0);
 
         list.dump();
     }
@@ -72,14 +72,15 @@ public class SkipListTest extends TestCase
      */
     public void testRegionSearch() throws Exception
     {
-        Rectangle region = new Rectangle(100, 100, 200, 200);
-        SkipList<String, Rectangle> regionList = 
-                new SkipList<String, Rectangle>();
+        Rectangle region = new Rectangle("region", 100, 100, 200,
+            200);
+        SkipList<String, Rectangle> regionList = new SkipList<String, Rectangle>();
         regionList.insert(new KVPair<String, Rectangle>(
-                "notIntersect", new Rectangle(10, 10, 20, 20)));
+            "notIntersect", new Rectangle("notIntersect", 10, 10, 20,
+                20)));
         assertFalse(regionList.regionSearch(region));
         regionList.insert(new KVPair<String, Rectangle>("intersect1",
-                new Rectangle(75, 75, 200, 250)));
+            new Rectangle("intersect1", 75, 75, 200, 250)));
         assertTrue(regionList.regionSearch(region));
     }
 
@@ -89,16 +90,18 @@ public class SkipListTest extends TestCase
      */
     public void testIntersections() throws Exception
     {
-        SkipList<String, Rectangle> intersectList = 
-                new SkipList<String, Rectangle>();
+        SkipList<String, Rectangle> intersectList = new SkipList<String, Rectangle>();
         intersectList.insert(new KVPair<String, Rectangle>(
-                "notIntersect", new Rectangle(10, 10, 20, 20)));
+            "notIntersect", new Rectangle("notIntersect", 10, 10, 20,
+                20)));
         assertFalse(intersectList.intersections());
         intersectList.insert(new KVPair<String, Rectangle>(
-                "intersect1", new Rectangle(75, 75, 200, 250)));
+            "intersect1", new Rectangle("intersect1", 75, 75, 200,
+                250)));
         assertFalse(intersectList.intersections());
         intersectList.insert(new KVPair<String, Rectangle>(
-                "intersect2", new Rectangle(100, 100, 200, 200)));
+            "intersect2", new Rectangle("intersect2", 100, 100, 200,
+                200)));
         assertTrue(intersectList.intersections());
 
     }
