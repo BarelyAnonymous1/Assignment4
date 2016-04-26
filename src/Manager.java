@@ -60,7 +60,6 @@ public class Manager
     public static void resetInstance()
     {
         instance = null;
-        numBlocks = 0;
     }
     
     public void setSize(int sz)
