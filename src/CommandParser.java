@@ -32,8 +32,8 @@ public class CommandParser
         // diskfile
         // numBuffs
         // bufferSize
-        Manager.resetInstance();
-        Manager.getInstance().setSize(Integer.parseInt(args[3]));
+        Manager.setValues(args[1], Integer.parseInt(args[2]),
+            Integer.parseInt(args[3]));
         list = new SkipList<String, Rectangle>();
     }
 
@@ -62,7 +62,8 @@ public class CommandParser
             while (scanner.hasNext())
             { // While the scanner has information to read
                 String cmd = scanner.next(); // Read the next command
-                switch (cmd) {
+                switch (cmd)
+                {
                     case ("insert"):
                     {
                         parseInsert(scanner);
@@ -125,8 +126,8 @@ public class CommandParser
         int width = scanner.nextInt();
         int height = scanner.nextInt();
         char c = name.charAt(0);
-        if (checkDim(x, y, width, height) && Character.isAlphabetic(
-            c))
+        if (checkDim(x, y, width, height)
+            && Character.isAlphabetic(c))
         {
             Rectangle rect = new Rectangle(name, x, y, width, height);
             KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(
@@ -160,8 +161,8 @@ public class CommandParser
             Rectangle found = list.removeKey(name);
             if (found == null)
             {
-                System.out.println("Rectangle not removed: (" + name
-                    + ")");
+                System.out
+                    .println("Rectangle not removed: (" + name + ")");
             }
             else
             {
@@ -184,13 +185,13 @@ public class CommandParser
                 Rectangle found = list.removeValue(searchRect);
                 if (found == null)
                 {
-                    System.out.println("Rectangle not removed: ("
-                        + search + ")");
+                    System.out.println(
+                        "Rectangle not removed: (" + search + ")");
                 }
                 else
                 {
-                    System.out.println("Rectangle removed: (" + found
-                        .toString() + ")");
+                    System.out.println("Rectangle removed: ("
+                        + found.toString() + ")");
                 }
             }
             else
@@ -254,25 +255,26 @@ public class CommandParser
         }
         else
         {
-            System.out.println("(" + searchResult.getValue()
-                .toString() + ")");
+            System.out.println(
+                "(" + searchResult.getValue().toString() + ")");
             SkipNode<String, Rectangle> searchNext = null;
             if (searchResult.next[0] != RectangleDisk.INVALID)
             {
                 searchNext = (SkipNode<String, Rectangle>) Serializer
-                    .deserialize(Manager.getInstance().getRecord(
-                        searchResult.next[0]));
+                    .deserialize(
+                        Manager.getRecord(searchResult.next[0]));
             }
-            while (searchResult.next[0] != RectangleDisk.INVALID && searchNext.getKey()
-                .compareTo(searchResult.getKey()) == 0)
+            while (searchResult.next[0] != RectangleDisk.INVALID
+                && searchNext.getKey()
+                    .compareTo(searchResult.getKey()) == 0)
             {
                 searchNext = (SkipNode<String, Rectangle>) Serializer
-                    .deserialize(Manager.getInstance().getRecord(
-                        searchResult.next[0]));
+                    .deserialize(
+                        Manager.getRecord(searchResult.next[0]));
                 searchResult = searchNext;
 
-                System.out.println("(" + name + ", " + searchResult
-                    .getValue().toString() + ")");
+                System.out.println("(" + name + ", "
+                    + searchResult.getValue().toString() + ")");
 
             }
         }
@@ -318,7 +320,7 @@ public class CommandParser
      */
     public boolean checkDim(int x, int y, int width, int height)
     {
-        return !(width <= 0 || height <= 0 || x + width > 1024 || y
-            + height > 1024 || x < 0 || y < 0);
+        return !(width <= 0 || height <= 0 || x + width > 1024
+            || y + height > 1024 || x < 0 || y < 0);
     }
 }
