@@ -53,12 +53,24 @@ public class SkipList<K extends Comparable<K>, E>
                 .getInstance().getRecord(head));
     }
 
+    /**
+     * gets an object from a specific handle in the manager
+     * @param handle index of the message required
+     * @return the object from the Serializer
+     * @throws Exception if the object cant be deserialized
+     */
     private Object getObject(int handle) throws Exception
     {
         return Serializer.deserialize(Manager.getInstance().getRecord(
                 handle));
     }
 
+    /**
+     * stores a message and returns a handle to it
+     * @param obj the object to store in the memory manager
+     * @return the index of the object in the manager array/disk
+     * @throws Exception if the object cant be serialized
+     */
     private int getHandle(Object obj) throws Exception
     {
         return Manager.getInstance().insert(Serializer.serialize(obj));
