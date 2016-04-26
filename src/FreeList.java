@@ -170,6 +170,9 @@ public class FreeList
                 curr.length += sz;
                 curr = curr.next;
             }
+            else
+                curr = curr.next;
+
         }
         insert(new FreeNode(handle, sz));
     }
