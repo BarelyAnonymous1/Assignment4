@@ -80,6 +80,7 @@ public class SkipNode<K extends Comparable<K>, E>
             return null;
         }
         byte[] obj = Manager.getInstance().getRecord(pair);
+        System.out.println(pair);
         KVPair<K, E> found = ((KVPair<K, E>) Serializer
             .deserialize(obj));
         if (found != null)
