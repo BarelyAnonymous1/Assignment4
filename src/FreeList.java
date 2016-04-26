@@ -151,6 +151,7 @@ public class FreeList
     public void reallocate(int handle, int sz)
     {
         FreeNode curr = head.next;
+        boolean removed = false;
         while (curr != tail)
         {
             if (curr.prev.index + curr.prev.length == curr.index)
@@ -158,23 +159,29 @@ public class FreeList
                 curr.prev.length += curr.length;
                 curr = curr.next;
                 remove(curr.prev.index);
+                removed = true;
             }
             if (curr.index + curr.length == handle)
             {
                 curr.length += sz;
                 curr = curr.next;
+                removed = true;
             }
             if (curr.index == handle + sz)
             {
                 curr.index -= sz;
                 curr.length += sz;
                 curr = curr.next;
+                removed =true;
             }
             else
                 curr = curr.next;
 
         }
+        if (!removed)
+        {
         insert(new FreeNode(handle, sz));
+        }
     }
 
     /**
