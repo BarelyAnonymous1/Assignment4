@@ -159,6 +159,11 @@ public class DoublyLinkedQueue
         return null;
     }
 
+    /**
+     * makes a certain block available again
+     * @param handle 
+     * @param sz
+     */
     public void reallocate(int handle, int sz)
     {
         DoublyLinkedNode curr = head.next;
