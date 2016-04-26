@@ -257,13 +257,13 @@ public class CommandParser
             System.out.println("(" + searchResult.getValue()
                 .toString() + ")");
             SkipNode<String, Rectangle> searchNext = null;
-            if (searchResult.next[0] != -1)
+            if (searchResult.next[0] != RectangleDisk.INVALID)
             {
                 searchNext = (SkipNode<String, Rectangle>) Serializer
                     .deserialize(Manager.getInstance().getRecord(
                         searchResult.next[0]));
             }
-            while (searchResult.next[0] != -1 && searchNext.getKey()
+            while (searchResult.next[0] != RectangleDisk.INVALID && searchNext.getKey()
                 .compareTo(searchResult.getKey()) == 0)
             {
                 searchNext = (SkipNode<String, Rectangle>) Serializer
