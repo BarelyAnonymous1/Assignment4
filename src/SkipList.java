@@ -222,7 +222,6 @@ public class SkipList<K extends Comparable<K>, E>
                     located = currNext.getValue();
                     currNode.next[i] = currNext.next[i];
                     removeHandle = currNode.next[i];
-                    pairHandle = currNode.pair;
                     break;
                 }
                 if (currNext.getKey().compareTo(key) > 0)
@@ -250,7 +249,7 @@ public class SkipList<K extends Comparable<K>, E>
                 replaceObject(updateHandles[i], updateNode);
             }
             Manager.getInstance().release(removeHandle);
-            Manager.getInstance().release(pairHandle);
+            Manager.getInstance().release(removeNode.pair);
         }
         
         return located;
