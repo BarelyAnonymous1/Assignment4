@@ -175,7 +175,7 @@ public class DoublyLinkedQueue
                 curr.length += sz;
                 return;
             }
-            if (curr.index - 1 == handle + sz)
+            if (curr.index == handle + sz)
             {
                 curr.index -= sz;
                 curr.length += sz;
