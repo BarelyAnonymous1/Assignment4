@@ -28,8 +28,10 @@ public class DoublyLinkedQueue
      */
     public DoublyLinkedQueue()
     {
-        head = new DoublyLinkedNode(-1, 0);
-        tail = new DoublyLinkedNode(-1, 0);
+        head = new DoublyLinkedNode(-1,
+                0);
+        tail = new DoublyLinkedNode(-1,
+                0);
         head.setNext(tail);
         tail.setPrev(head);
         size = 0;
@@ -134,6 +136,15 @@ public class DoublyLinkedQueue
         }
         return null;
     }
+
+    /**
+     * checks to see if the freelist has a block of a certain size available
+     * 
+     * @param sz
+     *            the size of the required freeblock
+     * @return the node containing the needed freeblock; or null if it does not
+     *         exist
+     */
     public DoublyLinkedNode contains(int sz)
     {
         DoublyLinkedNode curr = tail.prev;
@@ -166,7 +177,8 @@ public class DoublyLinkedQueue
             }
             curr = curr.next;
         }
-        insert(new DoublyLinkedNode(handle, sz));
+        insert(new DoublyLinkedNode(handle,
+                sz));
     }
 
     /**
@@ -187,7 +199,8 @@ public class DoublyLinkedQueue
         DoublyLinkedNode curr = head.next;
         while (curr != tail)
         {
-            System.out.println("(" + curr.index + ", " + curr.length+ ")");
+            System.out.println("(" + curr.index + ", " + curr.length
+                    + ")");
             curr = curr.next;
         }
     }
