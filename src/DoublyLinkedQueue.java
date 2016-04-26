@@ -103,7 +103,7 @@ public class DoublyLinkedQueue
      *            size of the message that needs to be allocated
      * @return the node that has the best fit for the message
      */
-    public DoublyLinkedNode contains(int sz)
+    public DoublyLinkedNode contains2(int sz)
     {
         DoublyLinkedNode curr = head.next;
         DoublyLinkedNode best = null;
@@ -134,7 +134,7 @@ public class DoublyLinkedQueue
         }
         return null;
     }
-    public DoublyLinkedNode contains2(int sz)
+    public DoublyLinkedNode contains(int sz)
     {
         DoublyLinkedNode curr = tail.prev;
         while (curr != head)
