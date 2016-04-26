@@ -356,10 +356,10 @@ public class SkipList<K extends Comparable<K>, E>
     public boolean regionSearch(Rectangle region) throws Exception
     {
         boolean inRegion = false;
-        SkipNode<K, E> temp = (SkipNode<K, E>) Serializer.deserialize(
-                Manager.getInstance().getRecord(head));
-        SkipNode<K, E> current = (SkipNode<K, E>) Serializer.deserialize(
-                Manager.getInstance().getRecord(temp.next[0]));
+        SkipNode<K, E> temp = (SkipNode<K, E>) getObject(head);
+        if (temp.next[0] == -1)
+            return inRegion;
+        SkipNode<K, E> current = (SkipNode<K, E>) getObject(temp.next[0]);
         for (int i = 0; i < size; i++)
         {
             if (((Rectangle) current.getValue()).intersects(region))
