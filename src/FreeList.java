@@ -21,7 +21,7 @@ public class FreeList
     /**
      * number of nodes in the list
      */
-    private int     size;
+    private int             size;
 
     /**
      * default constructor for the LinkedList
@@ -66,6 +66,7 @@ public class FreeList
         newNode.prev = curr;
         size++;
     }
+
 
     /**
      * pulls the last added node from the queue this node removed from the queue
@@ -150,36 +151,23 @@ public class FreeList
     public void reallocate(int handle, int sz)
     {
         FreeNode curr = head.next;
-        boolean removed = false;
         while (curr != tail)
         {
-            if (curr.index + curr.length == curr.next.index)
-            {
-                curr.length += curr.next.length;
-                curr = curr.next;
-                remove(curr.prev.index);
-            }
-            else if (curr.index + curr.length == handle)
+            if (curr.index + curr.length == handle)
             {
                 curr.length += sz;
-                curr = curr.next;
-                removed = true;
+                return;
             }
-            else if (curr.index == handle + sz)
+            if (curr.index == handle + sz)
             {
                 curr.index -= sz;
                 curr.length += sz;
-                curr = curr.next;
-                removed = true;
+                return;
             }
-            else
-                curr = curr.next;
 
+            curr = curr.next;
         }
-        if (!removed)
-        {
-            insert(new FreeNode(handle, sz));
-        }
+        insert(new FreeNode(handle, sz));
     }
 
     /**
