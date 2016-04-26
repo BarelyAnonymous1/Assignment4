@@ -163,9 +163,10 @@ public class SkipList<K extends Comparable<K>, E>
         {
             SkipNode<K, E> currNode = (SkipNode<K, E>) getObject(
                 curr);
-            while (currNode.next[i] != -1 && (newPair.key().compareTo(
-                ((SkipNode<K, E>) getObject(currNode.next[i]))
-                    .getKey()) > 0))
+            while (i < currNode.next.length && currNode.next[i] != -1
+                && (newPair.key().compareTo(
+                    ((SkipNode<K, E>) getObject(currNode.next[i]))
+                        .getKey()) > 0))
             {
                 curr = currNode.next[i];
                 currNode = (SkipNode<K, E>) getObject(curr);
