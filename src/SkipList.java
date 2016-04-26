@@ -250,6 +250,7 @@ public class SkipList<K extends Comparable<K>, E>
                 replaceObject(updateHandles[i], updateNode);
             }
             Manager.getInstance().release(removeHandle);
+            Manager.getInstance().release(pairHandle);
         }
         
         return located;
