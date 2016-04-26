@@ -35,8 +35,7 @@ public class Manager
         sizeArr = new byte[messageSize];
         tempDisk = new byte[10 * blockSize];
         freeList = new DoublyLinkedQueue();
-        freeList.insert(new DoublyLinkedNode(0,
-                blockSize));
+        freeList.insert(new DoublyLinkedNode(0, blockSize));
         numBlocks++;
     }
 
@@ -99,15 +98,9 @@ public class Manager
         }
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
-        System.arraycopy(buffer.array(),
-                0,
-                tempDisk,
-                handle,
+        System.arraycopy(buffer.array(), 0, tempDisk, handle,
                 messageSize);
-        System.arraycopy(data,
-                0,
-                tempDisk,
-                handle + messageSize,
+        System.arraycopy(data, 0, tempDisk, handle + messageSize,
                 data.length);
         return handle;
     }
@@ -120,15 +113,9 @@ public class Manager
      */
     public void release(int h)
     {
-        System.arraycopy(tempDisk,
-                h,
-                sizeArr,
-                0,
-                messageSize);
-        short sizeNum = ByteBuffer.wrap(sizeArr)
-                .getShort();
-        freeList.reallocate(h,
-                sizeNum + messageSize);
+        System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
+        short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
+        freeList.reallocate(h, sizeNum + messageSize);
     }
 
     /**
@@ -140,18 +127,10 @@ public class Manager
      */
     public byte[] getRecord(int h)
     {
-        System.arraycopy(tempDisk,
-                h,
-                sizeArr,
-                0,
-                messageSize);
-        short sizeNum = ByteBuffer.wrap(sizeArr)
-                .getShort();
+        System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
+        short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] temp = new byte[messageSize + sizeNum];
-        System.arraycopy(tempDisk,
-                h + messageSize,
-                temp,
-                0,
+        System.arraycopy(tempDisk, h + messageSize, temp, 0,
                 temp.length);
         return temp;
     }
@@ -160,15 +139,8 @@ public class Manager
     {
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) newMessage.length);
-        System.arraycopy(buffer.array(),
-                0,
-                tempDisk,
-                h,
-                messageSize);
-        System.arraycopy(newMessage,
-                0,
-                tempDisk,
-                h + 2,
+        System.arraycopy(buffer.array(), 0, tempDisk, h, messageSize);
+        System.arraycopy(newMessage, 0, tempDisk, h + 2,
                 newMessage.length);
     }
 
