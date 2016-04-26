@@ -31,48 +31,15 @@ public class Manager
      * make the constructor private so that this class cannot be instantiated
      * creates a doubly linked freelist
      */
-    private Manager()
+    private Manager(int sz)
     {
         // start freelist
+        blockSize = sz;
         messageSize = 2;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
+        tempDisk = new byte[blockSize];
         freeList = new FreeList();
-    }
-
-    /**
-     * Get the only object available
-     * 
-     * @return the Singleton instance of the Manager class
-     */
-    public static Manager getInstance()
-    {
-        if (instance == null)
-        {
-            instance = new Manager();
-        }
-        return instance;
-    }
-
-    /**
-     * resets the instance of the Manager
-     */
-    public static void resetInstance()
-    {
-        instance = null;
-    }
-
-    /**
-     * sets the size of a block of the freelist and reinitializes the temp array
-     * that represents the disk
-     * 
-     * @param sz
-     *            size of the block
-     */
-    public void setSize(int sz)
-    {
-        blockSize = sz;
-        tempDisk = new byte[10 * blockSize];
     }
 
     /**
