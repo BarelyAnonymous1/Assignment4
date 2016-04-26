@@ -23,7 +23,7 @@ public class SkipListTest extends TestCase
      */
     public void setUp() throws IOException
     {
-        Manager.setValues(null, 3, 512);
+        Manager.setValues("skipListTest", 3, 512);
         pair1 = new KVPair<String, Rectangle>("node1",
             new Rectangle("node1", 1, 1, 1, 1));
         pair2 = new KVPair<String, Rectangle>("node2",
