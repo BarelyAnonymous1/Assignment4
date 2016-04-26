@@ -237,7 +237,7 @@ public class SkipList<K extends Comparable<K>, E>
         {
             size--;
         }
-        if (updateHandles[0] != -1)
+        if (removeHandle != -1)
         {
             SkipNode<K,E> removeNode = ((SkipNode<K,E>) getObject(removeHandle));
             for (int i = 0; i < removeNode.next.length; i++)
