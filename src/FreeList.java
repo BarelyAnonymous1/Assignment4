@@ -179,6 +179,7 @@ public class FreeList
             if (curr.index + curr.length == curr.next.index)
             {
                 curr.length += curr.next.length;
+                System.out.println("removed a thing");
                 remove(curr.next.index);
             }
             curr = curr.next;
