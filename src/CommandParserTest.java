@@ -64,8 +64,8 @@ public class CommandParserTest extends TestCase
     {
         String[] args = {"test.txt", "1", "2", "512"};
         parser = new CommandParser(args);
-//        boolean success = parser.parseFile();
-        assertTrue(true);
+        boolean success = parser.parseFile();
+        assertTrue(success);
     }
     
 }
