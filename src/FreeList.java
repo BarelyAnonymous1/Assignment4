@@ -21,7 +21,7 @@ public class FreeList
     /**
      * number of nodes in the list
      */
-    private int             size;
+    private int     size;
 
     /**
      * default constructor for the LinkedList
@@ -66,7 +66,6 @@ public class FreeList
         newNode.prev = curr;
         size++;
     }
-
 
     /**
      * pulls the last added node from the queue this node removed from the queue
@@ -172,7 +171,7 @@ public class FreeList
                 curr.index -= sz;
                 curr.length += sz;
                 curr = curr.next;
-                removed =true;
+                removed = true;
             }
             else
                 curr = curr.next;
@@ -180,7 +179,7 @@ public class FreeList
         }
         if (!removed)
         {
-        insert(new FreeNode(handle, sz));
+            insert(new FreeNode(handle, sz));
         }
     }
 
