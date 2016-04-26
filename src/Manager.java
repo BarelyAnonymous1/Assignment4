@@ -91,6 +91,7 @@ public class Manager
                     && recordSize > free.length)
             {
                 free.length += blockSize;
+                blockSize++;
             }
             handle = free.index;
             free.index += recordSize;
