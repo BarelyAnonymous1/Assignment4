@@ -135,6 +135,15 @@ public class Manager
         return temp;
     }
 
+    /**
+     * updates a record in place; incoming message is expected to be the same
+     * size as the original message
+     * 
+     * @param h
+     *            index position of the original message
+     * @param newMessage
+     *            byte array containing the new message
+     */
     public void replaceRecord(int h, byte[] newMessage)
     {
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
