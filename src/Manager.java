@@ -77,7 +77,7 @@ public class Manager
     public int insert(byte[] data)
     {
         int recordSize = messageSize + data.length;
-        DoublyLinkedNode free = freeList.contains2(recordSize);
+        DoublyLinkedNode free = freeList.contains(recordSize);
         int handle = -1;
         if (free == null)
         {
