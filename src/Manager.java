@@ -15,7 +15,7 @@ public abstract class Manager
      */
     private static int        blockSize;
 
-    private static int        messageSize;
+    private static int        messageSize = 2;
 
     private static byte[]            tempDisk;
     private static byte[]            sizeArr;
@@ -27,11 +27,10 @@ public abstract class Manager
      * make the constructor private so that this class cannot be instantiated
      * creates a doubly linked freelist
      */
-    public static void setValues(int sz)
+    public static void setValues(String diskFile, int numBuffs, int buffSize)
     {
         // start freelist
-        blockSize = sz;
-        messageSize = 2;
+        blockSize = buffSize;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
         tempDisk = new byte[blockSize];
