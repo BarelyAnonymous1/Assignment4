@@ -170,7 +170,7 @@ public class DoublyLinkedQueue
         DoublyLinkedNode curr = head.next;
         while (curr != tail)
         {
-            if (curr.index + curr.length + 1 == handle)
+            if (curr.index + curr.length== handle)
             {
                 curr.length += sz;
                 return;
