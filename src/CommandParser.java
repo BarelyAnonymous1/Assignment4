@@ -181,8 +181,7 @@ public class CommandParser
                     + height;
                 Rectangle searchRect = new Rectangle("", x, y, width,
                     height);
-                KVPair<String, Rectangle> found = list.removeValue(
-                    searchRect);
+                Rectangle found = list.removeValue(searchRect);
                 if (found == null)
                 {
                     System.out.println("Rectangle not removed: ("
@@ -191,7 +190,7 @@ public class CommandParser
                 else
                 {
                     System.out.println("Rectangle removed: (" + found
-                        .value().toString() + ")");
+                        .toString() + ")");
                 }
             }
             else
@@ -255,15 +254,12 @@ public class CommandParser
         }
         else
         {
-            System.out.println("(" + searchResult.getPair().toString()
-                + ")");
+            System.out.println("(" + searchResult.getValue()
+                .toString() + ")");
             SkipNode<String, Rectangle> searchNext = null;
-            if (searchResult.next[0] != -1)
-            {
-                searchNext = (SkipNode<String, Rectangle>) Serializer
-                    .deserialize(Manager.getInstance().getRecord(
-                        searchResult.next[0]));
-            }
+            searchNext = (SkipNode<String, Rectangle>) Serializer
+                .deserialize(Manager.getInstance().getRecord(
+                    searchResult.next[0]));
             while (searchResult.next[0] != -1 && searchNext.getKey()
                 .compareTo(searchResult.getKey()) == 0)
             {
