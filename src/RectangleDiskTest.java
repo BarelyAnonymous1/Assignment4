@@ -42,8 +42,8 @@ public class RectangleDiskTest extends TestCase
         String[] params = { "bad", "params" };
         RectangleDisk.main(params);
         assertFuzzyEquals("Usage: RectangleDisk <commandfile> "
-                + "<diskFile> <numBuffs> <buffSize>", systemOut()
-                        .getHistory());
+            + "<diskFile> <numBuffs> <buffSize>", systemOut()
+                .getHistory());
     }
 
     /**
@@ -52,10 +52,10 @@ public class RectangleDiskTest extends TestCase
     public void testGoodParams()
     {
         String[] params = {
-                "commands.txt",
-                "dataFile.dat",
-                "5",
-                "4096" };
+            "commands.txt",
+            "dataFile.dat",
+            "5",
+            "4096" };
         RectangleDisk.main(params);
         assertEquals(4096, Manager.blockSize);
     }
@@ -69,8 +69,8 @@ public class RectangleDiskTest extends TestCase
         assertNotNull(dum);
         RectangleDisk.main(input1);
         assertFuzzyEquals("Usage: RectangleDisk <commandfile> "
-                + "<diskFile> <numBuffs> <buffSize>\n", systemOut()
-                        .getHistory());
+            + "<diskFile> <numBuffs> <buffSize>\n", systemOut()
+                .getHistory());
     }
 
     /**
@@ -88,10 +88,10 @@ public class RectangleDiskTest extends TestCase
     public void testSearchFile()
     {
         String[] input = {
-                "SyntaxTest.txt",
-                "dataFile.dat",
-                "5",
-                "4096" };
+            "SyntaxTest.txt",
+            "dataFile.dat",
+            "5",
+            "4096" };
         RectangleDisk.main(input);
         assertEquals(4096, Manager.blockSize);
 
