@@ -165,6 +165,17 @@ public class FreeList
                 curr.length += sz;
                 return;
             }
+            curr = curr.next;
+        }
+        insert(new FreeNode(handle, sz));
+        combineBlocks();
+    }
+
+    public void combineBlocks()
+    {
+        FreeNode curr = head.next;
+        while (curr != tail)
+        {
             if (curr.index + curr.length == curr.next.index)
             {
                 curr.length += curr.next.length;
@@ -172,7 +183,6 @@ public class FreeList
             }
             curr = curr.next;
         }
-        insert(new FreeNode(handle, sz));
     }
 
     /**
