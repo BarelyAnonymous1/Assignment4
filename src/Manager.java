@@ -96,7 +96,7 @@ public class Manager
     {
         int recordSize = messageSize + data.length;
         FreeNode free = freeList.contains(recordSize);
-        int handle = -1;
+        int handle = RectangleDisk.INVALID;
         if (free == null)
         {
             handle = (numBlocks) * blockSize;
