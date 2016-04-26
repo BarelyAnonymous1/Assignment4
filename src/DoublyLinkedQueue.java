@@ -7,16 +7,16 @@
  * @author Jonathan DeFreeuw (jondef95) Preston Lattimer (platt)
  * @version 1
  */
-public class DoublyLinkedQueue
+public class FreeList
 {
     /**
      * pointer to the first node in the list
      */
-    public DoublyLinkedNode head;
+    public FreeNode head;
     /**
      * pointer to the end of the list
      */
-    public DoublyLinkedNode tail;
+    public FreeNode tail;
 
     /**
      * number of nodes in the list
@@ -26,10 +26,10 @@ public class DoublyLinkedQueue
     /**
      * default constructor for the LinkedList
      */
-    public DoublyLinkedQueue()
+    public FreeList()
     {
-        head = new DoublyLinkedNode(-1, -1);
-        tail = new DoublyLinkedNode(-1, -1);
+        head = new FreeNode(-1, -1);
+        tail = new FreeNode(-1, -1);
         head.setNext(tail);
         tail.setPrev(head);
         size = 0;
@@ -42,15 +42,15 @@ public class DoublyLinkedQueue
      * @param newerNode
      *            the node to be inserted
      */
-    public void insert(DoublyLinkedNode newerNode)
+    public void insert(FreeNode newerNode)
     {
-        DoublyLinkedNode newNode = newerNode;
-        DoublyLinkedNode curr = head;
+        FreeNode newNode = newerNode;
+        FreeNode curr = head;
         while (curr.next != tail)
         {
             if (newNode.index < curr.next.index)
             {
-                DoublyLinkedNode temp = curr.next;
+                FreeNode temp = curr.next;
                 curr.next = newNode;
                 newNode.next = temp;
                 temp.prev = newNode;
@@ -67,30 +67,6 @@ public class DoublyLinkedQueue
         size++;
     }
 
-    /**
-     * adds a new node into the linked queue This node is inserted into the
-     * front of the queue ------------- -> x -------------
-     * 
-     * @param newerNode
-     *            the node to be inserted
-     */
-    public int insert(int numBlocks, int sz, int recordSz)
-    {
-        DoublyLinkedNode newNode = null;
-        DoublyLinkedNode curr = head;
-        if (size == 0)
-        {
-            insert(
-                new DoublyLinkedNode(numBlocks * sz, sz - recordSz));
-            return numBlocks * sz;
-        }
-        else
-        {
-            tail.prev.length -= recordSz;
-            return tail.prev.index;
-        }
-
-    }
 
     /**
      * pulls the last added node from the queue this node removed from the queue
@@ -101,14 +77,14 @@ public class DoublyLinkedQueue
      * @return the node that was just removed from the list so that it may be
      *         recycled and returned to the back of the queue
      */
-    public DoublyLinkedNode remove(int remIndex)
+    public FreeNode remove(int remIndex)
     {
-        DoublyLinkedNode curr = head;
+        FreeNode curr = head;
         while (curr.next != tail)
         {
             if (curr.next.index == remIndex)
             {
-                DoublyLinkedNode temp = curr.next;
+                FreeNode temp = curr.next;
                 curr.next.next.prev = curr;
                 curr.next = curr.next.next;
                 temp.next = null;
@@ -128,10 +104,10 @@ public class DoublyLinkedQueue
      *            size of the message that needs to be allocated
      * @return the node that has the best fit for the message
      */
-    public DoublyLinkedNode contains(int sz)
+    public FreeNode contains(int sz)
     {
-        DoublyLinkedNode curr = head.next;
-        DoublyLinkedNode best = null;
+        FreeNode curr = head.next;
+        FreeNode best = null;
         while (curr != tail)
         {
             if (curr.length == sz)
@@ -165,28 +141,6 @@ public class DoublyLinkedQueue
     }
 
     /**
-     * checks to see if the freelist has a block of a certain size available
-     * 
-     * @param sz
-     *            the size of the required freeblock
-     * @return the node containing the needed freeblock; or null if it does not
-     *         exist
-     */
-    public DoublyLinkedNode contains2(int sz)
-    {
-        DoublyLinkedNode curr = tail.prev;
-        while (curr != head)
-        {
-            if (curr.length >= sz)
-            {
-                return curr;
-            }
-            curr = curr.prev;
-        }
-        return null;
-    }
-
-    /**
      * makes a certain block available again
      * 
      * @param handle
@@ -196,7 +150,7 @@ public class DoublyLinkedQueue
      */
     public void reallocate(int handle, int sz)
     {
-        DoublyLinkedNode curr = head.next;
+        FreeNode curr = head.next;
         while (curr != tail)
         {
             if (curr.index + curr.length == handle)
@@ -217,7 +171,7 @@ public class DoublyLinkedQueue
             }
             curr = curr.next;
         }
-        insert(new DoublyLinkedNode(handle, sz));
+        insert(new FreeNode(handle, sz));
     }
 
     /**
@@ -235,7 +189,7 @@ public class DoublyLinkedQueue
      */
     public void dump()
     {
-        DoublyLinkedNode curr = head.next;
+        FreeNode curr = head.next;
         while (curr != tail)
         {
             System.out

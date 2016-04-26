@@ -5,16 +5,16 @@
  * @author Jonathan DeFreeuw (jondef95) Preston Lattimer (platt)
  * @version 1
  */
-public class DoublyLinkedNode
+public class FreeNode
 {
     /**
      * next node in the list
      */
-    public DoublyLinkedNode next;
+    public FreeNode next;
     /**
      * previous node in the list
      */
-    public DoublyLinkedNode prev;
+    public FreeNode prev;
     /**
      * length of data
      */
@@ -32,7 +32,7 @@ public class DoublyLinkedNode
      * @param newLength
      *            the length of the freeblock stored in the node
      */
-    public DoublyLinkedNode(int newIndex, int newLength)
+    public FreeNode(int newIndex, int newLength)
     {
         index = newIndex;
         length = newLength;
@@ -46,7 +46,7 @@ public class DoublyLinkedNode
      * @param newNext
      *            the node next to this one
      */
-    public void setNext(DoublyLinkedNode newNext)
+    public void setNext(FreeNode newNext)
     {
         next = newNext;
     }
@@ -57,7 +57,7 @@ public class DoublyLinkedNode
      * @param newPrev
      *            the node prev to this one
      */
-    public void setPrev(DoublyLinkedNode newPrev)
+    public void setPrev(FreeNode newPrev)
     {
         prev = newPrev;
     }
