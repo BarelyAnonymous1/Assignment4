@@ -157,6 +157,7 @@ public class FreeList
             {
                 curr.length += curr.next.length;
                 remove(curr.next.index);
+                System.out.println("tried to remove stuff");
             }
             if (curr.index + curr.length == handle)
             {
