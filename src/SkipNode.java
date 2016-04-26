@@ -23,7 +23,7 @@ public class SkipNode<K extends Comparable<K>, E>
     /**
      * Data stored into the node
      */
-    private int  pair;
+    public int  pair;
 
     /**
      * constructor to make nodes that store a KVPair
