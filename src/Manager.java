@@ -16,10 +16,6 @@ public class Manager
     private static int        blockSize;
 
     private static int        messageSize;
-    /**
-     * create an object of SingleObject
-     */
-    private static Manager    instance;
 
     private byte[]            tempDisk;
     private byte[]            sizeArr;
@@ -47,7 +43,7 @@ public class Manager
      * 
      * @return the freeblock size
      */
-    public int getSize()
+    public static int getSize()
     {
         return blockSize;
     }
