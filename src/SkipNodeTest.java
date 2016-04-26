@@ -16,11 +16,9 @@ public class SkipNodeTest extends TestCase
      */
     public void setUp() throws Exception
     {
-        Manager.resetInstance();
-        Manager.getInstance().setSize(512);
+        Manager manager = new Manager(512);
         pair = null;
-        int handle = Manager.getInstance()
-                .insert(Serializer.serialize(pair));
+        int handle = Manager.insert(Serializer.serialize(pair));
         node2 = new SkipNode<String, Integer>(handle, 1);
     }
 
@@ -46,9 +44,9 @@ public class SkipNodeTest extends TestCase
     public void testGetPairRight() throws Exception
     {
         KVPair<String, Integer> newPair = new KVPair<String, Integer>(
-                "hello!", 1);
-        int handle = Manager.getInstance()
-                .insert(Serializer.serialize(newPair));
+            "hello!", 1);
+        int handle = Manager
+            .insert(Serializer.serialize(newPair));
         node3 = new SkipNode<String, Integer>(handle, 4);
         assertFuzzyEquals(node3.getPair().key(), "hello!");
     }

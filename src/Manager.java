@@ -27,7 +27,7 @@ public class Manager
      * make the constructor private so that this class cannot be instantiated
      * creates a doubly linked freelist
      */
-    public Manager(int sz)
+    public static void setValues(int sz)
     {
         // start freelist
         blockSize = sz;

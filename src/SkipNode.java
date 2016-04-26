@@ -55,7 +55,7 @@ public class SkipNode<K extends Comparable<K>, E>
         {
             return null;
         }
-        byte[] obj = Manager.getInstance().getRecord(pair);
+        byte[] obj = Manager.getRecord(pair);
         if (obj == null)
             return null;
         KVPair<K, E> found = ((KVPair<K, E>) Serializer
@@ -79,7 +79,7 @@ public class SkipNode<K extends Comparable<K>, E>
         {
             return null;
         }
-        byte[] obj = Manager.getInstance().getRecord(pair);
+        byte[] obj = Manager.getRecord(pair);
         KVPair<K, E> found = ((KVPair<K, E>) Serializer
             .deserialize(obj));
         if (found != null)
@@ -101,7 +101,7 @@ public class SkipNode<K extends Comparable<K>, E>
         {
             return null;
         }
-        byte[] obj = Manager.getInstance().getRecord(pair);
+        byte[] obj = Manager.getRecord(pair);
         return ((KVPair<K, E>) Serializer.deserialize(obj));
     }
 }
