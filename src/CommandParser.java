@@ -126,21 +126,19 @@ public class CommandParser
         int height = scanner.nextInt();
         char c = name.charAt(0);
         if (checkDim(x, y, width, height) && Character.isAlphabetic(
-                c))
+            c))
         {
-            Rectangle rect = new Rectangle(x, y, width, height);
+            Rectangle rect = new Rectangle(name, x, y, width, height);
             KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(
-                    name, rect);
+                name, rect);
             list.insert(pair);
             System.out.println("Rectangle inserted: (" + name + ", "
-                    + x + ", " + y + ", " + width + ", " + height
-                    + ")");
+                + x + ", " + y + ", " + width + ", " + height + ")");
         }
         else
         {
             System.out.println("Rectangle rejected: (" + name + ", "
-                    + x + ", " + y + ", " + width + ", " + height
-                    + ")");
+                + x + ", " + y + ", " + width + ", " + height + ")");
         }
     }
 
@@ -163,12 +161,12 @@ public class CommandParser
             if (found == null)
             {
                 System.out.println("Rectangle not removed: (" + name
-                        + ")");
+                    + ")");
             }
             else
             {
                 System.out.println("Rectangle removed: (" + found
-                        .toString() + ")");
+                    .toString() + ")");
             }
         }
         else
@@ -180,26 +178,26 @@ public class CommandParser
             if (checkDim(x, y, width, height))
             {
                 String search = x + ", " + y + ", " + width + ", "
-                        + height;
-                Rectangle searchRect = new Rectangle(x, y, width,
-                        height);
+                    + height;
+                Rectangle searchRect = new Rectangle("", x, y, width,
+                    height);
                 KVPair<String, Rectangle> found = list.removeValue(
-                        searchRect);
+                    searchRect);
                 if (found == null)
                 {
                     System.out.println("Rectangle not removed: ("
-                            + search + ")");
+                        + search + ")");
                 }
                 else
                 {
                     System.out.println("Rectangle removed: (" + found
-                            .toString() + ")");
+                        .value().toString() + ")");
                 }
             }
             else
             {
                 System.out.println("Rectangle rejected: (" + x + ", "
-                        + y + ", " + width + ", " + height + ")");
+                    + y + ", " + width + ", " + height + ")");
             }
         }
     }
@@ -224,14 +222,15 @@ public class CommandParser
         if (!(height < 1 | width < 1))
         {
             System.out.println("Rectangles intersecting region (" + x
-                    + ", " + y + ", " + width + ", " + height + "):");
-            Rectangle regionRect = new Rectangle(x, y, width, height);
+                + ", " + y + ", " + width + ", " + height + "):");
+            Rectangle regionRect = new Rectangle("regionRect", x, y,
+                width, height);
             list.regionSearch(regionRect);
         }
         else
         {
             System.out.println("Rectangle rejected: (" + x + ", " + y
-                    + ", " + width + ", " + height + ")");
+                + ", " + width + ", " + height + ")");
         }
         // look in the SkipList for all Rectangles in the region
     }
@@ -257,20 +256,19 @@ public class CommandParser
         else
         {
             System.out.println("(" + name + ", " + searchResult
-                    .getValue().toString() + ")");
-            SkipNode<String, Rectangle> searchNext = 
-                    (SkipNode<String, Rectangle>) Serializer
-                    .deserialize(Manager.getInstance().getRecord(
-                            searchResult.next[0]));
+                .getValue().toString() + ")");
+            SkipNode<String, Rectangle> searchNext = (SkipNode<String, Rectangle>) Serializer
+                .deserialize(Manager.getInstance().getRecord(
+                    searchResult.next[0]));
             while (searchResult.next[0] != -1 && searchNext.getKey()
-                    .compareTo(searchResult.getKey()) == 0)
+                .compareTo(searchResult.getKey()) == 0)
             {
                 searchNext = (SkipNode<String, Rectangle>) Serializer
-                        .deserialize(Manager.getInstance().getRecord(
-                                searchResult.next[0]));
+                    .deserialize(Manager.getInstance().getRecord(
+                        searchResult.next[0]));
                 searchResult = searchNext;
                 System.out.println("(" + name + ", " + searchResult
-                        .getValue().toString() + ")");
+                    .getValue().toString() + ")");
             }
         }
     }
@@ -317,6 +315,6 @@ public class CommandParser
     public boolean checkDim(int x, int y, int width, int height)
     {
         return !(width <= 0 || height <= 0 || x + width > 1024 || y
-                + height > 1024 || x < 0 || y < 0);
+            + height > 1024 || x < 0 || y < 0);
     }
 }
