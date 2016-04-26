@@ -13,7 +13,7 @@ public class Manager
     /**
      * stores the size of a single FreeBlock and Buffer
      */
-    public static int         blockSize;
+    private static int         blockSize;
 
     private static int        messageSize;
     /**
@@ -92,7 +92,6 @@ public class Manager
                     && recordSize > free.length)
             {
                 free.length += blockSize;
-                numBlocks++;
             }
             handle = free.index;
             free.index += recordSize;
