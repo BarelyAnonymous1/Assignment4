@@ -23,7 +23,7 @@ public class Manager
 
     private byte[]            tempDisk;
     private byte[]            sizeArr;
-    private static int               numBlocks;
+    private int               numBlocks;
 
     private DoublyLinkedQueue freeList;
 
