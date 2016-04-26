@@ -116,10 +116,9 @@ public class SkipList<K extends Comparable<K>, E>
         {
             newHead.next[i] = oldHead.next[i];
         }
-        int temp = head;
+        Manager.getInstance().release(head);
         level = newLevel;
         head = getHandle(newHead);
-        Manager.getInstance().release(temp);
     }
 
     /**
@@ -203,12 +202,12 @@ public class SkipList<K extends Comparable<K>, E>
      *             if an object cant be serialized
      */
     @SuppressWarnings("unchecked")
-    public K removeKey(K key) throws Exception
+    public E removeKey(K key) throws Exception
     {
         SkipNode<K, E> current = (SkipNode<K, E>) getObject(head);
         int removeHandle = -1;
         int currHandle = head;
-        K located = null;
+        E located = null;
         for (int i = level; i >= 0; i--)
         {
             while (current.next[i] != -1)
@@ -218,7 +217,7 @@ public class SkipList<K extends Comparable<K>, E>
                         current.next[i]));
                 if (currNext.getKey().compareTo(key) == 0)
                 {
-                    located = currNext.getKey();
+                    located = currNext.getValue();
                     current.next[i] = currNext.next[i];
                     removeHandle = current.next[i];
                     break;
@@ -256,7 +255,7 @@ public class SkipList<K extends Comparable<K>, E>
      *             if an object cant be serialized
      */
     @SuppressWarnings("unchecked")
-    public KVPair<K, E> removeValue(E value) throws Exception
+    public E removeValue(E value) throws Exception
     {
         SkipNode<K, E> current = (SkipNode<K, E>) Serializer
             .deserialize(Manager.getInstance().getRecord(head));
