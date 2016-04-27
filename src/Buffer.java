@@ -25,12 +25,7 @@ public class Buffer
      * determines if the block has been edited (new record has been placed)
      */
     private boolean          dirtyBit;
-    /**
-     * the index of the furthest record that has been edited in the block; helps
-     * the buffer not write the entire block if it can help it; optimization
-     * decision
-     */
-    private int              furthestByte;
+    
     /**
      * the specific file that the block has been read from and will write to
      */
@@ -71,8 +66,6 @@ public class Buffer
         file = resetFile;
         dirtyBit = false; // makes sure that the new block won't be written if
                           // it hasn't been changed
-        furthestByte = 0; // make it so if the dirtyBit doesn't work, the block
-                          // won't get written at all
         storeBlock(); // get a new block
     }
 
