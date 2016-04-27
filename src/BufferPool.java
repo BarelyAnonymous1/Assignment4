@@ -79,13 +79,17 @@ public class BufferPool
         byte[] record = new byte[sz];
         int remSize = sz;
         int writePos = 0;
+        int readPos = recordPos % BufferPool.bufferSize;
         while (remSize > 0)
         {
+            int length = min(BufferPool.bufferSize
+                - recordPos, remSize);
             allocateBuffer(recordPos + writePos, file).getRecord(
-                record, recordPos % BufferPool.bufferSize, writePos,
-                min(remSize, BufferPool.bufferSize));
-            remSize -= BufferPool.bufferSize;
+                record, readPos, writePos, length);
             writePos += BufferPool.bufferSize;
+            remSize -= min(BufferPool.bufferSize
+                - recordPos, BufferPool.bufferSize);
+            readPos = 0;
         }
         return record;
     }
@@ -112,8 +116,8 @@ public class BufferPool
         RandomAccessFile file) throws IOException
     {
         // recordpos % buffersize is the position within a single block
-        allocateBuffer(recordPos, file).setBlock(record,
-            recordPos % BufferPool.bufferSize, 3, 4);
+        allocateBuffer(recordPos, file).setBlock(record, recordPos
+            % BufferPool.bufferSize, 3, 4);
     }
 
     /**
