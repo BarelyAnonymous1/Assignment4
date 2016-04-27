@@ -81,15 +81,15 @@ public class BufferPool
         int writePos = 0;
         while (remSize > 0)
         {
-            allocateBuffer(recordPos + writePos, file).getRecord(record,
-                recordPos % BufferPool.bufferSize, writePos,
+            allocateBuffer(recordPos + writePos, file).getRecord(
+                record, recordPos % BufferPool.bufferSize, writePos,
                 min(remSize, BufferPool.bufferSize));
             remSize -= BufferPool.bufferSize;
             writePos += BufferPool.bufferSize;
         }
         return record;
     }
-    
+
     private int min(int a, int b)
     {
         if (a < b)
