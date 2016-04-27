@@ -135,12 +135,9 @@ public class Buffer
      * @param recordNum
      *            the position within the block that is being retrieved
      */
-    public void getRecord(byte[] record, int recordNum)
+    public void getRecord(byte[] record, int recordNum, int pos, int sz)
     {
-        record[0] = block[recordNum];
-        record[1] = block[recordNum + 1];
-        record[2] = block[recordNum + 2];
-        record[3] = block[recordNum + 3];
+        System.arraycopy(block, recordNum, record, pos, sz);
     }
 
     /**
@@ -159,18 +156,13 @@ public class Buffer
      *            the position within the block that the record will be written
      *            to
      */
-    public void setBlock(byte[] record, int recordNum)
+    public void setBlock(byte[] record, int recordNum, int pos, int sz)
     {
         dirtyBit = true;
-        block[recordNum] = record[0];
-        block[recordNum + 1] = record[1];
-        block[recordNum + 2] = record[2];
-        block[recordNum + 3] = record[3];
+        System.arraycopy(record, pos, block, recordNum, sz);
 
         // updates the furthestByte if the new record was further into the block
         // than the previous furthest
-        if (furthestByte < recordNum + 4)
-            furthestByte = recordNum + 4;
     }
 
     /**
@@ -184,7 +176,7 @@ public class Buffer
         if (dirtyBit) // has the block been changed?
         {
             file.seek(index * BufferPool.bufferSize);
-            file.write(block, 0, furthestByte); // write the block until the
+            file.write(block); // write the block until the
                                                 // furthest changed byte
         }
     }
