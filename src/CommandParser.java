@@ -255,7 +255,6 @@ public class CommandParser
             System.out.println("Rectangle not found: " + name);
         }
         else
-
         {
             System.out.println(
                 "(" + searchResult.getValue().toString() + ")");
