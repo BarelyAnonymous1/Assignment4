@@ -255,7 +255,6 @@ public class CommandParser
             System.out.println("Rectangle not found: " + name);
         }
         else
-
         {
             System.out.println(
                 "(" + searchResult.getValue().toString() + ")");
@@ -270,13 +269,13 @@ public class CommandParser
                 && searchNext.getKey()
                     .compareTo(searchResult.getKey()) == 0)
             {
+                System.out.println("(" + name + ", "
+                    + searchNext.getValue().toString() + ")");
+                
+                searchResult = searchNext;
                 searchNext = (SkipNode<String, Rectangle>) Serializer
                     .deserialize(
                         Manager.getRecord(searchResult.next[0]));
-                searchResult = searchNext;
-
-                System.out.println("(" + name + ", "
-                    + searchResult.getValue().toString() + ")");
 
             }
         }

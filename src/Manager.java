@@ -1,4 +1,5 @@
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 import java.io.*;
 
 /**
@@ -18,7 +19,6 @@ public abstract class Manager
 
     private static int              messageSize = 2;
 
-    private static byte[]           tempDisk;
     private static byte[]           sizeArr;
     private static int              numBlocks;
     private static RandomAccessFile diskFile;
@@ -37,11 +37,10 @@ public abstract class Manager
     {
         // start freelist
         diskFile = new RandomAccessFile(startFile, "rw");
-        diskFile.setLength(0);
+        // diskFile.setLength(0);
         blockSize = buffSize;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
-        tempDisk = new byte[10 * blockSize];
         pool = new BufferPool(numBuffs, blockSize);
         freeList = new FreeList();
     }
@@ -98,10 +97,6 @@ public abstract class Manager
         }
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
-        // System.arraycopy(buffer.array(), 0, tempDisk, handle,
-        // messageSize);
-        // System.arraycopy(data, 0, tempDisk, handle + messageSize,
-        // data.length);
 
         pool.writeRecord(handle, messageSize, buffer.array(),
             diskFile);
@@ -140,8 +135,8 @@ public abstract class Manager
         System.arraycopy(pool.getRecord(h, messageSize, diskFile), 0,
             sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
-        return pool.getRecord(h + messageSize, sizeNum + messageSize,
-            diskFile);
+
+        return pool.getRecord(h + messageSize, sizeNum, diskFile);
     }
 
     /**
@@ -159,7 +154,6 @@ public abstract class Manager
     {
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) newMessage.length);
-
         pool.writeRecord(h, messageSize, buffer.array(), diskFile);
         pool.writeRecord(h + messageSize, newMessage.length,
             newMessage, diskFile);
@@ -176,6 +170,7 @@ public abstract class Manager
 
     public static void close() throws IOException
     {
+        pool.flushPool();
         diskFile.close();
     }
 }
