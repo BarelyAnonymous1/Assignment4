@@ -87,8 +87,11 @@ public class Buffer
     {
 
         // go to the byte position at the start of the block
-        file.seek(index * bufferSize);
-        file.read(block); // read the block from the file
+        if (index > -1)
+        {
+            file.seek(index * bufferSize);
+            file.read(block);
+        } // read the block from the file
     }
 
     /**
