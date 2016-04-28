@@ -265,16 +265,18 @@ public class CommandParser
                     .deserialize(
                         Manager.getRecord(searchResult.next[0]));
             }
-            while (searchNext.next[0] != RectangleDisk.INVALID
+            while (searchResult.next[0] != RectangleDisk.INVALID
                 && searchNext.getKey()
                     .compareTo(searchResult.getKey()) == 0)
             {
+                System.out.println("(" + name + ", "
+                    + searchNext.getValue().toString() + ")");
+                
+                searchResult = searchNext;
                 searchNext = (SkipNode<String, Rectangle>) Serializer
                     .deserialize(
-                        Manager.getRecord(searchNext.next[0]));
-            }
-                System.out.println("(" + name + ", "
-                    + searchResult.getValue().toString() + ")");
+                        Manager.getRecord(searchResult.next[0]));
+
             }
         }
     }

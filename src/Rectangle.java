@@ -166,12 +166,12 @@ public class Rectangle
     public boolean intersects(Rectangle otherRect)
     {
         // left edge r2 is to the right of r1
-        return !((otherRect.getX() >= this.x + this.width)
+        return !((otherRect.getX() > this.x + this.width)
             // right edge r2 is to the left of r1
-            || (otherRect.getX() + otherRect.getWidth() <= this.x)
+            || (otherRect.getX() + otherRect.getWidth() < this.x)
             // bottom edge r2 is above r1
-            || (otherRect.getY() + otherRect.getHeight() <= this.y)
+            || (otherRect.getY() + otherRect.getHeight() < this.y)
             // top edge r2 is below r1
-            || (otherRect.getY() >= this.y + this.height));
+            || (otherRect.getY() > this.y + this.height));
     }
 }
