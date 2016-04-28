@@ -150,14 +150,17 @@ public abstract class Manager
      *            index position of the original message
      * @param newMessage
      *            byte array containing the new message
+     * @throws IOException 
      */
-    public static void replaceRecord(int h, byte[] newMessage)
+    public static void replaceRecord(int h, byte[] newMessage) throws IOException
     {
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) newMessage.length);
-        System.arraycopy(buffer.array(), 0, tempDisk, h, messageSize);
-        System.arraycopy(newMessage, 0, tempDisk, h + 2,
-            newMessage.length);
+        
+        pool.writeRecord(h, messageSize, buffer.array(),
+            diskFile);
+        pool.writeRecord(h + messageSize, newMessage.length, newMessage,
+            diskFile);
     }
 
     /**
