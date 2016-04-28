@@ -34,7 +34,7 @@ public class Manager
      * @param numBuffs
      *            the max number buffers for the pool
      * @param buffSize
-     *            of the buffers in the pool
+     *            size of the buffers in the pool
      * 
      * @throws IOException
      */
@@ -174,6 +174,7 @@ public class Manager
 
     /**
      * flushes the pool and closes the disk file
+     * 
      * @throws IOException
      */
     public static void close() throws IOException
