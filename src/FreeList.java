@@ -177,6 +177,9 @@ public class FreeList
         combineBlocks();
     }
 
+    /**
+     * loops through the freeList and combines adjacent freeblocks
+     */
     public void combineBlocks()
     {
         FreeNode curr = head.next;
