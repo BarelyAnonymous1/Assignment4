@@ -9,7 +9,11 @@ import java.io.IOException;
 public class RectangleDisk
 {
 
+    /**
+     * used to describe when a handle is invalid; analagous to null
+     */
     public static final int INVALID = -1;
+
     /**
      * The entry point for the application.
      *
@@ -21,7 +25,7 @@ public class RectangleDisk
         if (args.length != 4)
         {
             System.out.println("Usage: RectangleDisk <commandfile> "
-                    + "<diskFile> <numBuffs> <buffSize>");
+                + "<diskFile> <numBuffs> <buffSize>");
         }
         else
         {
