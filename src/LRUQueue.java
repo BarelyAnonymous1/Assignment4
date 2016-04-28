@@ -76,9 +76,13 @@ public class LRUQueue
     {
         DoublyLinkedNode found = list.dequeue();
         if (found != null)
+        {
             return found.getData();
+        }
         else
+        {
             return null;
+        }
     }
 
     /**
