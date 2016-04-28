@@ -25,11 +25,11 @@ public class Buffer
      * determines if the block has been edited (new record has been placed)
      */
     private boolean          dirtyBit;
-    
+
     /**
      * integer that keeps the max size of the buffer
      */
-    private int bufferSize;
+    private int              bufferSize;
 
     /**
      * the specific file that the block has been read from and will write to
@@ -43,15 +43,17 @@ public class Buffer
      * @param startID
      *            the initial index for the buffer, determines where in the file
      *            the first block will come from
+     * @param startSize
+     *            the size of the buffer in bytes
      * @param startFile
      *            the initial file for the buffer, determines which file the
      *            first block will come from
      */
-    public Buffer(int startID, int startSize, RandomAccessFile startFile)
-        throws IOException
+    public Buffer(int startID, int startSize,
+        RandomAccessFile startFile) throws IOException
     {
         block = new byte[bufferSize]; // create the array necessary
-                                                 // for operation
+                                      // for operation
         bufferSize = startSize;
         reset(startID, startFile);
     }
