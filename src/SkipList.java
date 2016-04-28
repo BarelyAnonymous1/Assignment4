@@ -316,6 +316,7 @@ public class SkipList<K extends Comparable<K>, E>
         }
         else 
         {
+            System.out.println("currNode was null");
             return null;
         }
         if (currNode.getKey() == null
