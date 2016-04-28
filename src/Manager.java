@@ -61,8 +61,9 @@ public abstract class Manager
      * @param data
      *            the byte array representing the data
      * @return a receipt for the object being placed
+     * @throws IOException 
      */
-    public static int insert(byte[] data)
+    public static int insert(byte[] data) throws IOException
     {
         int recordSize = messageSize + data.length;
         FreeNode free = freeList.contains(recordSize);
@@ -100,6 +101,11 @@ public abstract class Manager
             messageSize);
         System.arraycopy(data, 0, tempDisk, handle + messageSize,
             data.length);
+        
+        pool.writeRecord(handle, messageSize, buffer.array(),
+            diskFile);
+        pool.writeRecord(handle + messageSize, data.length, data,
+            diskFile);
         return handle;
     }
 
