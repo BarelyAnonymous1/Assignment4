@@ -149,7 +149,7 @@ public class Buffer
      *            the position within the block that the record will be written
      *            to
      */
-    public void setBlock(byte[] record, int recordNum, int pos, int sz)
+    public void setRecord(byte[] record, int recordNum, int pos, int sz)
     {
         dirtyBit = true;
         System.arraycopy(record, pos, block, recordNum, sz);
