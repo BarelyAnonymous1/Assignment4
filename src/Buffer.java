@@ -169,8 +169,7 @@ public class Buffer
         if (dirtyBit) // has the block been changed?
         {
             file.seek(index * BufferPool.bufferSize);
-            file.write(block); // write the block until the
-                                                // furthest changed byte
+            file.write(block); // write the block until the                                          // furthest changed byte
         }
     }
 }
