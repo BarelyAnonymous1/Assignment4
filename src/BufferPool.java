@@ -66,8 +66,8 @@ public class BufferPool
      * 
      * @param recordPos
      *            the position of the record in the file
-     * @param record
-     *            the byte array where the new record will be stored
+     * @param sz
+     *            the number of bytes to get from the disk
      * @param file
      *            the file where the record will be read from
      */
