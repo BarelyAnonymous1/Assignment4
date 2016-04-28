@@ -179,7 +179,7 @@ public class Buffer
      */
     public void flush() throws IOException
     {
-        if (dirtyBit) // has the block been changed?
+        if (dirtyBit & index > -1) // has the block been changed?
         {
             file.seek(index * bufferSize);
             file.write(block);
