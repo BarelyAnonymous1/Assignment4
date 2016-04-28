@@ -170,7 +170,7 @@ public class Buffer
         if (dirtyBit) // has the block been changed?
         {
             file.seek(index * BufferPool.bufferSize);
-            file.write(block); 
+            file.write(block);
         }
     }
 }
