@@ -17,11 +17,6 @@ public class BufferPool
      */
     public static int bufferSize;
     /**
-     * standard size of the records; number of bytes for each record wanted to
-     * write as RECORD_SIZE but WebCAT threw a fit
-     */
-    public static int recordSize = 4;
-    /**
      * modified linked queue used to implement the insertion and cycling of
      * Buffers
      */
