@@ -41,7 +41,7 @@ public abstract class Manager
         numBlocks = 0;
         sizeArr = new byte[messageSize];
         tempDisk = new byte[10 * blockSize];
-        pool = new BufferPool(numBuffs);
+        pool = new BufferPool(numBuffs, blockSize);
         freeList = new FreeList();
     }
 
