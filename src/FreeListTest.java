@@ -70,10 +70,11 @@ public class FreeListTest extends TestCase
     {
         System.out.println("");
         assertNull(list.contains(0));
-        node3.setData(3, 1);
+        node3.setData(4, 1);
         list.insert(node2);
         list.insert(node3);
         assertEquals(node3, list.contains(1));
+        assertEquals()
         list.dump();
     }
 
