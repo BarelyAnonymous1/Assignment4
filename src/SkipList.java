@@ -319,7 +319,7 @@ public class SkipList<K extends Comparable<K>, E>
             return null;
         }
         SkipNode<K, E> nextNode = null;
-        if (curr != RectangleDisk.INVALID)
+        if (currNode.next[0] != RectangleDisk.INVALID)
         {
             nextNode = (SkipNode<K, E>) getObject(currNode.next[0]);
         }
