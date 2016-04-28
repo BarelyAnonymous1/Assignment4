@@ -94,6 +94,7 @@ public class SkipList<K extends Comparable<K>, E>
      */
     private void replaceObject(int pos, Object obj) throws Exception
     {
+        System.out.println("pos: " + pos);
         Manager.replaceRecord(pos,
                 Serializer.serialize(obj));
     }
