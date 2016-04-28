@@ -18,7 +18,6 @@ public abstract class Manager
 
     private static int              messageSize = 2;
 
-    private static byte[]           tempDisk;
     private static byte[]           sizeArr;
     private static int              numBlocks;
     private static RandomAccessFile diskFile;
@@ -37,11 +36,10 @@ public abstract class Manager
     {
         // start freelist
         diskFile = new RandomAccessFile(startFile, "rw");
-//        diskFile.setLength(0);
+        // diskFile.setLength(0);
         blockSize = buffSize;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
-        tempDisk = new byte[10 * blockSize];
         pool = new BufferPool(numBuffs, blockSize);
         freeList = new FreeList();
     }
@@ -82,11 +80,11 @@ public abstract class Manager
             if ((free.index + free.length) % blockSize == 0
                 && recordSize > free.length)
             {
-//                while (free.length < recordSize)
-//                {
-                    free.length += blockSize;
-                    numBlocks++;
-//                }
+                // while (free.length < recordSize)
+                // {
+                free.length += blockSize;
+                numBlocks++;
+                // }
             }
             handle = free.index;
             free.index += recordSize;
@@ -142,6 +140,10 @@ public abstract class Manager
         System.arraycopy(pool.getRecord(h, messageSize, diskFile), 0,
             sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
+        byte[] temp = pool.getRecord(h + messageSize,
+            sizeNum + messageSize, diskFile);
+        System.out.println("populated temp. size is: " + temp.length
+            + "and sizeNum is: " + sizeNum);
         return pool.getRecord(h + messageSize, sizeNum + messageSize,
             diskFile);
     }
