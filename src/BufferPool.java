@@ -138,7 +138,7 @@ public class BufferPool
      *            name of the file that the stats from the sort will be written
      *            to
      */
-    public void flushPool(String statName) throws IOException
+    public void flushPool() throws IOException
     {
         Buffer bufferToFlush = pool.removeLRU();
         while (bufferToFlush != null)
