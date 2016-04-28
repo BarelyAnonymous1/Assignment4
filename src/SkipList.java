@@ -318,21 +318,20 @@ public class SkipList<K extends Comparable<K>, E>
         {
             return null;
         }
-        SkipNode<K, E> nextNode = null;
         if (currNode.next[0] != RectangleDisk.INVALID)
         {
-            nextNode = (SkipNode<K, E>) getObject(currNode.next[0]);
+            currNode = (SkipNode<K, E>) getObject(currNode.next[0]);
         }
         else
         {
             return null;
         }
-        if (nextNode.getKey() == null
-            || key.compareTo(nextNode.getKey()) != 0)
+        if (currNode.getKey() == null
+            || key.compareTo(currNode.getKey()) != 0)
         {
             return null;
         }
-        return nextNode;
+        return currNode;
     }
 
     /**
