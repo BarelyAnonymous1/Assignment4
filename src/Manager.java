@@ -30,13 +30,14 @@ public abstract class Manager
      * make the constructor private so that this class cannot be instantiated
      * creates a doubly linked freelist
      * 
-     * @throws FileNotFoundException
+     * @throws IOException
      */
     public static void setValues(String startFile, int numBuffs,
-        int buffSize) throws FileNotFoundException
+        int buffSize) throws IOException
     {
         // start freelist
         diskFile = new RandomAccessFile(startFile, "rw");
+        diskFile.setLength(0);
         blockSize = buffSize;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
@@ -61,7 +62,7 @@ public abstract class Manager
      * @param data
      *            the byte array representing the data
      * @return a receipt for the object being placed
-     * @throws IOException 
+     * @throws IOException
      */
     public static int insert(byte[] data) throws IOException
     {
@@ -97,11 +98,11 @@ public abstract class Manager
         }
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
-        System.arraycopy(buffer.array(), 0, tempDisk, handle,
-            messageSize);
-        System.arraycopy(data, 0, tempDisk, handle + messageSize,
-            data.length);
-        
+        // System.arraycopy(buffer.array(), 0, tempDisk, handle,
+        // messageSize);
+        // System.arraycopy(data, 0, tempDisk, handle + messageSize,
+        // data.length);
+
         pool.writeRecord(handle, messageSize, buffer.array(),
             diskFile);
         pool.writeRecord(handle + messageSize, data.length, data,
@@ -114,13 +115,15 @@ public abstract class Manager
      * 
      * @param h
      *            the receipt for the data in the allocated list
+     * @throws IOException
      */
-    public static void release(int h)
+    public static void release(int h) throws IOException
     {
-        System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
+        System.arraycopy(pool.getRecord(h, messageSize, diskFile), 0,
+            sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] replace = new byte[sizeNum + messageSize];
-        System.arraycopy(replace, 0, tempDisk, h, replace.length);
+        pool.writeRecord(h, replace.length, replace, diskFile);
         freeList.reallocate(h, sizeNum + messageSize);
     }
 
@@ -130,15 +133,15 @@ public abstract class Manager
      * @param h
      *            the receipt for the data in the allocated list
      * @return the byte array that represents the data in the allocated list
+     * @throws IOException
      */
-    public static byte[] getRecord(int h)
+    public static byte[] getRecord(int h) throws IOException
     {
-        System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
+        System.arraycopy(pool.getRecord(h, messageSize, diskFile), 0,
+            sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
-        byte[] temp = new byte[messageSize + sizeNum];
-        System.arraycopy(tempDisk, h + messageSize, temp, 0,
-            temp.length);
-        return temp;
+        return pool.getRecord(h + messageSize, sizeNum + messageSize,
+            diskFile);
     }
 
     /**
@@ -149,14 +152,17 @@ public abstract class Manager
      *            index position of the original message
      * @param newMessage
      *            byte array containing the new message
+     * @throws IOException
      */
     public static void replaceRecord(int h, byte[] newMessage)
+        throws IOException
     {
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) newMessage.length);
-        System.arraycopy(buffer.array(), 0, tempDisk, h, messageSize);
-        System.arraycopy(newMessage, 0, tempDisk, h + 2,
-            newMessage.length);
+
+        pool.writeRecord(h, messageSize, buffer.array(), diskFile);
+        pool.writeRecord(h + messageSize, newMessage.length,
+            newMessage, diskFile);
     }
 
     /**
@@ -166,5 +172,10 @@ public abstract class Manager
     {
         System.out.println("Freelist Blocks:");
         freeList.dump();
+    }
+
+    public static void close() throws IOException
+    {
+        diskFile.close();
     }
 }
