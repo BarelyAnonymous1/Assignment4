@@ -163,7 +163,8 @@ public abstract class Manager
     {
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) newMessage.length);
-
+        System.out
+            .println("newMessage.length = " + newMessage.length);
         pool.writeRecord(h, messageSize, buffer.array(), diskFile);
         pool.writeRecord(h + messageSize, newMessage.length,
             newMessage, diskFile);
