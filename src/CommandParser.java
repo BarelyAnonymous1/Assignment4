@@ -24,11 +24,7 @@ public class CommandParser
      * constructor for parser, stores filename
      * 
      * @param args
-<<<<<<< HEAD
-     *            name for the file that is being parsed
-=======
      *            inputs given from the command line
->>>>>>> branch 'master' of https://github.com/BarelyAnonymous1/Assignment4.git
      */
     public CommandParser(String[] args) throws IOException
     {
