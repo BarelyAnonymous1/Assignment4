@@ -84,10 +84,10 @@ public class BufferPool
         while (remSize > 0)
         {
             int length = remSize;
-            if (readPos + remSize > bufferSize)
-                length = bufferSize - readPos;
-            allocateBuffer(recordPos + writePos, file).getRecord(
-                record, readPos, writePos, length);
+            if (readPos + remSize > BufferPool.bufferSize)
+                length = BufferPool.bufferSize - readPos;
+            allocateBuffer(recordPos + writePos, file)
+                .getRecord(record, readPos, writePos, length);
             writePos += length;
             remSize -= length;
             readPos = 0;
@@ -105,12 +105,27 @@ public class BufferPool
      * @param file
      *            file the where the record will be written
      */
-    public void writeRecord(int recordPos, byte[] record,
+    public void writeRecord(int recordPos, int sz, byte[] record,
         RandomAccessFile file) throws IOException
     {
         // recordpos % buffersize is the position within a single block
-        allocateBuffer(recordPos, file).setBlock(record, recordPos
-            % BufferPool.bufferSize, 3, 4);
+        allocateBuffer(recordPos, file).setBlock(record,
+            recordPos % BufferPool.bufferSize, 3, 4);
+        int remSize = sz;
+        int writePos = 0;
+        int readPos = recordPos % BufferPool.bufferSize;
+        while (remSize > 0)
+        {
+            int length = remSize;
+            if (readPos + remSize > BufferPool.bufferSize)
+                length = BufferPool.bufferSize - readPos;
+            allocateBuffer(recordPos + writePos, file)
+                .setRecord(record, readPos, writePos, length);
+            writePos += length;
+            remSize -= length;
+            readPos = 0;
+        }
+        return record;
     }
 
     /**
