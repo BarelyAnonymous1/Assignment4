@@ -34,6 +34,8 @@ public class CommandParserTest extends TestCase
         parser = new CommandParser(args);
         boolean success = parser.parseFile();
         assertTrue(success);
+        assertEquals(512, Manager.getSize());
+
         System.out.println("");
 
     }
