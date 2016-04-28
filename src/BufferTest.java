@@ -76,17 +76,6 @@ public class BufferTest extends TestCase
     }
 
     /**
-     * tests that a record can be properly retrieved from the block
-     * 
-     * @throws IOException
-     *             if the file doesnt work
-     */
-    public void testGetRecord() throws IOException
-    {
-
-    }
-
-    /**
      * tests that a record can be properly written to the block
      * 
      * @throws IOException
