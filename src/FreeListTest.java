@@ -57,6 +57,16 @@ public class FreeListTest extends TestCase
         assertEquals(list.remove(1), node1);
         list.dump();
     }
-
+    /**
+     * tests the contains method
+     */
+    public void testContains()
+    {
+        list.insert(node3);
+        list.insert(node2);
+        list.insert(node1);
+        //list.contains(1);
+        list.dump();
+    }
 
 }
