@@ -338,6 +338,7 @@ public class SkipList<K extends Comparable<K>, E>
         int curr = head;
         while (curr != RectangleDisk.INVALID)
         {
+            System.out.println(curr);
             SkipNode<K, E> current = (SkipNode<K, E>) Serializer
                     .deserialize(Manager.getRecord(curr));
             String name = "";
