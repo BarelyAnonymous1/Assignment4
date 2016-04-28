@@ -103,7 +103,7 @@ public abstract class Manager
         // System.arraycopy(data, 0, tempDisk, handle + messageSize,
         // data.length);
 
-        System.out.println("writing to handle: " + h);
+        System.out.println("writing to handle: " + handle);
         pool.writeRecord(handle, messageSize, buffer.array(),
             diskFile);
         pool.writeRecord(handle + messageSize, data.length, data,
