@@ -1,5 +1,4 @@
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 import java.io.*;
 
 /**
@@ -35,9 +34,7 @@ public abstract class Manager
     public static void setValues(String startFile, int numBuffs,
         int buffSize) throws IOException
     {
-        // start freelist
         diskFile = new RandomAccessFile(startFile, "rw");
-        // diskFile.setLength(0);
         blockSize = buffSize;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
