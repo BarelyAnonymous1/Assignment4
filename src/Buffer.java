@@ -52,9 +52,10 @@ public class Buffer
     public Buffer(int startID, int startSize,
         RandomAccessFile startFile) throws IOException
     {
+        bufferSize = startSize;
+
         block = new byte[bufferSize]; // create the array necessary
                                       // for operation
-        bufferSize = startSize;
         reset(startID, startFile);
     }
 
