@@ -30,10 +30,10 @@ public abstract class Manager
      * make the constructor private so that this class cannot be instantiated
      * creates a doubly linked freelist
      * 
-     * @throws FileNotFoundException
+     * @throws IOException
      */
     public static void setValues(String startFile, int numBuffs,
-        int buffSize) throws FileNotFoundException
+        int buffSize) throws IOException
     {
         // start freelist
         diskFile = new RandomAccessFile(startFile, "rw");
@@ -98,10 +98,10 @@ public abstract class Manager
         }
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
-//        System.arraycopy(buffer.array(), 0, tempDisk, handle,
-//            messageSize);
-//        System.arraycopy(data, 0, tempDisk, handle + messageSize,
-//            data.length);
+        // System.arraycopy(buffer.array(), 0, tempDisk, handle,
+        // messageSize);
+        // System.arraycopy(data, 0, tempDisk, handle + messageSize,
+        // data.length);
 
         pool.writeRecord(handle, messageSize, buffer.array(),
             diskFile);
@@ -132,15 +132,15 @@ public abstract class Manager
      * @param h
      *            the receipt for the data in the allocated list
      * @return the byte array that represents the data in the allocated list
-     * @throws IOException 
+     * @throws IOException
      */
     public static byte[] getRecord(int h) throws IOException
     {
         System.out.println("Tried to get handle: " + h);
-        sizeArr = pool.getRecord(h, messageSize, diskFile);
+        System.arraycopy(pool.getRecord(h, messageSize, diskFile), 0,
+            sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
-        byte[] temp = new byte[messageSize + sizeNum];
-        temp = pool.getRecord(h, temp.length, diskFile);
+        return pool.getRecord(h, sizeNum + messageSize, diskFile);
         return temp;
     }
 
@@ -152,17 +152,17 @@ public abstract class Manager
      *            index position of the original message
      * @param newMessage
      *            byte array containing the new message
-     * @throws IOException 
+     * @throws IOException
      */
-    public static void replaceRecord(int h, byte[] newMessage) throws IOException
+    public static void replaceRecord(int h, byte[] newMessage)
+        throws IOException
     {
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) newMessage.length);
-        
-        pool.writeRecord(h, messageSize, buffer.array(),
-            diskFile);
-        pool.writeRecord(h + messageSize, newMessage.length, newMessage,
-            diskFile);
+
+        pool.writeRecord(h, messageSize, buffer.array(), diskFile);
+        pool.writeRecord(h + messageSize, newMessage.length,
+            newMessage, diskFile);
     }
 
     /**
