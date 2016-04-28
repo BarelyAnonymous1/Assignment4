@@ -9,7 +9,6 @@ public class SkipNodeTest extends TestCase
     private SkipNode<String, Integer> node1;
     private SkipNode<String, Integer> node2;
     private SkipNode<String, Integer> node3;
-    private KVPair<String, Integer>   pair;
     private KVPair<String, Integer> pair2;
 
     /**
@@ -18,7 +17,7 @@ public class SkipNodeTest extends TestCase
     public void setUp() throws Exception
     {
         Manager.setValues("skipNodeTest", 3, 512);
-        pair = null;
+        KVPair<String, Integer> pair = null;
         int handle = Manager.insert(Serializer.serialize(pair));
         node2 = new SkipNode<String, Integer>(handle, 1);
         pair2 = new KVPair<String, Integer>("a", 1);
