@@ -38,7 +38,7 @@ public class BufferTest extends TestCase
             test2[j] = "b".getBytes()[0];
         file.write(test);
         file.write(test2);
-        bufferpool = BufferPool(4, 4096);
+        bufferpool = new BufferPool(4, 4096);
     }
 
     /**
