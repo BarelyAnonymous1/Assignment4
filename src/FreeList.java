@@ -117,7 +117,8 @@ public class FreeList
             {
                 best = curr;
             }
-            else if (curr.length > sz && best != null
+            else if (curr.length > sz 
+                && best != null
                 && curr.length < best.length)
             {
                 best = curr;
