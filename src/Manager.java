@@ -61,7 +61,7 @@ public abstract class Manager
      * @param data
      *            the byte array representing the data
      * @return a receipt for the object being placed
-     * @throws IOException 
+     * @throws IOException
      */
     public static int insert(byte[] data) throws IOException
     {
@@ -101,7 +101,7 @@ public abstract class Manager
             messageSize);
         System.arraycopy(data, 0, tempDisk, handle + messageSize,
             data.length);
-        
+
         pool.writeRecord(handle, messageSize, buffer.array(),
             diskFile);
         pool.writeRecord(handle + messageSize, data.length, data,
@@ -114,7 +114,7 @@ public abstract class Manager
      * 
      * @param h
      *            the receipt for the data in the allocated list
-     * @throws IOException 
+     * @throws IOException
      */
     public static void release(int h) throws IOException
     {
@@ -134,6 +134,8 @@ public abstract class Manager
      */
     public static byte[] getRecord(int h)
     {
+        sizeArr = pool.getRecord(h, messageSize, diskFile);
+
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] temp = new byte[messageSize + sizeNum];
@@ -168,6 +170,7 @@ public abstract class Manager
         System.out.println("Freelist Blocks:");
         freeList.dump();
     }
+
     public static void close() throws IOException
     {
         diskFile.close();
