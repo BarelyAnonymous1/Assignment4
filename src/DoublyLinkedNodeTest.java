@@ -21,8 +21,8 @@ public class DoublyLinkedNodeTest extends TestCase
     {
         RandomAccessFile file = new RandomAccessFile("buffertest.txt",
                 "rw");
-        node1 = new DoublyLinkedNode(new Buffer(0, file));
-        node2 = new DoublyLinkedNode(new Buffer(0, file));
+        node1 = new DoublyLinkedNode(new Buffer(0, 512, file));
+        node2 = new DoublyLinkedNode(new Buffer(0, 512, file));
     }
 
     /**

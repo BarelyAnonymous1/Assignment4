@@ -40,17 +40,18 @@ public class LRUQueue
      * @param searchFile
      *            the file to search
      */
-    public void makeMostRecent(int recordPos, RandomAccessFile searchFile)
-        throws IOException
+    public void makeMostRecent(int recordPos,
+        RandomAccessFile searchFile) throws IOException
     {
-        DoublyLinkedNode foundNode = list.remove(recordPos
-                / BufferPool.bufferSize, searchFile);
+        DoublyLinkedNode foundNode = list
+            .remove(recordPos / BufferPool.bufferSize, searchFile);
         if (foundNode == null)
         {
             if (list.getSize() < maxSize)
             {
-                list.enqueue(new DoublyLinkedNode((new Buffer(recordPos
-                        / BufferPool.bufferSize, searchFile))));
+                list.enqueue(new DoublyLinkedNode(
+                    (new Buffer(recordPos / BufferPool.bufferSize,
+                        BufferPool.bufferSize, searchFile))));
             }
             else
             {
@@ -75,9 +76,13 @@ public class LRUQueue
     {
         DoublyLinkedNode found = list.dequeue();
         if (found != null)
+        {
             return found.getData();
+        }
         else
+        {
             return null;
+        }
     }
 
     /**

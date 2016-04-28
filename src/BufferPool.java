@@ -31,11 +31,16 @@ public class BufferPool
      *            spec)
      * @param startSize
      *            the size of the buffers that will be stored in the pool
+     * @throws IOException
      */
-    public BufferPool(int startMax, int startSize)
+    public BufferPool(int startMax, int startSize) throws IOException
     {
         pool = new LRUQueue(startMax);
         bufferSize = startSize;
+        for (int i = 1; i <= startMax; i++)
+        {
+            pool.makeMostRecent((-1) * i * bufferSize, null);
+        }
     }
 
     /**
@@ -55,8 +60,10 @@ public class BufferPool
         // if a new Buffer was moved to MRU, change the Buffer values
         if (pool.getMRU().getFile() != searchFile || pool.getMRU()
             .getID() != recordPos / BufferPool.bufferSize)
+        {
             pool.getMRU().reset(recordPos / BufferPool.bufferSize,
                 searchFile);
+        }
         // return the Buffer that was just used
         return pool.getMRU();
     }
@@ -70,6 +77,7 @@ public class BufferPool
      *            the number of bytes to get from the disk
      * @param file
      *            the file where the record will be read from
+     * @return the record that was retrieved from disk
      */
     public byte[] getRecord(int recordPos, int sz,
         RandomAccessFile file) throws IOException
@@ -101,8 +109,8 @@ public class BufferPool
      * 
      * @param recordPos
      *            the position of the record in the file
-     * @param record
-     *            the byte array to be written to disk
+     * @param sz
+     *            the number of bytes to be written to disk
      * @param record
      *            the byte array that contains the record values
      * @param file
@@ -119,7 +127,9 @@ public class BufferPool
         {
             int length = remSize;
             if (writePos + remSize > BufferPool.bufferSize)
+            {
                 length = BufferPool.bufferSize - writePos;
+            }
             allocateBuffer(recordPos + readPos, file)
                 .setRecord(record, writePos, readPos, length);
             readPos += length;

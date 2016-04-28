@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 /**
  * The class containing the main method, the entry point of the application.
  *
@@ -9,33 +7,31 @@ import java.io.IOException;
 public class RectangleDisk
 {
 
+    /**
+     * used to describe when a handle is invalid; analogous to null
+     */
     public static final int INVALID = -1;
+
     /**
      * The entry point for the application.
      *
      * @param args
      *            The command line arguments.
      */
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws Exception
     {
         if (args.length != 4)
         {
             System.out.println("Usage: RectangleDisk <commandfile> "
-                    + "<diskFile> <numBuffs> <buffSize>");
+                + "<diskFile> <numBuffs> <buffSize>");
         }
         else
         {
-            try
-            {
-                CommandParser parser = new CommandParser(args);
-                parser.parseFile();
-                Manager.close();
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                Manager.close();
-            }
+
+            CommandParser parser = new CommandParser(args);
+            parser.parseFile();
+            Manager.close();
+
         }
     }
 }

@@ -134,9 +134,17 @@ public class FreeList
         }
         else if ((tail.prev.index + tail.prev.length)
             % Manager.getSize() == 0)
+        {
             return tail.prev;
+        }
         else
+<<<<<<< HEAD
             return best;
+=======
+        {
+            return null;
+        }
+>>>>>>> branch 'master' of https://github.com/BarelyAnonymous1/Assignment4.git
     }
 
     /**
@@ -173,6 +181,9 @@ public class FreeList
         combineBlocks();
     }
 
+    /**
+     * loops through the freeList and combines adjacent freeblocks
+     */
     public void combineBlocks()
     {
         FreeNode curr = head.next;

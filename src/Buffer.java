@@ -27,6 +27,11 @@ public class Buffer
     private boolean          dirtyBit;
 
     /**
+     * integer that keeps the max size of the buffer
+     */
+    private int              bufferSize;
+
+    /**
      * the specific file that the block has been read from and will write to
      */
     private RandomAccessFile file;
@@ -38,15 +43,19 @@ public class Buffer
      * @param startID
      *            the initial index for the buffer, determines where in the file
      *            the first block will come from
+     * @param startSize
+     *            the size of the buffer in bytes
      * @param startFile
      *            the initial file for the buffer, determines which file the
      *            first block will come from
      */
-    public Buffer(int startID, RandomAccessFile startFile)
-        throws IOException
+    public Buffer(int startID, int startSize,
+        RandomAccessFile startFile) throws IOException
     {
-        block = new byte[BufferPool.bufferSize]; // create the array necessary
-                                                 // for operation
+        bufferSize = startSize;
+
+        block = new byte[bufferSize]; // create the array necessary
+                                      // for operation
         reset(startID, startFile);
     }
 
@@ -78,8 +87,11 @@ public class Buffer
     {
 
         // go to the byte position at the start of the block
-        file.seek(index * BufferPool.bufferSize);
-        file.read(block); // read the block from the file
+        if (index > -1)
+        {
+            file.seek(index * bufferSize);
+            file.read(block);
+        } // read the block from the file
     }
 
     /**
@@ -167,9 +179,9 @@ public class Buffer
      */
     public void flush() throws IOException
     {
-        if (dirtyBit) // has the block been changed?
+        if (dirtyBit & index > -1) // has the block been changed?
         {
-            file.seek(index * BufferPool.bufferSize);
+            file.seek(index * bufferSize);
             file.write(block);
         }
     }

@@ -310,14 +310,7 @@ public class SkipList<K extends Comparable<K>, E>
             }
         }
         SkipNode<K, E> currNode = null;
-        if (curr != RectangleDisk.INVALID)
-        {
-            currNode = (SkipNode<K, E>) getObject(curr);
-        }
-        else
-        {
-            return null;
-        }
+        currNode = (SkipNode<K, E>) getObject(curr);
         if (currNode.next[0] != RectangleDisk.INVALID)
         {
             currNode = (SkipNode<K, E>) getObject(currNode.next[0]);
@@ -326,8 +319,7 @@ public class SkipList<K extends Comparable<K>, E>
         {
             return null;
         }
-        if (currNode.getKey() == null
-            || key.compareTo(currNode.getKey()) != 0)
+        if (key.compareTo(currNode.getKey()) != 0)
         {
             return null;
         }
@@ -449,7 +441,7 @@ public class SkipList<K extends Comparable<K>, E>
             if (current.next[0] != RectangleDisk.INVALID)
             {
                 current = (SkipNode<K, E>) getObject(current.next[0]);
-            }   
+            }
         }
         return inRegion;
     }

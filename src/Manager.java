@@ -1,5 +1,4 @@
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 import java.io.*;
 
 /**
@@ -10,7 +9,7 @@ import java.io.*;
  * @version 1
  *
  */
-public abstract class Manager
+public class Manager
 {
     /**
      * stores the size of a single FreeBlock and Buffer
@@ -30,14 +29,19 @@ public abstract class Manager
      * make the constructor private so that this class cannot be instantiated
      * creates a doubly linked freelist
      * 
+     * @param startFile
+     *            file for the buffer
+     * @param numBuffs
+     *            the max number buffers for the pool
+     * @param buffSize
+     *            size of the buffers in the pool
+     * 
      * @throws IOException
      */
     public static void setValues(String startFile, int numBuffs,
         int buffSize) throws IOException
     {
-        // start freelist
         diskFile = new RandomAccessFile(startFile, "rw");
-        // diskFile.setLength(0);
         blockSize = buffSize;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
@@ -168,6 +172,11 @@ public abstract class Manager
         freeList.dump();
     }
 
+    /**
+     * flushes the pool and closes the disk file
+     * 
+     * @throws IOException
+     */
     public static void close() throws IOException
     {
         pool.flushPool();
