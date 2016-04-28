@@ -82,11 +82,11 @@ public abstract class Manager
             if ((free.index + free.length) % blockSize == 0
                 && recordSize > free.length)
             {
-                while (free.length < recordSize)
-                {
+//                while (free.length < recordSize)
+//                {
                     free.length += blockSize;
                     numBlocks++;
-                }
+//                }
             }
             handle = free.index;
             free.index += recordSize;
