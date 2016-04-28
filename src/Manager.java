@@ -119,10 +119,11 @@ public abstract class Manager
      */
     public static void release(int h) throws IOException
     {
-        sizeArr = pool.getRecord(h, messageSize, diskFile);
+        System.arraycopy(pool.getRecord(h, messageSize, diskFile), 0,
+            sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] replace = new byte[sizeNum + messageSize];
-//        pool.writeRecord(h, replace.length, replace, diskFile);
+         pool.writeRecord(h, replace.length, replace, diskFile);
         freeList.reallocate(h, sizeNum + messageSize);
     }
 
