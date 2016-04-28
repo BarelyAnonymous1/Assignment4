@@ -15,7 +15,7 @@ public class RectangleDisk
      * @param args
      *            The command line arguments.
      */
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
         if (args.length != 4)
         {
@@ -33,6 +33,7 @@ public class RectangleDisk
             catch (Exception e)
             {
                 e.printStackTrace();
+                Manager.close();
             }
         }
     }
