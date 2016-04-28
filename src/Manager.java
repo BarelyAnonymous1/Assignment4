@@ -167,7 +167,7 @@ public abstract class Manager
         System.out.println("Freelist Blocks:");
         freeList.dump();
     }
-    public static void close()
+    public static void close() throws IOException
     {
         diskFile.close();
     }
