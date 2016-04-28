@@ -19,6 +19,7 @@ public class BufferTest extends TestCase
 
     private RandomAccessFile file;
     private Buffer           buffer;
+    private BufferPool bufferpool;
     private byte[]           test;
     private byte[]           test2;
 
@@ -37,6 +38,7 @@ public class BufferTest extends TestCase
             test2[j] = "b".getBytes()[0];
         file.write(test);
         file.write(test2);
+        bufferpool = new BufferPool(4, 4096);
     }
 
     /**
@@ -85,17 +87,17 @@ public class BufferTest extends TestCase
      * 
      * @throws IOException if the file doesnt work
      */
-//    public void testSetRecord() throws IOException
-//    {
-//        buffer = new Buffer(0, file);
-//        assertTrue(ByteBuffer.wrap(buffer.getBlock()).compareTo(ByteBuffer
-//                .wrap(test)) == 0);
-//        byte[] temp = new byte[4];
-//        byte[] compare = "bbbb".getBytes();
-//        buffer.setBlock(compare, 0);
-//        buffer.getRecord(temp, 0);
-//        assertTrue(ByteBuffer.wrap(temp).compareTo(ByteBuffer.wrap(
-//                compare)) == 0);
-//    }
+    public void testSetRecord() throws IOException
+    {
+        buffer = new Buffer(0, file);
+        assertTrue(ByteBuffer.wrap(buffer.getBlock()).compareTo(ByteBuffer
+                .wrap(test)) == 0);
+        byte[] temp = new byte[4];
+        byte[] compare = "bbbb".getBytes();
+        buffer.setRecord(compare, 0, 0, 4);
+        buffer.getRecord(temp, 0, 0, 4);
+        assertTrue(ByteBuffer.wrap(temp).compareTo(ByteBuffer.wrap(
+                compare)) == 0);
+    }
 
 }
