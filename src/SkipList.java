@@ -306,7 +306,6 @@ public class SkipList<K extends Comparable<K>, E>
                         .getKey()) > 0))
             {
                 curr = currNode.next[i];
-                currNode = (SkipNode<K, E>) getObject(curr);
             }
         }
         SkipNode<K,E> currNode = null;
