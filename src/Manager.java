@@ -167,4 +167,8 @@ public abstract class Manager
         System.out.println("Freelist Blocks:");
         freeList.dump();
     }
+    public static void close()
+    {
+        diskFile.close();
+    }
 }
