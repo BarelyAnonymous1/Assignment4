@@ -135,6 +135,7 @@ public abstract class Manager
      */
     public static byte[] getRecord(int h) throws IOException
     {
+        System.out.println("Tried to get handle: " + h);
         sizeArr = pool.getRecord(h, messageSize, diskFile);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] temp = new byte[messageSize + sizeNum];
