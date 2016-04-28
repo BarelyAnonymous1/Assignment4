@@ -19,7 +19,6 @@ public class BufferTest extends TestCase
 
     private RandomAccessFile file;
     private Buffer           buffer;
-    private BufferPool       bufferpool;
     private byte[]           test;
     private byte[]           test2;
 
@@ -42,7 +41,6 @@ public class BufferTest extends TestCase
         }
         file.write(test);
         file.write(test2);
-        bufferpool = new BufferPool(4, 4096);
     }
 
     /**
@@ -53,7 +51,7 @@ public class BufferTest extends TestCase
      */
     public void testStoreBlock() throws IOException
     {
-        buffer = new Buffer(0, file);
+        buffer = new Buffer(0, 4096, file);
         assertEquals(ByteBuffer.wrap(buffer.getBlock())
             .compareTo(ByteBuffer.wrap(test)), 0);
     }
@@ -67,7 +65,7 @@ public class BufferTest extends TestCase
      */
     public void testReset() throws IOException
     {
-        buffer = new Buffer(0, file);
+        buffer = new Buffer(0, 4096, file);
         assertEquals(ByteBuffer.wrap(buffer.getBlock())
             .compareTo(ByteBuffer.wrap(test)), 0);
         buffer.reset(1, file);
@@ -83,7 +81,7 @@ public class BufferTest extends TestCase
      */
     public void testSetRecord() throws IOException
     {
-        buffer = new Buffer(0, file);
+        buffer = new Buffer(0, 4096, file);
         assertEquals(ByteBuffer.wrap(buffer.getBlock())
             .compareTo(ByteBuffer.wrap(test)), 0);
         byte[] temp = new byte[4];

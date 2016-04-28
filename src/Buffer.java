@@ -50,7 +50,7 @@ public class Buffer
     public Buffer(int startID, int startSize, RandomAccessFile startFile)
         throws IOException
     {
-        block = new byte[BufferPool.bufferSize]; // create the array necessary
+        block = new byte[bufferSize]; // create the array necessary
                                                  // for operation
         bufferSize = startSize;
         reset(startID, startFile);
