@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 /**
  * The class containing the main method, the entry point of the application.
  *
@@ -20,7 +18,7 @@ public class RectangleDisk
      * @param args
      *            The command line arguments.
      */
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws Exception
     {
         if (args.length != 4)
         {

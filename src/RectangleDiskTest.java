@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import student.TestCase;
@@ -36,7 +35,7 @@ public class RectangleDiskTest extends TestCase
      * This method gets you credit for testing a bad set of parameters and for
      * initializing the Driver class.
      */
-    public void testBadParams() throws IOException
+    public void testBadParams() throws Exception
     {
         RectangleDisk rectDisk = new RectangleDisk();
         assertNotNull(rectDisk);
@@ -50,7 +49,7 @@ public class RectangleDiskTest extends TestCase
     /**
      * This method gets you credit for testing a good set of parameters.
      */
-    public void testGoodParams() throws IOException
+    public void testGoodParams() throws Exception
     {
         String[] params = {
             "commands.txt",
@@ -64,7 +63,7 @@ public class RectangleDiskTest extends TestCase
     /**
      * This method is simply to get code coverage of the class declaration.
      */
-    public void testRInit() throws IOException
+    public void testRInit() throws Exception
     {
         RectangleDisk dum = new RectangleDisk();
         assertNotNull(dum);
@@ -78,7 +77,7 @@ public class RectangleDiskTest extends TestCase
      * test to show that the main will display an error through the parser
      * @throws IOException 
      */
-    public void testFileNotFound() throws IOException
+    public void testFileNotFound() throws Exception
     {
         RectangleDisk.main(input2);
         assertNotSame(4096, Manager.getSize());
@@ -88,7 +87,7 @@ public class RectangleDiskTest extends TestCase
      * test to skim a file to show parser can move through file
      * @throws IOException 
      */
-    public void testSearchFile() throws IOException
+    public void testSearchFile() throws Exception
     {
         String[] input = {
             "SyntaxTest.txt",
