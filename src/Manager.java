@@ -37,6 +37,7 @@ public abstract class Manager
     {
         // start freelist
         diskFile = new RandomAccessFile(startFile, "rw");
+        diskFile.setLength(0);
         blockSize = buffSize;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
