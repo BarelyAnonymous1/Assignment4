@@ -118,6 +118,7 @@ public abstract class Manager
      */
     public static void release(int h) throws IOException
     {
+        sizeArr = pool.getRecord(h, messageSize, diskFile);
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] replace = new byte[sizeNum + messageSize];
