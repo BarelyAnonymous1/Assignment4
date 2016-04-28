@@ -319,8 +319,7 @@ public class SkipList<K extends Comparable<K>, E>
         {
             return null;
         }
-        if (currNode.getKey() == null
-            || key.compareTo(currNode.getKey()) != 0)
+        if (key.compareTo(currNode.getKey()) != 0)
         {
             return null;
         }
