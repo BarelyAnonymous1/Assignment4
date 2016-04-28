@@ -37,7 +37,7 @@ public class BufferPool
     {
         pool = new LRUQueue(startMax);
         bufferSize = startSize;
-        for (int i = 0; i < startMax; i++)
+        for (int i = 1; i <= startMax; i++)
         {
             pool.makeMostRecent((-1)*i*bufferSize, null);
         }
