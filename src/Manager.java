@@ -105,6 +105,7 @@ public abstract class Manager
             diskFile);
         pool.writeRecord(handle + messageSize, data.length, data,
             diskFile);
+        System.out.println(handle);
         return handle;
     }
 
