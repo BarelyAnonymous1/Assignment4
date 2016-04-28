@@ -134,9 +134,13 @@ public class FreeList
         }
         else if ((tail.prev.index + tail.prev.length)
             % Manager.getSize() == 0)
+        {
             return tail.prev;
+        }
         else
+        {
             return null;
+        }
     }
 
     /**
