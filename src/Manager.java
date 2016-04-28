@@ -172,6 +172,10 @@ public class Manager
         freeList.dump();
     }
 
+    /**
+     * flushes the pool and closes the disk file
+     * @throws IOException
+     */
     public static void close() throws IOException
     {
         pool.flushPool();
