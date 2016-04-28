@@ -33,9 +33,10 @@ public class CommandParser
     public CommandParser(String[] args) throws IOException
     {
         inputFile = args[0];
-        // diskfile
-        // numBuffs
-        // bufferSize
+        // sets the disk information in the following order:
+        // 1. diskfile
+        // 2. numBuffs
+        // 3. bufferSize
         Manager.setValues(args[1], Integer.parseInt(args[2]),
             Integer.parseInt(args[3]));
         list = new SkipList<String, Rectangle>();
@@ -262,6 +263,7 @@ public class CommandParser
         {
             System.out.println(
                 "(" + searchResult.getValue().toString() + ")");
+            SkipNode<String, Rectangle> searchNext = null;
             if (searchResult.next[0] != RectangleDisk.INVALID)
             {
                 searchNext = (SkipNode<String, Rectangle>) Serializer
