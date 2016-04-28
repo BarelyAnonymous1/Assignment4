@@ -37,6 +37,13 @@ public class SkipNodeTest extends TestCase
         node3 = new SkipNode<String, Integer>(-1, 1);
         assertNull(node3.getKey());
     }
+    /**
+     * tests the getValue method
+     */
+    public void testGetValue() 
+    {
+        assertNull(node2.getValue());
+    }
 
     /**
      * tests that a node with no pair returns null
