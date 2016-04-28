@@ -11,9 +11,9 @@ import student.TestCase;
 public class FreeListTest extends TestCase
 {
 
-    private FreeNode  node1;
-    private FreeNode  node2;
-    private FreeNode  node3;
+    private FreeNode node1;
+    private FreeNode node2;
+    private FreeNode node3;
     private FreeList list;
 
     /**
@@ -21,6 +21,8 @@ public class FreeListTest extends TestCase
      */
     public void setUp()
     {
+        Manager.setValues("freelist", 3,
+            512);
         node1 = new FreeNode(1, 1);
         node2 = new FreeNode(2, 2);
         node3 = new FreeNode(3, 3);
@@ -57,6 +59,7 @@ public class FreeListTest extends TestCase
         assertEquals(list.remove(1), node1);
         list.dump();
     }
+
     /**
      * tests the contains method
      */
@@ -67,7 +70,7 @@ public class FreeListTest extends TestCase
         list.insert(node2);
         list.insert(node3);
         assertEquals(node3, list.contains(1));
-        assertEquals(list.contains(0);
+        assertNull(list.contains(0));
         list.dump();
     }
 
