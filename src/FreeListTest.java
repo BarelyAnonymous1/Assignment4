@@ -20,12 +20,12 @@ public class FreeListTest extends TestCase
 
     /**
      * sets up the nodes and files for the FreeQueue
-     * @throws IOException 
+     * 
+     * @throws IOException
      */
     public void setUp() throws IOException
     {
-        Manager.setValues("freelist", 3,
-            512);
+        Manager.setValues("freelist", 3, 512);
         node1 = new FreeNode(1, 1);
         node2 = new FreeNode(2, 2);
         node3 = new FreeNode(3, 3);
@@ -74,7 +74,7 @@ public class FreeListTest extends TestCase
         list.insert(node2);
         list.insert(node3);
         assertEquals(node3, list.contains(1));
-        assertEquals()
+        assertNull(list.contains(3));
         list.dump();
     }
 
