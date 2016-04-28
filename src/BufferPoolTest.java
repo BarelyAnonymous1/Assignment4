@@ -23,7 +23,7 @@ public class BufferPoolTest extends TestCase
      */
     public void setUp() throws IOException
     {
-        buffpool = new BufferPool(2, 512);
+        buffpool = new BufferPool(2, 4096);
         file = new RandomAccessFile("buffertest.txt", "rw");
         byte[] test = new byte[4096];
         byte[] test2 = new byte[4096];
@@ -99,11 +99,11 @@ public class BufferPoolTest extends TestCase
         assertTrue(ByteBuffer.wrap(sample).compareTo(ByteBuffer.wrap(
                 compare)) == 0);
         buffpool.writeRecord(0, 4, sample, file);
-//        buffpool.getRecord(4096, sample, file);
-//        buffpool.getRecord(0, sample, file);
+        sample = buffpool.getRecord(4096, 4, file);
+        sample = buffpool.getRecord(0, 4, file);
         assertTrue(ByteBuffer.wrap(sample).compareTo(ByteBuffer.wrap(
                 compare)) == 0);
-        buffpool.flushPool(null);
+        buffpool.flushPool();
         byte[] first = new byte[4];
         file.seek(0);
         file.read(first);

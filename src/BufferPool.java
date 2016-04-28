@@ -121,11 +121,16 @@ public class BufferPool
             int length = remSize;
             if (readPos + remSize > BufferPool.bufferSize)
                 length = BufferPool.bufferSize - readPos;
+            System.out.println("length: " + length);
+            System.out.println("writePos: " + writePos);
+            System.out.println("readPos: " + readPos);
+            System.out.println("remSize: " + remSize);
+
             allocateBuffer(recordPos + writePos, file)
-                .setRecord(record, writePos, readPos, length);
-            writePos += length;
+                .setRecord(record, readPos, writePos, length);
+            readPos += length;
             remSize -= length;
-            readPos = 0;
+            writePos = 0;
         }
     }
 
@@ -138,7 +143,7 @@ public class BufferPool
      *            name of the file that the stats from the sort will be written
      *            to
      */
-    public void flushPool(String statName) throws IOException
+    public void flushPool() throws IOException
     {
         Buffer bufferToFlush = pool.removeLRU();
         while (bufferToFlush != null)
