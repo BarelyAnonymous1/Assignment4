@@ -142,8 +142,6 @@ public abstract class Manager
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] temp = pool.getRecord(h + messageSize,
             sizeNum + messageSize, diskFile);
-        System.out.println("populated temp. size is: " + temp.length
-            + "and sizeNum is: " + sizeNum);
         return pool.getRecord(h + messageSize, sizeNum + messageSize,
             diskFile);
     }
