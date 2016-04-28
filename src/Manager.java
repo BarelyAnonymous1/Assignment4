@@ -170,6 +170,7 @@ public abstract class Manager
 
     public static void close() throws IOException
     {
+        pool.flushPool();
         diskFile.close();
     }
 }
