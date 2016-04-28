@@ -32,7 +32,7 @@ public class SkipNodeTest extends TestCase
     public void testGetKey() throws Exception
     {
         assertNull(node2.getKey());
-        assertEquals(1, node1.getKey());
+        assertEquals("a", node1.getKey());
     }
 
     /**
