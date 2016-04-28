@@ -29,17 +29,11 @@ public class RectangleDisk
         }
         else
         {
-            try
-            {
-                CommandParser parser = new CommandParser(args);
-                parser.parseFile();
-                Manager.close();
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                Manager.close();
-            }
+
+            CommandParser parser = new CommandParser(args);
+            parser.parseFile();
+            Manager.close();
+
         }
     }
 }
