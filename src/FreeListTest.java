@@ -1,4 +1,6 @@
 
+import java.io.IOException;
+
 import student.TestCase;
 
 /**
@@ -18,8 +20,9 @@ public class FreeListTest extends TestCase
 
     /**
      * sets up the nodes and files for the FreeQueue
+     * @throws IOException 
      */
-    public void setUp()
+    public void setUp() throws IOException
     {
         Manager.setValues("freelist", 3,
             512);
@@ -70,7 +73,7 @@ public class FreeListTest extends TestCase
         list.insert(node2);
         list.insert(node3);
         assertEquals(node3, list.contains(1));
-        assertNull(list.contains(0));
+        assertEquals(node2, list.contains(0));
         list.dump();
     }
 
