@@ -23,7 +23,7 @@ public class BufferPoolTest extends TestCase
      */
     public void setUp() throws IOException
     {
-        buffpool = new BufferPool(2, 512);
+        buffpool = new BufferPool(2, 4096);
         file = new RandomAccessFile("buffertest.txt", "rw");
         byte[] test = new byte[4096];
         byte[] test2 = new byte[4096];
