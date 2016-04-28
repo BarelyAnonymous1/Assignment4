@@ -33,7 +33,7 @@ public class Manager
      *            file for the buffer
      * @param numBuffs
      *            the max number buffers for the pool
-     * @param size
+     * @param buffSize
      *            of the buffers in the pool
      * 
      * @throws IOException
