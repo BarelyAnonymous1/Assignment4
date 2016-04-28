@@ -6,10 +6,11 @@ import student.TestCase;
  */
 public class SkipNodeTest extends TestCase
 {
-
+    private SkipNode<String, Integer> node1;
     private SkipNode<String, Integer> node2;
     private SkipNode<String, Integer> node3;
     private KVPair<String, Integer>   pair;
+    private KVPair<String, Integer> pair2;
 
     /**
      * sets up the test cases
@@ -20,6 +21,9 @@ public class SkipNodeTest extends TestCase
         pair = null;
         int handle = Manager.insert(Serializer.serialize(pair));
         node2 = new SkipNode<String, Integer>(handle, 1);
+        pair2 = new KVPair<String, Integer>("a", 1);
+        handle = Manager.insert(Serializer.serialize(pair2));
+        node1 = new SkipNode<String, Integer>(handle, 2);
     }
 
     /**
@@ -28,6 +32,7 @@ public class SkipNodeTest extends TestCase
     public void testGetKey() throws Exception
     {
         assertNull(node2.getKey());
+        assertEquals(1, node1.getKey());
     }
 
     /**
