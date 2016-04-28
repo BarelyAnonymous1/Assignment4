@@ -332,7 +332,7 @@ public class SkipList<K extends Comparable<K>, E>
         {
             return null;
         }
-        return currNode;
+        return nextNode;
     }
 
     /**
