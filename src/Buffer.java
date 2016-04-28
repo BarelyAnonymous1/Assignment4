@@ -84,7 +84,7 @@ public class Buffer
     {
 
         // go to the byte position at the start of the block
-        file.seek(index * BufferPool.bufferSize);
+        file.seek(index * bufferSize);
         file.read(block); // read the block from the file
     }
 
@@ -175,7 +175,7 @@ public class Buffer
     {
         if (dirtyBit) // has the block been changed?
         {
-            file.seek(index * BufferPool.bufferSize);
+            file.seek(index * bufferSize);
             file.write(block);
         }
     }
