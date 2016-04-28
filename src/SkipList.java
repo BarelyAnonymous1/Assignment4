@@ -450,6 +450,8 @@ public class SkipList<K extends Comparable<K>, E>
             {
                 current = (SkipNode<K, E>) getObject(current.next[0]);
             }   
+            else 
+                break;
         }
         return inRegion;
     }
