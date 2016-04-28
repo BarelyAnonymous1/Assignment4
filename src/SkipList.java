@@ -446,11 +446,11 @@ public class SkipList<K extends Comparable<K>, E>
                 System.out.println(current.getValue().toString());
                 inRegion = true;
             }
-//            if (current.next[0] != RectangleDisk.INVALID)
-//            {
-//                current = (SkipNode<K, E>) getObject(current.next[0]);
-//            }
-            current = (SkipNode<K, E>) getObject(current.next[0]);
+            if (current.next[0] != RectangleDisk.INVALID)
+            {
+                current = (SkipNode<K, E>) getObject(current.next[0]);
+            }
+            
         }
         return inRegion;
     }
