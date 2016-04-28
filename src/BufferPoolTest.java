@@ -45,11 +45,14 @@ public class BufferPoolTest extends TestCase
      */
     public void testAllocateBuffer() throws IOException
     {
-        assertTrue(buffpool.allocateBuffer(0, file).getFile() == file);
+        assertTrue(
+            buffpool.allocateBuffer(0, file).getFile() == file);
         assertTrue(buffpool.allocateBuffer(0, file).getID() == 0);
-        assertTrue(buffpool.allocateBuffer(4096, file).getFile() == file);
+        assertTrue(
+            buffpool.allocateBuffer(4096, file).getFile() == file);
         assertTrue(buffpool.allocateBuffer(4096, file).getID() == 1);
-        assertTrue(buffpool.allocateBuffer(1, file).getFile() == file);
+        assertTrue(
+            buffpool.allocateBuffer(1, file).getFile() == file);
         assertTrue(buffpool.allocateBuffer(1, file).getID() == 0);
         assertTrue(buffpool.getSize() == 2);
     }
@@ -63,28 +66,30 @@ public class BufferPoolTest extends TestCase
      */
     public void testGetRecord() throws IOException
     {
-        assertTrue(buffpool.allocateBuffer(0, file).getFile() == file);
+        assertTrue(
+            buffpool.allocateBuffer(0, file).getFile() == file);
         byte[] sample = new byte[4];
         byte[] compare = "aaaa".getBytes();
         sample = buffpool.getRecord(0, 4, file);
-        assertTrue(ByteBuffer.wrap(sample).compareTo(ByteBuffer.wrap(
-                compare)) == 0);
-        assertTrue(buffpool.allocateBuffer(4096, file).getFile() == file);
+        assertTrue(ByteBuffer.wrap(sample)
+            .compareTo(ByteBuffer.wrap(compare)) == 0);
+        assertTrue(
+            buffpool.allocateBuffer(4096, file).getFile() == file);
         compare = "bbbb".getBytes();
         sample = buffpool.getRecord(4096, 4, file);
-        assertTrue(ByteBuffer.wrap(sample).compareTo(ByteBuffer.wrap(
-                compare)) == 0);
+        assertTrue(ByteBuffer.wrap(sample)
+            .compareTo(ByteBuffer.wrap(compare)) == 0);
         compare = "aaaa".getBytes();
         sample = buffpool.getRecord(36, 4, file);
-        assertTrue(ByteBuffer.wrap(sample).compareTo(ByteBuffer.wrap(
-                compare)) == 0);
-        assertTrue(buffpool.getSize() == 2);
+        assertEquals(ByteBuffer.wrap(sample)
+            .compareTo(ByteBuffer.wrap(compare)), 0);
+        assertEquals(buffpool.getSize(), 2);
     }
 
     /**
-     * tests to see if the records are being written to the block properly
-     * also runs the flushPool method to show that the file is being 
-     * written to correctly
+     * tests to see if the records are being written to the block properly also
+     * runs the flushPool method to show that the file is being written to
+     * correctly
      * 
      * @throws IOException
      *             if the file doesnt work
@@ -96,19 +101,20 @@ public class BufferPoolTest extends TestCase
         byte[] sample = new byte[4];
         byte[] compare = "cccc".getBytes();
         sample = buffpool.getRecord(8192, 4, file);
-        assertEquals(ByteBuffer.wrap(sample).compareTo(ByteBuffer.wrap(
-                compare)), 0);
+        assertEquals(ByteBuffer.wrap(sample)
+            .compareTo(ByteBuffer.wrap(compare)), 0);
         buffpool.writeRecord(0, 4, sample, file);
         sample = buffpool.getRecord(4096, 4, file);
         sample = buffpool.getRecord(0, 4, file);
-        assertEquals(ByteBuffer.wrap(sample).compareTo(ByteBuffer.wrap(
-                compare)), 0);
+        assertEquals(ByteBuffer.wrap(sample)
+            .compareTo(ByteBuffer.wrap(compare)), 0);
         buffpool.flushPool();
         byte[] first = new byte[4];
         file.seek(0);
         file.read(first);
-        assertEquals(ByteBuffer.wrap(sample).compareTo(ByteBuffer.wrap(
-                first)), 0);
+        assertEquals(
+            ByteBuffer.wrap(sample).compareTo(ByteBuffer.wrap(first)),
+            0);
     }
-    
+
 }
