@@ -45,8 +45,8 @@ public class BufferPoolTest extends TestCase
      */
     public void testAllocateBuffer() throws IOException
     {
-        assertEquals(
-            buffpool.allocateBuffer(0, file).getFile(), file);
+        assertEquals(buffpool.allocateBuffer(0, file).getFile(),
+            file);
         assertTrue(buffpool.allocateBuffer(0, file).getID() == 0);
         assertTrue(
             buffpool.allocateBuffer(4096, file).getFile() == file);
@@ -66,15 +66,15 @@ public class BufferPoolTest extends TestCase
      */
     public void testGetRecord() throws IOException
     {
-        assertTrue(
-            buffpool.allocateBuffer(0, file).getFile() == file);
+        assertEquals(buffpool.allocateBuffer(0, file).getFile(),
+            file);
         byte[] sample = new byte[4];
         byte[] compare = "aaaa".getBytes();
         sample = buffpool.getRecord(0, 4, file);
         assertEquals(ByteBuffer.wrap(sample)
             .compareTo(ByteBuffer.wrap(compare)), 0);
-        assertTrue(
-            buffpool.allocateBuffer(4096, file).getFile() == file);
+        assertEquals(buffpool.allocateBuffer(4096, file).getFile(),
+            file);
         compare = "bbbb".getBytes();
         sample = buffpool.getRecord(4096, 4, file);
         assertEquals(ByteBuffer.wrap(sample)
