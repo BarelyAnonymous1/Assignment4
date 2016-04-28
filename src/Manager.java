@@ -131,16 +131,14 @@ public abstract class Manager
      * @param h
      *            the receipt for the data in the allocated list
      * @return the byte array that represents the data in the allocated list
+     * @throws IOException 
      */
-    public static byte[] getRecord(int h)
+    public static byte[] getRecord(int h) throws IOException
     {
         sizeArr = pool.getRecord(h, messageSize, diskFile);
-
-        System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] temp = new byte[messageSize + sizeNum];
-        System.arraycopy(tempDisk, h + messageSize, temp, 0,
-            temp.length);
+        temp = pool.getRecord(h, temp.length, diskFile);
         return temp;
     }
 
