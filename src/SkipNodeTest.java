@@ -39,8 +39,9 @@ public class SkipNodeTest extends TestCase
     }
     /**
      * tests the getValue method
+     * @throws Exception 
      */
-    public void testGetValue() 
+    public void testGetValue() throws Exception 
     {
         assertNull(node2.getValue());
     }
@@ -51,6 +52,8 @@ public class SkipNodeTest extends TestCase
     public void testGetPair() throws Exception
     {
         assertNull(node2.getPair());
+        node3 = new SkipNode<String, Integer>(-1, 1);
+        assertNull(node3.getPair());
     }
 
     /**
