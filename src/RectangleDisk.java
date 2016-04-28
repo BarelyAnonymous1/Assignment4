@@ -8,6 +8,7 @@
 public class RectangleDisk
 {
 
+    public static final int INVALID = -1;
     /**
      * The entry point for the application.
      *

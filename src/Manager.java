@@ -1,4 +1,5 @@
 import java.nio.ByteBuffer;
+import java.io.*;
 
 /**
  * Memory manager class that will communicate with a buffer pool to keep a
@@ -8,71 +9,40 @@ import java.nio.ByteBuffer;
  * @version 1
  *
  */
-public class Manager
+public abstract class Manager
 {
     /**
      * stores the size of a single FreeBlock and Buffer
      */
-    private static int        blockSize;
+    private static int              blockSize;
 
-    private static int        messageSize;
-    /**
-     * create an object of SingleObject
-     */
-    private static Manager    instance;
+    private static int              messageSize = 2;
 
-    private byte[]            tempDisk;
-    private byte[]            sizeArr;
-    private int               numBlocks;
+    private static byte[]           tempDisk;
+    private static byte[]           sizeArr;
+    private static int              numBlocks;
+    private static RandomAccessFile diskFile;
+    private static BufferPool       pool;
 
-    private FreeList freeList;
+    private static FreeList         freeList;
 
     /**
      * make the constructor private so that this class cannot be instantiated
      * creates a doubly linked freelist
+     * 
+     * @throws FileNotFoundException
      */
-    private Manager()
+    public static void setValues(String startFile, int numBuffs,
+        int buffSize) throws FileNotFoundException
     {
         // start freelist
-        messageSize = 2;
+        diskFile = new RandomAccessFile(startFile, "rw");
+        blockSize = buffSize;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
-        freeList = new FreeList();
-    }
-
-    /**
-     * Get the only object available
-     * 
-     * @return the Singleton instance of the Manager class
-     */
-    public static Manager getInstance()
-    {
-        if (instance == null)
-        {
-            instance = new Manager();
-        }
-        return instance;
-    }
-
-    /**
-     * resets the instance of the Manager
-     */
-    public static void resetInstance()
-    {
-        instance = null;
-    }
-
-    /**
-     * sets the size of a block of the freelist and reinitializes the temp array
-     * that represents the disk
-     * 
-     * @param sz
-     *            size of the block
-     */
-    public void setSize(int sz)
-    {
-        blockSize = sz;
         tempDisk = new byte[10 * blockSize];
+        pool = new BufferPool(numBuffs);
+        freeList = new FreeList();
     }
 
     /**
@@ -80,7 +50,7 @@ public class Manager
      * 
      * @return the freeblock size
      */
-    public int getSize()
+    public static int getSize()
     {
         return blockSize;
     }
@@ -92,23 +62,23 @@ public class Manager
      *            the byte array representing the data
      * @return a receipt for the object being placed
      */
-    public int insert(byte[] data)
+    public static int insert(byte[] data)
     {
         int recordSize = messageSize + data.length;
         FreeNode free = freeList.contains(recordSize);
-        int handle = -1;
+        int handle = RectangleDisk.INVALID;
         if (free == null)
         {
             handle = (numBlocks) * blockSize;
             numBlocks++;
             freeList.insert(new FreeNode(handle + recordSize,
-                    blockSize - recordSize));
+                blockSize - recordSize));
         }
         // freeblock on the end of the list
         else
         {
             if ((free.index + free.length) % blockSize == 0
-                    && recordSize > free.length)
+                && recordSize > free.length)
             {
                 free.length += blockSize;
                 numBlocks++;
@@ -123,9 +93,10 @@ public class Manager
         }
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
-        System.arraycopy(buffer.array(), 0, tempDisk, handle, messageSize);
+        System.arraycopy(buffer.array(), 0, tempDisk, handle,
+            messageSize);
         System.arraycopy(data, 0, tempDisk, handle + messageSize,
-                data.length);
+            data.length);
         return handle;
     }
 
@@ -135,10 +106,12 @@ public class Manager
      * @param h
      *            the receipt for the data in the allocated list
      */
-    public void release(int h)
+    public static void release(int h)
     {
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
+        byte[] replace = new byte[sizeNum + messageSize];
+        System.arraycopy(replace, 0, tempDisk, h, replace.length);
         freeList.reallocate(h, sizeNum + messageSize);
     }
 
@@ -149,12 +122,13 @@ public class Manager
      *            the receipt for the data in the allocated list
      * @return the byte array that represents the data in the allocated list
      */
-    public byte[] getRecord(int h)
+    public static byte[] getRecord(int h)
     {
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] temp = new byte[messageSize + sizeNum];
-        System.arraycopy(tempDisk, h + messageSize, temp, 0, temp.length);
+        System.arraycopy(tempDisk, h + messageSize, temp, 0,
+            temp.length);
         return temp;
     }
 
@@ -167,19 +141,19 @@ public class Manager
      * @param newMessage
      *            byte array containing the new message
      */
-    public void replaceRecord(int h, byte[] newMessage)
+    public static void replaceRecord(int h, byte[] newMessage)
     {
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) newMessage.length);
         System.arraycopy(buffer.array(), 0, tempDisk, h, messageSize);
         System.arraycopy(newMessage, 0, tempDisk, h + 2,
-                newMessage.length);
+            newMessage.length);
     }
 
     /**
      * outputs a string representation of the Freelist
      */
-    public void dump()
+    public static void dump()
     {
         System.out.println("Freelist Blocks:");
         freeList.dump();

@@ -73,11 +73,25 @@ public class BufferPool
      * @param file
      *            the file where the record will be read from
      */
-    public void getRecord(int recordPos, byte[] record,
+    public byte[] getRecord(int recordPos, int sz,
         RandomAccessFile file) throws IOException
     {
-        allocateBuffer(recordPos, file).getRecord(record,
-            recordPos % BufferPool.bufferSize);
+        byte[] record = new byte[sz];
+        int remSize = sz;
+        int writePos = 0;
+        int readPos = recordPos % BufferPool.bufferSize;
+        while (remSize > 0)
+        {
+            int length = remSize;
+            if (readPos + remSize > bufferSize)
+                length = bufferSize - readPos;
+            allocateBuffer(recordPos + writePos, file).getRecord(
+                record, readPos, writePos, length);
+            writePos += length;
+            remSize -= length;
+            readPos = 0;
+        }
+        return record;
     }
 
     /**
@@ -94,8 +108,8 @@ public class BufferPool
         RandomAccessFile file) throws IOException
     {
         // recordpos % buffersize is the position within a single block
-        allocateBuffer(recordPos, file).setBlock(record,
-            recordPos % BufferPool.bufferSize);
+        allocateBuffer(recordPos, file).setBlock(record, recordPos
+            % BufferPool.bufferSize, 3, 4);
     }
 
     /**

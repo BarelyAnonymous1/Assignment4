@@ -21,7 +21,7 @@ public class FreeList
     /**
      * number of nodes in the list
      */
-    private int             size;
+    private int     size;
 
     /**
      * default constructor for the LinkedList
@@ -66,7 +66,6 @@ public class FreeList
         newNode.prev = curr;
         size++;
     }
-
 
     /**
      * pulls the last added node from the queue this node removed from the queue
@@ -134,7 +133,7 @@ public class FreeList
             return null;
         }
         else if ((tail.prev.index + tail.prev.length)
-            % Manager.getInstance().getSize() == 0)
+            % Manager.getSize() == 0)
             return tail.prev;
         else
             return null;
@@ -153,25 +152,40 @@ public class FreeList
         FreeNode curr = head.next;
         while (curr != tail)
         {
-            if (curr.index + curr.length == handle)
+            if (curr.index == handle + sz) // inserting at the beginning of a
+                                           // block
             {
+                curr.index = handle;
                 curr.length += sz;
+                combineBlocks();
                 return;
             }
-            if (curr.index == handle + sz)
+            if (curr.index + curr.length == handle) // inserting at the end of a
+                                                    // block
             {
-                curr.index -= sz;
                 curr.length += sz;
+                combineBlocks();
                 return;
-            }
-            if (curr.index + curr.length == curr.next.index)
-            {
-                curr.length += curr.next.length;
-                remove(curr.next.index);
             }
             curr = curr.next;
         }
         insert(new FreeNode(handle, sz));
+        combineBlocks();
+    }
+
+    public void combineBlocks()
+    {
+        FreeNode curr = head.next;
+        while (curr != tail)
+        {
+            if (curr.index + curr.length == curr.next.index)
+            {
+                curr.length += curr.next.length;
+                System.out.println("removed a thing");
+                remove(curr.next.index);
+            }
+            curr = curr.next;
+        }
     }
 
     /**
