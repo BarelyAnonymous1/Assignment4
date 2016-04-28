@@ -121,7 +121,7 @@ public abstract class Manager
         sizeArr = pool.getRecord(h, messageSize, diskFile);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] replace = new byte[sizeNum + messageSize];
-//        pool.writeRecord(h, replace.length, replace, diskFile);
+        pool.writeRecord(h, replace.length, replace, diskFile);
         freeList.reallocate(h, sizeNum + messageSize);
     }
 
