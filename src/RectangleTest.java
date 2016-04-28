@@ -247,8 +247,8 @@ public class RectangleTest extends TestCase
     {
         Rectangle rect1 = new Rectangle("a", 10, 10, 5, 5);
         Rectangle rect2 = new Rectangle("a", 15, 10, 5, 5);
-        assertFalse(rect1.intersects(rect2));
-        assertFalse(rect2.intersects(rect1));
+        assertTrue(rect1.intersects(rect2));
+        assertTrue(rect2.intersects(rect1));
     }
     /**
      * tests the .equals method
