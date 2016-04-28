@@ -439,7 +439,7 @@ public class SkipList<K extends Comparable<K>, E>
         }
         SkipNode<K, E> current = (SkipNode<K, E>) getObject(
             temp.next[0]);
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i <= size; i++)
         {
             if (((Rectangle) current.getValue()).intersects(region))
             {
