@@ -55,8 +55,10 @@ public class BufferPool
         // if a new Buffer was moved to MRU, change the Buffer values
         if (pool.getMRU().getFile() != searchFile || pool.getMRU()
             .getID() != recordPos / BufferPool.bufferSize)
+        {
             pool.getMRU().reset(recordPos / BufferPool.bufferSize,
                 searchFile);
+        }
         // return the Buffer that was just used
         return pool.getMRU();
     }
