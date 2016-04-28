@@ -136,8 +136,6 @@ public abstract class Manager
      */
     public static byte[] getRecord(int h) throws IOException
     {
-        System.out.println(Arrays
-            .toString(pool.getRecord(h, messageSize, diskFile)));
         System.arraycopy(pool.getRecord(h, messageSize, diskFile), 0,
             sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
