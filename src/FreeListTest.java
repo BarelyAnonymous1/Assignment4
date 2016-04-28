@@ -68,12 +68,13 @@ public class FreeListTest extends TestCase
      */
     public void testContains()
     {
+        assertNull(list.contains(0));
+
         System.out.println("");
         node3.setData(3, 1);
         list.insert(node2);
         list.insert(node3);
         assertEquals(node3, list.contains(1));
-        assertEquals(node2, list.contains(0));
         list.dump();
     }
 
