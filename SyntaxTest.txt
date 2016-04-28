@@ -4,6 +4,7 @@ insert r_r          -1 -20 3 4
 dump
 
 insert a 2 3 4 5
+dump
 insert a -2 3 4 5
 insert 1a 2 3 4 5
 insert 2a -2 3 4 5
