@@ -1,10 +1,6 @@
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import student.TestCase;
 
 /**
@@ -88,8 +84,9 @@ public class BufferTest extends TestCase
         byte[] compare = "bbbb".getBytes();
         buffer.setRecord(compare, 0, 0, 4);
         buffer.getRecord(temp, 0, 0, 4);
-        assertEquals(ByteBuffer.wrap(temp)
-            .compareTo(ByteBuffer.wrap(compare)), 0);
+        assertEquals(
+            ByteBuffer.wrap(temp).compareTo(ByteBuffer.wrap(compare)),
+            0);
     }
 
 }
