@@ -77,8 +77,8 @@ public class BufferPoolTest extends TestCase
             buffpool.allocateBuffer(4096, file).getFile() == file);
         compare = "bbbb".getBytes();
         sample = buffpool.getRecord(4096, 4, file);
-        assertTrue(ByteBuffer.wrap(sample)
-            .compareTo(ByteBuffer.wrap(compare)) == 0);
+        assertEquals(ByteBuffer.wrap(sample)
+            .compareTo(ByteBuffer.wrap(compare)), 0);
         compare = "aaaa".getBytes();
         sample = buffpool.getRecord(36, 4, file);
         assertEquals(ByteBuffer.wrap(sample)
