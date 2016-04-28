@@ -120,6 +120,7 @@ public abstract class Manager
      */
     public static void release(int h) throws IOException
     {
+        System.out.println("releasing...");
         System.arraycopy(pool.getRecord(h, messageSize, diskFile), 0,
             sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
