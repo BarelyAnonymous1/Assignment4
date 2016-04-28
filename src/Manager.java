@@ -114,13 +114,14 @@ public abstract class Manager
      * 
      * @param h
      *            the receipt for the data in the allocated list
+     * @throws IOException 
      */
-    public static void release(int h)
+    public static void release(int h) throws IOException
     {
         System.arraycopy(tempDisk, h, sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] replace = new byte[sizeNum + messageSize];
-        System.arraycopy(replace, 0, tempDisk, h, replace.length);
+        pool.writeRecord(h, replace.length, replace, diskFile);
         freeList.reallocate(h, sizeNum + messageSize);
     }
 
