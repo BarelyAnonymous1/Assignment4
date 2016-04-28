@@ -10,7 +10,7 @@ public class RectangleDisk
 {
 
     /**
-     * used to describe when a handle is invalid; analagous to null
+     * used to describe when a handle is invalid; analogous to null
      */
     public static final int INVALID = -1;
 
