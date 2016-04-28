@@ -103,7 +103,7 @@ public class BufferPoolTest extends TestCase
         sample = buffpool.getRecord(0, 4, file);
         assertTrue(ByteBuffer.wrap(sample).compareTo(ByteBuffer.wrap(
                 compare)) == 0);
-        buffpool.flushPool(null);
+        buffpool.flushPool();
         byte[] first = new byte[4];
         file.seek(0);
         file.read(first);
