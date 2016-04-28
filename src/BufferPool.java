@@ -78,26 +78,20 @@ public class BufferPool
         RandomAccessFile file) throws IOException
     {
         byte[] record = new byte[sz];
-        int remSize = sz; //# of bytes yet to be read
+        int remSize = sz; // # of bytes yet to be read
         int writePos = 0; // position within the RECORD
         int readPos = recordPos % BufferPool.bufferSize; // position in buffer
         while (remSize > 0)
         {
             int length = remSize;
-<<<<<<< HEAD
-            if (readPos + remSize > BufferPool.bufferSize)
-                length = BufferPool.bufferSize - readPos;
-            allocateBuffer(recordPos + writePos, file)
-                .getRecord(record, readPos, writePos, length);
-=======
-            //pos in buffer + # yet to read > bufferSize
+
+            // pos in buffer + # yet to read > bufferSize
             if (readPos + remSize > bufferSize)
             {
                 length = bufferSize - readPos; // size of what we try to read
             }
-            allocateBuffer(recordPos + writePos, file).getRecord(
-                record, readPos, writePos, length);
->>>>>>> branch 'master' of https://github.com/BarelyAnonymous1/Assignment4.git
+            allocateBuffer(recordPos + writePos, file)
+                .getRecord(record, readPos, writePos, length);
             writePos += length;
             remSize -= length;
             readPos = 0;
