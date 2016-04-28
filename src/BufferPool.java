@@ -128,9 +128,9 @@ public class BufferPool
 
             allocateBuffer(recordPos + writePos, file)
                 .setRecord(record, readPos, writePos, length);
-            writePos += length;
+            readPos += length;
             remSize -= length;
-            readPos = 0;
+            writePos = 0;
         }
     }
 
