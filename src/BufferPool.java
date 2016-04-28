@@ -120,7 +120,7 @@ public class BufferPool
         {
             int length = remSize;
             if (writePos + remSize > BufferPool.bufferSize)
-                length = BufferPool.bufferSize - readPos;
+                length = BufferPool.bufferSize - writePos;
             allocateBuffer(recordPos + writePos, file)
                 .setRecord(record, writePos, readPos, length);
             readPos += length;
