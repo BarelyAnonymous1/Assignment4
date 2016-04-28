@@ -15,7 +15,7 @@ public class BufferPool
      * standard size of the Buffer; number of bytes in the Buffer wanted to
      * write as BUFFER_SIZE but WebCAT threw a fit
      */
-    public static int bufferSize = 4096;
+    public static int bufferSize;
     /**
      * standard size of the records; number of bytes for each record wanted to
      * write as RECORD_SIZE but WebCAT threw a fit
@@ -35,9 +35,10 @@ public class BufferPool
      *            the max number of blocks the bufferpool can hold (per project
      *            spec)
      */
-    public BufferPool(int startMax)
+    public BufferPool(int startMax, int startSize)
     {
         pool = new LRUQueue(startMax);
+        bufferSize = startSize;
     }
 
     /**
