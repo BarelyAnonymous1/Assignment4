@@ -25,6 +25,11 @@ public class Buffer
      * determines if the block has been edited (new record has been placed)
      */
     private boolean          dirtyBit;
+    
+    /**
+     * integer that keeps the max size of the buffer
+     */
+    private int bufferSize;
 
     /**
      * the specific file that the block has been read from and will write to
@@ -42,11 +47,12 @@ public class Buffer
      *            the initial file for the buffer, determines which file the
      *            first block will come from
      */
-    public Buffer(int startID, RandomAccessFile startFile)
+    public Buffer(int startID, int startSize, RandomAccessFile startFile)
         throws IOException
     {
         block = new byte[BufferPool.bufferSize]; // create the array necessary
                                                  // for operation
+        bufferSize = startSize;
         reset(startID, startFile);
     }
 
