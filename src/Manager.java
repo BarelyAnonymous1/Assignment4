@@ -82,11 +82,11 @@ public abstract class Manager
             if ((free.index + free.length) % blockSize == 0
                 && recordSize > free.length)
             {
-//                while (free.length < recordSize)
-//                {
+                while (free.length < recordSize)
+                {
                     free.length += blockSize;
                     numBlocks++;
-//                }
+                }
             }
             handle = free.index;
             free.index += recordSize;
@@ -123,7 +123,7 @@ public abstract class Manager
             sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         byte[] replace = new byte[sizeNum + messageSize];
-         pool.writeRecord(h, replace.length, replace, diskFile);
+        pool.writeRecord(h, replace.length, replace, diskFile);
         freeList.reallocate(h, sizeNum + messageSize);
     }
 
