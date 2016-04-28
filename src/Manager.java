@@ -81,11 +81,11 @@ public abstract class Manager
             if ((free.index + free.length) % blockSize == 0
                 && recordSize > free.length)
             {
-                // while (free.length < recordSize)
-                // {
-                free.length += blockSize;
-                numBlocks++;
-                // }
+                while (free.length < recordSize)
+                {
+                    free.length += blockSize;
+                    numBlocks++;
+                }
             }
             handle = free.index;
             free.index += recordSize;
@@ -136,13 +136,13 @@ public abstract class Manager
      */
     public static byte[] getRecord(int h) throws IOException
     {
-        System.out.println(Arrays.toString(pool.getRecord(h, messageSize, diskFile)));
+        System.out.println(Arrays
+            .toString(pool.getRecord(h, messageSize, diskFile)));
         System.arraycopy(pool.getRecord(h, messageSize, diskFile), 0,
             sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
 
-        return pool.getRecord(h + messageSize, sizeNum,
-            diskFile);
+        return pool.getRecord(h + messageSize, sizeNum, diskFile);
     }
 
     /**
