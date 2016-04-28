@@ -256,6 +256,7 @@ public class CommandParser
         }
         else
         {
+            System.out.println("Search Results:");
             System.out.println(
                 "(" + searchResult.getValue().toString() + ")");
             SkipNode<String, Rectangle> searchNext = null;
