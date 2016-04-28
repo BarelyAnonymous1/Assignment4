@@ -24,6 +24,7 @@ public class SkipNodeTest extends TestCase
         pair2 = new KVPair<String, Integer>("a", 1);
         handle = Manager.insert(Serializer.serialize(pair2));
         node1 = new SkipNode<String, Integer>(handle, 2);
+        
     }
 
     /**
@@ -33,6 +34,8 @@ public class SkipNodeTest extends TestCase
     {
         assertNull(node2.getKey());
         assertEquals("a", node1.getKey());
+        node3 = new SkipNode<String, Integer>(-1, 1);
+        assertNull(node3.getKey());
     }
 
     /**
