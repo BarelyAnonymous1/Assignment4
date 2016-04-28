@@ -63,7 +63,9 @@ public class DoublyLinkedQueue
     public DoublyLinkedNode dequeue()
     {
         if (size == 0)
+        {
             return null;
+        }
         else
         {
             DoublyLinkedNode temp = head.next;
@@ -91,8 +93,9 @@ public class DoublyLinkedQueue
         while (curr != head)
         {
             Buffer buffer = curr.getData();
-            if (!(buffer.getID() != blockID || buffer.getFile() == null
-                    || buffer.getFile() != file))
+            if (!(buffer.getID() != blockID
+                || buffer.getFile() == null
+                || buffer.getFile() != file))
             {
                 curr.prev.setNext(curr.next);
                 curr.next.setPrev(curr.prev);
