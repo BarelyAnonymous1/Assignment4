@@ -9,7 +9,7 @@ import java.io.*;
  * @version 1
  *
  */
-public abstract class Manager
+public class Manager
 {
     /**
      * stores the size of a single FreeBlock and Buffer
@@ -28,6 +28,7 @@ public abstract class Manager
     /**
      * make the constructor private so that this class cannot be instantiated
      * creates a doubly linked freelist
+     * @param startFile
      * 
      * @throws IOException
      */
