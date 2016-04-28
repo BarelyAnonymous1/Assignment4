@@ -70,6 +70,7 @@ public class BufferPool
      *            the number of bytes to get from the disk
      * @param file
      *            the file where the record will be read from
+     * @return the record that was retrieved from disk
      */
     public byte[] getRecord(int recordPos, int sz,
         RandomAccessFile file) throws IOException
