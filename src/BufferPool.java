@@ -31,11 +31,16 @@ public class BufferPool
      *            spec)
      * @param startSize
      *            the size of the buffers that will be stored in the pool
+     * @throws IOException 
      */
-    public BufferPool(int startMax, int startSize)
+    public BufferPool(int startMax, int startSize) throws IOException
     {
         pool = new LRUQueue(startMax);
         bufferSize = startSize;
+        for (int i = 0; i < startMax; i++)
+        {
+            pool.makeMostRecent((-1)*i*bufferSize, null);
+        }
     }
 
     /**
