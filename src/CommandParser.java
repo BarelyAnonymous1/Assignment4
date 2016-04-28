@@ -277,7 +277,6 @@ public class CommandParser
 
                 System.out.println("(" + name + ", "
                     + searchResult.getValue().toString() + ")");
-
             }
         }
     }
