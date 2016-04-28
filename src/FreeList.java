@@ -138,13 +138,9 @@ public class FreeList
             return tail.prev;
         }
         else
-<<<<<<< HEAD
-            return best;
-=======
         {
-            return null;
+            return best;
         }
->>>>>>> branch 'master' of https://github.com/BarelyAnonymous1/Assignment4.git
     }
 
     /**
