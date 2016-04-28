@@ -24,14 +24,19 @@ public class CommandParser
      * constructor for parser, stores filename
      * 
      * @param args
+<<<<<<< HEAD
+     *            name for the file that is being parsed
+=======
      *            inputs given from the command line
+>>>>>>> branch 'master' of https://github.com/BarelyAnonymous1/Assignment4.git
      */
     public CommandParser(String[] args) throws IOException
     {
         inputFile = args[0];
-        // diskfile
-        // numBuffs
-        // bufferSize
+        // sets the disk information in the following order:
+        // 1. diskfile
+        // 2. numBuffs
+        // 3. bufferSize
         Manager.setValues(args[1], Integer.parseInt(args[2]),
             Integer.parseInt(args[3]));
         list = new SkipList<String, Rectangle>();
@@ -254,6 +259,7 @@ public class CommandParser
             System.out.println("Rectangle not found: " + name);
         }
         else
+
         {
             System.out.println(
                 "(" + searchResult.getValue().toString() + ")");
