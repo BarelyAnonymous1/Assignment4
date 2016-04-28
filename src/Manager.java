@@ -140,7 +140,8 @@ public abstract class Manager
         System.arraycopy(pool.getRecord(h, messageSize, diskFile), 0,
             sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
-        return pool.getRecord(h, sizeNum + messageSize, diskFile);
+        return pool.getRecord(h + messageSize, sizeNum + messageSize,
+            diskFile);
     }
 
     /**
