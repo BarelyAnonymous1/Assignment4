@@ -97,10 +97,10 @@ public abstract class Manager
         }
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
-        System.arraycopy(buffer.array(), 0, tempDisk, handle,
-            messageSize);
-        System.arraycopy(data, 0, tempDisk, handle + messageSize,
-            data.length);
+//        System.arraycopy(buffer.array(), 0, tempDisk, handle,
+//            messageSize);
+//        System.arraycopy(data, 0, tempDisk, handle + messageSize,
+//            data.length);
 
         pool.writeRecord(handle, messageSize, buffer.array(),
             diskFile);
