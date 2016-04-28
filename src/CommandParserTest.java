@@ -61,15 +61,15 @@ public class CommandParserTest extends TestCase
         System.out.println("");
     }
     
-    /**
-     * tests the parsers various tests
-     */
-    public void testParseFile() throws Exception
-    {
-        String[] args = {"test.txt", "1", "2", "512"};
-        parser = new CommandParser(args);
-        boolean success = parser.parseFile();
-        assertTrue(success);
-    }
+//    /**
+//     * tests the parsers various tests
+//     */
+//    public void testParseFile() throws Exception
+//    {
+//        String[] args = {"test.txt", "1", "2", "512"};
+//        parser = new CommandParser(args);
+//        boolean success = parser.parseFile();
+//        assertTrue(success);
+//    }
     
 }
