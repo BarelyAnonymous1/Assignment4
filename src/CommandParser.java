@@ -222,7 +222,7 @@ public class CommandParser
         int height = scanner.nextInt();
         if (!(height < 1 | width < 1))
         {
-          Rectangle regionRect = new Rectangle("regionRect", x, y,
+            Rectangle regionRect = new Rectangle("regionRect", x, y,
                 width, height);
             list.regionSearch(regionRect);
         }
@@ -269,7 +269,7 @@ public class CommandParser
             {
                 System.out.println("(" + name + ", "
                     + searchNext.getValue().toString() + ")");
-                
+
                 searchResult = searchNext;
                 searchNext = (SkipNode<String, Rectangle>) Serializer
                     .deserialize(
