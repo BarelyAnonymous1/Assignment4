@@ -29,6 +29,8 @@ public class BufferPool
      * @param startMax
      *            the max number of blocks the bufferpool can hold (per project
      *            spec)
+     * @param startSize
+     *            the size of the buffers that will be stored in the pool
      */
     public BufferPool(int startMax, int startSize)
     {
@@ -141,7 +143,7 @@ public class BufferPool
             bufferToFlush.flush();
             bufferToFlush = pool.removeLRU();
         }
-        
+
     }
 
     /**
