@@ -20,6 +20,7 @@ public class BufferPoolTest extends TestCase
      * sets up the tests
      * 
      * @throws FileNotFoundException
+     *             file cant be found
      */
     public void setUp() throws IOException
     {
