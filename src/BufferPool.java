@@ -17,11 +17,6 @@ public class BufferPool
      */
     public static int bufferSize;
     /**
-     * standard size of the records; number of bytes for each record wanted to
-     * write as RECORD_SIZE but WebCAT threw a fit
-     */
-    public static int recordSize = 4;
-    /**
      * modified linked queue used to implement the insertion and cycling of
      * Buffers
      */
@@ -34,6 +29,8 @@ public class BufferPool
      * @param startMax
      *            the max number of blocks the bufferpool can hold (per project
      *            spec)
+     * @param startSize
+     *            the size of the buffers that will be stored in the pool
      */
     public BufferPool(int startMax, int startSize)
     {
@@ -69,8 +66,8 @@ public class BufferPool
      * 
      * @param recordPos
      *            the position of the record in the file
-     * @param record
-     *            the byte array where the new record will be stored
+     * @param sz
+     *            the number of bytes to get from the disk
      * @param file
      *            the file where the record will be read from
      */
@@ -105,6 +102,8 @@ public class BufferPool
      * @param recordPos
      *            the position of the record in the file
      * @param record
+     *            the byte array to be written to disk
+     * @param record
      *            the byte array that contains the record values
      * @param file
      *            file the where the record will be written
@@ -131,12 +130,7 @@ public class BufferPool
 
     /**
      * removes everything from the bufferPool starting with the least recently
-     * used block. Will also write all stats to the file given in the
-     * parameters.
-     * 
-     * @param statName
-     *            name of the file that the stats from the sort will be written
-     *            to
+     * used block.
      */
     public void flushPool() throws IOException
     {
@@ -146,7 +140,7 @@ public class BufferPool
             bufferToFlush.flush();
             bufferToFlush = pool.removeLRU();
         }
-        
+
     }
 
     /**

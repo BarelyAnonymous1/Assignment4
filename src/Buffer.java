@@ -25,7 +25,7 @@ public class Buffer
      * determines if the block has been edited (new record has been placed)
      */
     private boolean          dirtyBit;
-    
+
     /**
      * the specific file that the block has been read from and will write to
      */
@@ -114,48 +114,49 @@ public class Buffer
     }
 
     /**
-     * stores the record from the block into a byte array of size 4
-     * 
-     * While we understand that the use of magic numbers is frowned upon, we
-     * decided that for the interest of efficiency for this project and keeping
-     * our sort times down, that the use of inline array copying would be more
-     * beneficial than using methods such as arraycopy or copyOfRange. We also
-     * tried using a loop that would run from 0 to the RECORD_SIZE, but it was
-     * still significantly slower than using inline code
+     * retrieves a record into the block. the function is given the byte array
+     * to store the record, the position to get it from the block, and the
+     * position to start writing into the input record. The size parameter tells
+     * the method how many bytes from the block array are being written to the
+     * record
      * 
      * @param record
      *            the array that the record will be written into
      * @param recordNum
      *            the position within the block that is being retrieved
+     * @param inPos
+     *            the position in the input record to store from the block
+     * 
+     * @param sz
+     *            the number of bytes taken from the block to put in the record
      */
-    public void getRecord(byte[] record, int recordNum, int pos, int sz)
+    public void getRecord(byte[] record, int recordNum, int inPos,
+        int sz)
     {
-        System.arraycopy(block, recordNum, record, pos, sz);
+        System.arraycopy(block, recordNum, record, inPos, sz);
     }
 
     /**
-     * stores a record into a specific spot in the block
+     * stores a record into a specific spot in the block; takes the place in the
+     * block to store, the place in the input record to start writing, and the
+     * number of bytes from the record that will be written
      * 
-     * While we understand that the use of magic numbers is frowned upon, we
-     * decided that for the interest of efficiency for this project and keeping
-     * our sort times down, that the use of inline array copying would be more
-     * beneficial than using methods such as arraycopy or copyOfRange. We also
-     * tried using a loop that would run from 0 to the RECORD_SIZE, but it was
-     * still significantly slower than using inline code
      * 
      * @param record
      *            the array that the record is being written from
      * @param recordNum
      *            the position within the block that the record will be written
      *            to
+     * @param inPos
+     *            the place within the record to start writing
+     * @param sz
+     *            the number of bytes to write to the block
      */
-    public void setRecord(byte[] record, int recordNum, int pos, int sz)
+    public void setRecord(byte[] record, int recordNum, int inPos,
+        int sz)
     {
         dirtyBit = true;
-        System.arraycopy(record, pos, block, recordNum, sz);
-
-        // updates the furthestByte if the new record was further into the block
-        // than the previous furthest
+        System.arraycopy(record, inPos, block, recordNum, sz);
     }
 
     /**
@@ -169,7 +170,7 @@ public class Buffer
         if (dirtyBit) // has the block been changed?
         {
             file.seek(index * BufferPool.bufferSize);
-            file.write(block); // write the block until the                                          // furthest changed byte
+            file.write(block);
         }
     }
 }

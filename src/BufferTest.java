@@ -19,7 +19,7 @@ public class BufferTest extends TestCase
 
     private RandomAccessFile file;
     private Buffer           buffer;
-    private BufferPool bufferpool;
+    private BufferPool       bufferpool;
     private byte[]           test;
     private byte[]           test2;
 
@@ -33,9 +33,13 @@ public class BufferTest extends TestCase
         test2 = new byte[4096];
 
         for (int i = 0; i < 4096; i++)
+        {
             test[i] = "a".getBytes()[0];
+        }
         for (int j = 0; j < 4096; j++)
+        {
             test2[j] = "b".getBytes()[0];
+        }
         file.write(test);
         file.write(test2);
         bufferpool = new BufferPool(4, 4096);
@@ -50,8 +54,8 @@ public class BufferTest extends TestCase
     public void testStoreBlock() throws IOException
     {
         buffer = new Buffer(0, file);
-        assertEquals(ByteBuffer.wrap(buffer.getBlock()).compareTo(
-                ByteBuffer.wrap(test)), 0);
+        assertEquals(ByteBuffer.wrap(buffer.getBlock())
+            .compareTo(ByteBuffer.wrap(test)), 0);
     }
 
     /**
@@ -64,40 +68,30 @@ public class BufferTest extends TestCase
     public void testReset() throws IOException
     {
         buffer = new Buffer(0, file);
-        assertTrue(ByteBuffer.wrap(buffer.getBlock()).compareTo(ByteBuffer
-                .wrap(test)) == 0);
+        assertEquals(ByteBuffer.wrap(buffer.getBlock())
+            .compareTo(ByteBuffer.wrap(test)), 0);
         buffer.reset(1, file);
-        assertTrue(ByteBuffer.wrap(buffer.getBlock()).compareTo(ByteBuffer
-                .wrap(test2)) == 0);
-    }
-
-    /**
-     * tests that a record can be properly retrieved from the block
-     * 
-     * @throws IOException
-     *             if the file doesnt work
-     */
-    public void testGetRecord() throws IOException
-    {
-
+        assertEquals(ByteBuffer.wrap(buffer.getBlock())
+            .compareTo(ByteBuffer.wrap(test2)), 0);
     }
 
     /**
      * tests that a record can be properly written to the block
      * 
-     * @throws IOException if the file doesnt work
+     * @throws IOException
+     *             if the file doesnt work
      */
     public void testSetRecord() throws IOException
     {
         buffer = new Buffer(0, file);
-        assertTrue(ByteBuffer.wrap(buffer.getBlock()).compareTo(ByteBuffer
-                .wrap(test)) == 0);
+        assertEquals(ByteBuffer.wrap(buffer.getBlock())
+            .compareTo(ByteBuffer.wrap(test)), 0);
         byte[] temp = new byte[4];
         byte[] compare = "bbbb".getBytes();
         buffer.setRecord(compare, 0, 0, 4);
         buffer.getRecord(temp, 0, 0, 4);
-        assertTrue(ByteBuffer.wrap(temp).compareTo(ByteBuffer.wrap(
-                compare)) == 0);
+        assertEquals(ByteBuffer.wrap(temp)
+            .compareTo(ByteBuffer.wrap(compare)), 0);
     }
 
 }
