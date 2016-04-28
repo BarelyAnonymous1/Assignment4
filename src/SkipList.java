@@ -309,14 +309,13 @@ public class SkipList<K extends Comparable<K>, E>
                 currNode = (SkipNode<K, E>) getObject(curr);
             }
         }
-        SkipNode<K,E> currNode = null;
+        SkipNode<K, E> currNode = null;
         if (curr != RectangleDisk.INVALID)
         {
-            currNode = (SkipNode<K,E>) getObject(curr);
+            currNode = (SkipNode<K, E>) getObject(curr);
         }
-        else 
+        else
         {
-            System.out.println("currNode was null");
             return null;
         }
         if (currNode.getKey() == null
