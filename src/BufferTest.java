@@ -85,17 +85,17 @@ public class BufferTest extends TestCase
      * 
      * @throws IOException if the file doesnt work
      */
-//    public void testSetRecord() throws IOException
-//    {
-//        buffer = new Buffer(0, file);
-//        assertTrue(ByteBuffer.wrap(buffer.getBlock()).compareTo(ByteBuffer
-//                .wrap(test)) == 0);
-//        byte[] temp = new byte[4];
-//        byte[] compare = "bbbb".getBytes();
-//        buffer.setBlock(compare, 0);
-//        buffer.getRecord(temp, 0);
-//        assertTrue(ByteBuffer.wrap(temp).compareTo(ByteBuffer.wrap(
-//                compare)) == 0);
-//    }
+    public void testSetRecord() throws IOException
+    {
+        buffer = new Buffer(0, file);
+        assertTrue(ByteBuffer.wrap(buffer.getBlock()).compareTo(ByteBuffer
+                .wrap(test)) == 0);
+        byte[] temp = new byte[4];
+        byte[] compare = "bbbb".getBytes();
+        buffer.setRecord(compare, 0, 0, 4);
+        buffer.getRecord(temp, 0, 0, 4);
+        assertTrue(ByteBuffer.wrap(temp).compareTo(ByteBuffer.wrap(
+                compare)) == 0);
+    }
 
 }
