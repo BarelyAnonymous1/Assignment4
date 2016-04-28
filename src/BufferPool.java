@@ -102,6 +102,8 @@ public class BufferPool
      * @param recordPos
      *            the position of the record in the file
      * @param record
+     *            the byte array to be written to disk
+     * @param record
      *            the byte array that contains the record values
      * @param file
      *            file the where the record will be written
