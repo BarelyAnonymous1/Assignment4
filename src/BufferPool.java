@@ -127,7 +127,7 @@ public class BufferPool
             System.out.println("remSize: " + remSize);
 
             allocateBuffer(recordPos + writePos, file)
-                .setRecord(record, readPos, writePos, length);
+                .setRecord(record, writePos, readPos, length);
             readPos += length;
             remSize -= length;
             writePos = 0;
