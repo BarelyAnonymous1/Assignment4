@@ -28,7 +28,13 @@ public class Manager
     /**
      * make the constructor private so that this class cannot be instantiated
      * creates a doubly linked freelist
+     * 
      * @param startFile
+     *            file for the buffer
+     * @param numBuffs
+     *            the max number buffers for the pool
+     * @param size
+     *            of the buffers in the pool
      * 
      * @throws IOException
      */
