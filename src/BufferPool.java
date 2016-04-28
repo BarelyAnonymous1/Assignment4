@@ -31,7 +31,7 @@ public class BufferPool
      *            spec)
      * @param startSize
      *            the size of the buffers that will be stored in the pool
-     * @throws IOException 
+     * @throws IOException
      */
     public BufferPool(int startMax, int startSize) throws IOException
     {
@@ -39,7 +39,7 @@ public class BufferPool
         bufferSize = startSize;
         for (int i = 1; i <= startMax; i++)
         {
-            pool.makeMostRecent((-1)*i*bufferSize, null);
+            pool.makeMostRecent((-1) * i * bufferSize, null);
         }
     }
 
