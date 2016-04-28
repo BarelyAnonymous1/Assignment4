@@ -30,11 +30,17 @@ public class BufferPoolTest extends TestCase
         byte[] test3 = new byte[4096];
 
         for (int i = 0; i < 4096; i++)
+        {
             test[i] = "a".getBytes()[0];
+        }
         for (int j = 0; j < 4096; j++)
+        {
             test2[j] = "b".getBytes()[0];
+        }
         for (int k = 0; k < 4096; k++)
+        {
             test3[k] = "c".getBytes()[0];
+        }
         file.write(test);
         file.write(test2);
         file.write(test3);
