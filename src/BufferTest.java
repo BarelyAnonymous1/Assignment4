@@ -19,6 +19,7 @@ public class BufferTest extends TestCase
 
     private RandomAccessFile file;
     private Buffer           buffer;
+    private BufferPool bufferpool;
     private byte[]           test;
     private byte[]           test2;
 
@@ -37,6 +38,7 @@ public class BufferTest extends TestCase
             test2[j] = "b".getBytes()[0];
         file.write(test);
         file.write(test2);
+        bufferpool = BufferPool(4, 4096);
     }
 
     /**
