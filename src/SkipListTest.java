@@ -118,8 +118,8 @@ public class SkipListTest extends TestCase
     {
         for (int i = 1; i < 20; i++)
         {
-            list.insert(new KVPair<String, Rectangle>("node6", new Rectangle(
-                "node6", 6, 6, 6, 6)));
+            list.insert(new KVPair<String, Rectangle>(Integer.toString(i), new Rectangle(
+                Integer.toString(i), i, i, i, i)));
             list.dump();
             System.out.println("");
 
