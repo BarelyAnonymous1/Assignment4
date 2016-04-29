@@ -214,4 +214,16 @@ public class FreeList
             curr = curr.next;
         }
     }
+    
+    public int getLast()
+    {
+        if (size == 0)
+        {
+            return -1;
+        }
+        else
+        {
+            return tail.prev.index;
+        }
+    }
 }
