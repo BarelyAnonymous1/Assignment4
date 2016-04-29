@@ -95,10 +95,10 @@ public class Manager
             handle = free.index;
             free.index += recordSize;
             free.length -= recordSize;
-            if (free.length == 0)
-            {
-                freeList.remove(free.index);
-            }
+//            if (free.length == 0)
+//            {
+//                freeList.remove(free.index);
+//            }
         }
         ByteBuffer buffer = ByteBuffer.allocate(messageSize);
         buffer.putShort((short) data.length);
