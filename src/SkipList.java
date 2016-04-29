@@ -349,7 +349,7 @@ public class SkipList<K extends Comparable<K>, E>
             }
             else
             {
-                name = current.getPair().toString();
+                name = current.getValue().toString();
             }
             System.out.println("Node has depth "
                 + (current.next.length) + ", Value (" + name + ")");
