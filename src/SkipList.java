@@ -14,7 +14,7 @@ import java.io.*;
  * @param <E>
  *            the data value contained in the KVPair of the node
  */
-public class SkipList<K extends Comparable<K>, E>
+public class SkipList<K extends Comparable<K>, E extends Comparable<E>>
 {
     /**
      * head node
@@ -283,9 +283,9 @@ public class SkipList<K extends Comparable<K>, E>
     }
     
     @SuppressWarnings("unchecked")
-    public E removeVal2(Comparable<E> val) throws Exception
+    public E removeVal2(E val) throws Exception
     {
-        Comparable<E> located = null;
+        E located = null;
         int[] updateHandles = (int[]) Array.newInstance(int.class,
             level + 1);
         int removeHandle = RectangleDisk.INVALID;
@@ -298,7 +298,7 @@ public class SkipList<K extends Comparable<K>, E>
             {
                 SkipNode<K, E> currNext = (SkipNode<K, E>) getObject(
                     currNode.next[i]);
-                if (currNext.getValue() == val)
+                if (currNext.getValue().compareTo(val) == 0)
                 {
                     located = currNext.getValue();
                     removeHandle = currNode.next[i];
