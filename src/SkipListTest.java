@@ -36,83 +36,83 @@ public class SkipListTest extends TestCase
         list = new SkipList<String, Rectangle>();
     }
 
-    /**
-     * tests the insert method
-     */
-    public void testInsert() throws Exception
-    {
-        list.insert(pair1);
-        list.dump();
-        System.out.println("");
-        list.insert(pair4);
-        list.dump();
-        System.out.println("");
-
-        assertNull(list.search("node3"));
-        list.insert(pair2);
-        list.dump();
-        System.out.println("");
-
-        list.insert(pair3);
-        assertEquals(pair3.compareTo(list.search("node3").getPair()),
-            0);
-
-        list.dump();
-        System.out.println("");
-        list.removeKey("node1");
-        list.dump();
-        System.out.println("");
-        list.removeKey("node2");
-        list.dump();
-        System.out.println("");
-        list.removeKey("node3");
-        list.dump();
-        System.out.println("");
-        list.removeKey("node4");
-        list.dump();
-
-        list.insert(pair1);
-        list.dump();
-        System.out.println("");
-        list.insert(pair4);
-        list.dump();
-        System.out.println("");
-
-        assertNull(list.search("node3"));
-        list.insert(pair2);
-        list.dump();
-        System.out.println("");
-
-        list.insert(pair3);
-        assertEquals(pair3.compareTo(list.search("node3").getPair()),
-            0);
-        list.dump();
-        System.out.println("");
-        
-        list.insert(new KVPair<String, Rectangle>("node5", new Rectangle(
-            "node5", 5, 5, 5, 5)));
-        list.dump();
-        System.out.println("");
-        list.insert(new KVPair<String, Rectangle>("node6", new Rectangle(
-            "node6", 6, 6, 6, 6)));
-        list.dump();
-        System.out.println("");
-
-        list.dump();
-        System.out.println("");
-        list.removeKey("node1");
-        list.dump();
-        System.out.println("");
-        list.removeKey("node2");
-        list.dump();
-        System.out.println("");
-        list.removeKey("node3");
-        list.dump();
-        System.out.println("");
-        list.removeKey("node4");
-        list.dump();
-        Manager.close();
-    }
+//    /**
+//     * tests the insert method
+//     */
+//    public void testInsert() throws Exception
+//    {
+//        list.insert(pair1);
+//        list.dump();
+//        System.out.println("");
+//        list.insert(pair4);
+//        list.dump();
+//        System.out.println("");
+//
+//        assertNull(list.search("node3"));
+//        list.insert(pair2);
+//        list.dump();
+//        System.out.println("");
+//
+//        list.insert(pair3);
+//        assertEquals(pair3.compareTo(list.search("node3").getPair()),
+//            0);
+//
+//        list.dump();
+//        System.out.println("");
+//        list.removeKey("node1");
+//        list.dump();
+//        System.out.println("");
+//        list.removeKey("node2");
+//        list.dump();
+//        System.out.println("");
+//        list.removeKey("node3");
+//        list.dump();
+//        System.out.println("");
+//        list.removeKey("node4");
+//        list.dump();
+//
+//        list.insert(pair1);
+//        list.dump();
+//        System.out.println("");
+//        list.insert(pair4);
+//        list.dump();
+//        System.out.println("");
+//
+//        assertNull(list.search("node3"));
+//        list.insert(pair2);
+//        list.dump();
+//        System.out.println("");
+//
+//        list.insert(pair3);
+//        assertEquals(pair3.compareTo(list.search("node3").getPair()),
+//            0);
+//        list.dump();
+//        System.out.println("");
+//        
+//        list.insert(new KVPair<String, Rectangle>("node5", new Rectangle(
+//            "node5", 5, 5, 5, 5)));
+//        list.dump();
+//        System.out.println("");
+//        list.insert(new KVPair<String, Rectangle>("node6", new Rectangle(
+//            "node6", 6, 6, 6, 6)));
+//        list.dump();
+//        System.out.println("");
+//
+//        list.dump();
+//        System.out.println("");
+//        list.removeKey("node1");
+//        list.dump();
+//        System.out.println("");
+//        list.removeKey("node2");
+//        list.dump();
+//        System.out.println("");
+//        list.removeKey("node3");
+//        list.dump();
+//        System.out.println("");
+//        list.removeKey("node4");
+//        list.dump();
+//        Manager.close();
+//    }
     
     public void testLoop() throws Exception
     {
@@ -122,7 +122,13 @@ public class SkipListTest extends TestCase
                 Integer.toString(i), i, i, i, i)));
             list.dump();
             System.out.println("");
-
+        }
+        
+        for (int i = 1; i < 20; i++)
+        {
+            list.removeKey(Integer.toString(i));
+            list.dump();
+            System.out.println("");
         }
     }
 //
