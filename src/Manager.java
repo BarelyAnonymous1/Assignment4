@@ -124,6 +124,7 @@ public class Manager
         byte[] replace = new byte[sizeNum + messageSize];
         pool.writeRecord(h, replace.length, replace, diskFile);
         freeList.reallocate(h, sizeNum + messageSize);
+        pool.fixBuffer(h, Math.max(h, freeList.getLast()));
     }
 
     /**
