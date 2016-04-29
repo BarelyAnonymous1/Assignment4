@@ -123,10 +123,18 @@ public class SkipListTest extends TestCase
             list.dump();
             System.out.println("");
         }
-        
+        System.out.println("\n\n");
         for (int i = 1; i < 20; i++)
         {
             list.removeKey(Integer.toString(i));
+            list.dump();
+            System.out.println("");
+        }
+        System.out.println("\n\n");
+        for (int i = 1; i < 20; i++)
+        {
+            list.insert(new KVPair<String, Rectangle>(Integer.toString(i), new Rectangle(
+                Integer.toString(i), i, i, i, i)));
             list.dump();
             System.out.println("");
         }
