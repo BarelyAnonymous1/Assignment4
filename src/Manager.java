@@ -121,9 +121,9 @@ public class Manager
         System.arraycopy(pool.getRecord(h, messageSize, diskFile), 0,
             sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
+        byte[] replace = new byte[sizeNum + messageSize];
+        pool.writeRecord(h, replace.length, replace, diskFile);
         freeList.reallocate(h, sizeNum + messageSize);
-        diskFile.setLength(Math.max(h, numBlocks*blockSize));
-        
     }
 
     /**
