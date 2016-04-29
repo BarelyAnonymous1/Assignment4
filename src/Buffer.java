@@ -30,11 +30,7 @@ public class Buffer
      * integer that keeps the max size of the buffer
      */
     private int              bufferSize;
-    
-    /**
-     * the furthest byte the buffer should write
-     */
-    private int furthestByte;
+
     /**
      * the specific file that the block has been read from and will write to
      */
@@ -77,7 +73,6 @@ public class Buffer
     {
         index = resetID;
         file = resetFile;
-        furthestByte = 0;
         dirtyBit = false; // makes sure that the new block won't be written if
                           // it hasn't been changed
         storeBlock(); // get a new block
@@ -174,16 +169,6 @@ public class Buffer
     {
         dirtyBit = true;
         System.arraycopy(record, inPos, block, recordNum, sz);
-        if (furthestByte < recordNum + sz)
-        {
-            furthestByte = recordNum + sz;
-        }
-    }
-    
-    public void setFurthest(int newFurthest)
-    {
-        furthestByte = Math.min(newFurthest, furthestByte);
-            
     }
 
     /**
@@ -197,7 +182,7 @@ public class Buffer
         if (dirtyBit & index > -1) // has the block been changed?
         {
             file.seek(index * bufferSize);
-            file.write(block, 0, furthestByte);
+            file.write(block);
         }
     }
 }
