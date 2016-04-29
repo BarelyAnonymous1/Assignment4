@@ -77,6 +77,7 @@ public class Buffer
     {
         index = resetID;
         file = resetFile;
+        furthestByte = 0;
         dirtyBit = false; // makes sure that the new block won't be written if
                           // it hasn't been changed
         storeBlock(); // get a new block
