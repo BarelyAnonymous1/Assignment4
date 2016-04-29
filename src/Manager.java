@@ -183,7 +183,13 @@ public class Manager
         pool.flushPool();
         int length = numBlocks * blockSize - 1;
         diskFile.seek(length);
-        byte[] last = new byte[1];
+        byte last = diskFile.readByte();
+        while (last == 0)
+        {
+            diskFile.setLength(length);
+            length--;
+            last = diskFile.readByte();            
+        }
         diskFile.close();
     }
 }
