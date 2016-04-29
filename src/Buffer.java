@@ -182,7 +182,8 @@ public class Buffer
     
     public void setFurthest(int newFurthest)
     {
-        if (furthestByte )
+        furthestByte = Math.min(newFurthest, furthestByte);
+            
     }
 
     /**

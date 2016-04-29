@@ -95,8 +95,8 @@ public class BufferPool
             {
                 length = bufferSize - readPos; // size of what we try to read
             }
-            allocateBuffer(recordPos + writePos, file)
-                .getRecord(record, readPos, writePos, length);
+            allocateBuffer(recordPos + writePos, file).getRecord(
+                record, readPos, writePos, length);
             writePos += length;
             remSize -= length;
             readPos = 0;
@@ -130,17 +130,17 @@ public class BufferPool
             {
                 length = BufferPool.bufferSize - writePos;
             }
-            allocateBuffer(recordPos + readPos, file)
-                .setRecord(record, writePos, readPos, length);
+            allocateBuffer(recordPos + readPos, file).setRecord(
+                record, writePos, readPos, length);
             readPos += length;
             remSize -= length;
             writePos = 0;
         }
     }
-    
-    public void fixBuffer(int h, RandomAccessFile file)
+
+    public void fixBuffer(int h, RandomAccessFile file) throws IOException
     {
-        allocateBuffer(h, file).setFurthestByte(h%bufferSize - 1);
+        allocateBuffer(h, file).setFurthest(h % bufferSize - 1);
     }
 
     /**

@@ -42,6 +42,7 @@ public class Manager
         int buffSize) throws IOException
     {
         diskFile = new RandomAccessFile(startFile, "rw");
+        diskFile.setLength(0);
         blockSize = buffSize;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
