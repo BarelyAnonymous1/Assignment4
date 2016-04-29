@@ -181,6 +181,9 @@ public class Manager
     public static void close() throws IOException
     {
         pool.flushPool();
+        int length = numBlocks * blockSize - 1;
+        diskFile.seek(length);
+        byte[] last = new byte[1];
         diskFile.close();
     }
 }
