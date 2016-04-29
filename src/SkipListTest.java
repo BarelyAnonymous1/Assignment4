@@ -1,4 +1,6 @@
 import student.TestCase;
+import student.TestableRandom;
+
 import java.io.*;
 
 /**
@@ -101,61 +103,57 @@ public class SkipListTest extends TestCase
         Manager.close();
     }
 
-    // /**
-    // * make sure that the list will adjust the head when a node is added
-    // higher
-    // * than the head
-    // */
-    // public void testRandomInsert() throws Exception
-    // {
-    // TestableRandom.setNextBooleans(false, true, false);
-    // assertEquals(1, list.getHead().next.length);
-    // assertTrue(list.insert(pair1));
-    // assertEquals(1, list.getHead().next.length);
-    // assertTrue(list.insert(pair2));
-    // assertEquals(2, list.getHead().next.length);
-    // list.dump();
-    // }
-    //
-    // /**
-    // * creates a fake region to check for new rectangles
-    // */
-    // public void testRegionSearch() throws Exception
-    // {
-    // Rectangle region = new Rectangle("region", 100, 100, 200,
-    // 200);
-    // SkipList<String, Rectangle> regionList = new SkipList<String,
-    // Rectangle>();
-    // regionList.insert(new KVPair<String, Rectangle>(
-    // "notIntersect", new Rectangle("notIntersect", 10, 10, 20,
-    // 20)));
-    // assertFalse(regionList.regionSearch(region));
-    // regionList.insert(new KVPair<String, Rectangle>("intersect1",
-    // new Rectangle("intersect1", 75, 75, 200, 250)));
-    // assertTrue(regionList.regionSearch(region));
-    // }
-    //
-    // /**
-    // * tests that the intersections test successfully finds an intersection
-    // and
-    // * returns the appropriate boolean
-    // */
-    // public void testIntersections() throws Exception
-    // {
-    // SkipList<String, Rectangle> intersectList = new SkipList<String,
-    // Rectangle>();
-    // intersectList.insert(new KVPair<String, Rectangle>(
-    // "notIntersect", new Rectangle("notIntersect", 10, 10, 20,
-    // 20)));
-    // assertFalse(intersectList.intersections());
-    // intersectList.insert(new KVPair<String, Rectangle>(
-    // "intersect1", new Rectangle("intersect1", 75, 75, 200,
-    // 250)));
-    // assertFalse(intersectList.intersections());
-    // intersectList.insert(new KVPair<String, Rectangle>(
-    // "intersect2", new Rectangle("intersect2", 100, 100, 200,
-    // 200)));
-    // assertTrue(intersectList.intersections());
-    //
-    // }
+    /**
+     * make sure that the list will adjust the head when a node is added higher
+     * than the head
+     */
+    public void testRandomInsert() throws Exception
+    {
+        TestableRandom.setNextBooleans(false, true, false);
+        assertEquals(1, list.getHead().next.length);
+        assertTrue(list.insert(pair1));
+        assertEquals(1, list.getHead().next.length);
+        assertTrue(list.insert(pair2));
+        assertEquals(2, list.getHead().next.length);
+        list.dump();
+    }
+
+    /**
+     * creates a fake region to check for new rectangles
+     */
+    public void testRegionSearch() throws Exception
+    {
+        Rectangle region = new Rectangle("region", 100, 100, 200,
+            200);
+        SkipList<String, Rectangle> regionList = new SkipList<String, Rectangle>();
+        regionList.insert(new KVPair<String, Rectangle>(
+            "notIntersect", new Rectangle("notIntersect", 10, 10, 20,
+                20)));
+        assertFalse(regionList.regionSearch(region));
+        regionList.insert(new KVPair<String, Rectangle>("intersect1",
+            new Rectangle("intersect1", 75, 75, 200, 250)));
+        assertTrue(regionList.regionSearch(region));
+    }
+
+    /**
+     * tests that the intersections test successfully finds an intersection and
+     * returns the appropriate boolean
+     */
+    public void testIntersections() throws Exception
+    {
+        SkipList<String, Rectangle> intersectList = new SkipList<String, Rectangle>();
+        intersectList.insert(new KVPair<String, Rectangle>(
+            "notIntersect", new Rectangle("notIntersect", 10, 10, 20,
+                20)));
+        assertFalse(intersectList.intersections());
+        intersectList.insert(new KVPair<String, Rectangle>(
+            "intersect1", new Rectangle("intersect1", 75, 75, 200,
+                250)));
+        assertFalse(intersectList.intersections());
+        intersectList.insert(new KVPair<String, Rectangle>(
+            "intersect2", new Rectangle("intersect2", 100, 100, 200,
+                200)));
+        assertTrue(intersectList.intersections());
+
+    }
 }
