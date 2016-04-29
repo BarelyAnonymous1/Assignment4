@@ -124,9 +124,9 @@ public class SkipListTest extends TestCase
             System.out.println("");
         }
         System.out.println("\n\n");
-        for (int i = 1; i < 20; i++)
+        for (int i = 1; i < 10; i++)
         {
-            list.removeKey(Integer.toString(i));
+            list.removeKey(Integer.toString(i*2));
             list.dump();
             System.out.println("");
         }
