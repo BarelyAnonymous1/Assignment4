@@ -183,7 +183,7 @@ public class CommandParser
                     + height;
                 Rectangle searchRect = new Rectangle("", x, y, width,
                     height);
-                Rectangle found = list.removeValue(searchRect);
+                Rectangle found = list.removeVal2(searchRect);
                 if (found == null)
                 {
                     System.out.println(
