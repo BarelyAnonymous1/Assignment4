@@ -174,6 +174,10 @@ public class Buffer
     {
         dirtyBit = true;
         System.arraycopy(record, inPos, block, recordNum, sz);
+        if (furthestByte < recordNum + sz)
+        {
+            furthestByte = recordNum + sz;
+        }
     }
 
     /**
