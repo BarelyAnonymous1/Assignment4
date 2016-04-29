@@ -188,6 +188,7 @@ public class Manager
         {
             diskFile.setLength(length);
             length--;
+            diskFile.seek(length);
             last = diskFile.readByte();            
         }
         diskFile.close();
