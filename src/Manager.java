@@ -122,7 +122,6 @@ public class Manager
             sizeArr, 0, messageSize);
         short sizeNum = ByteBuffer.wrap(sizeArr).getShort();
         freeList.reallocate(h, sizeNum + messageSize);
-        Math.max(h, numBlocks*blockSize);
         diskFile.setLength(Math.max(h, numBlocks*blockSize));
         
     }
