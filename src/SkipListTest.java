@@ -113,6 +113,18 @@ public class SkipListTest extends TestCase
         list.dump();
         Manager.close();
     }
+    
+    public void testLoop() throws Exception
+    {
+        for (int i = 1; i < 20; i++)
+        {
+            list.insert(new KVPair<String, Rectangle>("node6", new Rectangle(
+                "node6", 6, 6, 6, 6)));
+            list.dump();
+            System.out.println("");
+
+        }
+    }
 //
 //    /**
 //     * make sure that the list will adjust the head when a node is added higher
