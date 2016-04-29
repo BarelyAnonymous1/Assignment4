@@ -137,6 +137,11 @@ public class BufferPool
             writePos = 0;
         }
     }
+    
+    public void fixBuffer(int h, RandomAccessFile file)
+    {
+        allocateBuffer(h, file).setFurthestByte(h%bufferSize - 1);
+    }
 
     /**
      * removes everything from the bufferPool starting with the least recently
