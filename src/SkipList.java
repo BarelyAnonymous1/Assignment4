@@ -283,9 +283,9 @@ public class SkipList<K extends Comparable<K>, E>
     }
     
     @SuppressWarnings("unchecked")
-    public E removeVal2(E val) throws Exception
+    public E removeVal2(Comparable<E> val) throws Exception
     {
-        E located = null;
+        Comparable<E> located = null;
         int[] updateHandles = (int[]) Array.newInstance(int.class,
             level + 1);
         int removeHandle = RectangleDisk.INVALID;
