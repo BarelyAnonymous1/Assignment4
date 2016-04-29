@@ -23,14 +23,14 @@ public class SkipListTest extends TestCase
     public void setUp() throws IOException
     {
         Manager.setValues("skipListTest", 3, 512);
-        pair1 = new KVPair<String, Rectangle>("node1",
-            new Rectangle("node1", 1, 1, 1, 1));
-        pair2 = new KVPair<String, Rectangle>("node2",
-            new Rectangle("node2", 2, 2, 2, 2));
-        pair3 = new KVPair<String, Rectangle>("node3",
-            new Rectangle("node3", 3, 3, 3, 3));
-        pair4 = new KVPair<String, Rectangle>("node4",
-            new Rectangle("node4", 4, 4, 4, 4));
+        pair1 = new KVPair<String, Rectangle>("node1", new Rectangle(
+            "node1", 1, 1, 1, 1));
+        pair2 = new KVPair<String, Rectangle>("node2", new Rectangle(
+            "node2", 2, 2, 2, 2));
+        pair3 = new KVPair<String, Rectangle>("node3", new Rectangle(
+            "node3", 3, 3, 3, 3));
+        pair4 = new KVPair<String, Rectangle>("node4", new Rectangle(
+            "node4", 4, 4, 4, 4));
         list = new SkipList<String, Rectangle>();
     }
 
@@ -68,7 +68,7 @@ public class SkipListTest extends TestCase
         System.out.println("");
         list.removeKey("node4");
         list.dump();
-        
+
         list.insert(pair1);
         list.dump();
         System.out.println("");
@@ -84,7 +84,7 @@ public class SkipListTest extends TestCase
         list.insert(pair3);
         assertEquals(pair3.compareTo(list.search("node3").getPair()),
             0);
-        
+
         list.dump();
         System.out.println("");
         list.removeKey("node1");
@@ -98,7 +98,7 @@ public class SkipListTest extends TestCase
         System.out.println("");
         list.removeKey("node4");
         list.dump();
-
+        Manager.close();
     }
 
     // /**
