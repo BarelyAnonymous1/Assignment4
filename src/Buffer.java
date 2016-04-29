@@ -30,7 +30,11 @@ public class Buffer
      * integer that keeps the max size of the buffer
      */
     private int              bufferSize;
-
+    
+    /**
+     * the furthest byte the buffer should write
+     */
+    private int furthestByte;
     /**
      * the specific file that the block has been read from and will write to
      */
