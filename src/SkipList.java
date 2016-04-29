@@ -35,8 +35,8 @@ public class SkipList<K extends Comparable<K>, E extends Comparable<E>>
      */
     public SkipList() throws IOException
     {
-        head = Manager.insert(Serializer
-            .serialize(new SkipNode<K, E>(RectangleDisk.INVALID, 0)));
+        head = Manager.insert(Serializer.serialize(new SkipNode<K, E>(
+            RectangleDisk.INVALID, 0)));
         level = 0;
         size = 0;
     }
@@ -49,8 +49,8 @@ public class SkipList<K extends Comparable<K>, E extends Comparable<E>>
     @SuppressWarnings("unchecked")
     public SkipNode<K, E> getHead() throws Exception
     {
-        return (SkipNode<K, E>) Serializer
-            .deserialize(Manager.getRecord(head));
+        return (SkipNode<K, E>) Serializer.deserialize(Manager
+            .getRecord(head));
     }
 
     /**
@@ -226,8 +226,8 @@ public class SkipList<K extends Comparable<K>, E extends Comparable<E>>
                     break;
                 }
                 curr = currNode.next[i];
-                currNode = (SkipNode<K, E>) Serializer
-                    .deserialize(Manager.getRecord(curr));
+                currNode = (SkipNode<K, E>) Serializer.deserialize(
+                    Manager.getRecord(curr));
             }
             updateHandles[i] = curr;
         }
@@ -281,7 +281,7 @@ public class SkipList<K extends Comparable<K>, E extends Comparable<E>>
         }
         return null;
     }
-    
+
     @SuppressWarnings("unchecked")
     public E removeVal2(E val) throws Exception
     {
@@ -290,26 +290,23 @@ public class SkipList<K extends Comparable<K>, E extends Comparable<E>>
             level + 1);
         int removeHandle = RectangleDisk.INVALID;
         int curr = head;
-        for (int i = level; i >= 0; i--)
+        SkipNode<K, E> currNode = (SkipNode<K, E>) Serializer
+            .deserialize(Manager.getRecord(curr));
+        while (currNode.next[i] != RectangleDisk.INVALID)
         {
-            SkipNode<K, E> currNode = (SkipNode<K, E>) Serializer
-                .deserialize(Manager.getRecord(curr));
-            while (currNode.next[i] != RectangleDisk.INVALID)
+            SkipNode<K, E> currNext = (SkipNode<K, E>) getObject(
+                currNode.next[i]);
+            if (currNext.getValue().compareTo(val) == 0)
             {
-                SkipNode<K, E> currNext = (SkipNode<K, E>) getObject(
-                    currNode.next[i]);
-                if (currNext.getValue().compareTo(val) == 0)
-                {
-                    located = currNext.getValue();
-                    removeHandle = currNode.next[i];
-                    break;
-                }
-                curr = currNode.next[i];
-                currNode = (SkipNode<K, E>) Serializer
-                    .deserialize(Manager.getRecord(curr));
+                located = currNext.getValue();
+                removeHandle = currNode.next[i];
+                break;
             }
-            updateHandles[i] = curr;
+            curr = currNode.next[i];
+            currNode = (SkipNode<K, E>) Serializer.deserialize(Manager
+                .getRecord(curr));
         }
+        updateHandles[i] = curr;
         if (located != null)
         {
             size--;
@@ -350,10 +347,9 @@ public class SkipList<K extends Comparable<K>, E extends Comparable<E>>
         {
             SkipNode<K, E> currNode = (SkipNode<K, E>) getObject(
                 curr);
-            while (currNode.next[i] != RectangleDisk.INVALID
-                && (key.compareTo(
-                    ((SkipNode<K, E>) getObject(currNode.next[i]))
-                        .getKey()) > 0))
+            while (currNode.next[i] != RectangleDisk.INVALID && (key
+                .compareTo(((SkipNode<K, E>) getObject(
+                    currNode.next[i])).getKey()) > 0))
             {
                 curr = currNode.next[i];
                 currNode = (SkipNode<K, E>) getObject(curr);
@@ -470,9 +466,9 @@ public class SkipList<K extends Comparable<K>, E extends Comparable<E>>
     @SuppressWarnings("unchecked")
     public boolean regionSearch(Rectangle region) throws Exception
     {
-        System.out.println("Rectangles intersecting region ("
-            + region.getX() + ", " + region.getY() + ", "
-            + region.getWidth() + ", " + region.getHeight() + "):");
+        System.out.println("Rectangles intersecting region (" + region
+            .getX() + ", " + region.getY() + ", " + region.getWidth()
+            + ", " + region.getHeight() + "):");
         boolean inRegion = false;
         SkipNode<K, E> temp = (SkipNode<K, E>) getObject(head);
         if (temp.next[0] == RectangleDisk.INVALID)
