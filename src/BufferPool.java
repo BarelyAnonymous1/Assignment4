@@ -138,10 +138,6 @@ public class BufferPool
         }
     }
 
-    public void fixBuffer(int h, RandomAccessFile file) throws IOException
-    {
-        allocateBuffer(h, file).setFurthest(h % bufferSize - 1);
-    }
 
     /**
      * removes everything from the bufferPool starting with the least recently
