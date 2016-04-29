@@ -281,6 +281,56 @@ public class SkipList<K extends Comparable<K>, E>
         }
         return null;
     }
+    
+    @SuppressWarnings("unchecked")
+    public E removeVal2(E val) throws Exception
+    {
+        E located = null;
+        int[] updateHandles = (int[]) Array.newInstance(int.class,
+            level + 1);
+        int removeHandle = RectangleDisk.INVALID;
+        int curr = head;
+        for (int i = level; i >= 0; i--)
+        {
+            SkipNode<K, E> currNode = (SkipNode<K, E>) Serializer
+                .deserialize(Manager.getRecord(curr));
+            while (currNode.next[i] != RectangleDisk.INVALID)
+            {
+                SkipNode<K, E> currNext = (SkipNode<K, E>) getObject(
+                    currNode.next[i]);
+                if (currNext.getValue() == val)
+                {
+                    located = currNext.getValue();
+                    removeHandle = currNode.next[i];
+                    break;
+                }
+                curr = currNode.next[i];
+                currNode = (SkipNode<K, E>) Serializer
+                    .deserialize(Manager.getRecord(curr));
+            }
+            updateHandles[i] = curr;
+        }
+        if (located != null)
+        {
+            size--;
+        }
+        if (removeHandle != RectangleDisk.INVALID)
+        {
+            SkipNode<K, E> removeNode = ((SkipNode<K, E>) getObject(
+                removeHandle));
+            for (int i = 0; i < removeNode.next.length; i++)
+            {
+                SkipNode<K, E> updateNode = ((SkipNode<K, E>) getObject(
+                    updateHandles[i]));
+                updateNode.next[i] = removeNode.next[i];
+                replaceObject(updateHandles[i], updateNode);
+            }
+            Manager.release(removeHandle);
+            Manager.release(removeNode.pair);
+        }
+
+        return located;
+    }
 
     /**
      * finds a specific node given a key value using a while loop to discover
