@@ -191,7 +191,7 @@ public class Buffer
         if (dirtyBit & index > -1) // has the block been changed?
         {
             file.seek(index * bufferSize);
-            file.write(block);
+            file.write(block, 0, furthestByte);
         }
     }
 }
