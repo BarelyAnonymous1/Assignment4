@@ -179,6 +179,11 @@ public class Buffer
             furthestByte = recordNum + sz;
         }
     }
+    
+    public void setFurthest(int newFurthest)
+    {
+        if (furthestByte )
+    }
 
     /**
      * writes the block of bytes contained within the buffer to the file that
