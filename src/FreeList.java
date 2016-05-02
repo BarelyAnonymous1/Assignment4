@@ -192,7 +192,6 @@ public class FreeList
             {
                 curr.length += curr.next.length;
                 remove(curr.next.index);
-                size--;
             }
             curr = curr.next;
         }
