@@ -122,8 +122,6 @@ public class FreeList
                 && curr.length < best.length)
             {
                 best = curr;
-                System.out.println("\nFound a better Size\n");
-                System.out.println("Found: " + best.length + "  Need: " + sz);
             }
             curr = curr.next;
         }
