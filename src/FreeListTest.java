@@ -1,4 +1,6 @@
 
+import java.io.IOException;
+
 import student.TestCase;
 
 /**
@@ -11,16 +13,19 @@ import student.TestCase;
 public class FreeListTest extends TestCase
 {
 
-    private FreeNode  node1;
-    private FreeNode  node2;
-    private FreeNode  node3;
+    private FreeNode node1;
+    private FreeNode node2;
+    private FreeNode node3;
     private FreeList list;
 
     /**
      * sets up the nodes and files for the FreeQueue
+     * 
+     * @throws IOException
      */
-    public void setUp()
+    public void setUp() throws IOException
     {
+        Manager.setValues("freelist", 3, 512);
         node1 = new FreeNode(1, 1);
         node2 = new FreeNode(2, 2);
         node3 = new FreeNode(3, 3);
@@ -57,6 +62,7 @@ public class FreeListTest extends TestCase
         assertEquals(list.remove(1), node1);
         list.dump();
     }
+
     /**
      * tests the contains method
      */
@@ -64,10 +70,19 @@ public class FreeListTest extends TestCase
     {
         list.contains(0);
         System.out.println("");
+<<<<<<< HEAD
+=======
+        assertNull(list.contains(0));
+>>>>>>> branch 'master' of https://github.com/BarelyAnonymous1/Assignment4.git
         node3.setData(4, 1);
         list.insert(node2);
         list.insert(node3);
+<<<<<<< HEAD
         list.contains(1);
+=======
+        assertEquals(node3, list.contains(1));
+        assertNull(list.contains(3));
+>>>>>>> branch 'master' of https://github.com/BarelyAnonymous1/Assignment4.git
         list.dump();
     }
 

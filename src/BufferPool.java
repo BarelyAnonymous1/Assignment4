@@ -95,8 +95,8 @@ public class BufferPool
             {
                 length = bufferSize - readPos; // size of what we try to read
             }
-            allocateBuffer(recordPos + writePos, file)
-                .getRecord(record, readPos, writePos, length);
+            allocateBuffer(recordPos + writePos, file).getRecord(
+                record, readPos, writePos, length);
             writePos += length;
             remSize -= length;
             readPos = 0;
@@ -130,13 +130,14 @@ public class BufferPool
             {
                 length = BufferPool.bufferSize - writePos;
             }
-            allocateBuffer(recordPos + readPos, file)
-                .setRecord(record, writePos, readPos, length);
+            allocateBuffer(recordPos + readPos, file).setRecord(
+                record, writePos, readPos, length);
             readPos += length;
             remSize -= length;
             writePos = 0;
         }
     }
+
 
     /**
      * removes everything from the bufferPool starting with the least recently

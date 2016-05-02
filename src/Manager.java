@@ -42,6 +42,7 @@ public class Manager
         int buffSize) throws IOException
     {
         diskFile = new RandomAccessFile(startFile, "rw");
+        diskFile.setLength(0);
         blockSize = buffSize;
         numBlocks = 0;
         sizeArr = new byte[messageSize];
@@ -180,6 +181,16 @@ public class Manager
     public static void close() throws IOException
     {
         pool.flushPool();
+        int length = numBlocks * blockSize - 1;
+        diskFile.seek(length);
+        byte last = diskFile.readByte();
+        while (last == 0)
+        {
+            diskFile.setLength(length);
+            length--;
+            diskFile.seek(length);
+            last = diskFile.readByte();            
+        }
         diskFile.close();
     }
 }

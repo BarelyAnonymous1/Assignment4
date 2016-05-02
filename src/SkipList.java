@@ -14,7 +14,7 @@ import java.io.*;
  * @param <E>
  *            the data value contained in the KVPair of the node
  */
-public class SkipList<K extends Comparable<K>, E>
+public class SkipList<K extends Comparable<K>, E extends Comparable<E>>
 {
     /**
      * head node
@@ -281,7 +281,8 @@ public class SkipList<K extends Comparable<K>, E>
         }
         return null;
     }
-
+    
+   
     /**
      * finds a specific node given a key value using a while loop to discover
      * the specific node.
@@ -349,7 +350,7 @@ public class SkipList<K extends Comparable<K>, E>
             }
             else
             {
-                name = current.getPair().toString();
+                name = current.getValue().toString();
             }
             System.out.println("Node has depth "
                 + (current.next.length) + ", Value (" + name + ")");
