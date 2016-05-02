@@ -70,19 +70,12 @@ public class FreeListTest extends TestCase
     {
         list.contains(0);
         System.out.println("");
-<<<<<<< HEAD
-=======
         assertNull(list.contains(0));
->>>>>>> branch 'master' of https://github.com/BarelyAnonymous1/Assignment4.git
         node3.setData(4, 1);
         list.insert(node2);
         list.insert(node3);
-<<<<<<< HEAD
-        list.contains(1);
-=======
         assertEquals(node3, list.contains(1));
         assertNull(list.contains(3));
->>>>>>> branch 'master' of https://github.com/BarelyAnonymous1/Assignment4.git
         list.dump();
     }
 

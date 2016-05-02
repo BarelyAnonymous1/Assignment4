@@ -1,0 +1,6 @@
+insert a 1 1 1 1
+insert b 2 2 2 2
+insert c 3 3 3 3
+insert d 4 4 4 4
+insert e 5 5 5 5
+dump

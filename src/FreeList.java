@@ -118,11 +118,7 @@ public class FreeList
                 best = curr;
             }
             else if (curr.length > sz 
-<<<<<<< HEAD
-                    && best != null
-=======
                 && best != null
->>>>>>> branch 'master' of https://github.com/BarelyAnonymous1/Assignment4.git
                 && curr.length < best.length)
             {
                 best = curr;

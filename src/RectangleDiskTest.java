@@ -98,4 +98,20 @@ public class RectangleDiskTest extends TestCase
         assertEquals(4096, Manager.getSize());
 
     }
+    /**
+     * test to skim a file to show parser can move through file
+     * @throws IOException 
+     */
+    public void testFile3() throws Exception
+    {
+        System.out.println("\n");
+        String[] input = {
+            "test2.txt",
+            "dataFile.dat",
+            "5",
+            "4096" };
+        RectangleDisk.main(input);
+        assertEquals(4096, Manager.getSize());
+
+    }
 }
