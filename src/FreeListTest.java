@@ -64,7 +64,7 @@ public class FreeListTest extends TestCase
     {
         list.contains(0);
         System.out.println("");
-        node3.setData(3, 1);
+        node3.setData(4, 1);
         list.insert(node2);
         list.insert(node3);
         list.contains(1);
