@@ -129,11 +129,11 @@ public class FreeList
         {
             return null;
         }
-        else if ((tail.prev.index + tail.prev.length)
-            % Manager.getSize() == 0)
-        {
-            return tail.prev;
-        }
+//        else if ((tail.prev.index + tail.prev.length)
+//            % Manager.getSize() == 0)
+//        {
+//            return tail.prev;
+//        }
         else
         {
             return best;

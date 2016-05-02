@@ -3,4 +3,19 @@ insert b 2 2 2 2
 insert c 3 3 3 3
 insert d 4 4 4 4
 insert e 5 5 5 5
+insert f 6 6 6 6
+insert g 7 7 7 7
+insert h 8 8 8 8
+insert i 9 9 9 9 
+insert j 10 10 10 10
+insert k 11 11 11 11
+dump
+
+remove 3 3 3 3
+dump
+
+remove 7 7 7 7
+dump
+
+insert a2 1 1 1 1
 dump
