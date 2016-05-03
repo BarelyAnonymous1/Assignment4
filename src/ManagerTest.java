@@ -24,7 +24,7 @@ public class ManagerTest extends TestCase {
      */
     public void testManager()
     {
-        assertTrue(manager.equals(new Object()));
+        assertFalse(manager.equals(new Object()));
     }
     
 }
