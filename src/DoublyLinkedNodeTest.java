@@ -24,7 +24,6 @@ public class DoublyLinkedNodeTest extends TestCase
                 "rw");
         node1 = new DoublyLinkedNode(new Buffer(0, 512, file));
         node2 = new DoublyLinkedNode(new Buffer(0, 512, file));
-        
     }
 
     /**
