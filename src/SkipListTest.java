@@ -51,6 +51,7 @@ public class SkipListTest extends TestCase
             list.dump();
             System.out.println("");
         }
-        list.search(null);
+        SkipNode<String, Rectangle> node1 = new SkipNode<String, Rectangle>(0, 0);
+        list.search(node1.getKey());
     }
 }
