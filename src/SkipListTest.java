@@ -51,5 +51,6 @@ public class SkipListTest extends TestCase
             list.dump();
             System.out.println("");
         }
+        list.search(null);
     }
 }
