@@ -95,10 +95,6 @@ public class Database
      */
     public SkipNode<String, Rectangle> search(String key) throws Exception
     {
-        if (key == null)
-        {
-            return null;
-        }
         return list.search(key);
     }
 
