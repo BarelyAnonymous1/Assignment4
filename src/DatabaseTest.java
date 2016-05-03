@@ -15,7 +15,7 @@ public class DatabaseTest extends TestCase
      * creates the database used in testing
      * @throws IOException 
      */
-    public void setUp() throws IOException
+    public void setUp() throws Exception
     {
         base = new Database();
     }
