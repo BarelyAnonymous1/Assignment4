@@ -45,7 +45,7 @@ public class Database
      * @return the value in the SkipList and quadtree
      * @throws Exception 
      */
-    public Rectangle remove(String key) throws Exception
+    public Rectangle removeKey(String key) throws Exception
     {
         Rectangle output = list.removeKey(key);
         if (output == null)
