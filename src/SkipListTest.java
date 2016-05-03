@@ -24,7 +24,10 @@ public class SkipListTest extends TestCase
         list = new SkipList<String, Rectangle>();
     }
 
-    
+    /**
+     * tests the skipList
+     * @throws Exception
+     */
     public void testLoop() throws Exception
     {
         for (int i = 1; i < 20; i++)

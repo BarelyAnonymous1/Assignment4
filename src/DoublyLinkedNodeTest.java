@@ -13,7 +13,6 @@ public class DoublyLinkedNodeTest extends TestCase
 
     private DoublyLinkedNode node1;
     private DoublyLinkedNode node2;
-    private DoublyLinkedNode node3;
 
     /**
      * creates a RAF and two nodes to use during testing
