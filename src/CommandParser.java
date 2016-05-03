@@ -16,9 +16,9 @@ public class CommandParser
     private String                      inputFile;
 
     /**
-     * SkipList used to hold the KeyValue Pairs for Rectangles
+     * databse used to hold the KeyValue Pairs for Rectangles
      */
-    private SkipList<String, Rectangle> list;
+    Database base;
 
     /**
      * constructor for parser, stores filename
@@ -35,7 +35,7 @@ public class CommandParser
         // 3. bufferSize
         Manager.setValues(args[1], Integer.parseInt(args[2]),
             Integer.parseInt(args[3]));
-        list = new SkipList<String, Rectangle>();
+        base = new Database();
     }
 
     /**
@@ -92,7 +92,7 @@ public class CommandParser
                     }
                     case ("dump"):
                     {
-                        list.dump();
+                        base.dump();
                         break;
                     }
                     default:
@@ -133,7 +133,7 @@ public class CommandParser
             Rectangle rect = new Rectangle(name, x, y, width, height);
             KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(
                 name, rect);
-            list.insert(pair);
+            base.insert(pair);
             System.out.println("Rectangle inserted: (" + name + ", "
                 + x + ", " + y + ", " + width + ", " + height + ")");
         }
@@ -159,7 +159,7 @@ public class CommandParser
         String name = scanner.next();
         if (!isNumeric(name))
         {
-            Rectangle found = list.removeKey(name);
+            Rectangle found = base.remove(name);
             if (found == null)
             {
                 System.out
@@ -183,7 +183,7 @@ public class CommandParser
                     + height;
                 Rectangle searchRect = new Rectangle("", x, y, width,
                     height);
-                Rectangle found = list.removeValue(searchRect);
+                Rectangle found = base.remove(searchRect);
                 if (found == null)
                 {
                     System.out.println(
@@ -224,7 +224,7 @@ public class CommandParser
         {
             Rectangle regionRect = new Rectangle("regionRect", x, y,
                 width, height);
-            list.regionSearch(regionRect);
+            base.regionSearch(regionRect);
         }
         else
         {
@@ -247,7 +247,7 @@ public class CommandParser
     private void parseSearch(Scanner scanner) throws Exception
     {
         String name = scanner.next();
-        SkipNode<String, Rectangle> searchResult = list.search(name);
+        SkipNode<String, Rectangle> searchResult = base.search(name);
         if (searchResult == null)
         {
             System.out.println("Rectangle not found: " + name);
@@ -289,7 +289,7 @@ public class CommandParser
      */
     private void parseIntersections() throws Exception
     {
-        list.intersections();
+        base.intersections();
     }
 
     /**
