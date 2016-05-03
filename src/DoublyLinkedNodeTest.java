@@ -24,7 +24,7 @@ public class DoublyLinkedNodeTest extends TestCase
                 "rw");
         node1 = new DoublyLinkedNode(new Buffer(0, 512, file));
         node2 = new DoublyLinkedNode(new Buffer(0, 512, file));
-        node3 = new DoublyLinkedNode(new Buffer(0, 512, null));
+        
     }
 
     /**
@@ -37,6 +37,7 @@ public class DoublyLinkedNodeTest extends TestCase
         node2.setPrev(node1);
         assertEquals(node1, node2.prev);
         node1.setData(node2.getData());
+        
     }
 
 }

@@ -53,8 +53,9 @@ public class DoublyLinkedQueueTest extends TestCase
 
     /**
      * tests that the queue properly searches for and removes a node
+     * @throws IOException 
      */
-    public void testRemove()
+    public void testRemove() throws IOException
     {
         list.remove(0, file);
         list.enqueue(node1);
@@ -62,6 +63,9 @@ public class DoublyLinkedQueueTest extends TestCase
         assertNotSame(node2, list.remove(4, file));
         assertNull(list.remove(0, null));
         assertEquals(node2, list.remove(0, file));
+        DoublyLinkedNode node3 = new DoublyLinkedNode(new Buffer(0, 512, file));
+        list.enqueue(node3);
+        assertNull(list.remove(1, null));
     }
 
 }

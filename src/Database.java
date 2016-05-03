@@ -42,23 +42,25 @@ public class Database
      * 
      * @param key
      *            is the key to be searched
-     * @return the value in the SkipList and quadtree
+     * @return the value in the SkipList 
      * @throws Exception 
      */
     public Rectangle remove(String key) throws Exception
     {
         Rectangle output = list.removeKey(key);
         if (output == null)
+        {
             return null;
+        }
         return output;
     }
 
     /**
      * remove a value from the database based on the value
      * 
-     * @param val
+     * @param searchRect
      *            is the value to be found
-     * @return the value in the SkipList and quadtree
+     * @return the value in the SkipList 
      * @throws Exception 
      */
     public Rectangle remove(Rectangle searchRect) throws Exception
@@ -68,7 +70,7 @@ public class Database
     }
 
     /**
-     * find all duplicate points in the quad tree
+     * find all intersections 
      * @throws Exception 
      */
     public void intersections() throws Exception
