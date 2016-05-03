@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 import student.TestCase;
 
 /**
@@ -15,17 +13,18 @@ public class DatabaseTest extends TestCase
      * creates the database used in testing
      * @throws IOException 
      */
-    public void setUp() throws Exception
-    {
-        base = new Database();
-    }
+    //public void setUp() throws Exception
+    //{
+    //    base = new Database();
+    //}
 
     /**
      * tests basic methods
      * @throws Exception 
      */
-    public void test() throws Exception
+    public void testBase() throws Exception
     {
+        base = new Database();
         assertNull(base.search(null));
     }
 
