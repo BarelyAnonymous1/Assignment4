@@ -22,7 +22,7 @@ public class DatabaseTest extends TestCase
      * tests basic methods
      * @throws Exception 
      */
-    public void testBase() throws Exception
+    public void testBase()
     {
         base = new Database();
         assertNull(base.search(null));
