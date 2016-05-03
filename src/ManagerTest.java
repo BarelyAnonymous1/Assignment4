@@ -2,7 +2,9 @@ import student.TestCase;
 
 
 /**
- * @author prestonlattimer
+ * instantiates the manager
+ * @author Jonathan DeFreeuw (jondef95), Preston Lattimer (platt)
+ * @version 1
  *
  */
 public class ManagerTest extends TestCase {
