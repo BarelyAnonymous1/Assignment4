@@ -30,28 +30,26 @@ public class SkipListTest extends TestCase
         for (int i = 1; i < 20; i++)
         {
             list.insert(new KVPair<String, Rectangle>(Integer.toString(i),
-                    new Rectangle(
-                Integer.toString(i), i, i, i, i)));
+                    new Rectangle(Integer.toString(i), i, i, i, i)));
             list.dump();
             System.out.println("");
         }
         System.out.println("\n\n");
         for (int i = 1; i < 10; i++)
         {
-            list.removeKey(Integer.toString(i*2));
+            list.removeKey(Integer.toString(i * 2));
             list.dump();
             System.out.println("");
         }
         System.out.println("\n\n");
         for (int i = 1; i < 10; i++)
         {
-            list.insert(new KVPair<String, Rectangle>(Integer.toString(i*2),
-                    new Rectangle(
-                Integer.toString(i*2), i, i, i, i)));
+            list.insert(new KVPair<String, Rectangle>(Integer.toString(i * 2),
+                    new Rectangle(Integer.toString(i * 2), i, i, i, i)));
             list.dump();
             System.out.println("");
         }
         KVPair<String, Integer> pair = new KVPair<String, Integer>("a", 0);
-        list.search(pair.key());
+        assertNull(list.search(pair.key()));
     }
 }
