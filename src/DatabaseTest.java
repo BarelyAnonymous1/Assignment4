@@ -26,8 +26,7 @@ public class DatabaseTest extends TestCase
      */
     public void test() throws Exception
     {
-        //base.regionSearch(null);
-        //assertNull(base.remove("hello"));
+        assertNull(base.search(null));
     }
 
 }
