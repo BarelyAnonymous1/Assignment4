@@ -11,11 +11,17 @@ public class ManagerTest extends TestCase {
 
     private Manager manager;
     
+    /**
+     * sets up the manager
+     */
     public void setUp()
     {
         manager = new Manager();
     }
     
+    /**
+     * checks to make sure the manager instantiated
+     */
     public void testManager()
     {
         manager.equals(new Object());
