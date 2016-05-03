@@ -51,7 +51,7 @@ public class SkipListTest extends TestCase
             list.dump();
             System.out.println("");
         }
-        SkipNode<String, Rectangle> node1 = new SkipNode<String, Rectangle>(0, 0);
-        list.search(node1.getKey());
+        KVPair<String, Integer> pair = new KVPair<String, Integer>("a", 0);
+        list.search(pair.key());
     }
 }
