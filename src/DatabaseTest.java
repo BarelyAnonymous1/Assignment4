@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import student.TestCase;
 
 /**
@@ -11,18 +13,20 @@ public class DatabaseTest extends TestCase
 
     /**
      * creates the database used in testing
+     * @throws IOException 
      */
-    public void setUp()
+    public void setUp() throws IOException
     {
         base = new Database();
     }
 
     /**
      * tests basic methods
+     * @throws Exception 
      */
-    public void test()
+    public void test() throws Exception
     {
-        base.regionSearch(null);
+        //base.regionSearch(null);
         assertNull(base.removeKey("hello"));
     }
 
