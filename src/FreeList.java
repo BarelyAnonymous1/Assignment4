@@ -125,7 +125,11 @@ public class FreeList
             }
             curr = curr.next;
         }
-        if (size == 0)
+        if (best != null)
+        {
+            return best;
+        }
+        else if (size == 0)
         {
             return null;
         }
@@ -136,7 +140,7 @@ public class FreeList
         }
         else
         {
-            return best;
+            return null;
         }
     }
 
